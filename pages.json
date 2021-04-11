@@ -1,0 +1,91 @@
+{
+	"pages": [//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/Index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom" ,
+				"backgroundColor": "#1A191B"
+			}
+		},
+		{
+			"path": "pages/playlist/Playlist",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"  
+			}
+		},
+		{
+			"path": "pages/songlist/Songlist",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"
+			}
+		},
+		{
+			"path": "pages/newSonglist/NewSonglist",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"
+			}
+		},
+		{
+			"path": "pages/profile/Profile",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"
+			}
+		},
+		{
+			"path": "pages/collect/Collect",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"
+			}
+		},
+		{
+			"path": "pages/collectPlaylist/CollectPlaylist",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"
+			}
+		},
+		{
+			"path": "pages/recentPlay/RecentPlay",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"backgroundColor": "#1A191B"
+			}
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "MOO",
+		"navigationBarBackgroundColor": "#1A191B",
+		"backgroundColor": "#1A191B",
+		"enablePullDownRefresh": true,
+		"onReachBottomDistance": 50,
+		"style": {
+			"app-plus": {
+				"background":"#1A191B"
+			}
+		}
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

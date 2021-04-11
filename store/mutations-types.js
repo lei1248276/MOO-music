@@ -1,0 +1,18 @@
+export default {
+  SET_INITIALIZE: 'setInitialize',
+  SET_IS_INIT: 'setIsInit',
+  SET_AUDIO: 'setAudio',
+  SET_SWITCH: 'setSwitch',
+  SET_DURATION: 'setDuration',
+  SET_CURRENT_SONG: 'setCurrentSong',
+  SET_CURRENT_TIME: 'setCurrentTime',
+  SET_PLAYLISTS: 'setPlaylists',
+  SET_NEW_SONGLIST: 'setNewSongList',
+  SET_SONGLIST_DETAILS: 'setSonglistDetails',
+  SET_PLAY_PAGE_INDEX: 'setPlayPageIndex',
+  SET_CURRENT_PLAY_QUEUE: 'setCurrentPlayQueue',
+  SET_CACHE_QUEUE: 'setCacheQueue',
+  SET_RECENT_PLAY_SONGS: 'setRecentPlaySongs',
+  SET_COL_SONGS: 'setColSongs',
+  SET_COL_PLAYLISTS: 'setColPlaylists',
+}

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-sound-wave": "/components/soundWave/UniSoundWave"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "backgroundColor": "#1A191B",
+  "usingComponents": {
+    "uni-transition": "/uni_modules/uni-transition/components/uni-transition/uni-transition",
+    "uni-back-nav": "/components/backNav/UniBackNav",
+    "uni-tab-control": "/components/tabControl/UniTabControl",
+    "uni-tab-view": "/components/tabView/UniTabView",
+    "uni-song-control": "/components/songControl/UniSongControl",
+    "uni-col-playlist": "/components/colPlaylist/UniColPlaylist"
+  }
+}

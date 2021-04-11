@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@types/html5plus": "^1.0.1",
+    "@types/uni-app": "^1.4.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "backgroundColor": "#1A191B",
+  "usingComponents": {
+    "uni-back-nav": "/components/backNav/UniBackNav",
+    "uni-show-shelf": "/components/showShelf/UniShowShelf"
+  }
+}

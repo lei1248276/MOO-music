@@ -1,0 +1,1 @@
+<view class="{{['uni_custom_checkbox data-v-8c29fd1a',checked?'select':'']}}"><view hidden="{{!(checked)}}" class="iconfont icon-select data-v-8c29fd1a"></view></view>

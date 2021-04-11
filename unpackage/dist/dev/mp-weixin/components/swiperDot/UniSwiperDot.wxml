@@ -1,0 +1,1 @@
+<view class="uni_swiper_dot data-v-ce7fec4c"><block wx:for="{{count}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="{{['dot_item data-v-ce7fec4c',(index===currentIndex)?'active':'']}}"></view></block></view>
