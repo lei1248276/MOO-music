@@ -150,16 +150,10 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
 
     this.getAudio.onEnded(function () {
       console.log("ended: ");
-      var index = _this.getPlayPageIndex,
-      queue = _this.getCurrentPlayQueue;
+      var index = _this.getShowPageIndex;
 
-      if (index < queue.length - 1) {
-        _this.$store.dispatch('getPlaySong', queue[index + 1]);
-        _this[_mutationsTypes.default.SET_PLAY_PAGE_INDEX](index + 1);
-      } else if (index === queue.length - 1) {
-        _this.$store.dispatch('getPlaySong', queue[0]);
-        _this[_mutationsTypes.default.SET_PLAY_PAGE_INDEX](0);
-      }
+      if (index < 2) _this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](index + 1);else
+      if (index === 2) _this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](0);
     });
 
     this.getAudio.onWaiting(function () {
@@ -177,8 +171,7 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
   (0, _vuex.mapState)({
     getAudio: 'audio',
     getIsPlay: 'isPlay',
-    getCurrentPlayQueue: 'currentPlayQueue',
-    getPlayPageIndex: 'playPageIndex' })),
+    getShowPageIndex: 'showPageIndex' })),
 
 
   methods: _objectSpread({},
@@ -187,7 +180,7 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
   _mutationsTypes.default.SET_AUDIO,
   _mutationsTypes.default.SET_SWITCH,
   _mutationsTypes.default.SET_CURRENT_TIME,
-  _mutationsTypes.default.SET_PLAY_PAGE_INDEX])) };exports.default = _default;
+  _mutationsTypes.default.SET_SHOW_PAGE_INDEX])) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

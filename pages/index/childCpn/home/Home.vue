@@ -17,9 +17,9 @@
       <!--  scroll-content区域  -->
       <scroll-view class="scroll"
                    scroll-y
-                   @scroll="onScroll"
+                   @scroll="onScroll($event)"
                    @touchstart="onTouchstart"
-                   @touchmove="onTouchmove"
+                   @touchmove="onTouchmove($event)"
                    @touchend="onTouchend">
 
         <!--   swiper 区域  -->
@@ -89,7 +89,7 @@ import {
   getPlaylist,
   getPlaylistAll,
   getAlbum} from "@/network/index";
-import {dividePlaylist} from "@/util/index";
+import {dividePlaylist, throttle} from "@/util/index";
 import types from '@/store/mutations-types';
 
 import HomeRecommend from "./childCpn/recommend/HomeRecommend";
@@ -212,11 +212,11 @@ import UniTag from "@/components/tag/UniTag";
         })
       },
 
-      onScroll(e) {
+      onScroll: throttle(function (e) {
         let scrollT = e.target.scrollTop;
         this.isMove = this.scrollTop < scrollT;
         this.scrollTop = scrollT;
-      },
+      }, 150),
 
       toPlaylist() {
         uni.navigateTo({
@@ -238,10 +238,9 @@ import UniTag from "@/components/tag/UniTag";
         this.isMove = false;
       },
 
-      onTouchmove(e) {
-		    let moveX = e.touches[0].clientX;
-        this.isReach = this.startX - moveX > 20;
-      },
+      onTouchmove: throttle(function(e) {
+        this.isReach = this.startX - e.touches[0].clientX >= 10;
+      }, 100),
 
       onTouchend() {
         if (!this.isMove && this.isReach) {

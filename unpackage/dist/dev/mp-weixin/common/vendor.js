@@ -9008,22 +9008,31 @@ var index = {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  SET_INITIALIZE: 'setInitialize',
-  SET_IS_INIT: 'setIsInit',
-  SET_AUDIO: 'setAudio',
-  SET_SWITCH: 'setSwitch',
-  SET_DURATION: 'setDuration',
-  SET_CURRENT_SONG: 'setCurrentSong',
-  SET_CURRENT_TIME: 'setCurrentTime',
-  SET_PLAYLISTS: 'setPlaylists',
-  SET_NEW_SONGLIST: 'setNewSongList',
-  SET_SONGLIST_DETAILS: 'setSonglistDetails',
-  SET_PLAY_PAGE_INDEX: 'setPlayPageIndex',
-  SET_CURRENT_PLAY_QUEUE: 'setCurrentPlayQueue',
-  SET_CACHE_QUEUE: 'setCacheQueue',
-  SET_RECENT_PLAY_SONGS: 'setRecentPlaySongs',
-  SET_COL_SONGS: 'setColSongs',
-  SET_COL_PLAYLISTS: 'setColPlaylists' };exports.default = _default;
+  SET_INITIALIZE: 'setInitialize', // 设置初始化
+  SET_IS_INIT: 'setIsInit', // 设置是否初始化
+  SET_AUDIO: 'setAudio', // 设置audio
+  SET_SWITCH: 'setSwitch', // 设置播放开关
+
+  SET_PLAYLISTS: 'setPlaylists', // 设置播放列表
+  SET_NEW_SONGLIST: 'setNewSongList', // 设置新歌单
+  SET_SONGLIST_DETAILS: 'setSonglistDetails', // 设置歌单详情信息
+
+  SET_DURATION: 'setDuration', // 设置当前歌曲时长
+  SET_CURRENT_TIME: 'setCurrentTime', // 设置当前歌曲当前播放时间
+  SET_CURRENT_SONG: 'setCurrentSong', // 设置当前播放歌曲
+  SET_CURRENT_PLAY_INDEX: 'setCurrentPlayIndex', // 设置当前播放歌曲index
+  SET_SHOW_PAGE_INDEX: 'setShowPageIndex', // 当前playPage页面显示窗口index
+  SET_TOP_PAGE_INDEX: 'setTopPageIndex', // 设置当前播放页面顶部窗口歌曲index
+  SET_MIDDLE_PAGE_INDEX: 'setMidPageIndex', // 设置当前播放页面中间窗口歌曲index
+  SET_BOTTOM_PAGE_INDEX: 'setBottomPageIndex', // 设置当前播放页面底部窗口歌曲index
+  SET_RESET_PAGE_INDEX: 'setResetPageIndex', // 设置重置pageIndex
+  SET_CURRENT_PLAY_QUEUE: 'setCurrentPlayQueue', // 设置当前播放队列
+
+  SET_CACHE_QUEUE: 'setCacheQueue', // 设置缓存队列（临时）
+  SET_RECENT_PLAY_SONGS: 'setRecentPlaySongs', // 设置最近播放过的歌曲
+  SET_COL_SONGS: 'setColSongs', // 设置收藏歌曲
+  SET_COL_PLAYLISTS: 'setColPlaylists' // 设置收藏歌单
+};exports.default = _default;
 
 /***/ }),
 /* 10 */,
@@ -9174,18 +9183,23 @@ _vue.default.use(_vuex.default);
 var state = {
   isInit: false, // 是否初始化
   lock: false, // 填坑操作
-  audio: null,
-  currentSong: null, // 当前播放歌曲
+  audio: null, // 播放器
   isPlay: false, // 是否开始播放
-  duration: 0, // 歌曲时长
-  currentTime: 0, // 歌曲当前播放时间
 
   playlists: [], // 全部播放歌单
   newSonglist: [], // 新歌歌单
   songlistDetails: {}, // 歌单详情信息
-  playPageIndex: 0, // 播放页面当前坐标
 
+  duration: 0, // 当前歌曲时长
+  currentTime: 0, // 当前歌曲播放时间
+  currentSong: null, // 当前播放歌曲
+  currentPlayIndex: 0, // 当前播放歌曲index
+  showPageIndex: 1, // 当前playPage页面显示窗口index（保证所有playPage页面显示一致）
+  topPageIndex: -1, // 当前播放页面顶部窗口歌曲index
+  middlePageIndex: -1, // 当前播放页面中间窗口歌曲index
+  bottomPageIndex: -1, // 当前播放页面底部窗口歌曲index
   currentPlayQueue: [], // 当前歌曲播放队列
+
   cacheQueue: new Map(), // 歌曲临时缓存队列
   recentPlaySongs: [], // 最近播放歌曲
   colSongs: {}, // 收藏的歌曲
@@ -9209,48 +9223,34 @@ store;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! ./mutations-types */ 9));var _types$SET_INITIALIZE;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _toArray(arr) {return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var _default = (_types$SET_INITIALIZE = {}, _defineProperty(_types$SET_INITIALIZE,
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! ./mutations-types */ 9));var _types$SET_INITIALIZE;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default = (_types$SET_INITIALIZE = {}, _defineProperty(_types$SET_INITIALIZE,
 
 
 
+_mutationsTypes.default.SET_INITIALIZE, function (state) {
+  var recentPlaySongs = uni.getStorageSync('recentPlaySongs') || [],
+  playRecord = uni.getStorageSync('playRecord') || [],
+  curSongIndex = playRecord.length && recentPlaySongs.length &&
+  playRecord.findIndex(function (value) {return value.id === recentPlaySongs[0].id;});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-_mutationsTypes.default.SET_INITIALIZE, function (state) {var _state$recentPlaySong =
-  state.recentPlaySongs = uni.getStorageSync('recentPlaySongs') || [],_state$recentPlaySong2 = _toArray(_state$recentPlaySong),RPS = _state$recentPlaySong2.slice(0);
+  state.recentPlaySongs = recentPlaySongs;
   uni.getStorage({
     key: 'colSongs',
-    success: function success(res) {state.colSongs = res.data;} });
+    success: function success(res) {
+      state.colSongs = res.data;
+    } });
 
   uni.getStorage({
     key: 'colPlaylists',
-    success: function success(res) {state.colPlaylists = res.data;} });
+    success: function success(res) {
+      state.colPlaylists = res.data;
+    } });
 
+  state.currentPlayQueue = playRecord;
 
-  state.currentPlayQueue = RPS.length >= 20 ? RPS.slice(0, 20) : RPS;
-  state.currentSong = RPS[0];
+  this.commit(_mutationsTypes.default.SET_CURRENT_SONG, playRecord[curSongIndex]);
+  this.commit(_mutationsTypes.default.SET_CURRENT_PLAY_INDEX, curSongIndex);
+  this.commit(_mutationsTypes.default.SET_RESET_PAGE_INDEX, curSongIndex);
 }), _defineProperty(_types$SET_INITIALIZE,
 
 
@@ -9264,23 +9264,8 @@ _mutationsTypes.default.SET_AUDIO, function (state, payload) {
 }), _defineProperty(_types$SET_INITIALIZE,
 
 
-_mutationsTypes.default.SET_CURRENT_SONG, function (state, payload) {
-  state.currentSong = payload;
-}), _defineProperty(_types$SET_INITIALIZE,
-
-
 _mutationsTypes.default.SET_SWITCH, function (state, payload) {
   state.isPlay = payload;
-}), _defineProperty(_types$SET_INITIALIZE,
-
-
-
-
-
-
-
-_mutationsTypes.default.SET_CURRENT_TIME, function (state, payload) {
-  state.currentTime = payload;
 }), _defineProperty(_types$SET_INITIALIZE,
 
 
@@ -9299,8 +9284,53 @@ _mutationsTypes.default.SET_SONGLIST_DETAILS, function (state, payload) {
 }), _defineProperty(_types$SET_INITIALIZE,
 
 
-_mutationsTypes.default.SET_PLAY_PAGE_INDEX, function (state, payload) {
-  state.playPageIndex = payload;
+
+
+
+
+
+
+_mutationsTypes.default.SET_CURRENT_TIME, function (state, payload) {
+  state.currentTime = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_CURRENT_SONG, function (state, payload) {
+  state.currentSong = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_CURRENT_PLAY_INDEX, function (state, payload) {
+  state.currentPlayIndex = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_SHOW_PAGE_INDEX, function (state, payload) {
+  state.showPageIndex = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_TOP_PAGE_INDEX, function (state, payload) {
+  state.topPageIndex = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_MIDDLE_PAGE_INDEX, function (state, payload) {
+  state.middlePageIndex = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_BOTTOM_PAGE_INDEX, function (state, payload) {
+  state.bottomPageIndex = payload;
+}), _defineProperty(_types$SET_INITIALIZE,
+
+
+_mutationsTypes.default.SET_RESET_PAGE_INDEX, function (state, payload) {
+  var last = state.currentPlayQueue.length - 1;
+  state.showPageIndex = 1;
+  state.topPageIndex = payload === 0 ? last : payload - 1;
+  state.middlePageIndex = payload;
+  state.bottomPageIndex = payload === last ? 0 : payload + 1;
 }), _defineProperty(_types$SET_INITIALIZE,
 
 
@@ -9427,6 +9457,7 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! ./mutations
         }
       }).catch(function (err) {
         console.log(err);
+        state.lock = false;
         uni.showToast({
           title: '歌曲链接失效！',
           icon: 'loading' });
@@ -9467,6 +9498,8 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! ./mutations
 var BASE_URL = 'https://api.mtnhao.com';
 
 // export const BASE_URL = 'https://netease-cloud-music-api-lei1248276.vercel.app'
+
+// export const BASE_URL = 'http://localhost:3000';
 
 // 请求 banner 数据
 exports.BASE_URL = BASE_URL;function getBanner() {
@@ -9542,7 +9575,8 @@ function getSongUrl(id) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.dividePlaylist = dividePlaylist;function dividePlaylist(data) {
+Object.defineProperty(exports, "__esModule", { value: true });exports.dividePlaylist = dividePlaylist;exports.throttle = throttle; // 将播放列表分组
+function dividePlaylist(data) {
   var arr = [],temp = [];
   for (var i = 0, len = data.length; i < len; i++) {
     temp.push({
@@ -9563,6 +9597,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.dividePlay
     }
   }
   return arr;
+}
+
+
+// 节流
+function throttle(cb, wait) {
+  var oldTime = 0;
+  return function (arg) {
+    var now = Date.now();
+    if (now - oldTime > wait) {
+      cb.call(this, arg);
+      oldTime = now;
+    }
+  };
 }
 
 /***/ })

@@ -32,6 +32,7 @@ export default {
         }
       }).catch(err => {
         console.log(err);
+        state.lock = false;
         uni.showToast({
           title: '歌曲链接失效！',
           icon: 'loading',

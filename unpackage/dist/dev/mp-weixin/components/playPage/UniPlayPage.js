@@ -163,14 +163,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 8);
-var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mutations-types */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var UniTag = function UniTag() {__webpack_require__.e(/*! require.ensure | components/tag/UniTag */ "components/tag/UniTag").then((function () {return resolve(__webpack_require__(/*! ../tag/UniTag */ 180));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSongQueue = function UniSongQueue() {__webpack_require__.e(/*! require.ensure | components/songQueue/UniSongQueue */ "components/songQueue/UniSongQueue").then((function () {return resolve(__webpack_require__(/*! ../songQueue/UniSongQueue */ 243));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mutations-types */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var UniTag = function UniTag() {__webpack_require__.e(/*! require.ensure | components/tag/UniTag */ "components/tag/UniTag").then((function () {return resolve(__webpack_require__(/*! ../tag/UniTag */ 180));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSongQueue = function UniSongQueue() {Promise.all(/*! require.ensure | components/songQueue/UniSongQueue */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/songQueue/UniSongQueue")]).then((function () {return resolve(__webpack_require__(/*! ../songQueue/UniSongQueue */ 243));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -187,13 +181,21 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       isActive: false };
 
   },
-  computed: _objectSpread({},
+  created: function created() {
+    var pages = getCurrentPages(),page = pages[pages.length - 1];
+    this.route = page.route;
+  },
+  computed: _objectSpread(_objectSpread({},
   (0, _vuex.mapState)({
     getIsInit: 'isInit',
     getIsPlay: 'isPlay',
     getAudio: 'audio',
     getCurrentSong: 'currentSong',
-    getPlayPageIndex: 'playPageIndex',
+    getShowPageIndex: 'showPageIndex',
+    getCurrentPlayIndex: 'currentPlayIndex',
+    getTopPageIndex: 'topPageIndex',
+    getMiddlePageIndex: 'middlePageIndex',
+    getBottomPageIndex: 'bottomPageIndex',
     getCurrentPlayQueue: function getCurrentPlayQueue(state) {
       state.currentPlayQueue.forEach(function (v) {
         if (state.colSongs[v.id] != null) v.isCollect = true;
@@ -201,23 +203,26 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       return state.currentPlayQueue;
     },
     getLock: 'lock',
-    getColSongs: 'colSongs' })),
+    getColSongs: 'colSongs' })), {}, {
 
 
+    renderQueue: function renderQueue() {
+      var queue = this.getCurrentPlayQueue;
+      return [
+      queue[this.getTopPageIndex],
+      queue[this.getMiddlePageIndex],
+      queue[this.getBottomPageIndex]];
 
-
-
-
-
-
-
-
-
+    } }),
 
 
   methods: _objectSpread(_objectSpread({},
   (0, _vuex.mapMutations)([
-  _mutationsTypes.default.SET_PLAY_PAGE_INDEX,
+  _mutationsTypes.default.SET_SHOW_PAGE_INDEX,
+  _mutationsTypes.default.SET_CURRENT_PLAY_INDEX,
+  _mutationsTypes.default.SET_TOP_PAGE_INDEX,
+  _mutationsTypes.default.SET_MIDDLE_PAGE_INDEX,
+  _mutationsTypes.default.SET_BOTTOM_PAGE_INDEX,
   _mutationsTypes.default.SET_IS_INIT,
   _mutationsTypes.default.SET_COL_SONGS])), {}, {
 
@@ -237,12 +242,9 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
     },
 
     onChange: function onChange(e) {
-      // 避免重复请求数据
-      if (!this.getLock) {
-        var current = e.detail.current;
-        this.$store.dispatch('getPlaySong', this.getCurrentPlayQueue[current]);
-        this[_mutationsTypes.default.SET_PLAY_PAGE_INDEX](current);
-      }
+      if (this.getLock) return;
+      this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](e.detail.current);
+      console.log("change");
     },
 
     onColSongs: function onColSongs(item) {
@@ -252,7 +254,54 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
 
     onShowSongQueue: function onShowSongQueue() {
       this.isShowSongQueue = this.isActive = true;
-    } }) };exports.default = _default;
+    } }),
+
+  watch: {
+    // 动态加载播放页面
+    getShowPageIndex: function getShowPageIndex(val, oldVal) {
+      // 避免多次触发函数，执行完毕后会发出网络请求直到请求结束才会解锁
+      if (this.getLock) return;
+
+      var playIndex = this.getCurrentPlayIndex;
+      var last = this.getCurrentPlayQueue.length - 1;
+
+      // 滑动窗口变化的6种情况，动态改变指针（保证初始化时只渲染 3页，而每次切歌只重绘 1页）
+      if (oldVal === 1 && val === 2) {
+        // console.log(oldVal, val, `下一曲`, playIndex);
+        playIndex = playIndex === last ? 0 : playIndex + 1;
+        this[_mutationsTypes.default.SET_TOP_PAGE_INDEX](playIndex === last ? 0 : playIndex + 1);
+
+      } else if (oldVal === 2 && val === 0) {
+        // console.log(oldVal, val, `下一曲`, playIndex);
+        playIndex = playIndex === last ? 0 : playIndex + 1;
+        this[_mutationsTypes.default.SET_MIDDLE_PAGE_INDEX](playIndex === last ? 0 : playIndex + 1);
+
+      } else if (oldVal === 0 && val === 1) {
+        // console.log(oldVal, val, `下一曲`, playIndex);
+        playIndex = playIndex === last ? 0 : playIndex + 1;
+        this[_mutationsTypes.default.SET_BOTTOM_PAGE_INDEX](playIndex === last ? 0 : playIndex + 1);
+
+      } else if (oldVal === 1 && val === 0) {
+        // console.log(oldVal, val, `上一曲`, playIndex);
+        playIndex = playIndex === 0 ? last : playIndex - 1;
+        this[_mutationsTypes.default.SET_BOTTOM_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
+
+      } else if (oldVal === 0 && val === 2) {
+        // console.log(oldVal, val, `上一曲`, playIndex);
+        playIndex = playIndex === 0 ? last : playIndex - 1;
+        this[_mutationsTypes.default.SET_MIDDLE_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
+
+      } else if (oldVal === 2 && val === 1) {
+        // console.log(oldVal, val, `上一曲`, playIndex);
+        playIndex = playIndex === 0 ? last : playIndex - 1;
+        this[_mutationsTypes.default.SET_TOP_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
+      }
+      console.log(playIndex);
+      // 切歌后发出请求歌曲 url
+      this.$store.dispatch('getPlaySong', this.getCurrentPlayQueue[playIndex]);
+      // 修改当前播放队列歌曲 index
+      this[_mutationsTypes.default.SET_CURRENT_PLAY_INDEX](playIndex);
+    } } };exports.default = _default;
 
 /***/ }),
 

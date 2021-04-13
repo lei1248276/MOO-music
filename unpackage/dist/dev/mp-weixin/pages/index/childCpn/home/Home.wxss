@@ -94,7 +94,7 @@ $uni-font-size-paragraph:30rpx;*/
   position: fixed;
   top: 13%;
   left: 3%;
-  z-index: 999;
+  z-index: 1111;
   -webkit-transition: all .5s;
   transition: all .5s;
 }

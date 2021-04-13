@@ -218,7 +218,8 @@ var _index2 = __webpack_require__(/*! @/util/index */ 31);function _slicedToArra
 
   data: function data() {
     return {
-      offset: 0,
+      offset: -30,
+      limit: 45,
       isShowPlayPage: false,
       playlists: [],
       isLoaded: false,
@@ -246,11 +247,9 @@ var _index2 = __webpack_require__(/*! @/util/index */ 31);function _slicedToArra
     }, 200);
   },
   methods: {
-    onScrollToLower: function onScrollToLower() {var _this2 = this;
-      var limit = 15;
+    onLoadMore: function onLoadMore() {var _this2 = this;
+      var limit = this.limit;
       var offset = this.offset += limit;
-      console.log(offset);
-
       (0, _index.getPlaylistAll)(offset, limit).then(function (res) {var _res = _slicedToArray(
         res, 2),err = _res[0],data = _res[1],
         pl = data.data.playlists;

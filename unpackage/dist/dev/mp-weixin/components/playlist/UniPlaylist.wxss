@@ -84,7 +84,7 @@ $uni-font-size-paragraph:30rpx;*/
   height: 800rpx;
   color: #fffeff;
   font-weight: bold;
-  margin: 0 auto;
+  margin: 0 auto 50rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -96,7 +96,7 @@ $uni-font-size-paragraph:30rpx;*/
 }
 .uni_playlist .playlist_detail.data-v-546e2340 {
   width: 100%;
-  height: 328rpx;
+  height: 340rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -106,7 +106,7 @@ $uni-font-size-paragraph:30rpx;*/
 }
 .uni_playlist .playlist_detail .detail_item.data-v-546e2340 {
   width: 48%;
-  height: 302rpx;
+  height: 332rpx;
   position: relative;
   overflow: hidden;
 }

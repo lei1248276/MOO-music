@@ -80,7 +80,7 @@ $uni-font-size-subtitle:36rpx;
 $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30rpx;*/
 .uni_audio_controller.data-v-38303cb6 {
-  width: 50%;
+  width: 60%;
   height: 110rpx;
   background-color: #010001;
   -webkit-border-radius: 60rpx;
@@ -88,7 +88,7 @@ $uni-font-size-paragraph:30rpx;*/
   position: fixed;
   bottom: 2%;
   left: 6%;
-  z-index: 1000;
+  z-index: 999;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -99,11 +99,26 @@ $uni-font-size-paragraph:30rpx;*/
   -webkit-align-items: center;
           align-items: center;
 }
-.uni_audio_controller .audio_img.data-v-38303cb6 {
-  width: 130rpx;
+.uni_audio_controller .mov_area.data-v-38303cb6 {
+  width: 100%;
   height: 130rpx;
 }
+.uni_audio_controller .mov_area .mov_view.data-v-38303cb6 {
+  width: 130rpx;
+  height: 130rpx;
+  left: 38%;
+  z-index: 1111;
+}
+.uni_audio_controller .mov_area .mov_view .audio_img.data-v-38303cb6 {
+  width: 100%;
+  height: 100%;
+}
 .uni_audio_controller .playTime.data-v-38303cb6 {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0);
   color: #959292;
   font-size: 48rpx;
   font-weight: bold;
@@ -111,6 +126,34 @@ $uni-font-size-paragraph:30rpx;*/
 }
 .uni_audio_controller .active.data-v-38303cb6 {
   color: #fffeff;
+}
+.uni_audio_controller .prompt.data-v-38303cb6 {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  -webkit-transform: translate3d(-52%, -50%, 0);
+          transform: translate3d(-52%, -50%, 0);
+  color: #fffeff;
+  font-size: 46rpx;
+}
+.uni_audio_controller .control.data-v-38303cb6 {
+  width: 100rpx;
+  height: 100%;
+  position: absolute;
+  right: 1%;
+  z-index: 1000;
+}
+.uni_audio_controller .control .icon-audioPlay.data-v-38303cb6, .uni_audio_controller .control .icon-audioPause.data-v-38303cb6 {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  -webkit-transform: translate3d(-20%, -50%, 0);
+          transform: translate3d(-20%, -50%, 0);
+  font-size: 42rpx;
+  color: #fffeff;
+}
+.uni_audio_controller .control .icon-audioPause.data-v-38303cb6 {
+  color: #959292;
 }
 .uni_audio_controller .audio_anim_play.data-v-38303cb6 {
   -webkit-animation: audioPlay-data-v-38303cb6 8s linear infinite;
@@ -123,23 +166,6 @@ $uni-font-size-paragraph:30rpx;*/
           animation: audioPlay-data-v-38303cb6 8s linear infinite;
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
-}
-.uni_audio_controller .control.data-v-38303cb6 {
-  width: 100rpx;
-  height: 100%;
-  position: relative;
-}
-.uni_audio_controller .control .icon-audioPlay.data-v-38303cb6, .uni_audio_controller .control .icon-audioPause.data-v-38303cb6 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-          transform: translate3d(-50%, -50%, 0);
-  font-size: 42rpx;
-  color: #fffeff;
-}
-.uni_audio_controller .control .icon-audioPause.data-v-38303cb6 {
-  color: #959292;
 }
 @-webkit-keyframes audioPlay-data-v-38303cb6 {
 0% {

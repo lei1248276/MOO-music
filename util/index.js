@@ -1,3 +1,4 @@
+// 将播放列表分组
 export function dividePlaylist(data) {
   let arr = [], temp = [];
   for (var i = 0, len = data.length; i < len; i++) {
@@ -19,4 +20,17 @@ export function dividePlaylist(data) {
     }
   }
   return arr;
+}
+
+
+// 节流
+export function throttle(cb, wait) {
+  let oldTime = 0;
+  return function (arg) {
+    const now = Date.now();
+    if (now - oldTime > wait) {
+      cb.call(this, arg);
+      oldTime = now;
+    }
+  }
 }

@@ -337,11 +337,11 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       });
     },
 
-    onScroll: function onScroll(e) {
+    onScroll: (0, _index2.throttle)(function (e) {
       var scrollT = e.target.scrollTop;
       this.isMove = this.scrollTop < scrollT;
       this.scrollTop = scrollT;
-    },
+    }, 150),
 
     toPlaylist: function toPlaylist() {
       uni.navigateTo({
@@ -363,10 +363,9 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       this.isMove = false;
     },
 
-    onTouchmove: function onTouchmove(e) {
-      var moveX = e.touches[0].clientX;
-      this.isReach = this.startX - moveX > 20;
-    },
+    onTouchmove: (0, _index2.throttle)(function (e) {
+      this.isReach = this.startX - e.touches[0].clientX >= 10;
+    }, 100),
 
     onTouchend: function onTouchend() {var _this6 = this;
       if (!this.isMove && this.isReach) {

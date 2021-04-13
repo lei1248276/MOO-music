@@ -4,9 +4,10 @@
   <!--  #endif  -->
 
     <scroll-view class="songlist"
-                   scroll-y
-                   lower-threshold="200"
-                   @scrolltolower="onLoadMore">
+                 scroll-y
+                 lower-threshold="200"
+                 @scrolltolower="onLoadMore"
+                 @scroll="onScroll($event)">
 
       <uni-loading v-if="!isLoaded"></uni-loading>
 
@@ -20,6 +21,12 @@
                   hover-class="hover_send">
             <text class="iconfont icon-more"></text>
           </button>
+
+          <text class="title"
+                :class="[isShowTitle ? 'isShowTitle' : 'isHideTitle']">
+            {{getSonglistDetails.name}}
+          </text>
+
           <button class="btn"
                   size="mini"
                   plain
@@ -90,6 +97,7 @@
 </template>
 
 <script>
+import {throttle} from '@/util/index';
 import {getPlaylist, getSongs} from "@/network/index";
 import {mapState, mapMutations} from "vuex";
 import types from "@/store/mutations-types";
@@ -108,6 +116,7 @@ export default {
       songs: [],
       tolLen: 0,
       limit: 15,
+      isShowTitle: false,
       isShowPlayPage: false,
       isActive: false
     }
@@ -186,8 +195,11 @@ export default {
       const songs = this.songs;
       if (songs.length === this.tolLen) return;
       this.songs = Object.seal(songs.concat(this.getRenderSongs(songs.length, this.limit)));
-      console.log(this.songs);
     },
+
+    onScroll: throttle(function (e) {
+      this.isShowTitle = e.target.scrollTop > 250;
+    }, 50),
 
     getIds(trackIds) {
       let len = trackIds.length,
@@ -226,13 +238,38 @@ export default {
       border: none;
       border-radius: 50%;
       float: right;
-      margin: 80rpx 10rpx;
+      margin: 80rpx 0;
       .icon-send, .icon-more{
          color: $font-color-white;
          font-size: 50rpx;
          font-weight: bold;
        }
     }
+
+    .title{
+      @include wh(45%, 50rpx);
+      position: absolute;
+      /* #ifndef APP-PLUS */
+      bottom: 15%;
+      /* #endif */
+      /* #ifdef APP-PLUS */
+      bottom: 28%;
+      /* #endif */
+      left: 45%;
+      transform: translateX(-45%);
+      color: $font-color-white;
+      font-size: 38rpx;
+      font-weight: bold;
+      @include omit();
+      transition: opacity .5s ease;
+    }
+    .isShowTitle{
+      opacity: 1
+    }
+    .isHideTitle{
+      opacity: 0;
+    }
+
     .hover_send{
       @include hover();
     }

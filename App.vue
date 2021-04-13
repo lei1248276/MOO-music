@@ -41,16 +41,10 @@
 
       this.getAudio.onEnded(() => {
         console.log(`ended: `);
-        let index = this.getPlayPageIndex,
-            queue = this.getCurrentPlayQueue;
+        const index = this.getShowPageIndex;
 
-        if (index < queue.length - 1) {
-          this.$store.dispatch('getPlaySong', queue[index + 1]);
-          this[types.SET_PLAY_PAGE_INDEX](index + 1);
-        } else if (index === queue.length - 1) {
-          this.$store.dispatch('getPlaySong', queue[0]);
-          this[types.SET_PLAY_PAGE_INDEX](0);
-        }
+        if (index < 2) this[types.SET_SHOW_PAGE_INDEX](index + 1);
+        else if (index === 2) this[types.SET_SHOW_PAGE_INDEX](0);
       })
 
 			this.getAudio.onWaiting(() => {
@@ -68,8 +62,7 @@
       ...mapState({
         getAudio: 'audio',
         getIsPlay: 'isPlay',
-        getCurrentPlayQueue: 'currentPlayQueue',
-        getPlayPageIndex: 'playPageIndex',
+        getShowPageIndex: 'showPageIndex'
       })
     },
     methods: {
@@ -78,7 +71,7 @@
           types.SET_AUDIO,
           types.SET_SWITCH,
           types.SET_CURRENT_TIME,
-          types.SET_PLAY_PAGE_INDEX
+          types.SET_SHOW_PAGE_INDEX
       ])
     }
 	}

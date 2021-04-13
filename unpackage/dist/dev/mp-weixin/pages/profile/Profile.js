@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var UniBackNav = function UniBackNav() {__webpack_require__.e(/*! require.ensure | components/backNav/UniBackNav */ "components/backNav/UniBackNav").then((function () {return resolve(__webpack_require__(/*! @/components/backNav/UniBackNav */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniShowShelf = function UniShowShelf() {__webpack_require__.e(/*! require.ensure | components/showShelf/UniShowShelf */ "components/showShelf/UniShowShelf").then((function () {return resolve(__webpack_require__(/*! @/components/showShelf/UniShowShelf */ 187));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -191,74 +191,106 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-{
-  components: {
-    UniBackNav: UniBackNav,
-    UniShowShelf: UniShowShelf },
 
-  data: function data() {
-    return {
-      isShowPlayPage: false,
-      isActive: false,
-      showData: [
-      {
-        icon: 'icon-heart',
-        text: '收藏',
-        count: this.$store.state.colSongs.length,
-        pic: Object.values(this.$store.state.colSongs).reverse().slice(0, 3),
-        route: '/pages/collect/Collect' },
 
-      {
-        icon: 'icon-playlist',
-        text: '歌单',
-        count: this.$store.state.colPlaylists.length,
-        pic: Object.values(this.$store.state.colPlaylists).reverse().slice(0, 3),
-        route: '/pages/collectPlaylist/CollectPlaylist' },
 
-      {
-        icon: 'icon-file',
-        text: '本地歌曲',
-        pic: [],
-        count: 0 },
 
+
+
+var _index = __webpack_require__(/*! @/util/index */ 31); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var UniBackNav = function UniBackNav() {__webpack_require__.e(/*! require.ensure | components/backNav/UniBackNav */ "components/backNav/UniBackNav").then((function () {return resolve(__webpack_require__(/*! @/components/backNav/UniBackNav */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniShowShelf = function UniShowShelf() {__webpack_require__.e(/*! require.ensure | components/showShelf/UniShowShelf */ "components/showShelf/UniShowShelf").then((function () {return resolve(__webpack_require__(/*! @/components/showShelf/UniShowShelf */ 187));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { UniBackNav: UniBackNav, UniShowShelf: UniShowShelf }, data: function data() {return { isLoaded: false, isShowPlayPage: false, isActive: false, message: [{ icon: 'icon-message', text: '消息' }, { icon: 'icon-app', text: 'MOO COVER' }] };}, onBackPress: function onBackPress() {if (this.isShowPlayPage) {this.isMove = this.isReach = this.isShowPlayPage = false;return true;}}, created: function created() {var _this = this;setTimeout(function () {_this.isLoaded = true;}, 200);}, computed: { getColSongs: function getColSongs() {return Object.values(this.$store.state.colSongs).reverse();}, getColPlaylists: function getColPlaylists() {return Object.values(this.$store.state.colPlaylists).reverse();}, getRecentPlaySongs: function getRecentPlaySongs() {return this.$store.state.recentPlaySongs;}, showData: function showData() {return [{ icon: 'icon-heart', text: '收藏', count: this.getColSongs.length, pic: this.getColSongs.slice(0, 3), route: '/pages/collect/Collect' }, { icon: 'icon-playlist', text: '歌单', count: this.getColPlaylists.length, pic: this.getColPlaylists.slice(0, 3), route: '/pages/collectPlaylist/CollectPlaylist' }, { icon: 'icon-file', text: '本地歌曲', pic: [], count: 0 },
       {
         icon: 'icon-time',
         text: '最近播放',
-        count: this.$store.state.recentPlaySongs.length,
-        pic: this.$store.state.recentPlaySongs.slice(0, 3),
-        route: '/pages/recentPlay/RecentPlay' }],
+        count: this.getRecentPlaySongs.length,
+        pic: this.getRecentPlaySongs.slice(0, 3),
+        route: '/pages/recentPlay/RecentPlay' }];
 
 
-      message: [
-      { icon: 'icon-message', text: '消息' },
-      { icon: 'icon-app', text: 'MOO COVER' }] };
+    } },
 
-
-  },
-  onBackPress: function onBackPress() {
-    if (this.isShowPlayPage) {
-      this.isMove = this.isReach = this.isShowPlayPage = false;
-      return true;
-    }
-  },
   methods: {
     onTouchstart: function onTouchstart(e) {
       this.startX = e.touches[0].clientX;
       this.isMove = false;
     },
 
-    onTouchmove: function onTouchmove(e) {
-      var moveX = e.touches[0].clientX;
-      this.isReach = moveX - this.startX > 20;
-    },
+    onTouchmove: (0, _index.throttle)(function (e) {
+      this.isReach = e.touches[0].clientX - this.startX >= 10;
+    }, 100),
 
-    onTouchend: function onTouchend() {var _this = this;
+    onTouchend: function onTouchend() {var _this2 = this;
       if (!this.isMove && this.isReach) {
         this.isMove = true;
         uni.navigateBack({
           delta: 1,
           success: function success() {
-            _this.isMove = _this.isReach = false;
+            _this2.isMove = _this2.isReach = false;
           } });
 
       }

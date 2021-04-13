@@ -22,25 +22,11 @@ export default {
       }
     });
     state.currentPlayQueue = playRecord;
-    state.currentSong = playRecord[curSongIndex];
-    state.playPageIndex = curSongIndex;
+
+    this.commit(types.SET_CURRENT_SONG, playRecord[curSongIndex]);
+    this.commit(types.SET_CURRENT_PLAY_INDEX, curSongIndex);
+    this.commit(types.SET_RESET_PAGE_INDEX, curSongIndex);
   },
-
-  // 设置初始化
-  /*[types.SET_INITIALIZE](state) {
-    let [...RPS] = state.recentPlaySongs = uni.getStorageSync('recentPlaySongs') || [];
-    uni.getStorage({
-      key: 'colSongs',
-      success: res => {state.colSongs = res.data;}
-    });
-    uni.getStorage({
-      key: 'colPlaylists',
-      success: res => {state.colPlaylists = res.data;}
-    });
-
-    state.currentPlayQueue = RPS.length >= 20 ? RPS.slice(0, 20) : RPS;
-    state.currentSong = RPS[0];
-  },*/
 
   // 设置是否初始化
   [types.SET_IS_INIT](state) {
@@ -52,24 +38,9 @@ export default {
   state.audio = payload;
   },
 
-  // 设置当前播放歌曲
-  [types.SET_CURRENT_SONG](state, payload) {
-    state.currentSong = payload;
-  },
-
   // 设置播放开关
   [types.SET_SWITCH](state, payload) {
     state.isPlay = payload;
-  },
-
-  /*// 设置歌曲时长
-  [types.SET_DURATION](state, payload) {
-    state.duration = payload;
-  },*/
-
-  // 设置歌曲当前播放时间
-  [types.SET_CURRENT_TIME](state, payload) {
-    state.currentTime = payload;
   },
 
   // 设置播放列表
@@ -87,9 +58,54 @@ export default {
     state.songlistDetails = payload;
   },
 
+  /*// 设置当前歌曲时长
+  [types.SET_DURATION](state, payload) {
+    state.duration = payload;
+  },*/
+
+
+  // 设置当前歌曲播放时间
+  [types.SET_CURRENT_TIME](state, payload) {
+    state.currentTime = payload;
+  },
+
+  // 设置当前播放歌曲
+  [types.SET_CURRENT_SONG](state, payload) {
+    state.currentSong = payload;
+  },
+
   // 设置播放页面当前index
-  [types.SET_PLAY_PAGE_INDEX](state, payload) {
-    state.playPageIndex = payload;
+  [types.SET_CURRENT_PLAY_INDEX](state, payload) {
+    state.currentPlayIndex = payload;
+  },
+
+  // 当前playPage页面显示窗口index（保证所有playPage页面显示一致）
+  [types.SET_SHOW_PAGE_INDEX](state, payload) {
+    state.showPageIndex = payload;
+  },
+
+  // 设置当前播放页面顶部窗口歌曲index
+  [types.SET_TOP_PAGE_INDEX](state, payload) {
+    state.topPageIndex = payload;
+  },
+
+  // 设置当前播放页面中间窗口歌曲index
+  [types.SET_MIDDLE_PAGE_INDEX](state, payload) {
+    state.middlePageIndex = payload;
+  },
+
+  // 设置当前播放页面底部窗口歌曲index
+  [types.SET_BOTTOM_PAGE_INDEX](state, payload) {
+    state.bottomPageIndex = payload;
+  },
+
+  // 设置重置pageIndex
+  [types.SET_RESET_PAGE_INDEX](state, payload) {
+    const last = state.currentPlayQueue.length - 1;
+    state.showPageIndex = 1;
+    state.topPageIndex = payload === 0 ? last : payload - 1;
+    state.middlePageIndex = payload;
+    state.bottomPageIndex = payload === last ? 0 : payload + 1;
   },
 
   // 设置当前播放队列

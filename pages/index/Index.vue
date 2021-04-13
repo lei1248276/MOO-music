@@ -6,19 +6,24 @@
       <text class="iconfont icon-user"></text>
     </view>
 
-    <uni-swiper-dot class="swiper_dots" :count="2"
-                    :currentIndex="current"></uni-swiper-dot>
+    <uni-swiper-dot class="swiper_dots"
+                    :count="2"
+                    :currentIndex="current">
+    </uni-swiper-dot>
 
     <swiper class="swiper"
             :current="current"
             duration="300"
             @change="onChange">
+
       <swiper-item>
         <uni-play-page></uni-play-page>
       </swiper-item>
+
       <swiper-item>
         <home ref="home"></home>
       </swiper-item>
+
     </swiper>
 
     <uni-audio-controller :class="[current ? 'show' : 'hide']"
@@ -54,12 +59,6 @@ import UniPlayPage from '@/components/playPage/UniPlayPage';
         this.current = 0;
       }
 		},
-    /*onLoad() {
-      console.log(`index Load: `, performance.now());
-    },
-    created() {
-      console.log(`index created`, performance.now());
-    }*/
     onShow() {
       if (this.$refs.home) {
         this.$refs.home.onAutoplay();
@@ -108,6 +107,7 @@ import UniPlayPage from '@/components/playPage/UniPlayPage';
     .hide{
       @extend .show;
       opacity: 0;
+      z-index: -1;
     }
 
     .swiper{

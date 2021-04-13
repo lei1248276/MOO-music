@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var UniBackNav = function UniBackNav() {__webpack_require__.e(/*! require.ensure | components/backNav/UniBackNav */ "components/backNav/UniBackNav").then((function () {return resolve(__webpack_require__(/*! @/components/backNav/UniBackNav */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSong = function UniSong() {Promise.all(/*! require.ensure | components/song/UniSong */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/song/UniSong")]).then((function () {return resolve(__webpack_require__(/*! @/components/song/UniSong */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSongControl = function UniSongControl() {__webpack_require__.e(/*! require.ensure | components/songControl/UniSongControl */ "components/songControl/UniSongControl").then((function () {return resolve(__webpack_require__(/*! @/components/songControl/UniSongControl */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -200,54 +200,58 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-{
-  data: function data() {
-    return {
-      isShowNav: true,
-      isShowTitle: true,
-      playlistId: '',
-      getNewSonglist: [],
-      isShowPlayPage: false,
-      isActive: false };
-
-  },
-  components: {
-    UniBackNav: UniBackNav,
-    UniSong: UniSong,
-    UniSongControl: UniSongControl },
-
-  onLoad: function onLoad(_ref) {var _this = this;var id = _ref.id;
-    this.playlistId = id;
-
-    // eventChannel在app端有400多ms延迟.....
-    var eventChannel = this.getOpenerEventChannel();
-    eventChannel.on('acceptNewSonglist', function (data) {
-      _this.getNewSonglist = data;
-    });
-  },
-  onBackPress: function onBackPress() {
-    if (this.isShowPlayPage) {
-      this.isShowPlayPage = false;
-      return true;
-    }
-  },
-  /*computed: {
-       getNewSonglist() {
-         return this.$store.state.newSonglist.slice(0, 15);
-       }
-     },*/
-  methods: {
-    onScroll: function onScroll(e) {
-      var top = e.target.scrollTop;
-      this.isShowTitle = top < 50;
-      this.isShowNav = top < 100;
-    },
-
-    onClick: function onClick() {
-      var audio = this.$store.state.audio,
-      duration = audio.duration;
+var _index = __webpack_require__(/*! @/util/index */ 31); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var UniBackNav = function UniBackNav() {__webpack_require__.e(/*! require.ensure | components/backNav/UniBackNav */ "components/backNav/UniBackNav").then((function () {return resolve(__webpack_require__(/*! @/components/backNav/UniBackNav */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSong = function UniSong() {Promise.all(/*! require.ensure | components/song/UniSong */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/song/UniSong")]).then((function () {return resolve(__webpack_require__(/*! @/components/song/UniSong */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSongControl = function UniSongControl() {__webpack_require__.e(/*! require.ensure | components/songControl/UniSongControl */ "components/songControl/UniSongControl").then((function () {return resolve(__webpack_require__(/*! @/components/songControl/UniSongControl */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { isShowNav: true, isShowTitle: true, playlistId: '', getNewSonglist: [], isShowPlayPage: false, isActive: false };}, components: { UniBackNav: UniBackNav, UniSong: UniSong, UniSongControl: UniSongControl }, onLoad: function onLoad(_ref) {var _this = this;var id = _ref.id;this.playlistId = id; // eventChannel在app端有400多ms延迟.....
+    var eventChannel = this.getOpenerEventChannel();eventChannel.on('acceptNewSonglist', function (data) {_this.getNewSonglist = data;});}, onBackPress: function onBackPress() {if (this.isShowPlayPage) {this.isShowPlayPage = false;return true;}}, /*computed: {
+                                                                                                                                                                                                                                                         getNewSonglist() {
+                                                                                                                                                                                                                                                           return this.$store.state.newSonglist.slice(0, 15);
+                                                                                                                                                                                                                                                         }
+                                                                                                                                                                                                                                                       },*/methods: { onScroll: (0, _index.throttle)(function (e) {var top = e.target.scrollTop;this.isShowTitle = top < 50;this.isShowNav = top < 100;}, 60), onClick: function onClick() {var audio = this.$store.state.audio,duration = audio.duration;
       audio.seek(duration - 5);
     },
 

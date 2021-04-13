@@ -24,7 +24,7 @@ export default {
   .uni_alt :nth-child(1) {
     width: 100%;
     /* #ifdef APP-PLUS */
-    font-size: 185rpx;
+    font-size: 180rpx;
     /* #endif */
     /* #ifndef APP-PLUS */
     font-size: 165rpx;

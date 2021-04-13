@@ -2,7 +2,9 @@
   <!-- #ifdef H5 -->
   <uni-transition :mode-class="['slide-right']" show>
     <!--  #endif  -->
-    <scroll-view class="new_songlist" scroll-y @scroll="onScroll">
+    <scroll-view class="new_songlist"
+                 scroll-y
+                 @scroll="onScroll($event)">
 
       <uni-back-nav class="nav" :class="[isShowNav ? '' : 'nav_text_hide']">
         <view class="nav_text" :class="[isShowNav ? 'nav_text_hide' : '']">MOO Track 新歌</view>
@@ -43,6 +45,8 @@
 </template>
 
 <script>
+import {throttle} from "@/util/index";
+
 import UniBackNav from "@/components/backNav/UniBackNav";
 import UniSong from "@/components/song/UniSong";
 import UniSongControl from "@/components/songControl/UniSongControl";
@@ -84,11 +88,11 @@ export default {
     }
   },*/
   methods: {
-    onScroll(e) {
+    onScroll: throttle(function (e) {
       const top = e.target.scrollTop;
       this.isShowTitle = top < 50;
       this.isShowNav = top < 100;
-    },
+    }, 50),
 
     onClick() {
       let audio = this.$store.state.audio,

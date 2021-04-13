@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var UniSongControl = function UniSongControl() {__webpack_require__.e(/*! require.ensure | components/songControl/UniSongControl */ "components/songControl/UniSongControl").then((function () {return resolve(__webpack_require__(/*! @/components/songControl/UniSongControl */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSong = function UniSong() {Promise.all(/*! require.ensure | components/song/UniSong */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/song/UniSong")]).then((function () {return resolve(__webpack_require__(/*! @/components/song/UniSong */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -142,6 +142,32 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _index = __webpack_require__(/*! @/util/index */ 31);
+var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var UniSongControl = function UniSongControl() {__webpack_require__.e(/*! require.ensure | components/songControl/UniSongControl */ "components/songControl/UniSongControl").then((function () {return resolve(__webpack_require__(/*! @/components/songControl/UniSongControl */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var UniSong = function UniSong() {Promise.all(/*! require.ensure | components/song/UniSong */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/song/UniSong")]).then((function () {return resolve(__webpack_require__(/*! @/components/song/UniSong */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   props: {
@@ -156,22 +182,59 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
-      delay: false };
+      limit: 10,
+      delay: false,
+      renderQueue: [] };
 
   },
   created: function created() {var _this = this;
+    this.renderQueue = Object.seal(this.getRenderSongs(0, this.limit));
+    console.log(this.getCurrentSong);
+    // 组件生成以后加延迟触发过渡
     setTimeout(function () {
       _this.delay = true;
     }, 17);
   },
-  computed: {
-    getCurrentPlayQueue: function getCurrentPlayQueue() {
-      return this.$store.state.currentPlayQueue;
-    } },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)({
+    getCurrentPlayQueue: 'currentPlayQueue',
+    getCurrentSong: 'currentSong' })),
+
 
   methods: {
-    offSongQueue: function offSongQueue() {
-      this.$emit('update:isShow', false);
+    // 获取当前需要渲染的歌曲
+    getRenderSongs: function getRenderSongs(offset, limit) {
+      return this.getCurrentPlayQueue.slice(offset, limit + offset);
+    },
+
+    // 监听滑动到底部加载更多
+    onLoadMore: function onLoadMore() {
+      var renderQueue = this.renderQueue;
+      if (renderQueue.length === this.getCurrentPlayQueue.length) return;
+      this.renderQueue = Object.seal(renderQueue.concat(this.getRenderSongs(renderQueue.length, this.limit)));
+    },
+
+    onTouchstart: function onTouchstart(e) {
+      this.startY = e.touches[0].clientY;
+    },
+
+    onTouchmove: (0, _index.throttle)(function (e) {
+      this.isReach = e.touches[0].clientY - this.startY > 50;
+    }, 100),
+
+    onTouchend: function onTouchend() {
+      if (this.isReach) {
+        this.$emit('update:isShow', false);
+        this.isReach = false;
+      }
+    } },
+
+  watch: {
+    // 切换歌单更新renderQueue
+    getCurrentPlayQueue: function getCurrentPlayQueue(val, oldVal) {
+      if (val[0].playlistId !== oldVal[0].playlistId) {
+        this.renderQueue = Object.seal(this.getRenderSongs(0, this.limit));
+      }
     } } };exports.default = _default;
 
 /***/ }),

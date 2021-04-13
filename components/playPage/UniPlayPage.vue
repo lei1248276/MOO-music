@@ -5,23 +5,17 @@
             circular
             duration="200"
             @change="onChange"
-            :current="getPlayPageIndex"
+            :current="getShowPageIndex"
             :class="[isShowSongQueue ? 'blur' : '']">
 
       <swiper-item class="item"
                    @click="onMask"
-                   v-for="(item, index) in getCurrentPlayQueue"
+                   v-for="(item, index) in renderQueue"
                    :key="index">
 
-        <!--  图片懒加载：优先加载，当前图片、上一张图片（或是最后一张图片）、下一张图片（或是第一张图片） -->
-        <image v-if="getPlayPageIndex === index
-            || getPlayPageIndex === index - 1
-            || getPlayPageIndex - 1 === index
-            || !index
-            || index === getCurrentPlayQueue.length - 1"
-               :src="item.picUrl + '?param=400y400'"
+        <image :src="item.picUrl + '?param=400y400'"
                class="img" mode="aspectFill"
-               :class="[(!getIsPlay && getPlayPageIndex === index) && 'mask iconfont icon-audioPlay']">
+               :class="[(!getIsPlay && getShowPageIndex === index) && 'mask iconfont icon-audioPlay']">
         </image>
 
         <prepare-img :fz="22"></prepare-img>
@@ -49,6 +43,8 @@
     <!--  歌曲播放队列  -->
     <uni-song-queue v-if="isActive" :isShow.sync="isShowSongQueue"></uni-song-queue>
 
+    <!--  soundWave  -->
+    <uni-super-sound-wave :run="getIsPlay"></uni-super-sound-wave>
   </view>
 </template>
 
@@ -58,35 +54,36 @@ import types from "@/store/mutations-types";
 
 import UniTag from "../tag/UniTag";
 import UniSongQueue from "../songQueue/UniSongQueue";
+import UniSuperSoundWave from "../superSoundWave/UniSuperSoundWave";
 
 export default {
   components: {
     UniTag,
-    UniSongQueue
+    UniSongQueue,
+    UniSuperSoundWave
   },
   data() {
     return {
       tag: ['+歌曲故事', '#New Wave', '#Hot', '#Moo Daily'],
       isShowSongQueue: false,
       isActive: false,
-      // currentIndex: 0,
-      // renderQueue: this.$store.state.currentPlayQueue.slice(0,this.$store.state.playPageIndex + 2)
     }
   },
-  /*created() {
-    this.currentIndex = this.getPlayPageIndex;
-    this.getAudio.onCanplay(() => {
-      console.log(`onCanplay`);
-      this.setRenderQueue();
-    })
-  },*/
+  created() {
+    const pages = getCurrentPages(), page = pages[pages.length - 1];
+    this.route = page.route;
+  },
   computed: {
     ...mapState({
       getIsInit: 'isInit',
       getIsPlay: 'isPlay',
       getAudio: 'audio',
       getCurrentSong: 'currentSong',
-      getPlayPageIndex: 'playPageIndex',
+      getShowPageIndex: 'showPageIndex',
+      getCurrentPlayIndex: 'currentPlayIndex',
+      getTopPageIndex: 'topPageIndex',
+      getMiddlePageIndex: 'middlePageIndex',
+      getBottomPageIndex: 'bottomPageIndex',
       getCurrentPlayQueue: state => {
         state.currentPlayQueue.forEach(v => {
           if (state.colSongs[v.id] != null) v.isCollect = true;
@@ -96,27 +93,27 @@ export default {
       getLock: 'lock',
       getColSongs: 'colSongs'
     }),
+
+    renderQueue() {
+      const queue = this.getCurrentPlayQueue;
+      return [
+          queue[this.getTopPageIndex],
+          queue[this.getMiddlePageIndex],
+          queue[this.getBottomPageIndex]
+      ];
+    }
 		
   },
   methods: {
     ...mapMutations([
-        types.SET_PLAY_PAGE_INDEX,
+        types.SET_SHOW_PAGE_INDEX,
+        types.SET_CURRENT_PLAY_INDEX,
+        types.SET_TOP_PAGE_INDEX,
+        types.SET_MIDDLE_PAGE_INDEX,
+        types.SET_BOTTOM_PAGE_INDEX,
         types.SET_IS_INIT,
-        types.SET_COL_SONGS
+        types.SET_COL_SONGS,
     ]),
-
-    // 动态加载播放页面
-    /*setRenderQueue() {
-      let index = this.getPlayPageIndex,
-          queue = this.getCurrentPlayQueue,
-          last = queue.length - 1;
-      /!*if (index !== last && index + 2 < queue.length) {
-        console.log(`.....`);
-        this.renderQueue.push(...queue.slice(index, index + 1));
-        console.log(this.renderQueue);
-      }*!/
-      this.renderQueue.push(...queue.slice(index, index + 1));
-    },*/
 
     onMask() {
       if (this.getIsPlay) {
@@ -133,12 +130,9 @@ export default {
     },
 
     onChange(e) {
-      // 避免重复请求数据
-      if (!this.getLock) {
-        let current = e.detail.current;
-        this.$store.dispatch('getPlaySong', this.getCurrentPlayQueue[current]);
-        this[types.SET_PLAY_PAGE_INDEX](current);
-      }
+      if (this.getLock)return;
+      this[types.SET_SHOW_PAGE_INDEX](e.detail.current);
+      // console.log(`change`);
     },
 
     onColSongs(item) {
@@ -150,11 +144,53 @@ export default {
       this.isShowSongQueue = this.isActive = true;
     },
   },
-  /*watch: {
-    getCurrentPlayQueue() {
-      // this.setRenderQueue();
-    }
-  }*/
+  watch: {
+    // 动态加载播放页面
+    getShowPageIndex(val, oldVal) {
+      // 避免多次触发函数，执行完毕后会发出网络请求直到请求结束才会解锁
+      if (this.getLock)return;
+
+      let playIndex = this.getCurrentPlayIndex;
+      const last = this.getCurrentPlayQueue.length - 1;
+
+      // 滑动窗口变化的6种情况，动态改变指针（保证初始化时只渲染 3页，而每次切歌只重绘 1页）
+      if (oldVal === 1 && val === 2) {
+        // console.log(oldVal, val, `下一曲`, playIndex);
+        playIndex = playIndex === last ? 0 : playIndex + 1;
+        this[types.SET_TOP_PAGE_INDEX](playIndex === last ? 0 : playIndex + 1);
+
+      } else if (oldVal === 2 && val === 0) {
+        // console.log(oldVal, val, `下一曲`, playIndex);
+        playIndex = playIndex === last ? 0 : playIndex + 1;
+        this[types.SET_MIDDLE_PAGE_INDEX](playIndex === last ? 0 : playIndex + 1);
+
+      } else if (oldVal === 0 && val === 1) {
+        // console.log(oldVal, val, `下一曲`, playIndex);
+        playIndex = playIndex === last ? 0 : playIndex + 1;
+        this[types.SET_BOTTOM_PAGE_INDEX](playIndex === last ? 0 : playIndex + 1);
+
+      } else if (oldVal === 1 && val === 0) {
+        // console.log(oldVal, val, `上一曲`, playIndex);
+        playIndex = playIndex === 0 ? last : playIndex - 1;
+        this[types.SET_BOTTOM_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
+
+      } else if (oldVal === 0 && val === 2) {
+        // console.log(oldVal, val, `上一曲`, playIndex);
+        playIndex = playIndex === 0 ? last : playIndex - 1;
+        this[types.SET_MIDDLE_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
+
+      } else if (oldVal === 2 && val === 1) {
+        // console.log(oldVal, val, `上一曲`, playIndex);
+        playIndex = playIndex === 0 ? last : playIndex - 1;
+        this[types.SET_TOP_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
+      }
+
+      // 切歌后发出请求歌曲 url
+      this.$store.dispatch('getPlaySong', this.getCurrentPlayQueue[playIndex]);
+      // 修改当前播放队列歌曲 index
+      this[types.SET_CURRENT_PLAY_INDEX](playIndex);
+    },
+  }
 }
 </script>
 
@@ -182,7 +218,7 @@ export default {
         .song_info{
           @include wh(90%, 25%);
           position: absolute;
-          bottom: 10%;
+          bottom: 18%;
           left: 50%;
           transform: translate3d(-50%, -10%, 0);
 

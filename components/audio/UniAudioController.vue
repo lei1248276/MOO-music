@@ -4,13 +4,16 @@
     <movable-area class="mov_area">
       <movable-view class="mov_view"
                     direction="horizontal" :x="x"
-                    @change="onMove" @touchend="onTouchend">
+                    @change="onMove($event)"
+                    @touchend="onTouchend">
         <image src="~@/static/record.png"
                class="audio_img"
                :class="[getIsPlay ? 'audio_anim_play' : 'audio_anim_pause']">
         </image>
       </movable-view>
     </movable-area>
+
+    <view class="prompt">{{oldX > 0 ? 'NEXT' : 'LAST'}}</view>
 
     <text class="playTime"
           :class="[getIsPlay ? 'active' : '']">
@@ -28,6 +31,8 @@
 
 <script>
 import {mapState, mapMutations} from "vuex";
+import {throttle} from '@/util/index';
+
 import types from "@/store/mutations-types";
 
 export default {
@@ -44,15 +49,14 @@ export default {
       getIsPlay: 'isPlay',
       getCurrentTime: 'currentTime',
       getCurrentSong: 'currentSong',
-      getPlayPageIndex: 'playPageIndex',
-      getCurrentPlayQueue: 'currentPlayQueue'
+      getShowPageIndex: 'showPageIndex'
     }),
 
   },
   methods: {
     ...mapMutations([
-      types.SET_IS_INIT,
-      types.SET_PLAY_PAGE_INDEX
+        types.SET_IS_INIT,
+        types.SET_SHOW_PAGE_INDEX
     ]),
 
     onPlay() {
@@ -66,30 +70,20 @@ export default {
       }
     },
 
-    onMove(e) {
+    onMove: throttle(function (e) {
       this.oldX = e.detail.x;
-    },
+    }, 17),
 
     onTouchend() {
-      let index = this.getPlayPageIndex,
-          queue = this.getCurrentPlayQueue,
-          len = queue.length;
+      const index = this.getShowPageIndex;
       if (this.oldX > 60) {
-        if (index < len - 1) {
-          this.$store.dispatch('getPlaySong', queue[index + 1]);
-          this[types.SET_PLAY_PAGE_INDEX](index + 1);
-        } else if (index === len - 1) {
-          this.$store.dispatch('getPlaySong', queue[0]);
-          this[types.SET_PLAY_PAGE_INDEX](0);
-        }
-      } else if (this.oldX < -70) {
-        if (index > 0) {
-          this.$store.dispatch('getPlaySong', queue[index - 1]);
-          this[types.SET_PLAY_PAGE_INDEX](index - 1);
-        } else if (index === 0) {
-          this.$store.dispatch('getPlaySong', queue[len - 1]);
-          this[types.SET_PLAY_PAGE_INDEX](len - 1);
-        }
+        // 右划下一曲
+        if (index < 2) this[types.SET_SHOW_PAGE_INDEX](index + 1);
+        else if (index === 2) this[types.SET_SHOW_PAGE_INDEX](0);
+      } else if (this.oldX < -60) {
+        // 左划上一曲
+        if (index > 0) this[types.SET_SHOW_PAGE_INDEX](index - 1);
+        else if (index === 0) this[types.SET_SHOW_PAGE_INDEX](2);
       }
       this.x = this.oldX;
       this.$nextTick(() => {
@@ -130,7 +124,7 @@ export default {
       .mov_view{
         @include wh(130rpx, 130rpx);
         left: 38%;
-        z-index: 1111;
+        z-index: 1001;
         .audio_img{
           @include wh(100%, 100%);
         }
@@ -151,13 +145,13 @@ export default {
       color: $font-color-white;
     }
 
-    .audio_anim_play{
-      animation: audioPlay 8s linear infinite;
-      animation-play-state: running;
-    }
-    .audio_anim_pause{
-      animation: audioPlay 8s linear infinite;
-      animation-play-state: paused;
+    .prompt{
+      position: absolute;
+      top: 50%;
+      left: 52%;
+      transform: translate3d(-52%, -50%, 0);
+      color: $font-color-white;
+      font-size: 46rpx;
     }
 
     .control{
@@ -177,6 +171,15 @@ export default {
         @extend .icon-audioPlay;
         color: $font-color-grey;
       }
+    }
+
+    .audio_anim_play{
+      animation: audioPlay 8s linear infinite;
+      animation-play-state: running;
+    }
+    .audio_anim_pause{
+      animation: audioPlay 8s linear infinite;
+      animation-play-state: paused;
     }
   }
 

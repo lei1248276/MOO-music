@@ -89,7 +89,7 @@ export default {
     @include wh($container-size, 800rpx);
     color: $font-color-white;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 0 auto 50rpx;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

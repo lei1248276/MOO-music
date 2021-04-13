@@ -197,12 +197,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.current = 0;
     } },
 
-  /*onLoad() {
-           console.log(`index Load: `, performance.now());
-         },
-         created() {
-           console.log(`index created`, performance.now());
-         }*/
   onShow: function onShow() {
     if (this.$refs.home) {
       this.$refs.home.onAutoplay();

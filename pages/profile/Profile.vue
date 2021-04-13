@@ -6,7 +6,7 @@
       <scroll-view class="profile"
                    scroll-y
                    @touchstart.stop="onTouchstart"
-                   @touchmove.stop="onTouchmove"
+                   @touchmove.stop="onTouchmove($event)"
                    @touchend.stop="onTouchend">
 
         <uni-back-nav>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import {throttle} from '@/util/index'
+
 import UniBackNav from "@/components/backNav/UniBackNav";
 import UniShowShelf from "@/components/showShelf/UniShowShelf";
 
@@ -74,35 +76,6 @@ export default {
     return {
       isShowPlayPage: false,
       isActive: false,
-      showData: [
-        {
-          icon: 'icon-heart',
-          text: '收藏',
-          count: this.$store.state.colSongs.length,
-          pic: Object.values(this.$store.state.colSongs).reverse().slice(0, 3),
-          route: '/pages/collect/Collect'
-        },
-        {
-          icon: 'icon-playlist',
-          text: '歌单',
-          count: this.$store.state.colPlaylists.length,
-          pic: Object.values(this.$store.state.colPlaylists).reverse().slice(0, 3),
-          route: '/pages/collectPlaylist/CollectPlaylist'
-        },
-        {
-          icon: 'icon-file',
-          text: '本地歌曲',
-          pic: [],
-          count: 0
-        },
-        {
-          icon: 'icon-time',
-          text: '最近播放',
-          count: this.$store.state.recentPlaySongs.length,
-          pic: this.$store.state.recentPlaySongs.slice(0, 3),
-          route: '/pages/recentPlay/RecentPlay'
-        },
-        ],
       message: [
           {icon: 'icon-message', text: '消息'},
           {icon: 'icon-app', text: 'MOO COVER'},
@@ -115,16 +88,60 @@ export default {
       return true;
     }
   },
+  computed: {
+    getColSongs() {
+      return Object.values(this.$store.state.colSongs).reverse();
+    },
+
+    getColPlaylists() {
+      return Object.values(this.$store.state.colPlaylists).reverse();
+    },
+
+    getRecentPlaySongs() {
+      return this.$store.state.recentPlaySongs;
+    },
+
+    showData() {
+      return [
+        {
+          icon: 'icon-heart',
+          text: '收藏',
+          count: this.getColSongs.length,
+          pic: this.getColSongs.slice(0, 3),
+          route: '/pages/collect/Collect'
+        },
+        {
+          icon: 'icon-playlist',
+          text: '歌单',
+          count: this.getColPlaylists.length,
+          pic: this.getColPlaylists.slice(0, 3),
+          route: '/pages/collectPlaylist/CollectPlaylist'
+        },
+        {
+          icon: 'icon-file',
+          text: '本地歌曲',
+          pic: [],
+          count: 0
+        },
+        {
+          icon: 'icon-time',
+          text: '最近播放',
+          count: this.getRecentPlaySongs.length,
+          pic: this.getRecentPlaySongs.slice(0, 3),
+          route: '/pages/recentPlay/RecentPlay'
+        },
+      ]
+    }
+  },
   methods: {
     onTouchstart(e) {
       this.startX = e.touches[0].clientX;
       this.isMove = false;
     },
 
-    onTouchmove(e) {
-      let moveX = e.touches[0].clientX;
-      this.isReach = moveX - this.startX > 20;
-    },
+    onTouchmove: throttle(function (e) {
+      this.isReach = e.touches[0].clientX - this.startX >= 10;
+    }, 100),
 
     onTouchend() {
       if (!this.isMove && this.isReach) {

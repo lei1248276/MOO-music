@@ -258,11 +258,11 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
   data: function data() {
     return {
       isLoaded: false,
-      songs: [],
       playlistId: '',
-      tolLen: 0,
-      limit: 20,
       tag: ['#一个人的夜', '#让我缓缓', '#躺着听'],
+      songs: [],
+      tolLen: 0,
+      limit: 15,
       isShowPlayPage: false,
       isActive: false };
 
@@ -274,22 +274,29 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
     UniSongControl: UniSongControl },
 
   onLoad: function onLoad(_ref) {var _this = this;var id = _ref.id;
+    // 保存播放列表id
     this.playlistId = id;
+    // 生成一个临时播放歌曲队列做懒加载
+    this.tempSongQueue = [];
 
     (0, _index.getPlaylist)(id).then(function (res) {var _res = _slicedToArray(
       res, 2),err = _res[0],data = _res[1];
-      _this.tracks = data.data.playlist.trackIds;
-      _this.tolLen = _this.tracks.length;
-      return _this.getIds(_this.songs.length, _this.limit);
+      // 获取所有歌曲查询id
+      return _this.getIds(data.data.playlist.trackIds.slice(0, 100));
     }).then(function (ids) {
       (0, _index.getSongs)(ids).then(function (res) {var _res2 = _slicedToArray(
         res, 2),err = _res2[0],data = _res2[1];
-        _this.songs = Object.seal(data.data.songs.map(function (val) {return {
+        // 将所有请求到的歌曲放入临时队列
+        _this.tempSongQueue = data.data.songs.map(function (val) {return {
             id: val.id,
             picUrl: val.al.picUrl,
             name: val.name,
-            singer: val.ar[0].name };}));
+            singer: val.ar[0].name };});
 
+
+        _this.tolLen = _this.tempSongQueue.length;
+        // 获取当前要渲染的歌曲（延迟加载）
+        _this.songs = Object.seal(_this.getRenderSongs(0, _this.limit));
         _this.isLoaded = true;
       }).catch(function (err) {
         console.log(err);
@@ -330,30 +337,23 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       this[_mutationsTypes.default.SET_COL_PLAYLISTS](this.getSonglistDetails);
     },
 
-    onScrollToLower: function onScrollToLower() {var _this2 = this;
-      var ids = this.getIds(this.songs.length, this.limit);
-      if (ids) {
-        (0, _index.getSongs)(ids).then(function (res) {var _res3 = _slicedToArray(
-          res, 2),err = _res3[0],data = _res3[1];
-          _this2.songs = Object.seal(_this2.songs.concat(data.data.songs.map(function (val) {return {
-              id: val.id,
-              picUrl: val.al.picUrl,
-              name: val.name,
-              singer: val.ar[0].name };})));
-
-        });
-      }
+    onLoadMore: function onLoadMore() {
+      var songs = this.songs;
+      if (songs.length === this.tolLen) return;
+      this.songs = Object.seal(songs.concat(this.getRenderSongs(songs.length, this.limit)));
     },
 
-    getIds: function getIds(offset, limit) {
-      var tolLen = this.tolLen,
-      temp = this.tracks,
-      ids = '',
-      l = tolLen - offset > limit ? limit + offset : tolLen;
-      for (var i = offset; i < l; i++) {
-        ids += ",".concat(temp[i].id);
+    getIds: function getIds(trackIds) {
+      var len = trackIds.length,
+      ids = '';
+      for (var i = 0; i < len; i++) {
+        ids += ",".concat(trackIds[i].id);
       }
       return ids.substring(1);
+    },
+
+    getRenderSongs: function getRenderSongs(offset, limit) {
+      return this.tempSongQueue.slice(offset, limit + offset);
     },
 
     toPlayPage: function toPlayPage() {

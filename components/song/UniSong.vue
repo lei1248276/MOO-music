@@ -84,7 +84,8 @@ export default {
         types.SET_IS_INIT,
         types.SET_SWITCH,
         types.SET_CURRENT_SONG,
-        types.SET_PLAY_PAGE_INDEX,
+        types.SET_RESET_PAGE_INDEX,
+        types.SET_CURRENT_PLAY_INDEX,
         types.SET_CURRENT_PLAY_QUEUE,
         types.SET_RECENT_PLAY_SONGS,
     ]),
@@ -116,19 +117,22 @@ export default {
           curPlId = this.playlistId;
       /*1. 歌单id不同直接获取歌单歌曲信息
       * 2. 歌单id相同但是因为加载了更多歌曲在次获取歌单歌曲信息 */
-      // console.log(curSong.playlistId, curPlId);
+      // console.log(curSong.playlistId, curPlId, curPlayQueue.length, songs.length);
+
       if (!curSong || curSong.playlistId !== curPlId) {
         console.log(`歌单初次加载`);
         songsInfo = this.reload(songs, [], curPlId);
-      } else if(curSong.playlistId === curPlId && curPlayQueue.length !== songs.length) {
+      } else if(curSong.playlistId === curPlId && curPlayQueue.length < songs.length) {
         console.log(`歌单加载更多`);
         songsInfo = curPlayQueue.concat(this.reload(songs, curPlayQueue, curPlId));
       } else {
         console.log(`默认加载`);
         // 获取歌曲链接
         this.$store.dispatch('getPlaySong', curPlayQueue[index]);
-        // 设置playPage当前页面index
-        this[types.SET_PLAY_PAGE_INDEX](index);
+        // 重置playPage当前页面index
+        this[types.SET_RESET_PAGE_INDEX](index);
+        // 设置当前播放歌曲 index
+        this[types.SET_CURRENT_PLAY_INDEX](index);
         return;
       }
 
@@ -136,8 +140,10 @@ export default {
       this[types.SET_CURRENT_PLAY_QUEUE](songsInfo);
       // 获取歌曲链接
       this.$store.dispatch('getPlaySong', songsInfo[index]);
-      // 设置playPage当前页面index
-      this[types.SET_PLAY_PAGE_INDEX](index);
+      // 重置playPage当前页面index
+      this[types.SET_RESET_PAGE_INDEX](index);
+      // 设置当前播放歌曲 index
+      this[types.SET_CURRENT_PLAY_INDEX](index);
     },
 
     reload(songs, curPlayQueue, curPlId) {

@@ -38,7 +38,7 @@ $container-size: 92%;
 @mixin omit () {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 /* button */

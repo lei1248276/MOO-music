@@ -39,9 +39,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     UniPlayPage: UniPlayPage },
 
   created: function created() {var _this = this;
+    // 组件生成以后加延迟触发过渡
+    var t = this.$store.state.currentPlayQueue.length > 50 ? 170 : 85;
     setTimeout(function () {
       _this.delay = true;
-    }, 17);
+    }, t);
   },
   methods: {
     offPlayPage: function offPlayPage() {

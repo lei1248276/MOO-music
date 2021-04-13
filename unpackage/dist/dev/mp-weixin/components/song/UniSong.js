@@ -200,7 +200,8 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
   _mutationsTypes.default.SET_IS_INIT,
   _mutationsTypes.default.SET_SWITCH,
   _mutationsTypes.default.SET_CURRENT_SONG,
-  _mutationsTypes.default.SET_PLAY_PAGE_INDEX,
+  _mutationsTypes.default.SET_RESET_PAGE_INDEX,
+  _mutationsTypes.default.SET_CURRENT_PLAY_INDEX,
   _mutationsTypes.default.SET_CURRENT_PLAY_QUEUE,
   _mutationsTypes.default.SET_RECENT_PLAY_SONGS])), {}, {
 
@@ -232,19 +233,22 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       curPlId = this.playlistId;
       /*1. 歌单id不同直接获取歌单歌曲信息
                                  * 2. 歌单id相同但是因为加载了更多歌曲在次获取歌单歌曲信息 */
-      // console.log(curSong.playlistId, curPlId);
+      // console.log(curSong.playlistId, curPlId, curPlayQueue.length, songs.length);
+
       if (!curSong || curSong.playlistId !== curPlId) {
         console.log("\u6B4C\u5355\u521D\u6B21\u52A0\u8F7D");
         songsInfo = this.reload(songs, [], curPlId);
-      } else if (curSong.playlistId === curPlId && curPlayQueue.length !== songs.length) {
+      } else if (curSong.playlistId === curPlId && curPlayQueue.length < songs.length) {
         console.log("\u6B4C\u5355\u52A0\u8F7D\u66F4\u591A");
         songsInfo = curPlayQueue.concat(this.reload(songs, curPlayQueue, curPlId));
       } else {
         console.log("\u9ED8\u8BA4\u52A0\u8F7D");
         // 获取歌曲链接
         this.$store.dispatch('getPlaySong', curPlayQueue[index]);
-        // 设置playPage当前页面index
-        this[_mutationsTypes.default.SET_PLAY_PAGE_INDEX](index);
+        // 重置playPage当前页面index
+        this[_mutationsTypes.default.SET_RESET_PAGE_INDEX](index);
+        // 设置当前播放歌曲 index
+        this[_mutationsTypes.default.SET_CURRENT_PLAY_INDEX](index);
         return;
       }
 
@@ -252,8 +256,10 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
       this[_mutationsTypes.default.SET_CURRENT_PLAY_QUEUE](songsInfo);
       // 获取歌曲链接
       this.$store.dispatch('getPlaySong', songsInfo[index]);
-      // 设置playPage当前页面index
-      this[_mutationsTypes.default.SET_PLAY_PAGE_INDEX](index);
+      // 重置playPage当前页面index
+      this[_mutationsTypes.default.SET_RESET_PAGE_INDEX](index);
+      // 设置当前播放歌曲 index
+      this[_mutationsTypes.default.SET_CURRENT_PLAY_INDEX](index);
     },
 
     reload: function reload(songs, curPlayQueue, curPlId) {

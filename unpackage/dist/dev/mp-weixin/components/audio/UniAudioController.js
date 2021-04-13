@@ -143,12 +143,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 8);
 var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mutations-types */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 {
   data: function data() {
-    return {};
+    return {
+      x: 0,
+      oldX: 0 };
 
   },
   computed: _objectSpread({},
@@ -157,13 +171,15 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
     getAudio: 'audio',
     getIsPlay: 'isPlay',
     getCurrentTime: 'currentTime',
-    getCurrentSong: 'currentSong' })),
+    getCurrentSong: 'currentSong',
+    getShowPageIndex: 'showPageIndex' })),
 
 
 
   methods: _objectSpread(_objectSpread({},
   (0, _vuex.mapMutations)([
-  _mutationsTypes.default.SET_IS_INIT])), {}, {
+  _mutationsTypes.default.SET_IS_INIT,
+  _mutationsTypes.default.SET_SHOW_PAGE_INDEX])), {}, {
 
 
     onPlay: function onPlay() {
@@ -175,6 +191,27 @@ var _mutationsTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mut
           this.getIsPlay ? this.getAudio.pause() : this.getAudio.play();
         }
       }
+    },
+
+    onMove: function onMove(e) {
+      this.oldX = e.detail.x;
+    },
+
+    onTouchend: function onTouchend() {var _this = this;
+      var index = this.getShowPageIndex;
+      if (this.oldX > 60) {
+        // 右划下一曲
+        if (index < 2) this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](index + 1);else
+        if (index === 2) this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](0);
+      } else if (this.oldX < -70) {
+        // 左划上一曲
+        if (index > 0) this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](index - 1);else
+        if (index === 0) this[_mutationsTypes.default.SET_SHOW_PAGE_INDEX](2);
+      }
+      this.x = this.oldX;
+      this.$nextTick(function () {
+        _this.x = 0;
+      });
     } }),
 
   filters: {
