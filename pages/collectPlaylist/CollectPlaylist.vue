@@ -4,7 +4,8 @@
     <!--  #endif  -->
     <view class="collect_playlist">
 
-      <uni-back-nav title="歌单"></uni-back-nav>
+      <uni-back-nav title="歌单">
+      </uni-back-nav>
 
       <uni-tab-control :tab="tab" @tabControl="onTabControl"></uni-tab-control>
 
@@ -54,7 +55,7 @@
       <uni-audio-controller v-show="isShowSongControl"
                             @click.native="toPlayPage">
       </uni-audio-controller>
-      <uni-mock-play-page v-if="isActive" :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+      <uni-mock-play-page :isShow.sync="isShowPlayPage"></uni-mock-play-page>
 
     </view>
     <!-- #ifdef H5 -->
@@ -88,7 +89,6 @@ export default {
       isShowSongControl: true,
       selectAll: false,
       getColPlaylists: [],
-      isActive: false
     }
   },
   onBackPress() {
@@ -113,7 +113,7 @@ export default {
     },
 
     toPlayPage() {
-      this.isShowPlayPage = this.isActive = true;
+      this.isShowPlayPage = true;
     },
 
     onMenu() {

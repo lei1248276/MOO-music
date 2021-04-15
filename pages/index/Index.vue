@@ -13,7 +13,7 @@
 
     <swiper class="swiper"
             :current="current"
-            duration="300"
+            duration="200"
             @change="onChange">
 
       <swiper-item>

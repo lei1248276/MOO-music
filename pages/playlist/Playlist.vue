@@ -19,8 +19,11 @@
           </view>
         </view>
 
-        <uni-audio-controller @click.native="toPlayPage"></uni-audio-controller>
-        <uni-mock-play-page v-if="isActive" :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+        <uni-audio-controller v-if="!isShowPlayPage"
+                              @click.native="toPlayPage">
+        </uni-audio-controller>
+        <uni-mock-play-page :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+
       </uni-transition>
 
     </scroll-view>
@@ -49,7 +52,6 @@ export default {
       isShowPlayPage: false,
       playlists: [],
       isLoaded: false,
-      isActive: false
     }
   },
   onBackPress() {
@@ -86,7 +88,7 @@ export default {
     },
 
     toPlayPage() {
-      this.isShowPlayPage = this.isActive = true;
+      this.isShowPlayPage = true;
 
     }
   },
@@ -120,6 +122,15 @@ export default {
         font-weight: bold;
         margin: 30rpx;
       }
+    }
+
+    .trans{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1001;
     }
   }
 </style>

@@ -90,7 +90,7 @@
         </view>
 
         <uni-audio-controller @click.native="toPlayPage"></uni-audio-controller>
-        <uni-mock-play-page v-if="isActive" :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+        <uni-mock-play-page :isShow.sync="isShowPlayPage"></uni-mock-play-page>
 
       </uni-transition>
     </scroll-view>
@@ -121,7 +121,6 @@ export default {
       limit: 15,
       isShowTitle: false,
       isShowPlayPage: false,
-      isActive: false
     }
   },
   components: {
@@ -222,7 +221,7 @@ export default {
     },
 
     toPlayPage() {
-      this.isShowPlayPage = this.isActive = true;
+      this.isShowPlayPage = true;
     }
   }
 }

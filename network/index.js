@@ -1,12 +1,4 @@
-// #ifdef H5
 export const BASE_URL = 'http://localhost:3000';
-// #endif
-// #ifndef H5
-export const BASE_URL = 'https://api.mtnhao.com';
-// #endif
-// export const BASE_URL = 'https://netease-cloud-music-api-lei1248276.vercel.app'
-
-// export const BASE_URL = 'http://localhost:3000';
 
 // 请求 banner 数据
 export function getBanner() {

@@ -36,7 +36,7 @@
       </uni-transition>
 
       <uni-audio-controller @click.native="toPlayPage"></uni-audio-controller>
-      <uni-mock-play-page v-if="isActive" :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+      <uni-mock-play-page :isShow.sync="isShowPlayPage"></uni-mock-play-page>
 
     </scroll-view>
   <!-- #ifdef H5 -->
@@ -59,7 +59,6 @@ export default {
       playlistId: '',
       getNewSonglist: [],
       isShowPlayPage: false,
-      isActive: false
     }
   },
   components: {
@@ -101,7 +100,7 @@ export default {
     },
 
     toPlayPage() {
-      this.isShowPlayPage = this.isActive = true;
+      this.isShowPlayPage = true;
     }
   }
 }

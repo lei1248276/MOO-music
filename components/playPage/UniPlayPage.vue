@@ -122,7 +122,7 @@ export default {
 
     // 获取处理后的歌词（与播放时间相匹配就切换歌词）
     getLrc({getCurrentTime: curTime, getCurrentLyric: {lrcTimeMap: time, lrcContentMap: content}}) {
-      if (!content || typeof content === 'string') return content;
+      if (!content) return;
       if (curTime >= time[0]) {
         time.shift();
         content.shift();

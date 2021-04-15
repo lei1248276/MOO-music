@@ -53,8 +53,10 @@
 
       </scroll-view>
 
-      <uni-audio-controller @click.native="toPlayPage"></uni-audio-controller>
-      <uni-mock-play-page v-if="isActive" :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+      <uni-audio-controller v-if="!isShowPlayPage"
+                            @click.native="toPlayPage">
+      </uni-audio-controller>
+      <uni-mock-play-page :isShow.sync="isShowPlayPage"></uni-mock-play-page>
     </view>
   <!-- #ifdef H5 -->
   </uni-transition>
@@ -75,7 +77,6 @@ export default {
   data() {
     return {
       isShowPlayPage: false,
-      isActive: false,
       message: [
           {icon: 'icon-message', text: '消息'},
           {icon: 'icon-app', text: 'MOO COVER'},
@@ -156,7 +157,7 @@ export default {
     },
 
     toPlayPage() {
-      this.isShowPlayPage = this.isActive = true;
+      this.isShowPlayPage = true;
 
     }
   }

@@ -88,9 +88,6 @@ export default {
         m = t[0] * 60;
         return m + Number(t[1]);
       });
-    } else {
-      // 没有歌词的情况
-      lyric.lrcContentMap = '该歌曲没有歌词！';
     }
   },
 

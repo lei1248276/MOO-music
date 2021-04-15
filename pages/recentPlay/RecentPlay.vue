@@ -4,7 +4,8 @@
   <!--  #endif  -->
     <view class="recent_play">
 
-      <uni-back-nav title="最近播放"></uni-back-nav>
+      <uni-back-nav title="最近播放">
+      </uni-back-nav>
 
       <uni-tab-control :tab="tab" @tabControl="onTabControl"></uni-tab-control>
 
@@ -35,7 +36,7 @@
       </scroll-view>
 
       <uni-audio-controller @click.native="toPlayPage"></uni-audio-controller>
-      <uni-mock-play-page v-if="isActive" :isShow.sync="isShowPlayPage"></uni-mock-play-page>
+      <uni-mock-play-page :isShow.sync="isShowPlayPage"></uni-mock-play-page>
 
     </view>
   <!-- #ifdef H5 -->
@@ -64,7 +65,6 @@ export default {
       currentIndex: 0,
       isShowPlayPage: false,
       getRecentPlaySongs: [],
-      isActive: false
     }
   },
   onBackPress() {
@@ -85,7 +85,7 @@ export default {
     },
 
     toPlayPage() {
-      this.isShowPlayPage = this.isActive = true;
+      this.isShowPlayPage = true;
     }
   }
 }

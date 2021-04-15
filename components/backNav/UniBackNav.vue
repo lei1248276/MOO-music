@@ -1,6 +1,10 @@
 <template>
   <view class="uni_back_nav">
-    <button class="btn" @click="toBack" size="mini" plain hover-class="hover_flag">
+    <button class="btn"
+            @click="toBack"
+            size="mini"
+            plain
+            hover-class="hover_flag">
       <text class="iconfont icon-back"></text>
     </button>
     <slot>

@@ -3,6 +3,7 @@
 >> 后台数据使用的是NeteaseCloudMusicApi（非常感谢）
 
 
-#动图
+#看图吧
 ![home](gif/home.gif)
+![playlist](gif/playlist.gif)
 ![collect](gif/collect.gif)

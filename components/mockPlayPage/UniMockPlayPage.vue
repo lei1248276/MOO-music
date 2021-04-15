@@ -1,9 +1,7 @@
 <template>
-  <view class="transition"
-        :class="[isShow && delay ? 'show' : 'hide']"
-        @touchstart="onTouchstart"
-        @touchmove="onTouchmove($event)"
-        @touchend="onTouchend">
+  <uni-transition class="transition"
+                  :mode-class="['slide-right']"
+                  :show="isShow">
 
     <view class="iconfont icon-back"
           @click="offPlayPage">
@@ -11,13 +9,11 @@
 
     <uni-play-page></uni-play-page>
 
-  </view>
+  </uni-transition>
 </template>
 
 <script>
 import UniPlayPage from "@/components/playPage/UniPlayPage";
-
-import {throttle} from "@/util/index";
 
 export default {
   props: {
@@ -26,41 +22,13 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      delay: false
-    }
-  },
   components: {
     UniPlayPage
-  },
-  created() {
-    // 组件生成以后加延迟触发过渡
-    let t = this.$store.state.currentPlayQueue.length > 50 ? 170 : 85;
-
-    setTimeout(() => {
-      this.delay = true;
-    },t);
   },
   methods: {
     offPlayPage() {
       this.$emit('update:isShow', false);
     },
-
-    onTouchstart(e) {
-      this.startX = e.touches[0].clientX;
-    },
-
-    onTouchmove: throttle(function(e) {
-      this.isReach = e.touches[0].clientX - this.startX > 10;
-    }, 100),
-
-    onTouchend() {
-      if (this.isReach) {
-        this.$emit('update:isShow', false);
-        this.isReach = false;
-      }
-    }
   }
 }
 </script>
@@ -94,11 +62,5 @@ export default {
       color: $font-color-white;
       font-size: $icon-size;
     }
-  }
-  .show{
-    transform: translate3d(0, 0, 0);
-  }
-  .hide{
-    transform: translate3d(100%, 0, 0);
   }
 </style>
