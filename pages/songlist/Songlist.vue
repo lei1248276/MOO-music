@@ -73,7 +73,9 @@
         <uni-tag :tag="tag"></uni-tag>
 
         <!--   #ifndef MP-WEIXIN   -->
-        <uni-song-control :count="tolLen"></uni-song-control>
+        <uni-song-control :count="tolLen"
+                          @play="onPlay">
+        </uni-song-control>
         <!--   #endif   -->
 
         <!--   #ifdef MP-WEIXIN   -->
@@ -81,7 +83,8 @@
         <!--   #endif   -->
 
         <view class="container">
-          <uni-song :songs="songs"
+          <uni-song ref="songs"
+                    :songs="songs"
                     :playlistId="playlistId">
           </uni-song>
         </view>
@@ -184,6 +187,10 @@ export default {
     ...mapMutations([
        types.SET_COL_PLAYLISTS
     ]),
+
+    onPlay() {
+      this.$refs.songs.onPlay(this.songs[0], 0);
+    },
 
     onColPlaylist() {
       this.getSonglistDetails.isCollect = !this.getSonglistDetails.isCollect;

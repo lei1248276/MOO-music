@@ -1,6 +1,7 @@
 <template>
   <view class="uni_play_page">
-    <swiper class="swiper"
+    <swiper v-if="getCurrentSong"
+            class="swiper"
             vertical
             circular
             duration="200"
@@ -8,19 +9,31 @@
             :current="getShowPageIndex"
             :class="[isShowSongQueue ? 'blur' : '']">
 
-      <swiper-item class="item"
+      <swiper-item
+                   class="item"
                    @click="onMask"
                    v-for="(item, index) in renderQueue"
                    :key="index">
 
         <image :src="item.picUrl + '?param=400y400'"
-               class="img" mode="aspectFill"
-               :class="[(!getIsPlay && getShowPageIndex === index) && 'mask iconfont icon-audioPlay']">
+               class="img mask"
+               mode="aspectFill"
+               :class="[(!getIsPlay && getShowPageIndex === index) && 'pause iconfont icon-audioPlay']">
         </image>
 
-        <prepare-img :fz="22"></prepare-img>
+        <!--  lyric  -->
+        <view v-if="getShowPageIndex === index && getCurrentSong"
+              class="lyric">
+          <view v-show="!isShowSongQueue">{{getLrc}}</view>
+        </view>
 
-        <view class="song_info" v-if="getCurrentSong">
+        <!--    配用图片背景    -->
+        <prepare-img v-if="renderQueue.length > 0"
+                     :fz="22">
+        </prepare-img>
+
+        <view class="song_info"
+              v-if="getCurrentSong">
           <uni-tag :tag="tag"></uni-tag>
           <view class="song_detail">
             <view class="info">
@@ -41,10 +54,14 @@
     </swiper>
 
     <!--  歌曲播放队列  -->
-    <uni-song-queue v-if="isActive" :isShow.sync="isShowSongQueue"></uni-song-queue>
+    <uni-song-queue v-if="isActive"
+                    :isShow.sync="isShowSongQueue">
+    </uni-song-queue>
 
     <!--  soundWave  -->
-    <uni-super-sound-wave :run="getIsPlay"></uni-super-sound-wave>
+    <uni-super-sound-wave v-show="!isShowSongQueue"
+                          :run="getIsPlay">
+    </uni-super-sound-wave>
   </view>
 </template>
 
@@ -60,18 +77,15 @@ export default {
   components: {
     UniTag,
     UniSongQueue,
-    UniSuperSoundWave
+    UniSuperSoundWave,
   },
   data() {
     return {
       tag: ['+歌曲故事', '#New Wave', '#Hot', '#Moo Daily'],
       isShowSongQueue: false,
       isActive: false,
+      i: 0
     }
-  },
-  created() {
-    const pages = getCurrentPages(), page = pages[pages.length - 1];
-    this.route = page.route;
   },
   computed: {
     ...mapState({
@@ -91,17 +105,30 @@ export default {
         return state.currentPlayQueue;
       },
       getLock: 'lock',
-      getColSongs: 'colSongs'
+      getColSongs: 'colSongs',
+      getCurrentTime: 'currentTime',
+      getCurrentLyric: 'currentLyric'
     }),
 
     renderQueue() {
       const queue = this.getCurrentPlayQueue;
+      if (queue.length < 3) return queue;
       return [
           queue[this.getTopPageIndex],
           queue[this.getMiddlePageIndex],
           queue[this.getBottomPageIndex]
       ];
-    }
+    },
+
+    // 获取处理后的歌词（与播放时间相匹配就切换歌词）
+    getLrc({getCurrentTime: curTime, getCurrentLyric: {lrcTimeMap: time, lrcContentMap: content}}) {
+      if (!content || typeof content === 'string') return content;
+      if (curTime >= time[0]) {
+        time.shift();
+        content.shift();
+      }
+      return content[0];
+    },
 		
   },
   methods: {
@@ -152,6 +179,14 @@ export default {
 
       let playIndex = this.getCurrentPlayIndex;
       const last = this.getCurrentPlayQueue.length - 1;
+      // 特殊情况（播放列表歌曲少于两首时）
+      if (last <= 2) {
+        // 切歌后发出请求歌曲 url
+        this.$store.dispatch('getPlaySong', this.getCurrentPlayQueue[val]);
+        // 修改当前播放队列歌曲 index
+        this[types.SET_CURRENT_PLAY_INDEX](val);
+        return;
+      }
 
       // 滑动窗口变化的6种情况，动态改变指针（保证初始化时只渲染 3页，而每次切歌只重绘 1页）
       if (oldVal === 1 && val === 2) {
@@ -184,7 +219,7 @@ export default {
         playIndex = playIndex === 0 ? last : playIndex - 1;
         this[types.SET_TOP_PAGE_INDEX](playIndex === 0 ? last : playIndex - 1);
       }
-
+      // console.log(playIndex);
       // 切歌后发出请求歌曲 url
       this.$store.dispatch('getPlaySong', this.getCurrentPlayQueue[playIndex]);
       // 修改当前播放队列歌曲 index
@@ -205,19 +240,28 @@ export default {
     .swiper{
       @include wh(100%, 100%);
       position: absolute;
+      top: 0;
+      left: 0;
 
       .item{
         position: absolute;
+        top: 0;
+        left: 0;
         @include wh(100%, 100%);
 
         .img{
           @include wh(100%, 100%);
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
           will-change: transform;
         }
 
         .song_info{
           @include wh(90%, 25%);
           position: absolute;
+          z-index: 2;
           bottom: 18%;
           left: 50%;
           transform: translate3d(-50%, -10%, 0);
@@ -259,56 +303,19 @@ export default {
       }
     }
 
-    /*.songQueue{
-      @include wh(100%, 100%);
+    .lyric{
+      width: 85%;
+      color: $font-color-white;
+      font-size: $icon-size;
+      font-weight: bold;
       position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 1000;
-      transition: all .5s ease;
-
-      .icon-arrow{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%) rotate(90deg);
-        color: $font-color-white;
-      }
-
-      .box{
-        @include wh(100%, 100%);
-        position: absolute;
-        background-color: rgba(0, 0, 0, .2);
-
-        .detail{
-          @include wh(100%, 45%);
-        }
-
-        .control{
-          position: absolute;
-          top: 45%;
-          left: 3%;
-        }
-
-        .scroll{
-          @include wh(100%, 100%);
-          position: absolute;
-          top: 53%;
-          color: $font-color-white;
-          font-size: 40rpx;
-
-          .view_item{
-            width: 90%;
-            margin: 0 auto;
-            padding-bottom: 900rpx;
-          }
-        }
-      }
     }
-    .show{
-      transform: translate3d(0, 0, 0);
-    }
-    .hide{
-      transform: translate3d(100%, 100%, 0);
-    }*/
   }
+
   .mask::after{
     content: '';
     position: fixed;
@@ -319,7 +326,7 @@ export default {
     background-color: rgba(0,0,0,.3);
     z-index: 999;
   }
-  .mask::before{
+  .pause::before{
     content: "\e734";
     color: $font-color-white;
     position: fixed;

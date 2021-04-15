@@ -1,5 +1,5 @@
 <template>
-  <view class="Prepare_img">
+  <view class="Prepare_img" v-once>
     <text class="content" :style="{'font-size': fz + 'vh'}">MOO</text>
   </view>
 </template>
@@ -19,6 +19,8 @@ export default {
   .Prepare_img{
     @include wh(100%, 100%);
     position: absolute;
+    top: 0;
+    left: 0;
     color: $font-color-white;
     background-color: $bgc-black2;
     .content{

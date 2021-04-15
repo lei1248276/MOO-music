@@ -1,1 +1,0 @@
-<view class="uni_sound_wave _ul data-v-f502b98c"><view class="{{['wave1 _li data-v-f502b98c',run?'run':'paused']}}"></view><view class="{{['wave2 _li data-v-f502b98c',run?'run':'paused']}}"></view><view class="{{['wave3 _li data-v-f502b98c',run?'run':'paused']}}"></view><view class="{{['wave4 _li data-v-f502b98c',run?'run':'paused']}}"></view></view>

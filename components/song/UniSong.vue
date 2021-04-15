@@ -10,7 +10,7 @@
 
       <uni-custom-checkbox v-if="selectable"
                            ref="checkbox" :checked="item.isChecked"
-                           @click.native.stop="onSelect(item,index)">
+                           @click.native.stop="onSelect(item)">
       </uni-custom-checkbox>
 
       <image :src="item.picUrl + '?param=70y70'"
@@ -83,7 +83,6 @@ export default {
     ...mapMutations([
         types.SET_IS_INIT,
         types.SET_SWITCH,
-        types.SET_CURRENT_SONG,
         types.SET_RESET_PAGE_INDEX,
         types.SET_CURRENT_PLAY_INDEX,
         types.SET_CURRENT_PLAY_QUEUE,
@@ -155,6 +154,7 @@ export default {
           id: songs[i].id,
           picUrl: songs[i].picUrl,
           songUrl: songs[i].songUrl || '',
+          lyric: songs[i].lyric || '',
           name: songs[i].name,
           singer: songs[i].singer,
           isCollect: false,
@@ -173,7 +173,7 @@ export default {
       console.log(`more`);
     },
 
-    onSelect(item, index) {
+    onSelect(item) {
       item.isChecked = !item.isChecked;
     }
   }

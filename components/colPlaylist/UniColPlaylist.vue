@@ -92,12 +92,14 @@ export default {
         align-items: center;
 
         .name{
+          width: 100%;
           color: $font-color-white;
           font-weight: bold;
           font-size: 36rpx;
         }
 
         .creator{
+          width: 100%;
           color: $font-color-grey;
           font-size: 34rpx;
         }

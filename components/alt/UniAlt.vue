@@ -1,5 +1,5 @@
 <template>
-  <view class="uni_alt">
+  <view class="uni_alt" v-once>
     <view>OhMoooo</view>
     <view>Nothing yet</view>
   </view>

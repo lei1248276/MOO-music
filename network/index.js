@@ -1,4 +1,12 @@
+// #ifdef H5
 export const BASE_URL = 'http://localhost:3000';
+// #endif
+// #ifndef H5
+export const BASE_URL = 'https://api.mtnhao.com';
+// #endif
+// export const BASE_URL = 'https://netease-cloud-music-api-lei1248276.vercel.app'
+
+// export const BASE_URL = 'http://localhost:3000';
 
 // 请求 banner 数据
 export function getBanner() {
@@ -46,6 +54,14 @@ export function getSongs(ids) {
 export function getSongUrl(id) {
   return uni.request({
     url: `${BASE_URL}/song/url?id=${id}`,
+    timeout: 3000
+  })
+}
+
+// 请求 songLyric 数据
+export function getLyric(id) {
+  return uni.request({
+    url: `${BASE_URL}/lyric?id=${id}`,
     timeout: 3000
   })
 }

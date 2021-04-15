@@ -1,1 +1,0 @@
-<view class="{{['transition data-v-f1ff1d94',isShow&&delay?'show':'hide']}}"><view data-event-opts="{{[['tap',[['offPlayPage',['$event']]]]]}}" class="iconfont icon-back data-v-f1ff1d94" bindtap="__e"></view><uni-play-page vue-id="590e3690-1" class="data-v-f1ff1d94" bind:__l="__l"></uni-play-page></view>

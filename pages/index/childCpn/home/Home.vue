@@ -44,7 +44,8 @@
         </swiper>
 
         <!--   recommend 区域   -->
-        <home-recommend :recommend="recommend" @load="onLoaded">
+        <home-recommend :recommend="recommend"
+                        @load="onLoaded">
         </home-recommend>
 
         <!--   playlist 区域   -->
@@ -59,7 +60,7 @@
         <!--   newSong 区域   -->
         <home-new-song v-if="newSong.length"
                        :newSong="newSong"
-                       playlistId="newSong"
+                       :playlistId="(recommend[0].id + '')"
                        title="MOO Track_新歌">
         </home-new-song>
 

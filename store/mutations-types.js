@@ -11,6 +11,7 @@ export default {
   SET_DURATION: 'setDuration',                    // 设置当前歌曲时长
   SET_CURRENT_TIME: 'setCurrentTime',             // 设置当前歌曲当前播放时间
   SET_CURRENT_SONG: 'setCurrentSong',             // 设置当前播放歌曲
+  SET_CURRENT_LYRIC: 'setCurrentLyric',           // 设置当前歌曲歌词
   SET_CURRENT_PLAY_INDEX: 'setCurrentPlayIndex',  // 设置当前播放歌曲index
   SET_SHOW_PAGE_INDEX: 'setShowPageIndex',        // 当前playPage页面显示窗口index
   SET_TOP_PAGE_INDEX: 'setTopPageIndex',          // 设置当前播放页面顶部窗口歌曲index

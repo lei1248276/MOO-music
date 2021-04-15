@@ -18,6 +18,7 @@ const state = {
   duration: 0,          // 当前歌曲时长
   currentTime: 0,       // 当前歌曲播放时间
   currentSong: null,    // 当前播放歌曲
+  currentLyric: {},     // 当前播放歌曲歌词
   currentPlayIndex: 0,  // 当前播放歌曲index
   showPageIndex: 1,     // 当前playPage页面显示窗口index（保证所有playPage页面显示一致）
   topPageIndex: -1,     // 当前播放页面顶部窗口歌曲index

@@ -23,9 +23,11 @@ export default {
     });
     state.currentPlayQueue = playRecord;
 
-    this.commit(types.SET_CURRENT_SONG, playRecord[curSongIndex]);
-    this.commit(types.SET_CURRENT_PLAY_INDEX, curSongIndex);
-    this.commit(types.SET_RESET_PAGE_INDEX, curSongIndex);
+    if (playRecord.length > 0) {
+      this.commit(types.SET_CURRENT_SONG, playRecord[curSongIndex]);
+      this.commit(types.SET_CURRENT_PLAY_INDEX, curSongIndex);
+      this.commit(types.SET_RESET_PAGE_INDEX, curSongIndex);
+    }
   },
 
   // 设置是否初始化
@@ -72,6 +74,24 @@ export default {
   // 设置当前播放歌曲
   [types.SET_CURRENT_SONG](state, payload) {
     state.currentSong = payload;
+    this.commit(types.SET_CURRENT_LYRIC, payload.lyric);
+  },
+
+  // 设置当前歌曲歌词
+  [types.SET_CURRENT_LYRIC]({currentLyric: lyric}, payload) {
+    if (payload) {
+      let time, t, m;
+      time = payload.match(/\d*:\d*\.\d*/g);
+      lyric.lrcContentMap = payload.split(/\[.*\]/g);
+      lyric.lrcTimeMap = time.map(v => {
+        t = v.split(':');
+        m = t[0] * 60;
+        return m + Number(t[1]);
+      });
+    } else {
+      // 没有歌词的情况
+      lyric.lrcContentMap = '该歌曲没有歌词！';
+    }
   },
 
   // 设置播放页面当前index
@@ -102,6 +122,12 @@ export default {
   // 设置重置pageIndex
   [types.SET_RESET_PAGE_INDEX](state, payload) {
     const last = state.currentPlayQueue.length - 1;
+    // 特殊情况（播放列表歌曲少于两首时）
+    if (last <= 2) {
+      state.showPageIndex = payload;
+      return;
+    }
+
     state.showPageIndex = 1;
     state.topPageIndex = payload === 0 ? last : payload - 1;
     state.middlePageIndex = payload;
@@ -113,8 +139,8 @@ export default {
     // state.currentPlayQueue.unshift(Object.seal(payload));
     state.currentPlayQueue = payload;
     uni.setStorage({
-        key: 'playRecord',
-        data: payload
+      key: 'playRecord',
+      data: payload
     })
   },
 
