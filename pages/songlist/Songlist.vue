@@ -188,7 +188,10 @@ export default {
     ]),
 
     onPlay() {
-      this.$refs.songs.onPlay(this.songs[0], 0);
+      this.$nextTick(() => {
+        this.songs = Object.seal(this.tempSongQueue);
+        this.$refs.songs.onPlay(this.tempSongQueue, 0);
+      })
     },
 
     onColPlaylist() {

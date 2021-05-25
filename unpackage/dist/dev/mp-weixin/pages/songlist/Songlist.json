@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-transition": "/uni_modules/uni-transition/components/uni-transition/uni-transition",
+    "uni-back-nav": "/components/backNav/UniBackNav",
+    "uni-song": "/components/song/UniSong",
+    "uni-tag": "/components/tag/UniTag",
+    "uni-song-control": "/components/songControl/UniSongControl"
+  }
+}

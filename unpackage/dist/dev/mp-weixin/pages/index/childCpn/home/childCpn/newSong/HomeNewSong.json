@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-nav": "/components/nav/UniNav",
+    "uni-song": "/components/song/UniSong"
+  }
+}

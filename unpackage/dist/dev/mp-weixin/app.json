@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/Index",
+    "pages/playlist/Playlist",
+    "pages/songlist/Songlist",
+    "pages/newSonglist/NewSonglist",
+    "pages/profile/Profile",
+    "pages/collect/Collect",
+    "pages/collectPlaylist/CollectPlaylist",
+    "pages/recentPlay/RecentPlay"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "MOO",
+    "navigationBarBackgroundColor": "#1A191B",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 50,
+    "style": {
+      "app-plus": {
+        "background": "#1A191B"
+      }
+    }
+  },
+  "permission": {},
+  "usingComponents": {
+    "uni-loading": "/components/loading/UniLoading",
+    "uni-audio-controller": "/components/audio/UniAudioController",
+    "uni-mock-play-page": "/components/mockPlayPage/UniMockPlayPage",
+    "prepare-img": "/components/prepareImg/PrepareImg",
+    "uni-alt": "/components/alt/UniAlt",
+    "uni-custom-checkbox": "/components/checkbox/UniCustomCheckbox"
+  },
+  "sitemapLocation": "sitemap.json"
+}

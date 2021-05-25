@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-song-control": "/components/songControl/UniSongControl",
+    "uni-song": "/components/song/UniSong"
+  }
+}

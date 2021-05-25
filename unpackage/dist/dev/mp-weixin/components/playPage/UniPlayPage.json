@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-tag": "/components/tag/UniTag",
+    "uni-song-queue": "/components/songQueue/UniSongQueue",
+    "uni-super-sound-wave": "/components/superSoundWave/UniSuperSoundWave"
+  }
+}

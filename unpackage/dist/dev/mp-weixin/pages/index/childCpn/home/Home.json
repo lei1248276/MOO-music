@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-playlist": "/components/playlist/UniPlaylist",
+    "home-recommend": "/pages/index/childCpn/home/childCpn/recommend/HomeRecommend",
+    "home-new-song": "/pages/index/childCpn/home/childCpn/newSong/HomeNewSong",
+    "home-album": "/pages/index/childCpn/home/childCpn/album/HomeAlbum",
+    "uni-nav": "/components/nav/UniNav",
+    "uni-tag": "/components/tag/UniTag"
+  }
+}

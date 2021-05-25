@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-transition": "/uni_modules/uni-transition/components/uni-transition/uni-transition",
+    "uni-playlist": "/components/playlist/UniPlaylist",
+    "uni-back-nav": "/components/backNav/UniBackNav"
+  }
+}

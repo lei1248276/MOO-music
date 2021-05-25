@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-back-nav": "/components/backNav/UniBackNav",
+    "uni-show-shelf": "/components/showShelf/UniShowShelf"
+  }
+}

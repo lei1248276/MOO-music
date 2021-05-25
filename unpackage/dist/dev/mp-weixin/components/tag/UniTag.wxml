@@ -1,0 +1,1 @@
+<view class="uni_tag data-v-89a62e8c"><block wx:for="{{tag}}" wx:for-item="item" wx:for-index="__i0__" wx:key="*this"><button class="tab_btn data-v-89a62e8c" type="default" size="mini" hover-class="btn_hover">{{item+''}}</button></block></view>

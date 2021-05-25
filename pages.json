@@ -4,64 +4,56 @@
 			"path": "pages/index/Index",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom" ,
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom" 
 			}
 		},
 		{
 			"path": "pages/playlist/Playlist",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"  
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path": "pages/songlist/Songlist",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path": "pages/newSonglist/NewSonglist",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path": "pages/profile/Profile",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path": "pages/collect/Collect",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path": "pages/collectPlaylist/CollectPlaylist",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom"
 			}
 		},
 		{
 			"path": "pages/recentPlay/RecentPlay",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
-				"backgroundColor": "#1A191B"
+				"navigationStyle":"custom"
 			}
 		}
     ],
@@ -69,7 +61,6 @@
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "MOO",
 		"navigationBarBackgroundColor": "#1A191B",
-		"backgroundColor": "#1A191B",
 		"enablePullDownRefresh": true,
 		"onReachBottomDistance": 50,
 		"style": {
