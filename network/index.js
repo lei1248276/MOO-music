@@ -2,9 +2,8 @@
 export const BASE_URL = 'http://localhost:3000';
 // #endif
 // #ifndef H5
-export const BASE_URL = 'https://api.mtnhao.com';
+export const BASE_URL = 'https://netease-music-api.fe-mm.com';
 // #endif
-// export const BASE_URL = 'https://netease-cloud-music-api-lei1248276.vercel.app'
 
 // export const BASE_URL = 'http://localhost:3000';
 
