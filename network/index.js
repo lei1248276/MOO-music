@@ -1,9 +1,4 @@
-// #ifdef H5
-export const BASE_URL = 'http://localhost:3000';
-// #endif
-// #ifndef H5
 export const BASE_URL = 'https://netease-music-api.fe-mm.com';
-// #endif
 
 // export const BASE_URL = 'http://localhost:3000';
 
