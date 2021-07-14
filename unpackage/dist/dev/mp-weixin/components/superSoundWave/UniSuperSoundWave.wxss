@@ -105,6 +105,7 @@ $uni-font-size-paragraph:30rpx;*/
      animation-play-state 规定动画是否正在运行或暂停。默认是 "running"。
      animation-fill-mode 规定对象动画时间之外的状态。 */
 }
+<<<<<<< HEAD
 .uni_super_sound_wave .wave1.data-v-581b6bf6 {
   width: 1%;
   margin-right: 2rpx;
@@ -746,6 +747,649 @@ $uni-font-size-paragraph:30rpx;*/
           animation-delay: 0.28231s;
 }
 .uni_super_sound_wave .wave1.data-v-581b6bf6 {
+=======
+.uni_super_sound_wave .wave1.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence1-data-v-581b6bf6 0.85263s ease-in-out infinite;
+          animation: sequence1-data-v-581b6bf6 0.85263s ease-in-out infinite;
+  -webkit-animation-delay: 0.39622s;
+          animation-delay: 0.39622s;
+}
+.uni_super_sound_wave .wave2.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence2-data-v-581b6bf6 0.82355s ease-in-out infinite;
+          animation: sequence2-data-v-581b6bf6 0.82355s ease-in-out infinite;
+  -webkit-animation-delay: 0.27104s;
+          animation-delay: 0.27104s;
+}
+.uni_super_sound_wave .wave3.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence3-data-v-581b6bf6 0.73389s ease-in-out infinite;
+          animation: sequence3-data-v-581b6bf6 0.73389s ease-in-out infinite;
+  -webkit-animation-delay: 0.8274s;
+          animation-delay: 0.8274s;
+}
+.uni_super_sound_wave .wave4.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence4-data-v-581b6bf6 0.81956s ease-in-out infinite;
+          animation: sequence4-data-v-581b6bf6 0.81956s ease-in-out infinite;
+  -webkit-animation-delay: 0.49748s;
+          animation-delay: 0.49748s;
+}
+.uni_super_sound_wave .wave5.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence5-data-v-581b6bf6 0.83999s ease-in-out infinite;
+          animation: sequence5-data-v-581b6bf6 0.83999s ease-in-out infinite;
+  -webkit-animation-delay: 0.23511s;
+          animation-delay: 0.23511s;
+}
+.uni_super_sound_wave .wave6.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence6-data-v-581b6bf6 0.87286s ease-in-out infinite;
+          animation: sequence6-data-v-581b6bf6 0.87286s ease-in-out infinite;
+  -webkit-animation-delay: 0.65656s;
+          animation-delay: 0.65656s;
+}
+.uni_super_sound_wave .wave7.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence7-data-v-581b6bf6 0.89305s ease-in-out infinite;
+          animation: sequence7-data-v-581b6bf6 0.89305s ease-in-out infinite;
+  -webkit-animation-delay: 0.36826s;
+          animation-delay: 0.36826s;
+}
+.uni_super_sound_wave .wave8.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence8-data-v-581b6bf6 0.85182s ease-in-out infinite;
+          animation: sequence8-data-v-581b6bf6 0.85182s ease-in-out infinite;
+  -webkit-animation-delay: 0.21789s;
+          animation-delay: 0.21789s;
+}
+.uni_super_sound_wave .wave9.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence9-data-v-581b6bf6 0.80094s ease-in-out infinite;
+          animation: sequence9-data-v-581b6bf6 0.80094s ease-in-out infinite;
+  -webkit-animation-delay: 0.72775s;
+          animation-delay: 0.72775s;
+}
+.uni_super_sound_wave .wave10.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence10-data-v-581b6bf6 0.82267s ease-in-out infinite;
+          animation: sequence10-data-v-581b6bf6 0.82267s ease-in-out infinite;
+  -webkit-animation-delay: 0.42002s;
+          animation-delay: 0.42002s;
+}
+.uni_super_sound_wave .wave11.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence11-data-v-581b6bf6 0.80746s ease-in-out infinite;
+          animation: sequence11-data-v-581b6bf6 0.80746s ease-in-out infinite;
+  -webkit-animation-delay: 0.31049s;
+          animation-delay: 0.31049s;
+}
+.uni_super_sound_wave .wave12.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence12-data-v-581b6bf6 0.70487s ease-in-out infinite;
+          animation: sequence12-data-v-581b6bf6 0.70487s ease-in-out infinite;
+  -webkit-animation-delay: 0.57059s;
+          animation-delay: 0.57059s;
+}
+.uni_super_sound_wave .wave13.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence13-data-v-581b6bf6 0.7837s ease-in-out infinite;
+          animation: sequence13-data-v-581b6bf6 0.7837s ease-in-out infinite;
+  -webkit-animation-delay: 0.4929s;
+          animation-delay: 0.4929s;
+}
+.uni_super_sound_wave .wave14.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence14-data-v-581b6bf6 0.83829s ease-in-out infinite;
+          animation: sequence14-data-v-581b6bf6 0.83829s ease-in-out infinite;
+  -webkit-animation-delay: 0.53624s;
+          animation-delay: 0.53624s;
+}
+.uni_super_sound_wave .wave15.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence15-data-v-581b6bf6 0.74424s ease-in-out infinite;
+          animation: sequence15-data-v-581b6bf6 0.74424s ease-in-out infinite;
+  -webkit-animation-delay: 0.70167s;
+          animation-delay: 0.70167s;
+}
+.uni_super_sound_wave .wave16.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence16-data-v-581b6bf6 0.71888s ease-in-out infinite;
+          animation: sequence16-data-v-581b6bf6 0.71888s ease-in-out infinite;
+  -webkit-animation-delay: 0.38761s;
+          animation-delay: 0.38761s;
+}
+.uni_super_sound_wave .wave17.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence17-data-v-581b6bf6 0.74254s ease-in-out infinite;
+          animation: sequence17-data-v-581b6bf6 0.74254s ease-in-out infinite;
+  -webkit-animation-delay: 0.28343s;
+          animation-delay: 0.28343s;
+}
+.uni_super_sound_wave .wave18.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence18-data-v-581b6bf6 0.775s ease-in-out infinite;
+          animation: sequence18-data-v-581b6bf6 0.775s ease-in-out infinite;
+  -webkit-animation-delay: 0.73306s;
+          animation-delay: 0.73306s;
+}
+.uni_super_sound_wave .wave19.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence19-data-v-581b6bf6 0.70055s ease-in-out infinite;
+          animation: sequence19-data-v-581b6bf6 0.70055s ease-in-out infinite;
+  -webkit-animation-delay: 0.62311s;
+          animation-delay: 0.62311s;
+}
+.uni_super_sound_wave .wave20.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence20-data-v-581b6bf6 0.86712s ease-in-out infinite;
+          animation: sequence20-data-v-581b6bf6 0.86712s ease-in-out infinite;
+  -webkit-animation-delay: 0.72389s;
+          animation-delay: 0.72389s;
+}
+.uni_super_sound_wave .wave21.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence21-data-v-581b6bf6 0.8643s ease-in-out infinite;
+          animation: sequence21-data-v-581b6bf6 0.8643s ease-in-out infinite;
+  -webkit-animation-delay: 0.49841s;
+          animation-delay: 0.49841s;
+}
+.uni_super_sound_wave .wave22.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence22-data-v-581b6bf6 0.76181s ease-in-out infinite;
+          animation: sequence22-data-v-581b6bf6 0.76181s ease-in-out infinite;
+  -webkit-animation-delay: 0.20145s;
+          animation-delay: 0.20145s;
+}
+.uni_super_sound_wave .wave23.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence23-data-v-581b6bf6 0.75963s ease-in-out infinite;
+          animation: sequence23-data-v-581b6bf6 0.75963s ease-in-out infinite;
+  -webkit-animation-delay: 0.53071s;
+          animation-delay: 0.53071s;
+}
+.uni_super_sound_wave .wave24.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence24-data-v-581b6bf6 0.71711s ease-in-out infinite;
+          animation: sequence24-data-v-581b6bf6 0.71711s ease-in-out infinite;
+  -webkit-animation-delay: 0.81203s;
+          animation-delay: 0.81203s;
+}
+.uni_super_sound_wave .wave25.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence25-data-v-581b6bf6 0.88099s ease-in-out infinite;
+          animation: sequence25-data-v-581b6bf6 0.88099s ease-in-out infinite;
+  -webkit-animation-delay: 0.56335s;
+          animation-delay: 0.56335s;
+}
+.uni_super_sound_wave .wave26.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence26-data-v-581b6bf6 0.86907s ease-in-out infinite;
+          animation: sequence26-data-v-581b6bf6 0.86907s ease-in-out infinite;
+  -webkit-animation-delay: 0.2931s;
+          animation-delay: 0.2931s;
+}
+.uni_super_sound_wave .wave27.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence27-data-v-581b6bf6 0.77467s ease-in-out infinite;
+          animation: sequence27-data-v-581b6bf6 0.77467s ease-in-out infinite;
+  -webkit-animation-delay: 0.87847s;
+          animation-delay: 0.87847s;
+}
+.uni_super_sound_wave .wave28.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence28-data-v-581b6bf6 0.81685s ease-in-out infinite;
+          animation: sequence28-data-v-581b6bf6 0.81685s ease-in-out infinite;
+  -webkit-animation-delay: 0.20113s;
+          animation-delay: 0.20113s;
+}
+.uni_super_sound_wave .wave29.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence29-data-v-581b6bf6 0.73055s ease-in-out infinite;
+          animation: sequence29-data-v-581b6bf6 0.73055s ease-in-out infinite;
+  -webkit-animation-delay: 0.41966s;
+          animation-delay: 0.41966s;
+}
+.uni_super_sound_wave .wave30.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence30-data-v-581b6bf6 0.79298s ease-in-out infinite;
+          animation: sequence30-data-v-581b6bf6 0.79298s ease-in-out infinite;
+  -webkit-animation-delay: 0.46021s;
+          animation-delay: 0.46021s;
+}
+.uni_super_sound_wave .wave31.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence31-data-v-581b6bf6 0.70512s ease-in-out infinite;
+          animation: sequence31-data-v-581b6bf6 0.70512s ease-in-out infinite;
+  -webkit-animation-delay: 0.27396s;
+          animation-delay: 0.27396s;
+}
+.uni_super_sound_wave .wave32.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence32-data-v-581b6bf6 0.75258s ease-in-out infinite;
+          animation: sequence32-data-v-581b6bf6 0.75258s ease-in-out infinite;
+  -webkit-animation-delay: 0.74881s;
+          animation-delay: 0.74881s;
+}
+.uni_super_sound_wave .wave33.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence33-data-v-581b6bf6 0.72854s ease-in-out infinite;
+          animation: sequence33-data-v-581b6bf6 0.72854s ease-in-out infinite;
+  -webkit-animation-delay: 0.70405s;
+          animation-delay: 0.70405s;
+}
+.uni_super_sound_wave .wave34.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence34-data-v-581b6bf6 0.83023s ease-in-out infinite;
+          animation: sequence34-data-v-581b6bf6 0.83023s ease-in-out infinite;
+  -webkit-animation-delay: 0.43284s;
+          animation-delay: 0.43284s;
+}
+.uni_super_sound_wave .wave35.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence35-data-v-581b6bf6 0.82945s ease-in-out infinite;
+          animation: sequence35-data-v-581b6bf6 0.82945s ease-in-out infinite;
+  -webkit-animation-delay: 0.32141s;
+          animation-delay: 0.32141s;
+}
+.uni_super_sound_wave .wave36.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence36-data-v-581b6bf6 0.73667s ease-in-out infinite;
+          animation: sequence36-data-v-581b6bf6 0.73667s ease-in-out infinite;
+  -webkit-animation-delay: 0.50189s;
+          animation-delay: 0.50189s;
+}
+.uni_super_sound_wave .wave37.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence37-data-v-581b6bf6 0.78262s ease-in-out infinite;
+          animation: sequence37-data-v-581b6bf6 0.78262s ease-in-out infinite;
+  -webkit-animation-delay: 0.25962s;
+          animation-delay: 0.25962s;
+}
+.uni_super_sound_wave .wave38.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence38-data-v-581b6bf6 0.74044s ease-in-out infinite;
+          animation: sequence38-data-v-581b6bf6 0.74044s ease-in-out infinite;
+  -webkit-animation-delay: 0.75294s;
+          animation-delay: 0.75294s;
+}
+.uni_super_sound_wave .wave39.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence39-data-v-581b6bf6 0.84417s ease-in-out infinite;
+          animation: sequence39-data-v-581b6bf6 0.84417s ease-in-out infinite;
+  -webkit-animation-delay: 0.28887s;
+          animation-delay: 0.28887s;
+}
+.uni_super_sound_wave .wave40.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence40-data-v-581b6bf6 0.87965s ease-in-out infinite;
+          animation: sequence40-data-v-581b6bf6 0.87965s ease-in-out infinite;
+  -webkit-animation-delay: 0.55764s;
+          animation-delay: 0.55764s;
+}
+.uni_super_sound_wave .wave41.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence41-data-v-581b6bf6 0.76476s ease-in-out infinite;
+          animation: sequence41-data-v-581b6bf6 0.76476s ease-in-out infinite;
+  -webkit-animation-delay: 0.63405s;
+          animation-delay: 0.63405s;
+}
+.uni_super_sound_wave .wave42.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence42-data-v-581b6bf6 0.85022s ease-in-out infinite;
+          animation: sequence42-data-v-581b6bf6 0.85022s ease-in-out infinite;
+  -webkit-animation-delay: 0.42026s;
+          animation-delay: 0.42026s;
+}
+.uni_super_sound_wave .wave43.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence43-data-v-581b6bf6 0.7802s ease-in-out infinite;
+          animation: sequence43-data-v-581b6bf6 0.7802s ease-in-out infinite;
+  -webkit-animation-delay: 0.69332s;
+          animation-delay: 0.69332s;
+}
+.uni_super_sound_wave .wave44.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence44-data-v-581b6bf6 0.84917s ease-in-out infinite;
+          animation: sequence44-data-v-581b6bf6 0.84917s ease-in-out infinite;
+  -webkit-animation-delay: 0.61375s;
+          animation-delay: 0.61375s;
+}
+.uni_super_sound_wave .wave45.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence45-data-v-581b6bf6 0.79953s ease-in-out infinite;
+          animation: sequence45-data-v-581b6bf6 0.79953s ease-in-out infinite;
+  -webkit-animation-delay: 0.55691s;
+          animation-delay: 0.55691s;
+}
+.uni_super_sound_wave .wave46.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence46-data-v-581b6bf6 0.81898s ease-in-out infinite;
+          animation: sequence46-data-v-581b6bf6 0.81898s ease-in-out infinite;
+  -webkit-animation-delay: 0.39087s;
+          animation-delay: 0.39087s;
+}
+.uni_super_sound_wave .wave47.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence47-data-v-581b6bf6 0.77675s ease-in-out infinite;
+          animation: sequence47-data-v-581b6bf6 0.77675s ease-in-out infinite;
+  -webkit-animation-delay: 0.57131s;
+          animation-delay: 0.57131s;
+}
+.uni_super_sound_wave .wave48.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence48-data-v-581b6bf6 0.8146s ease-in-out infinite;
+          animation: sequence48-data-v-581b6bf6 0.8146s ease-in-out infinite;
+  -webkit-animation-delay: 0.83806s;
+          animation-delay: 0.83806s;
+}
+.uni_super_sound_wave .wave49.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence49-data-v-581b6bf6 0.86421s ease-in-out infinite;
+          animation: sequence49-data-v-581b6bf6 0.86421s ease-in-out infinite;
+  -webkit-animation-delay: 0.40289s;
+          animation-delay: 0.40289s;
+}
+.uni_super_sound_wave .wave50.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence50-data-v-581b6bf6 0.84761s ease-in-out infinite;
+          animation: sequence50-data-v-581b6bf6 0.84761s ease-in-out infinite;
+  -webkit-animation-delay: 0.30591s;
+          animation-delay: 0.30591s;
+}
+.uni_super_sound_wave .wave51.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence51-data-v-581b6bf6 0.7745s ease-in-out infinite;
+          animation: sequence51-data-v-581b6bf6 0.7745s ease-in-out infinite;
+  -webkit-animation-delay: 0.58586s;
+          animation-delay: 0.58586s;
+}
+.uni_super_sound_wave .wave52.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence52-data-v-581b6bf6 0.84815s ease-in-out infinite;
+          animation: sequence52-data-v-581b6bf6 0.84815s ease-in-out infinite;
+  -webkit-animation-delay: 0.45429s;
+          animation-delay: 0.45429s;
+}
+.uni_super_sound_wave .wave53.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence53-data-v-581b6bf6 0.76535s ease-in-out infinite;
+          animation: sequence53-data-v-581b6bf6 0.76535s ease-in-out infinite;
+  -webkit-animation-delay: 0.57385s;
+          animation-delay: 0.57385s;
+}
+.uni_super_sound_wave .wave54.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence54-data-v-581b6bf6 0.88327s ease-in-out infinite;
+          animation: sequence54-data-v-581b6bf6 0.88327s ease-in-out infinite;
+  -webkit-animation-delay: 0.55678s;
+          animation-delay: 0.55678s;
+}
+.uni_super_sound_wave .wave55.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence55-data-v-581b6bf6 0.89866s ease-in-out infinite;
+          animation: sequence55-data-v-581b6bf6 0.89866s ease-in-out infinite;
+  -webkit-animation-delay: 0.56559s;
+          animation-delay: 0.56559s;
+}
+.uni_super_sound_wave .wave56.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence56-data-v-581b6bf6 0.89679s ease-in-out infinite;
+          animation: sequence56-data-v-581b6bf6 0.89679s ease-in-out infinite;
+  -webkit-animation-delay: 0.21847s;
+          animation-delay: 0.21847s;
+}
+.uni_super_sound_wave .wave57.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence57-data-v-581b6bf6 0.81968s ease-in-out infinite;
+          animation: sequence57-data-v-581b6bf6 0.81968s ease-in-out infinite;
+  -webkit-animation-delay: 0.83799s;
+          animation-delay: 0.83799s;
+}
+.uni_super_sound_wave .wave58.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence58-data-v-581b6bf6 0.72857s ease-in-out infinite;
+          animation: sequence58-data-v-581b6bf6 0.72857s ease-in-out infinite;
+  -webkit-animation-delay: 0.49192s;
+          animation-delay: 0.49192s;
+}
+.uni_super_sound_wave .wave59.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence59-data-v-581b6bf6 0.76101s ease-in-out infinite;
+          animation: sequence59-data-v-581b6bf6 0.76101s ease-in-out infinite;
+  -webkit-animation-delay: 0.63147s;
+          animation-delay: 0.63147s;
+}
+.uni_super_sound_wave .wave60.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence60-data-v-581b6bf6 0.88146s ease-in-out infinite;
+          animation: sequence60-data-v-581b6bf6 0.88146s ease-in-out infinite;
+  -webkit-animation-delay: 0.68187s;
+          animation-delay: 0.68187s;
+}
+.uni_super_sound_wave .wave61.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence61-data-v-581b6bf6 0.80534s ease-in-out infinite;
+          animation: sequence61-data-v-581b6bf6 0.80534s ease-in-out infinite;
+  -webkit-animation-delay: 0.20971s;
+          animation-delay: 0.20971s;
+}
+.uni_super_sound_wave .wave62.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence62-data-v-581b6bf6 0.79308s ease-in-out infinite;
+          animation: sequence62-data-v-581b6bf6 0.79308s ease-in-out infinite;
+  -webkit-animation-delay: 0.22238s;
+          animation-delay: 0.22238s;
+}
+.uni_super_sound_wave .wave63.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence63-data-v-581b6bf6 0.80294s ease-in-out infinite;
+          animation: sequence63-data-v-581b6bf6 0.80294s ease-in-out infinite;
+  -webkit-animation-delay: 0.53647s;
+          animation-delay: 0.53647s;
+}
+.uni_super_sound_wave .wave64.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence64-data-v-581b6bf6 0.81924s ease-in-out infinite;
+          animation: sequence64-data-v-581b6bf6 0.81924s ease-in-out infinite;
+  -webkit-animation-delay: 0.71976s;
+          animation-delay: 0.71976s;
+}
+.uni_super_sound_wave .wave65.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence65-data-v-581b6bf6 0.76992s ease-in-out infinite;
+          animation: sequence65-data-v-581b6bf6 0.76992s ease-in-out infinite;
+  -webkit-animation-delay: 0.4679s;
+          animation-delay: 0.4679s;
+}
+.uni_super_sound_wave .wave66.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence66-data-v-581b6bf6 0.85131s ease-in-out infinite;
+          animation: sequence66-data-v-581b6bf6 0.85131s ease-in-out infinite;
+  -webkit-animation-delay: 0.26791s;
+          animation-delay: 0.26791s;
+}
+.uni_super_sound_wave .wave67.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence67-data-v-581b6bf6 0.76201s ease-in-out infinite;
+          animation: sequence67-data-v-581b6bf6 0.76201s ease-in-out infinite;
+  -webkit-animation-delay: 0.25605s;
+          animation-delay: 0.25605s;
+}
+.uni_super_sound_wave .wave68.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence68-data-v-581b6bf6 0.87108s ease-in-out infinite;
+          animation: sequence68-data-v-581b6bf6 0.87108s ease-in-out infinite;
+  -webkit-animation-delay: 0.31993s;
+          animation-delay: 0.31993s;
+}
+.uni_super_sound_wave .wave69.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence69-data-v-581b6bf6 0.88869s ease-in-out infinite;
+          animation: sequence69-data-v-581b6bf6 0.88869s ease-in-out infinite;
+  -webkit-animation-delay: 0.70821s;
+          animation-delay: 0.70821s;
+}
+.uni_super_sound_wave .wave70.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence70-data-v-581b6bf6 0.79977s ease-in-out infinite;
+          animation: sequence70-data-v-581b6bf6 0.79977s ease-in-out infinite;
+  -webkit-animation-delay: 0.4158s;
+          animation-delay: 0.4158s;
+}
+.uni_super_sound_wave .wave71.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence71-data-v-581b6bf6 0.86232s ease-in-out infinite;
+          animation: sequence71-data-v-581b6bf6 0.86232s ease-in-out infinite;
+  -webkit-animation-delay: 0.40408s;
+          animation-delay: 0.40408s;
+}
+.uni_super_sound_wave .wave72.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence72-data-v-581b6bf6 0.85455s ease-in-out infinite;
+          animation: sequence72-data-v-581b6bf6 0.85455s ease-in-out infinite;
+  -webkit-animation-delay: 0.87435s;
+          animation-delay: 0.87435s;
+}
+.uni_super_sound_wave .wave73.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence73-data-v-581b6bf6 0.86252s ease-in-out infinite;
+          animation: sequence73-data-v-581b6bf6 0.86252s ease-in-out infinite;
+  -webkit-animation-delay: 0.82053s;
+          animation-delay: 0.82053s;
+}
+.uni_super_sound_wave .wave74.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence74-data-v-581b6bf6 0.87822s ease-in-out infinite;
+          animation: sequence74-data-v-581b6bf6 0.87822s ease-in-out infinite;
+  -webkit-animation-delay: 0.48602s;
+          animation-delay: 0.48602s;
+}
+.uni_super_sound_wave .wave75.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence75-data-v-581b6bf6 0.87674s ease-in-out infinite;
+          animation: sequence75-data-v-581b6bf6 0.87674s ease-in-out infinite;
+  -webkit-animation-delay: 0.57244s;
+          animation-delay: 0.57244s;
+}
+.uni_super_sound_wave .wave76.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence76-data-v-581b6bf6 0.81467s ease-in-out infinite;
+          animation: sequence76-data-v-581b6bf6 0.81467s ease-in-out infinite;
+  -webkit-animation-delay: 0.64304s;
+          animation-delay: 0.64304s;
+}
+.uni_super_sound_wave .wave77.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence77-data-v-581b6bf6 0.88718s ease-in-out infinite;
+          animation: sequence77-data-v-581b6bf6 0.88718s ease-in-out infinite;
+  -webkit-animation-delay: 0.61014s;
+          animation-delay: 0.61014s;
+}
+.uni_super_sound_wave .wave78.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence78-data-v-581b6bf6 0.72295s ease-in-out infinite;
+          animation: sequence78-data-v-581b6bf6 0.72295s ease-in-out infinite;
+  -webkit-animation-delay: 0.62265s;
+          animation-delay: 0.62265s;
+}
+.uni_super_sound_wave .wave79.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence79-data-v-581b6bf6 0.81763s ease-in-out infinite;
+          animation: sequence79-data-v-581b6bf6 0.81763s ease-in-out infinite;
+  -webkit-animation-delay: 0.88649s;
+          animation-delay: 0.88649s;
+}
+.uni_super_sound_wave .wave80.data-v-581b6bf6 {
+  width: 1%;
+  margin-right: 2rpx;
+  -webkit-animation: sequence80-data-v-581b6bf6 0.843s ease-in-out infinite;
+          animation: sequence80-data-v-581b6bf6 0.843s ease-in-out infinite;
+  -webkit-animation-delay: 0.28231s;
+          animation-delay: 0.28231s;
+}
+.uni_super_sound_wave .wave1.data-v-581b6bf6 {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
   background-color: #fffeff;
 }
 .uni_super_sound_wave .wave2.data-v-581b6bf6 {
@@ -1000,7 +1644,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 6.84635%;
 }
 100% {
@@ -1011,7 +1659,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 6.84635%;
 }
 100% {
@@ -1022,7 +1674,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 78.59413%;
 }
 100% {
@@ -1033,7 +1689,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 78.59413%;
 }
 100% {
@@ -1044,7 +1704,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 24.92366%;
 }
 100% {
@@ -1055,7 +1719,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 24.92366%;
 }
 100% {
@@ -1066,7 +1734,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 22.4665%;
 }
 100% {
@@ -1077,7 +1749,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 22.4665%;
 }
 100% {
@@ -1088,7 +1764,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 76.60801%;
 }
 100% {
@@ -1099,7 +1779,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 76.60801%;
 }
 100% {
@@ -1110,7 +1794,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 19.70439%;
 }
 100% {
@@ -1121,7 +1809,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 19.70439%;
 }
 100% {
@@ -1132,7 +1824,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 60.25686%;
 }
 100% {
@@ -1143,7 +1839,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 60.25686%;
 }
 100% {
@@ -1154,7 +1854,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 8.768%;
 }
 100% {
@@ -1165,7 +1869,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 8.768%;
 }
 100% {
@@ -1176,7 +1884,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 55.79989%;
 }
 100% {
@@ -1187,7 +1899,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 55.79989%;
 }
 100% {
@@ -1198,7 +1914,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 89.6476%;
 }
 100% {
@@ -1209,7 +1929,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 89.6476%;
 }
 100% {
@@ -1220,7 +1944,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 11.99108%;
 }
 100% {
@@ -1231,7 +1959,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 11.99108%;
 }
 100% {
@@ -1242,7 +1974,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 14.46006%;
 }
 100% {
@@ -1253,7 +1989,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 14.46006%;
 }
 100% {
@@ -1264,7 +2004,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 19.91738%;
 }
 100% {
@@ -1275,7 +2019,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 19.91738%;
 }
 100% {
@@ -1286,7 +2034,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 26.19502%;
 }
 100% {
@@ -1297,7 +2049,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 26.19502%;
 }
 100% {
@@ -1308,7 +2064,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 51.70996%;
 }
 100% {
@@ -1319,7 +2079,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 51.70996%;
 }
 100% {
@@ -1330,7 +2094,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 41.65267%;
 }
 100% {
@@ -1341,7 +2109,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 41.65267%;
 }
 100% {
@@ -1352,7 +2124,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 63.44632%;
 }
 100% {
@@ -1363,7 +2139,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 63.44632%;
 }
 100% {
@@ -1374,7 +2154,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 91.07655%;
 }
 100% {
@@ -1385,7 +2169,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 91.07655%;
 }
 100% {
@@ -1396,7 +2184,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 20.0561%;
 }
 100% {
@@ -1407,7 +2199,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 20.0561%;
 }
 100% {
@@ -1418,7 +2214,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 44.10396%;
 }
 100% {
@@ -1429,7 +2229,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 44.10396%;
 }
 100% {
@@ -1440,7 +2244,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 66.01508%;
 }
 100% {
@@ -1451,7 +2259,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 66.01508%;
 }
 100% {
@@ -1462,7 +2274,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 84.28714%;
 }
 100% {
@@ -1473,7 +2289,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 84.28714%;
 }
 100% {
@@ -1484,7 +2304,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 80.31197%;
 }
 100% {
@@ -1495,7 +2319,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 80.31197%;
 }
 100% {
@@ -1506,7 +2334,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.59124%;
 }
 100% {
@@ -1517,7 +2349,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.59124%;
 }
 100% {
@@ -1528,7 +2364,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 96.75081%;
 }
 100% {
@@ -1539,7 +2379,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 96.75081%;
 }
 100% {
@@ -1550,7 +2394,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 52.50767%;
 }
 100% {
@@ -1561,7 +2409,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 52.50767%;
 }
 100% {
@@ -1572,7 +2424,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 36.37375%;
 }
 100% {
@@ -1583,7 +2439,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 36.37375%;
 }
 100% {
@@ -1594,7 +2454,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 44.47569%;
 }
 100% {
@@ -1605,7 +2469,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 44.47569%;
 }
 100% {
@@ -1616,7 +2484,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 34.33478%;
 }
 100% {
@@ -1627,7 +2499,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 34.33478%;
 }
 100% {
@@ -1638,7 +2514,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 78.7676%;
 }
 100% {
@@ -1649,7 +2529,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 78.7676%;
 }
 100% {
@@ -1660,7 +2544,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 51.05965%;
 }
 100% {
@@ -1671,7 +2559,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 51.05965%;
 }
 100% {
@@ -1682,7 +2574,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 90.56414%;
 }
 100% {
@@ -1693,7 +2589,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 90.56414%;
 }
 100% {
@@ -1704,7 +2604,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 17.4083%;
 }
 100% {
@@ -1715,7 +2619,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 17.4083%;
 }
 100% {
@@ -1726,7 +2634,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.79444%;
 }
 100% {
@@ -1737,7 +2649,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.79444%;
 }
 100% {
@@ -1748,7 +2664,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 86.06181%;
 }
 100% {
@@ -1759,7 +2679,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 86.06181%;
 }
 100% {
@@ -1770,7 +2694,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 0.66805%;
 }
 100% {
@@ -1781,7 +2709,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 0.66805%;
 }
 100% {
@@ -1792,7 +2724,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 72.08263%;
 }
 100% {
@@ -1803,7 +2739,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 72.08263%;
 }
 100% {
@@ -1814,7 +2754,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 1.83602%;
 }
 100% {
@@ -1825,7 +2769,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 1.83602%;
 }
 100% {
@@ -1836,7 +2784,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 3.63233%;
 }
 100% {
@@ -1847,7 +2799,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 3.63233%;
 }
 100% {
@@ -1858,7 +2814,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 72.23518%;
 }
 100% {
@@ -1869,7 +2829,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 72.23518%;
 }
 100% {
@@ -1880,7 +2844,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 37.15757%;
 }
 100% {
@@ -1891,7 +2859,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 37.15757%;
 }
 100% {
@@ -1902,7 +2874,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 58.82462%;
 }
 100% {
@@ -1913,7 +2889,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 58.82462%;
 }
 100% {
@@ -1924,7 +2904,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 28.60521%;
 }
 100% {
@@ -1935,7 +2919,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 28.60521%;
 }
 100% {
@@ -1946,7 +2934,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 39.0467%;
 }
 100% {
@@ -1957,7 +2949,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 39.0467%;
 }
 100% {
@@ -1968,7 +2964,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.11127%;
 }
 100% {
@@ -1979,7 +2979,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.11127%;
 }
 100% {
@@ -1990,7 +2994,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 33.83931%;
 }
 100% {
@@ -2001,7 +3009,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 33.83931%;
 }
 100% {
@@ -2012,7 +3024,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 58.83446%;
 }
 100% {
@@ -2023,7 +3039,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 58.83446%;
 }
 100% {
@@ -2034,7 +3054,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 95.35634%;
 }
 100% {
@@ -2045,7 +3069,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 95.35634%;
 }
 100% {
@@ -2056,7 +3084,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 70.02589%;
 }
 100% {
@@ -2067,7 +3099,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 70.02589%;
 }
 100% {
@@ -2078,7 +3114,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 67.12513%;
 }
 100% {
@@ -2089,7 +3129,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 67.12513%;
 }
 100% {
@@ -2100,7 +3144,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 51.13213%;
 }
 100% {
@@ -2111,7 +3159,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 51.13213%;
 }
 100% {
@@ -2122,7 +3174,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 95.61674%;
 }
 100% {
@@ -2133,7 +3189,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 95.61674%;
 }
 100% {
@@ -2144,7 +3204,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 48.27407%;
 }
 100% {
@@ -2155,7 +3219,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 48.27407%;
 }
 100% {
@@ -2166,7 +3234,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 74.45628%;
 }
 100% {
@@ -2177,7 +3249,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 74.45628%;
 }
 100% {
@@ -2188,7 +3264,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 12.8091%;
 }
 100% {
@@ -2199,7 +3279,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 12.8091%;
 }
 100% {
@@ -2210,7 +3294,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 9.06063%;
 }
 100% {
@@ -2221,7 +3309,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 9.06063%;
 }
 100% {
@@ -2232,7 +3324,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 60.2202%;
 }
 100% {
@@ -2243,7 +3339,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 60.2202%;
 }
 100% {
@@ -2254,7 +3354,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 15.53052%;
 }
 100% {
@@ -2265,7 +3369,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 15.53052%;
 }
 100% {
@@ -2276,7 +3384,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 43.26289%;
 }
 100% {
@@ -2287,7 +3399,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 43.26289%;
 }
 100% {
@@ -2298,7 +3414,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 28.70969%;
 }
 100% {
@@ -2309,7 +3429,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 28.70969%;
 }
 100% {
@@ -2320,7 +3444,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 47.23584%;
 }
 100% {
@@ -2331,7 +3459,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 47.23584%;
 }
 100% {
@@ -2342,7 +3474,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 13.08896%;
 }
 100% {
@@ -2353,7 +3489,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 13.08896%;
 }
 100% {
@@ -2364,7 +3504,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 57.98838%;
 }
 100% {
@@ -2375,7 +3519,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 57.98838%;
 }
 100% {
@@ -2386,7 +3534,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 54.70713%;
 }
 100% {
@@ -2397,7 +3549,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 54.70713%;
 }
 100% {
@@ -2408,7 +3564,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 93.51586%;
 }
 100% {
@@ -2419,7 +3579,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 93.51586%;
 }
 100% {
@@ -2430,7 +3594,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 28.58792%;
 }
 100% {
@@ -2441,7 +3609,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 28.58792%;
 }
 100% {
@@ -2452,7 +3624,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 54.44657%;
 }
 100% {
@@ -2463,7 +3639,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 54.44657%;
 }
 100% {
@@ -2474,7 +3654,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 85.84017%;
 }
 100% {
@@ -2485,7 +3669,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 85.84017%;
 }
 100% {
@@ -2496,7 +3684,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 30.52201%;
 }
 100% {
@@ -2507,7 +3699,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 30.52201%;
 }
 100% {
@@ -2518,7 +3714,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 83.48338%;
 }
 100% {
@@ -2529,7 +3729,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 83.48338%;
 }
 100% {
@@ -2540,7 +3744,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 8.90071%;
 }
 100% {
@@ -2551,7 +3759,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 8.90071%;
 }
 100% {
@@ -2562,7 +3774,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.92582%;
 }
 100% {
@@ -2573,7 +3789,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 21.92582%;
 }
 100% {
@@ -2584,7 +3804,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 80.61485%;
 }
 100% {
@@ -2595,7 +3819,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 80.61485%;
 }
 100% {
@@ -2606,7 +3834,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 25.12896%;
 }
 100% {
@@ -2617,7 +3849,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 25.12896%;
 }
 100% {
@@ -2628,7 +3864,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 37.64994%;
 }
 100% {
@@ -2639,7 +3879,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 37.64994%;
 }
 100% {
@@ -2650,7 +3894,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 96.77641%;
 }
 100% {
@@ -2661,7 +3909,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 96.77641%;
 }
 100% {
@@ -2672,7 +3924,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 24.35673%;
 }
 100% {
@@ -2683,7 +3939,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 24.35673%;
 }
 100% {
@@ -2694,7 +3954,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 67.10037%;
 }
 100% {
@@ -2705,7 +3969,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 67.10037%;
 }
 100% {
@@ -2716,7 +3984,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 8.71232%;
 }
 100% {
@@ -2727,7 +3999,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 8.71232%;
 }
 100% {
@@ -2738,7 +4014,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 4.43393%;
 }
 100% {
@@ -2749,7 +4029,11 @@ $uni-font-size-paragraph:30rpx;*/
 0% {
     height: 0;
 }
+<<<<<<< HEAD
 50% {
+=======
+50% {
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
     height: 4.43393%;
 }
 100% {

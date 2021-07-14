@@ -84,8 +84,13 @@ $uni-font-size-paragraph:30rpx;*/
   height: 100%;
   position: relative;
 }
+<<<<<<< HEAD
 .uni_play_page .blur.data-v-f106863c {
   -webkit-filter: blur(15px);
+=======
+.uni_play_page .blur.data-v-f106863c {
+  -webkit-filter: blur(15px);
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
           filter: blur(15px);
 }
 .uni_play_page .swiper.data-v-f106863c {
@@ -101,6 +106,15 @@ $uni-font-size-paragraph:30rpx;*/
   left: 0;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
+=======
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  will-change: transform;
+  object-fit: cover;
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
 }
 .uni_play_page .swiper .item .img.data-v-f106863c {
   width: 100%;
@@ -165,6 +179,7 @@ $uni-font-size-paragraph:30rpx;*/
 .uni_play_page .swiper .item .song_info .song_detail .control .active.data-v-f106863c {
   color: #dc143c;
 }
+<<<<<<< HEAD
 .mask.data-v-f106863c::after {
   content: '';
   position: fixed;
@@ -173,6 +188,16 @@ $uni-font-size-paragraph:30rpx;*/
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
+=======
+.mask.data-v-f106863c::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+>>>>>>> 0a262098dafa87636509473e53b05d55aa5b01d6
   z-index: 999;
 }
 .pause.data-v-f106863c::before {
