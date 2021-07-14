@@ -15,17 +15,12 @@
                    v-for="(item, index) in renderQueue"
                    :key="index">
 
-        <image :src="item.picUrl + '?param=400y400'"
+        <image :src="item.picUrl + '?param=400y700'"
                class="img mask"
-               mode="aspectFill"
                :class="[(!getIsPlay && getShowPageIndex === index) && 'pause iconfont icon-audioPlay']">
         </image>
 
-        <!--  lyric  -->
-        <view v-if="getShowPageIndex === index && getCurrentSong"
-              class="lyric">
-          <view v-show="!isShowSongQueue">{{getLrc}}</view>
-        </view>
+        <uni-lyric v-if="getShowPageIndex === index && getCurrentSong"></uni-lyric>
 
         <!--    配用图片背景    -->
         <prepare-img v-if="renderQueue.length > 0"
@@ -72,12 +67,14 @@ import types from "@/store/mutations-types";
 import UniTag from "../tag/UniTag";
 import UniSongQueue from "../songQueue/UniSongQueue";
 import UniSuperSoundWave from "../superSoundWave/UniSuperSoundWave";
+import UniLyric from "../lyric/UniLyric";
 
 export default {
   components: {
     UniTag,
     UniSongQueue,
     UniSuperSoundWave,
+    UniLyric
   },
   data() {
     return {
@@ -105,9 +102,7 @@ export default {
         return state.currentPlayQueue;
       },
       getLock: 'lock',
-      getColSongs: 'colSongs',
-      getCurrentTime: 'currentTime',
-      getCurrentLyric: 'currentLyric'
+      getColSongs: 'colSongs'
     }),
 
     renderQueue() {
@@ -120,16 +115,6 @@ export default {
       ];
     },
 
-    // 获取处理后的歌词（与播放时间相匹配就切换歌词）
-    getLrc({getCurrentTime: curTime, getCurrentLyric: {lrcTimeMap: time, lrcContentMap: content}}) {
-      if (!content) return;
-      if (curTime >= time[0]) {
-        time.shift();
-        content.shift();
-      }
-      return content[0];
-    },
-		
   },
   methods: {
     ...mapMutations([
@@ -235,7 +220,7 @@ export default {
     position: relative;
 
     .blur{
-      filter: blur(20px);
+      filter: blur(15px);
     }
     .swiper{
       @include wh(100%, 100%);
@@ -256,6 +241,7 @@ export default {
           left: 0;
           z-index: 1;
           will-change: transform;
+		      object-fit: cover;
         }
 
         .song_info{
@@ -301,18 +287,6 @@ export default {
           }
         }
       }
-    }
-
-    .lyric{
-      width: 85%;
-      color: $font-color-white;
-      font-size: $icon-size;
-      font-weight: bold;
-      position: absolute;
-      top: 25%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
     }
   }
 

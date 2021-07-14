@@ -85,8 +85,8 @@ $uni-font-size-paragraph:30rpx;*/
   position: relative;
 }
 .uni_play_page .blur.data-v-f106863c {
-  -webkit-filter: blur(20px);
-          filter: blur(20px);
+  -webkit-filter: blur(15px);
+          filter: blur(15px);
 }
 .uni_play_page .swiper.data-v-f106863c {
   width: 100%;
@@ -110,6 +110,7 @@ $uni-font-size-paragraph:30rpx;*/
   left: 0;
   z-index: 1;
   will-change: transform;
+  object-fit: cover;
 }
 .uni_play_page .swiper .item .song_info.data-v-f106863c {
   width: 90%;
@@ -163,18 +164,6 @@ $uni-font-size-paragraph:30rpx;*/
 }
 .uni_play_page .swiper .item .song_info .song_detail .control .active.data-v-f106863c {
   color: #dc143c;
-}
-.uni_play_page .lyric.data-v-f106863c {
-  width: 85%;
-  color: #fffeff;
-  font-size: 60rpx;
-  font-weight: bold;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  z-index: 1000;
 }
 .mask.data-v-f106863c::after {
   content: '';

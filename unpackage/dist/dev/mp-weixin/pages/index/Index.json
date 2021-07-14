@@ -1,5 +1,4 @@
 {
-  "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {
     "home": "/pages/index/childCpn/home/Home",
