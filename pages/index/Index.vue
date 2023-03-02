@@ -1,8 +1,7 @@
 <template>
   <view class="index">
     <view class="nav">
-      <view :class="[current ? 'show' : 'hide']">DISCOVER</view>
-      <view :class="[current ? 'hide' : 'show']">PLAY</view>
+      <view :class="[current ? 'show' : 'hide']">{{ current ? 'DISCOVER' : 'PLAY' }}</view>
       <text class="iconfont icon-user"></text>
     </view>
 

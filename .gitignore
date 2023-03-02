@@ -4,10 +4,12 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+unpackage
 
 # Editor directories and files
 .idea
 .vscode
+.hbuilderx
 *.suo
 *.ntvs*
 *.njsproj

@@ -45,6 +45,7 @@
 
         <!--   recommend 区域   -->
         <home-recommend :recommend="recommend"
+                        :songs="newSong"
                         @load="onLoaded">
         </home-recommend>
 
@@ -137,9 +138,7 @@ import UniTag from "@/components/tag/UniTag";
       onLoaded() {
         this.loadImg++;
         if (this.ok === this.loadImg) {
-          this.$nextTick(() => {
-            this.isLoaded = true;
-          })
+          this.isLoaded = true;
         }
       },
 

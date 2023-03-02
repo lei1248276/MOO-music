@@ -90,6 +90,7 @@ export default {
     ]),
 
     onPlay(item, index) {
+      console.log(this.songs)
       // 点击动画
       this.onAnim(index);
 

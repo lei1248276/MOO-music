@@ -1,23 +1,14 @@
 <template>
   <view class="home_recommend" v-if="recommend.length">
-    <image class="recommend_img1"
-           :src="recommend[0].picUrl + '?param=100y100'"
+    <image v-for="(item, index) in recommend.slice(0, 3)"
+           :key="item.id"
+           :class="`recommend_img${index + 1}`"
+           :src="item.picUrl + '?param=100y100'"
            mode="aspectFill"
            lazy-load
            @load="onLoaded">
     </image>
-    <image class="recommend_img2"
-           :src="recommend[1].picUrl + '?param=100y100'"
-           mode="aspectFill"
-           lazy-load
-           @load="onLoaded">
-    </image>
-    <image class="recommend_img3"
-           :src="recommend[2].picUrl + '?param=100y100'"
-           mode="aspectFill"
-           lazy-load
-           @load="onLoaded">
-    </image>
+
     <view class="recommend_control">
       <view class="control_text">
         <text class="text1">MOO Radio</text>
@@ -32,7 +23,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
+import types from "@/store/mutations-types";
 
 export default {
   props: {
@@ -41,19 +33,32 @@ export default {
       default() {
         return []
       }
+    },
+    songs: {
+      type: Array,
+      default(){
+        return []
+      }
     }
   },
   computed: {
     ...mapState({
+      getIsInit: 'isInit',
       getAudio: 'audio',
       getIsPlay: 'isPlay',
       getCurrentSong: 'currentSong',
-    })
+    }),
   },
   created() {
     this.loadImg = 0;
   },
   methods: {
+    ...mapMutations([
+        types.SET_IS_INIT,
+        types.SET_RESET_PAGE_INDEX,
+        types.SET_CURRENT_PLAY_INDEX,
+        types.SET_CURRENT_PLAY_QUEUE,
+    ]),
     onLoaded() {
       this.loadImg++;
       if (this.recommend.length === this.loadImg) {
@@ -62,10 +67,39 @@ export default {
     },
 
     onPlay() {
-      if (this.getCurrentSong) {
-        this.getIsPlay ? this.getAudio.pause() : this.getAudio.play();
+      !this.getIsInit && this[types.SET_IS_INIT]()
+
+      this.getIsPlay && this.getAudio.pause()
+
+      const playlistId = this.recommend[0].id
+      const songsInfo = this.reload(this.songs, [], playlistId);
+      // 设置当前播放队列
+      this[types.SET_CURRENT_PLAY_QUEUE](songsInfo);
+      // 获取歌曲链接
+      this.$store.dispatch('getPlaySong', songsInfo[0]);
+      // 重置playPage当前页面index
+      this[types.SET_RESET_PAGE_INDEX](0);
+      // 设置当前播放歌曲 index
+      this[types.SET_CURRENT_PLAY_INDEX](0);
+    },
+
+    reload(songs, curPlayQueue, curPlId) {
+      let songsInfo = [];
+      for (let i = curPlayQueue.length, len = songs.length; i < len; i++) {
+        // 设置歌曲信息
+        songsInfo.push({
+          playlistId: curPlId,
+          id: songs[i].id,
+          picUrl: songs[i].picUrl,
+          songUrl: songs[i].songUrl || '',
+          lyric: songs[i].lyric || '',
+          name: songs[i].name,
+          singer: songs[i].singer,
+          isCollect: false,
+          isChecked: false,
+        });
       }
-      console.log(this.getAudio.paused);
+      return songsInfo;
     },
   }
 }
