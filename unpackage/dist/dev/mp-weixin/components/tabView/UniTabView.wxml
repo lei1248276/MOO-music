@@ -1,1 +1,0 @@
-<view class="uni_tab_view data-v-bb7d598c" style="{{'transform:'+('translate3d('+view[viewIndex]+'vw, -50vh, 0)')+';'}}"><slot></slot></view>

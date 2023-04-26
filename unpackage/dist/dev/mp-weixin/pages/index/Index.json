@@ -1,8 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "home": "/pages/index/childCpn/home/Home",
-    "uni-play-page": "/components/playPage/UniPlayPage",
-    "uni-swiper-dot": "/components/swiperDot/UniSwiperDot"
-  }
-}

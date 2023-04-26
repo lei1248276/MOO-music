@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "uni-transition": "/uni_modules/uni-transition/components/uni-transition/uni-transition",
-    "uni-play-page": "/components/playPage/UniPlayPage"
-  }
-}

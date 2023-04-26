@@ -1,1 +1,0 @@
-<view class="home_new_song data-v-46892c4e"><uni-nav class="newSong_nav data-v-46892c4e" vue-id="eac64310-1" title="{{title}}" data-event-opts="{{[['tap',[['toNewSonglist',['$event']]]]]}}" bindtap="__e" bind:__l="__l"></uni-nav><uni-song vue-id="eac64310-2" songs="{{$root.g0}}" playlistId="{{playlistId}}" class="data-v-46892c4e" bind:__l="__l"></uni-song></view>
