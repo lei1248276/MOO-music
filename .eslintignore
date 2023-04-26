@@ -5,3 +5,4 @@ public
 dist
 dist_prod
 dist_test
+node_modules

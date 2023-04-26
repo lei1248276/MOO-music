@@ -5,11 +5,14 @@ import postcss from './postcss.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import path from 'path'
 
+const isH5 = process.env.UNI_PLATFORM === 'h5'
+const app = process.env.UNI_PLATFORM === 'app'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     uni(),
-    ...(process.env.UNI_PLATFORM !== 'app' ? [uvwt()] : []),
+    ...(isH5 || app ? [] : [uvwt()]),
     AutoImport({
       imports: [
         'vue',

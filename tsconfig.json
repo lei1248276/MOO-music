@@ -10,5 +10,5 @@
     "types": ["@dcloudio/types"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "auto-imports.d.ts", "components.d.ts"],
-  "exclude": ["src/uni_modules"]
+  "exclude": ["src/uni_modules", "node_modules", "unpackage", "src/**/*.nvue"]
 }
