@@ -1,4 +1,4 @@
-import Request from 'luch-request'
+import Request from '@/utils/luch-request'
 import toast from './toast'
 
 const request = new Request({
@@ -17,7 +17,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    console.log('🚀 ~ file: request.ts:20 ~ response:', response)
+    // console.log('🚀 ~ file: request.ts:20 ~ response:', response)
     const { data, statusCode } = response
     if (!data) return (toast.fail(), response)
 
@@ -25,7 +25,7 @@ request.interceptors.response.use(
       return (toast.fail(), Promise.reject(new Error(data.message || '请求失败')))
     }
 
-    return response
+    return data
   }, (err) => {
     console.error(err)
     toast.fail()
