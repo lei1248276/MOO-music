@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import NavTitle from './components/NavTitle.vue'
-import Home from './components/Home.vue'
-import Profile from './components/Profile.vue'
+import NavTitle from './components/NavTitle/NavTitle.vue'
+import Home from './components/Home/Home.vue'
+import Profile from './components/Profile/Profile.vue'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 
 const pages = ['home', 'profile']
