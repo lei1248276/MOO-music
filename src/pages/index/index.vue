@@ -1,14 +1,15 @@
 <template>
-  <view class="flex flex-col items-center justify-center">
-    <view class="flex justify-center text-blue-600 text-[40rpx]">
-      <text class="first-letter:text-[60rpx]">{{ title }}-{{ name }}</text>
-    </view>
-    <button @click="() => ++count">{{ count }}</button>
+  <view class="min-h-screen bg-black-2">
+    <Navbar />
+
+    <NavTitle
+      :pages="['home', 'profile']"
+      current-page="home"
+    />
   </view>
 </template>
 
 <script setup lang="ts">
-const title = ref('Hello')
-const name = ref('Jaye')
-const count = ref(0)
+import NavTitle from '../components/NavTitle.vue'
+
 </script>
