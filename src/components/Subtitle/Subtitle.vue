@@ -38,8 +38,11 @@ const props = withDefaults(defineProps<Props>(), {
   clickable: false,
   customClass: ''
 })
+const emit = defineEmits(['title'])
 
 function onSubtitle() {
+  emit('title')
+
   if (!props.url) return
 
   uni.navigateTo({ url: props.url, fail(err) { console.error(err) } })
