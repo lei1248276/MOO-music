@@ -1,0 +1,13 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+  .alt {
+    width: 100%;
+    height: 100%;
+    background: #1a191b
+      url("data:image/svg+xml,%3Csvg width='50' height='50' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' fill='%23959292' font-family='system-ui, sans-serif' text-anchor='middle' dominant-baseline='middle'%3EMOO%3C/text%3E%3C/svg%3E")
+      no-repeat center/100%;
+  }
+}
