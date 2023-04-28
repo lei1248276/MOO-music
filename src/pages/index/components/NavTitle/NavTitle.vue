@@ -13,7 +13,7 @@
       <view
         v-for="item in pages"
         :key="item"
-        :class="currentPage === item ? 'w-[36rpx] rounded-[20rpx] bg-white-1' : ''"
+        :class="currentPage === item ? 'w-[36rpx] !rounded-[20rpx] bg-white-1' : ''"
         class="w-[18rpx] h-[18rpx] bg-grey-1 rounded-[50%] mr-1 transition-[width] duration-500 ease-in-out"
       />
     </view>

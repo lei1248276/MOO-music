@@ -1,5 +1,5 @@
 <template>
-  <view class="relative px-[28rpx]">
+  <view class="relative px-[28rpx] mb-[20rpx]">
     <uni-easyinput
       v-model="search"
       class="rounded-[30rpx] overflow-hidden indent-[54rpx]"

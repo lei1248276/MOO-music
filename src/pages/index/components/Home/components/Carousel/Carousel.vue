@@ -1,6 +1,6 @@
 <template>
   <swiper
-    class="swiper"
+    class="rounded-[14rpx] overflow-hidden"
     :autoplay="true"
     :duration="400"
     :interval="4000"
@@ -31,12 +31,13 @@
 import { getBanner } from '@/api/home'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 
-const bannerList = ref<{ pic: string }[]>([])
+const bannerList = shallowRef<{ pic: string }[]>([])
 const currentIndex = ref(0)
 
 ;(async function fetchBanner() {
   const { banners } = await getBanner(1)
   bannerList.value = banners
+
   console.log('🚀 ~ file: Carousel.vue:40 ~ fetchBanner ~ banners:', banners)
 })()
 
