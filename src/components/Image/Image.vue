@@ -10,7 +10,8 @@
 
     <image
       v-if="loading || passive || loaded"
-      :style="{ width, height, transition: 'opacity 1s', opacity: loaded ? 1 : 0 }"
+      class="w-full h-full"
+      :style="{ transition: 'opacity 1s', opacity: loaded ? 1 : 0 }"
       v-bind="$attrs"
       mode="scaleToFill"
       @load="() => loaded = true"

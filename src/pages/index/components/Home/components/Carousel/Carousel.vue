@@ -30,8 +30,9 @@
 <script setup lang="ts">
 import { getBanner } from '@/api/home'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
+import type { Banner } from '@/api/interface/Banner'
 
-const bannerList = shallowRef<{ pic: string }[]>([])
+const bannerList = shallowRef<Banner[]>([])
 const currentIndex = ref(0)
 
 ;(async function fetchBanner() {
