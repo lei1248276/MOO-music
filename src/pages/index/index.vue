@@ -1,5 +1,5 @@
 <template>
-  <view class="min-h-screen bg-black-2">
+  <view class="min-h-screen bg-black-2 flex flex-col justify-stretch">
     <Navbar />
 
     <NavTitle
@@ -7,8 +7,10 @@
       :current-page="currentPage"
     />
 
+    <Search />
+
     <swiper
-      class="bg-black-2 min-h-screen"
+      class="bg-black-2 grow"
       :duration="300"
       @change="onSwiper"
     >
@@ -25,6 +27,7 @@
 
 <script setup lang="ts">
 import NavTitle from './components/NavTitle/NavTitle.vue'
+import Search from './components/Search/Search.vue'
 import Home from './components/Home/Home.vue'
 import Profile from './components/Profile/Profile.vue'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'

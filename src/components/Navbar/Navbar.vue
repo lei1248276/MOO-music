@@ -5,7 +5,7 @@
     background-color="#1a191b"
     color="#fffeff"
     :border="false"
-    v-bind="props"
+    v-bind="$attrs"
   />
 </template>
 
@@ -13,6 +13,6 @@
 import type { UniNavBarProps } from '@uni-helper/uni-ui-types'
 interface NavBarProps extends UniNavBarProps {}
 
-const props = defineProps<NavBarProps>()
+defineProps<NavBarProps>()
 
 </script>
