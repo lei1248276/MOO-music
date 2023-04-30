@@ -7,7 +7,7 @@
       v-for="item in songlist"
       :key="item.id"
       class="w-[48%] h-[420rpx] rounded-[20rpx] font-bold text-white-1 relative"
-      @click="onSonglist(item)"
+      @click="toPlaylist(item)"
     >
       <JImage
         :src="item.coverImgUrl"
@@ -33,7 +33,13 @@ defineProps<{
   customClass?: string
 }>()
 
-function onSonglist(item: Songlist) {
-  console.log('🚀 ~ file: Songlist.vue:33 ~ onSonglist ~ e:', item)
+function toPlaylist(item: Songlist) {
+  uni.navigateTo({
+    url: `/sharedPages/playlist`,
+    success: (res) => {
+      res.eventChannel.emit('acceptSonglist', item)
+    },
+    fail: (err) => { console.error(err) }
+  })
 }
 </script>

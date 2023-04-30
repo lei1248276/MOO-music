@@ -1,8 +1,7 @@
 <template>
   <Navbar
     title="歌单列表"
-    left-icon="left"
-    fixed
+    left-arrow
     @clickLeft="isShowPage = false"
   />
 
@@ -34,13 +33,13 @@ let total = 0
 
 fetchSonglist()
 
-onReachBottom(() => {
-  songlist.length !== total && fetchSonglist()
-})
-
 function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
   !isShow && uni.navigateBack()
 }
+
+onReachBottom(() => {
+  songlist.length !== total && fetchSonglist()
+})
 
 async function fetchSonglist() {
   const { playlists, total: _total } = await getSonglist(songlist.length, limit)

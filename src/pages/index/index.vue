@@ -1,7 +1,7 @@
 <template>
-  <view class="min-h-screen bg-black-2 flex flex-col justify-stretch">
-    <Navbar />
+  <Navbar />
 
+  <view class="min-h-screen bg-black-2 flex flex-col justify-stretch">
     <NavTitle
       :pages="pages"
       :current-page="currentPage"
