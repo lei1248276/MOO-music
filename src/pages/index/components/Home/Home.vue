@@ -8,6 +8,8 @@
 
     <NewSong />
 
+    <NewAlbum />
+
     <view
       v-for="item in 100"
       :key="item"
@@ -22,4 +24,5 @@ import Carousel from './components/Carousel/Carousel.vue'
 import Recommend from './components/Recommend/Recommend.vue'
 import NewSonglist from './components/NewSonglist/NewSonglist.vue'
 import NewSong from './components/NewSong/NewSong.vue'
+import NewAlbum from './components/NewAlbum/NewAlbum.vue'
 </script>

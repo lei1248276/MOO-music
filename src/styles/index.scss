@@ -10,4 +10,16 @@
       url("data:image/svg+xml,%3Csvg width='50' height='50' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' fill='%23959292' font-family='system-ui, sans-serif' text-anchor='middle' dominant-baseline='middle'%3EMOO%3C/text%3E%3C/svg%3E")
       no-repeat center/100%;
   }
+
+  .mid{
+    @apply absolute top-[50%] left-[50%] transform-x-[-50%] translate-y-[-50%]
+  }
+
+  .y-mid{
+    @apply absolute top-[50%] translate-y-[-50%]
+  }
+
+  .x-mid{
+    @apply absolute left-[50%] translate-x-[-50%]
+  }
 }
