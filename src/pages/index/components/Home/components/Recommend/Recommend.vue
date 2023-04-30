@@ -43,11 +43,13 @@ import { shuffle } from '@/utils/util'
 
 const recommendList = shallowRef<Recommend[]>([])
 
-;(async function fetchRecommend() {
+fetchRecommend()
+
+async function fetchRecommend() {
   const { result } = await getRecommend(10)
 
   recommendList.value = shuffle(result).slice(0, 3)
-})()
+}
 </script>
 
 <style scoped lang="scss">

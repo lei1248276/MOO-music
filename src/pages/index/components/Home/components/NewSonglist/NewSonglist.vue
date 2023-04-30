@@ -14,10 +14,12 @@ import { rangeRandom } from '@/utils/util'
 
 const newSonglist = shallowRef<Songlist[]>([])
 
-;(async function fetchNewSonglist() {
+fetchNewSonglist()
+
+async function fetchNewSonglist() {
   const { playlists } = await getNewSonglist(rangeRandom(0, 100), 4)
   console.log('🚀 ~ file: NewSonglist.vue:17 ~ fetchNewSonglist ~ playlists:', playlists)
 
   newSonglist.value = playlists
-})()
+}
 </script>

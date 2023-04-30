@@ -35,15 +35,17 @@ import type { Banner } from '@/api/interface/Banner'
 const bannerList = shallowRef<Banner[]>([])
 const currentIndex = ref(0)
 
-;(async function fetchBanner() {
-  const { banners } = await getBanner(1)
-  bannerList.value = banners
-
-  console.log('🚀 ~ file: Carousel.vue:40 ~ fetchBanner ~ banners:', banners)
-})()
+fetchBanner()
 
 function onChange({ detail: { current }}: SwiperOnChangeEvent) {
   // console.log('🚀 ~ file: Carousel.vue:42 ~ onChange ~ e:', current)
   currentIndex.value = current
+}
+
+async function fetchBanner() {
+  const { banners } = await getBanner(1)
+  bannerList.value = banners
+
+  console.log('🚀 ~ file: Carousel.vue:40 ~ fetchBanner ~ banners:', banners)
 }
 </script>
