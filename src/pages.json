@@ -7,7 +7,7 @@
 			}
 		},
 		{
-			"path": "pages/index/songlist/songlist",
+			"path": "pages/index/songlist",
 			"style": {
 				"navigationStyle": "custom",
 				"onReachBottomDistance": 1000
