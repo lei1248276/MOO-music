@@ -2,6 +2,7 @@
   <Subtitle
     title="MOO Songlist_歌单"
     clickable
+    url="./songlist/songlist"
   />
 
   <Songlist :songlist="newSonglist" />

@@ -5,11 +5,20 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/index/songlist/songlist",
+			"style": {
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 1000
+			}
 		}
 	],
 	"globalStyle": {
 		"app-plus": {
-			"background": "#1a191b"
+			"background": "#1a191b",
+			"animationType": "slide-in-right",
+			"animationDuration": "200"
 		}
 	}
 }

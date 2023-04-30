@@ -14,4 +14,8 @@ onHide(() => {
 @import '@/styles/index.scss';
 
 @import '@/styles/iconfont/iconfont.css';
+
+#app{
+  background-color: #1a191b;
+}
 </style>
