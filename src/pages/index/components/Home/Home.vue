@@ -1,5 +1,5 @@
 <template>
-  <view class="h-full px-[28rpx] overflow-y-auto">
+  <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-20">
     <Carousel />
 
     <Recommend />
@@ -10,12 +10,7 @@
 
     <NewAlbum />
 
-    <view
-      v-for="item in 100"
-      :key="item"
-    >
-      {{ item }}
-    </view>
+    <SearchTags />
   </view>
 </template>
 
@@ -25,4 +20,5 @@ import Recommend from './components/Recommend/Recommend.vue'
 import NewSonglist from './components/NewSonglist/NewSonglist.vue'
 import NewSong from './components/NewSong/NewSong.vue'
 import NewAlbum from './components/NewAlbum/NewAlbum.vue'
+import SearchTags from './components/SearchTags/SearchTags.vue'
 </script>
