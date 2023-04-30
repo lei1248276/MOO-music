@@ -4,7 +4,7 @@
     hover-stay-time="100"
     hover-class="bg-grey-1/10"
   >
-    <Image
+    <JImage
       :src="song.al.picUrl"
       width="140rpx"
       height="140rpx"

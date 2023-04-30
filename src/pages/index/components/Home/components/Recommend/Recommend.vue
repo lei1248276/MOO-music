@@ -1,7 +1,7 @@
 <template>
   <view class="w-auto h-[140rpx] mt-[50rpx] mx-auto rounded-[60rpx] flex items-center bg-black-1">
     <view class="flex-1 relative flex justify-start h-full">
-      <Image
+      <JImage
         v-for="(item, index) in recommendList"
         :key="item.id"
         :class="`absolute bottom-0 img-${index + 1}`"

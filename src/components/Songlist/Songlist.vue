@@ -9,7 +9,7 @@
       class="w-[48%] h-[420rpx] rounded-[20rpx] font-bold text-white-1 relative"
       @click="onSonglist(item)"
     >
-      <Image
+      <JImage
         :src="item.coverImgUrl"
         width="100%"
         height="322rpx"

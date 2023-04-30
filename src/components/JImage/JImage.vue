@@ -1,6 +1,6 @@
 <template>
   <view
-    class="Image-wrapper overflow-hidden"
+    class="overflow-hidden"
     :style="{ width, height, 'border-radius': radius }"
   >
     <view

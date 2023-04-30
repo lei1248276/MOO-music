@@ -15,7 +15,7 @@
       :key="index"
       skip-hidden-item-layout
     >
-      <Image
+      <JImage
         :id="index"
         :src="item.pic"
         :passive="currentIndex === index"
