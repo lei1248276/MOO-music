@@ -15,7 +15,8 @@ onHide(() => {
 
 @import '@/styles/iconfont/iconfont.css';
 
-#app{
+page{
+  min-height: 100vh;
   background-color: #1a191b;
 }
 </style>

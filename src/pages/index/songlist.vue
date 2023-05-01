@@ -14,7 +14,7 @@
     <!-- #endif -->
     <Songlist
       :songlist="songlist"
-      class="bg-black-2 px-[28rpx] pb-28"
+      class="min-h-screen bg-black-2 px-[28rpx] pb-28"
     />
     <!-- #ifdef H5 -->
   </uni-transition>
