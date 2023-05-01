@@ -5,11 +5,12 @@
     hover-class="bg-grey-1/10"
   >
     <JImage
+      class="mr-5"
       :src="song.al.picUrl"
       width="140rpx"
       height="140rpx"
       radius="12rpx"
-      class="mr-5"
+      lazy-load
     />
 
     <view class="flex-1 flex flex-col justify-around h-full">

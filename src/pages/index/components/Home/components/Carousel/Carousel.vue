@@ -18,7 +18,7 @@
       <JImage
         :id="index"
         :src="item.pic"
-        :passive="currentIndex === index"
+        :lazy-load="currentIndex !== index"
         width="100%"
         height="100%"
         radius="14rpx"

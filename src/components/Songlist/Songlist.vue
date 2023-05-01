@@ -14,6 +14,7 @@
         width="100%"
         height="322rpx"
         radius="20rpx"
+        lazy-load
       />
       <uni-icons
         custom-prefix="iconfont"

@@ -9,10 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Image: typeof import('./src/components/Image/Image.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
-    Playlist: typeof import('./src/components/Playlist/Playlist.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Song: typeof import('./src/components/Song/Song.vue')['default']

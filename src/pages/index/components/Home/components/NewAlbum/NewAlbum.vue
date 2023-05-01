@@ -15,11 +15,13 @@
         width="300rpx"
         height="300rpx"
         radius="12rpx"
+        lazy-load
       />
       <JImage
         src="/static/cd.png"
         width="50rpx"
         height="200rpx"
+        lazy-load
       />
     </view>
 

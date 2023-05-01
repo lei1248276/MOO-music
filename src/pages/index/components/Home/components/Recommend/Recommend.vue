@@ -9,7 +9,6 @@
         width="180rpx"
         :height="index === 1 ? '120%' : '100%'"
         radius="8rpx"
-        passive
       />
     </view>
 
