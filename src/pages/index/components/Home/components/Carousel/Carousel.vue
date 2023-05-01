@@ -1,7 +1,7 @@
 <template>
   <swiper
     class="rounded-[14rpx] overflow-hidden"
-    :autoplay="true"
+    :autoplay="autoplay"
     :duration="400"
     :interval="4000"
     circular
@@ -32,10 +32,14 @@ import { getBanner } from '@/api/home'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import type { Banner } from '@/api/interface/Banner'
 
+const autoplay = ref(false)
 const bannerList = shallowRef<Banner[]>([])
 const currentIndex = ref(0)
 
 fetchBanner()
+
+onShow(() => { autoplay.value = true })
+onHide(() => { autoplay.value = false })
 
 function onChange({ detail: { current }}: SwiperOnChangeEvent) {
   // console.log('🚀 ~ file: Carousel.vue:42 ~ onChange ~ e:', current)
