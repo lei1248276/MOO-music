@@ -2,7 +2,7 @@
   <Navbar
     title="歌单列表"
     left-arrow
-    @clickLeft="isShowPage = false"
+    @click-left-icon="isShowPage = false"
   />
 
   <!-- #ifdef H5 -->

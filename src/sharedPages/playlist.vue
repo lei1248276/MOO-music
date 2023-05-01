@@ -2,7 +2,7 @@
   <Navbar
     :title="title"
     left-arrow
-    @clickLeft="isShowPage = false"
+    @click-left-icon="isShowPage = false"
   />
 
   <template v-if="playlist">

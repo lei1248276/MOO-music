@@ -8,16 +8,30 @@
     color="#fffeff"
     :border="false"
     fixed
+    status-bar
+    @clickLeft="onClickLeft"
+    @clickRight="onClickRight"
   />
 </template>
 
 <script setup lang="ts">
 import type { UniNavBarProps } from '@uni-helper/uni-ui-types'
 interface NavBarProps extends UniNavBarProps {
-  clickLeft?:() => void
-  clickRight?: () => void
   leftArrow?: boolean
 }
 
 defineProps<NavBarProps>()
+const emit = defineEmits(['clickLeftIcon', 'clickRightIcon'])
+
+function onClickLeft() {
+  emit('clickLeftIcon')
+
+  // #ifndef H5
+  uni.navigateBack()
+  // #endif
+}
+
+function onClickRight() {
+  emit('clickRightIcon')
+}
 </script>
