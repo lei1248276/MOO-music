@@ -17,6 +17,6 @@ onHide(() => {
 
 page{
   min-height: 100vh;
-  background-color: #1a191b;
+  background-color: #1a191b !important;
 }
 </style>

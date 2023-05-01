@@ -1,6 +1,7 @@
 <template>
   <view
     class="overflow-hidden"
+    :class="customClass"
     :style="{ width, height, 'border-radius': radius }"
   >
     <view
@@ -36,6 +37,7 @@ interface ImgProps extends ImageProps {
   fadeShow?: ImageProps['fadeShow']
   showMenuByLongpress?: ImageProps['showMenuByLongpress']
   draggable?: ImageProps['draggable']
+  customClass?: string
 }
 
 const props = withDefaults(defineProps<ImgProps>(), {
@@ -45,7 +47,8 @@ const props = withDefaults(defineProps<ImgProps>(), {
   fadeShow: true,
   webp: false,
   showMenuByLongpress: false,
-  draggable: true
+  draggable: true,
+  customClass: ''
 })
 
 const loading = ref(false)

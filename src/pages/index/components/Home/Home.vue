@@ -1,5 +1,5 @@
 <template>
-  <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-20">
+  <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-28">
     <Carousel />
 
     <Recommend />

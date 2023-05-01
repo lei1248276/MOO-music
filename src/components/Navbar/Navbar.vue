@@ -3,7 +3,7 @@
     v-bind="$attrs"
     class="font-bold"
     title="MOO"
-    :left-icon="$props.leftArrow ? 'left' : undefined"
+    :left-icon="$props.leftArrow ? 'back' : undefined"
     background-color="#1a191b"
     color="#fffeff"
     :border="false"
