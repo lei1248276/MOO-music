@@ -5,10 +5,10 @@ import type { SongResponse } from '@/api/interface/Song'
 
 // * 获取指定歌单歌曲列表
 export function getPlaylist(id: number) {
-  return request.get<PlaylistResponse>(`/playlist/detail?id=${id}`)
+  return request.get<any, PlaylistResponse>(`/playlist/detail?id=${id}`)
 }
 
 // * 查询歌曲信息（可以是多首以 "," 分割）
 export function getSongs(ids: string | number) {
-  return request.get<SongResponse>(`/song/detail?ids=${ids}`)
+  return request.get<any, SongResponse>(`/song/detail?ids=${ids}`)
 }

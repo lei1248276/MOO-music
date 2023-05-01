@@ -12,6 +12,13 @@
 				"navigationStyle": "custom",
 				"onReachBottomDistance": 1000
 			}
+		},
+		{
+			"path": "sharedPages/playlist",
+			"style": {
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 1000
+			}
 		}
 	],
 	"globalStyle": {
