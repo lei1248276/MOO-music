@@ -87,6 +87,7 @@
     "triggerRef": true,
     "unref": true,
     "useAttrs": true,
+    "useAudioStore": true,
     "useCssModule": true,
     "useCssVars": true,
     "useSlots": true,

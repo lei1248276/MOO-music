@@ -1,9 +1,9 @@
-export interface SongUrlResponse {
-  data: SongUrl[]
+export interface SongURLResponse {
+  data: SongURL[]
   code: number
 }
 
-export interface SongUrl {
+export interface SongURL {
   id: number
   url: string
   br: number
