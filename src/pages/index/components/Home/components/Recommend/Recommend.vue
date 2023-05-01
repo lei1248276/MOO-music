@@ -4,8 +4,8 @@
       <JImage
         v-for="(item, index) in recommendList"
         :key="item.id"
-        :class="`absolute bottom-0 img-${index + 1}`"
-        :src="recommendList[index].picUrl"
+        :custom-class="'absolute bottom-0 ' + 'img-' + (index + 1)"
+        :src="item.picUrl"
         width="180rpx"
         :height="index === 1 ? '120%' : '100%'"
         radius="8rpx"
@@ -21,16 +21,7 @@
           个性好歌推荐
         </text>
       </view>
-      <uni-icons
-        custom-prefix="iconfont"
-        type="icon-play"
-        class="!text-[80rpx] !text-yellow-1"
-      />
-      <!-- <icon
-        class="text-yellow-1 iconfont {{ isPlay ? 'icon-pause' : 'icon-play' }}"
-        style="font-size: 80rpx"
-        bind:tap="onPlay"
-      /> -->
+      <JIcon custom-class="icon-play text-[80rpx] text-yellow-1" />
     </view>
   </view>
 </template>

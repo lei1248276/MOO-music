@@ -9,11 +9,7 @@
       :input-border="false"
       :styles="{ backgroundColor: '#010001', color: '#fce939', disableColor: '#eee', borderColor: 'transparent' }"
     />
-    <uni-icons
-      custom-prefix="iconfont"
-      type="icon-search"
-      class="!text-[60rpx] !text-yellow-1 absolute top-[50%] translate-y-[-50%] ml-1"
-    />
+    <JIcon custom-class="icon-search text-[60rpx] text-yellow-1 absolute top-[50%] translate-y-[-50%] ml-1" />
   </view>
 </template>
 

@@ -30,16 +30,15 @@
       class="w-[44rpx] h-[70rpx] flex items-end"
     >
       <i
-        v-for="item in 4"
-        :key="item"
-        :class="`w-[25%] mr-[2rpx] bg-white-1 wave${item} ` + (isPlay ? 'run' : 'paused')"
+        v-for="index in 4"
+        :key="index"
+        class="w-[25%] mr-[2rpx] bg-white-1"
+        :class="'wave' + index + (isPlay ? ' run' : ' paused')"
       />
     </view>
-    <uni-icons
+    <JIcon
       v-else
-      custom-prefix="iconfont"
-      type="icon-more"
-      class="!text-grey-1 !text-[44rpx]"
+      custom-class="icon-more text-grey-1 text-[44rpx]"
     />
   </view>
 </template>

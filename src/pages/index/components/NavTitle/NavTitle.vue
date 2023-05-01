@@ -2,10 +2,9 @@
   <view class="bg-black-2 text-white-1 text-[70rpx] px-[28rpx] pb-[20rpx]">
     <view class="flex justify-between items-center">
       <text>{{ isHome ? 'DISCOVER' : 'PROFILE' }}</text>
-      <uni-icons
-        custom-prefix="iconfont"
+      <JIcon
         :type="isHome ? 'icon-user' : 'icon-setting'"
-        class="!text-white-1 !text-[60rpx]"
+        custom-class="text-white-1 text-[60rpx]"
       />
     </view>
 

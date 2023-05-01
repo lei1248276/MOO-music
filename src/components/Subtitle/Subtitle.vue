@@ -13,11 +13,10 @@
     </slot>
 
     <slot name="icon">
-      <uni-icons
-        custom-prefix="iconfont"
+      <JIcon
         :type="icon"
-        class="!text-grey-1"
-        :style="{ fontSize: iconSize + ' !important' }"
+        :size="iconSize"
+        custom-class="text-grey-1"
       />
     </slot>
   </view>

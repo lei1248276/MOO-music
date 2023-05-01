@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
