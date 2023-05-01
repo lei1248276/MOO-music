@@ -16,7 +16,8 @@
       <uni-icons
         custom-prefix="iconfont"
         :type="icon"
-        class="!text-grey-1 !text-[40rpx]"
+        class="!text-grey-1"
+        :style="{ fontSize: iconSize + ' !important' }"
       />
     </slot>
   </view>
@@ -26,6 +27,7 @@
 interface Props {
   title?: string
   icon?: `icon-${string}`
+  iconSize?: string
   url?: string
   clickable?: boolean
   customClass?: string
@@ -34,6 +36,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   title: '',
   icon: 'icon-arrow',
+  iconSize: '40rpx',
   url: '',
   clickable: false,
   customClass: ''
