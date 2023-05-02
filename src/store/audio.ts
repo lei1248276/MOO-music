@@ -16,18 +16,12 @@ export const useAudioStore = defineStore('audio', () => {
   const currentTime = ref(0) // * 当前歌曲播放时间
 
   const playlist = shallowRef<Playlist>()
-  const songs = shallowRef<Song[]>()
+  const songs = shallowRef<Song[]>([])
   const currentSongInfo = shallowRef<SongInfo>()
   const currentSongIndex = ref(-1)
 
-  // function setIsPlay(is: boolean) { isPlay.value = is }
-  // function setDuration(time: number) { duration.value = time }
-  // function setCurrentTime(time: number) { currentTime.value = time }
-  // function setPlaylist(list: Playlist) { playlist.value = list }
-  // function setSongs(list: Song[]) { songs.value = list }
-
   function setPreSong() {
-    if (!songs.value) return
+    if (!songs.value.length) return
 
     const last = songs.value.length - 1
     const currentIndex = currentSongIndex
@@ -37,7 +31,7 @@ export const useAudioStore = defineStore('audio', () => {
   }
 
   function setNextSong() {
-    if (!songs.value) return
+    if (!songs.value.length) return
 
     const last = songs.value.length - 1
     const currentIndex = currentSongIndex
@@ -55,7 +49,10 @@ export const useAudioStore = defineStore('audio', () => {
 
     if (!urlInfo.url) {
       (audio.stop(), toast.fail('播放地址失效'))
-      return (currentSongInfo.value = undefined)
+      currentSongInfo.value = undefined
+      isPlay.value = false
+      duration.value = 0
+      return
     }
 
     currentSongInfo.value = { song, urlInfo }
@@ -68,7 +65,7 @@ export const useAudioStore = defineStore('audio', () => {
   }
 
   function toggle() {
-    if (!currentSongInfo) return
+    if (!currentSongInfo.value) return
 
     isPlay.value ? audio.pause() : audio.play()
   }
