@@ -3,6 +3,7 @@
     class="overflow-hidden"
     :class="customClass"
     :style="{ width, height, 'border-radius': radius }"
+    @click="$emit('click')"
   >
     <view
       v-if="!loaded"
@@ -50,6 +51,7 @@ const props = withDefaults(defineProps<ImgProps>(), {
   draggable: true,
   customClass: ''
 })
+defineEmits(['click'])
 
 const loading = ref(false)
 const loaded = ref(false)

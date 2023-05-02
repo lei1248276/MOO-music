@@ -3,6 +3,7 @@
     class="w-auto h-[140rpx] mb-5 flex justify-center items-center"
     hover-stay-time="100"
     hover-class="bg-grey-1/10"
+    @click="$emit('click')"
   >
     <JImage
       class="mr-5"
@@ -51,6 +52,7 @@ defineProps<{
   isRun: boolean
   isPlay: boolean
 }>()
+defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">
