@@ -1,5 +1,5 @@
 <template>
-  <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-28">
+  <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
     <Carousel />
 
     <Recommend />
