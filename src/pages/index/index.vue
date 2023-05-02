@@ -23,6 +23,8 @@
       </swiper-item>
     </swiper>
   </view>
+
+  <PlayController />
 </template>
 
 <script setup lang="ts">

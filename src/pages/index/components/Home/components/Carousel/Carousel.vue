@@ -1,7 +1,7 @@
 <template>
   <swiper
     class="rounded-[14rpx] overflow-hidden"
-    :autoplay="false"
+    :autoplay="autoplay"
     :duration="400"
     :interval="4000"
     circular

@@ -6,12 +6,12 @@
   />
 
   <Song
-    v-for="song in songs"
+    v-for="(song, index) in songs"
     :key="song.id"
     :song="song"
-    :is-play="false"
-    :is-run="false"
-    @click="onSong(song)"
+    :is-play="audioStore.isPlay"
+    :is-run="audioStore.currentSongInfo?.song.id === song.id"
+    @click="onSong(index)"
   />
 </template>
 
@@ -20,28 +20,43 @@ import { getRecommend, getPlaylist, getNewSong } from '@/api/home'
 import type { Playlist } from '@/api/interface/Playlist'
 import type { Song } from '@/api/interface/Song'
 
+const audioStore = useAudioStore()
+
 const playlist = shallowRef<Playlist>()
-const songs = shallowRef<Song[]>([])
+const songs = shallowReactive<Song[]>([])
 
 fetchNewSong()
 
 function toPlaylist() {
-
+  uni.navigateTo({
+    url: `/sharedPages/playlist`,
+    success: (res) => { res.eventChannel.emit('acceptPlaylist', playlist.value) },
+    fail: (err) => { console.error(err) }
+  })
 }
 
-function onSong(song: Song) {
-  console.log('🚀 ~ file: NewSong.vue:43 ~ onSong ~ song:', song)
+function onSong(index: number) {
+  console.log('🚀 ~ file: NewSong.vue:43 ~ onSong ~ song:', songs[index])
+  if (audioStore.playlist !== playlist.value) {
+    audioStore.playlist = playlist.value
+  }
+
+  if (audioStore.songs !== songs || audioStore.songs.length !== songs.length) {
+    audioStore.songs = songs
+  }
+
+  audioStore.setCurrentSong(songs[index], index)
 }
 
 async function fetchNewSong() {
   // const data = await getNewSong()
-  // console.log('%c🚀 ~ method: fetchNewSong ~', 'color: #F25F5C;font-weight: bold;', data)
+  // console.log('🚀 ~ file: NewSong.vue:53 ~ fetchNewSong ~ data:', data)
   const { result: [{ id }] } = await getRecommend(1)
   const { playlist: _playlist } = await getPlaylist(id)
   const tracks = _playlist.tracks ? _playlist.tracks.slice(0, 4) : []
   console.log('🚀 ~ file: NewSong.vue:31 ~ fetchNewSong ~ tracks:', tracks)
 
   playlist.value = _playlist
-  songs.value = tracks
+  songs.push(...tracks)
 }
 </script>

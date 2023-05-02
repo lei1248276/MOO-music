@@ -52,18 +52,20 @@
         </Subtitle>
 
         <Song
-          v-for="song in songs"
+          v-for="(song, index) in songs"
           :key="song.id"
           :song="song"
-          :is-play="false"
-          :is-run="false"
-          @click="onSong(song)"
+          :is-play="audioStore.isPlay"
+          :is-run="audioStore.currentSongInfo?.song.id === song.id"
+          @click="onSong(index)"
         />
       </view>
       <!-- #ifdef H5 -->
     </uni-transition>
     <!-- #endif -->
   </template>
+
+  <PlayController />
 </template>
 
 <script setup lang="ts">
@@ -75,6 +77,8 @@ import { getPlaylist } from '@/api/playlist'
 import { getSongs } from '@/api/playlist'
 import Cover from './components/Cover/Cover.vue'
 import Creator from './components/Creator/Creator.vue'
+
+const audioStore = useAudioStore()
 
 const isShowPage = ref(true)
 const title = ref('')
@@ -117,8 +121,17 @@ onReachBottom(() => {
   fetchSongs()
 })
 
-function onSong(song: Song) {
-  console.log('🚀 ~ file: playlist.vue:121 ~ onSong ~ song:', song)
+function onSong(index: number) {
+  console.log('🚀 ~ file: playlist.vue:121 ~ onSong ~ song:', songs[index])
+  if (audioStore.playlist !== playlist.value) {
+    audioStore.playlist = playlist.value
+  }
+
+  if (audioStore.songs !== songs || audioStore.songs.length !== songs.length) {
+    audioStore.songs = songs
+  }
+
+  audioStore.setCurrentSong(songs[index], index)
 }
 
 async function fetchSongs() {
