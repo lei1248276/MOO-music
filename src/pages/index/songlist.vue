@@ -5,20 +5,23 @@
     @click-left-icon="isShowPage = false"
   />
 
-  <!-- #ifdef H5 -->
-  <uni-transition
-    :mode-class="['slide-right']"
-    :show="isShowPage"
-    @change="onShowPage"
-  >
-    <!-- #endif -->
-    <Songlist
-      :songlist="songlist"
-      class="min-h-screen bg-black-2 px-[28rpx] pb-28"
-    />
+  <template v-if="songlist.length">
+    <!-- ! BUG：避免'uni-transition'内部插槽重新渲染，'uni-transition'的状态会重置（https://github.com/dcloudio/uni-app/issues/3412） -->
     <!-- #ifdef H5 -->
-  </uni-transition>
+    <uni-transition
+      :mode-class="['slide-right']"
+      :show="isShowPage"
+      @change="onShowPage"
+    >
+      <!-- #endif -->
+      <Songlist
+        :songlist="songlist"
+        class="min-h-screen bg-black-2 px-[28rpx] pb-28"
+      />
+    <!-- #ifdef H5 -->
+    </uni-transition>
   <!-- #endif -->
+  </template>
 </template>
 
 <script setup lang="ts">
