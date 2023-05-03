@@ -4,7 +4,7 @@
     class="iconfont"
     :class="type + ' ' + customClass"
     :style="{ ...(size ? {fontSize: size} : {}), ...(color ? {color: color} : {}) }"
-    @click="$emit('click')"
+    @click.stop="$emit('click')"
   />
 </template>
 

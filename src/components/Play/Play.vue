@@ -31,7 +31,7 @@
         />
 
         <template v-if="currentView === index">
-          <!-- <Lyric :song-id="song.id" /> -->
+          <Lyric :song-id="song.id" />
 
           <SongInfo
             :tags="audioStore?.playlist?.tags || []"
@@ -67,7 +67,7 @@
 import type { Song } from '@/api/interface/Song'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import SongInfo from './components/SongInfo/SongInfo.vue'
-// import Lyric from './components/Lyric/Lyric.vue'
+import Lyric from './components/Lyric/Lyric.vue'
 
 const audioStore = useAudioStore()
 
