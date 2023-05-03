@@ -13,10 +13,12 @@ declare module '@vue/runtime-core' {
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
+    Play: typeof import('./src/components/Play/Play.vue')['default']
     PlayController: typeof import('./src/components/PlayController/PlayController.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Song: typeof import('./src/components/Song/Song.vue')['default']
+    SongInfo: typeof import('./src/components/Play/SongInfo/SongInfo.vue')['default']
     Songlist: typeof import('./src/components/Songlist/Songlist.vue')['default']
     Subtitle: typeof import('./src/components/Subtitle/Subtitle.vue')['default']
   }

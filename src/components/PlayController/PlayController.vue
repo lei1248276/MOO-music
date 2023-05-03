@@ -1,6 +1,7 @@
 <template>
   <view
-    class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[2%] left-[6%] z-50 box-border flex justify-between items-center bg-black-1"
+    v-show="hidden"
+    class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[2%] left-[6%] z-[9999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
     :style="{ width: area + 'rpx'}"
   >
     <Countdown />
@@ -23,6 +24,7 @@
           :height="size + 'rpx'"
           class="will-change-transform"
           :class="audioStore.isPlay ? 'play-controller--play' : 'play-controller--pause'"
+          @click="onShowPlay"
         />
       </movable-view>
     </movable-area>
@@ -39,22 +41,19 @@
     />
   </view>
 
-  <!-- <page-container
-    show="{{ isShowPlay }}"
-    position="right"
-    overlay="{{ false }}"
-    custom-style="background-color: #1a191b; border: none"
-    @afterleave="onHidePlay"
+  <uni-popup
+    ref="popup"
+    type="right"
+    mask-background-color="transparent"
+    class="play-popup"
   >
-    <Play
-      wx:if="{{ isShowPlay }}"
-      bind:back="onHidePlay"
-    />
-  </page-container> -->
+    <Play />
+  </uni-popup>
 </template>
 
 <script setup lang="ts">
 import type { MovableViewOnChangeEvent } from '@uni-helper/uni-app-types'
+import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 
 const audioStore = useAudioStore()
 
@@ -62,7 +61,20 @@ const area = 450
 const size = 130
 const pivot = (area / 2) - (size / 2) // * 中心点
 let moved = -1 // * 被移动的距离
+
+const hidden = ref(true)
 const x = ref(pivot)
+const popup = ref<UniPopupInstance>()
+
+onShow(() => { hidden.value = true })
+onHide(() => { hidden.value = false })
+
+let isShowPlay = false
+function onShowPlay() {
+  if (!audioStore.currentSongInfo) return
+  isShowPlay ? popup.value?.close?.() : popup.value?.open?.()
+  isShowPlay = !isShowPlay
+}
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {
   if (!source) return
@@ -97,6 +109,16 @@ function onMoveEnd() {
   }
 }
 </script>
+
+<style lang="scss">
+// * 为了覆盖Navbar和兼容多平台
+.play-popup{
+  z-index: 999 !important;
+  .uni-popup{
+    z-index: 999 !important;
+  }
+}
+</style>
 
 <style scoped lang="scss">
 .play-controller--play {
