@@ -24,20 +24,20 @@ export const useAudioStore = defineStore('audio', () => {
     if (!songs.value.length) return
 
     const last = songs.value.length - 1
-    const currentIndex = currentSongIndex
-    const preIndex = currentIndex.value === 0 ? last : currentIndex.value - 1
+    const currentIndex = currentSongIndex.value
+    const preIndex = currentIndex === 0 ? last : currentIndex - 1
     setCurrentSong(songs.value[preIndex], preIndex)
-    // previousHooks.emit()
+    uni.$emit('onPreSong', preIndex)
   }
 
   function setNextSong() {
     if (!songs.value.length) return
 
     const last = songs.value.length - 1
-    const currentIndex = currentSongIndex
-    const nextIndex = currentIndex.value === last ? 0 : currentIndex.value + 1
+    const currentIndex = currentSongIndex.value
+    const nextIndex = currentIndex === last ? 0 : currentIndex + 1
     setCurrentSong(songs.value[nextIndex], nextIndex)
-    // nextHooks.emit()
+    uni.$emit('onNextSong', nextIndex)
   }
 
   async function setCurrentSong(song: Song, index: number) {
