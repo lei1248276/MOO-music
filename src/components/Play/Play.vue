@@ -30,8 +30,8 @@
           height="100%"
         />
 
-        <!-- <template v-if="currentView === index">
-          <Lyric :song-id="song.id" />
+        <template v-if="currentView === index">
+          <!-- <Lyric :song-id="song.id" /> -->
 
           <SongInfo
             :tags="audioStore?.playlist?.tags || []"
@@ -40,7 +40,7 @@
             :song-id="song.id"
             catch:menu="onShowPlaylist"
           />
-        </template> -->
+        </template>
       </swiper-item>
     </swiper>
 
@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import type { Song } from '@/api/interface/Song'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
-// import SongInfo from './components/SongInfo/SongInfo.vue'
+import SongInfo from './components/SongInfo/SongInfo.vue'
 // import Lyric from './components/Lyric/Lyric.vue'
 
 const audioStore = useAudioStore()
