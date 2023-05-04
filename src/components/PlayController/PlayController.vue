@@ -41,13 +41,17 @@
     />
   </view>
 
+  <!-- * 兼容小程序（因为uni-popup会自动打开） -->
   <uni-popup
+    v-if="audioStore.currentSongInfo || audioStore.songs.length"
     ref="popup"
     type="right"
-    mask-background-color="transparent"
     class="play-popup"
   >
-    <Play />
+    <Play
+      v-if="isShowPlay"
+      @back="onShowPlay"
+    />
   </uni-popup>
 </template>
 
@@ -69,11 +73,20 @@ const popup = ref<UniPopupInstance>()
 onShow(() => { hidden.value = true })
 onHide(() => { hidden.value = false })
 
-let isShowPlay = false
+const isShowPlay = ref(false)
 function onShowPlay() {
-  if (!audioStore.currentSongInfo) return
-  isShowPlay ? popup.value?.close?.() : popup.value?.open?.()
-  isShowPlay = !isShowPlay
+  if (!audioStore.currentSongInfo || !popup.value) return
+
+  if (!isShowPlay.value) {
+    // @ts-ignore
+    popup.value.closeMask?.() // ! 强行关闭mask
+    popup.value.open?.()
+    isShowPlay.value = true
+    return
+  }
+
+  popup.value.close?.()
+  setTimeout(() => { isShowPlay.value = false }, 1000) // * 等待close动画结束（模拟closeFinish）
 }
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {

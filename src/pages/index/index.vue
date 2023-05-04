@@ -9,19 +9,22 @@
 
     <Search />
 
-    <swiper
-      class="bg-black-2 grow"
-      :duration="300"
-      @change="onSwiper"
-    >
-      <swiper-item skip-hidden-item-layout>
-        <Home />
-      </swiper-item>
+    <!-- * 解决小程序真机上swiper使用flex-grow无效的问题 -->
+    <view class="bg-black-2 grow relative">
+      <swiper
+        class="!h-full absolute top-0 left-0 right-0 bottom-0"
+        :duration="300"
+        @change="onSwiper"
+      >
+        <swiper-item skip-hidden-item-layout>
+          <Home />
+        </swiper-item>
 
-      <swiper-item skip-hidden-item-layout>
-        <Profile />
-      </swiper-item>
-    </swiper>
+        <swiper-item skip-hidden-item-layout>
+          <Profile />
+        </swiper-item>
+      </swiper>
+    </view>
   </view>
 
   <PlayController />
