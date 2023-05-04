@@ -9,10 +9,14 @@ onLaunch(() => {
   // @ts-ignore
   audio.autoplay = true
 
-  audio.onCanplay(() => {
+  // * 小程序的BUG：需要多次获取
+  function getDuration() {
+    if (!audio.duration) return setTimeout(() => { getDuration() }, 333)
+
     console.log('onCanplay.duration: ', audio.duration)
     audioStore.duration = audio.duration
-  })
+  }
+  audio.onCanplay(getDuration)
 
   audio.onPlay(() => {
     console.log('onPlay: ')
