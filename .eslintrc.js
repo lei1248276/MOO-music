@@ -135,7 +135,7 @@ module.exports = {
     'no-self-compare': 2,
     'no-sequences': 2,
     'no-shadow-restricted-names': 2,
-    'no-spaced-func': 2,
+    'no-spaced-func': 0,
     'no-sparse-arrays': 2,
     'no-this-before-super': 2,
     'no-throw-literal': 2,

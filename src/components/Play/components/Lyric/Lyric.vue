@@ -1,5 +1,5 @@
 <template>
-  <view class="lyric w-[80%] mid top-[30%] text-center text-[50rpx] text-white-1 whitespace-pre-line">
+  <view class="lyric w-[80%] max-h-[50%] mid top-[30%] text-center text-[50rpx] text-white-1 whitespace-pre-line line-clamp-6">
     <template
       v-for="(item, index) in lyrics"
       :key="index"

@@ -1,7 +1,7 @@
 <template>
   <view class="w-screen h-screen relative">
     <view
-      class="fixed top-[44px] left-0 z-[999] flex items-center"
+      class="fixed top-[44px] left-0 z-10 flex items-center"
       :style="{ height: statusBarHeight + 'px'}"
     >
       <JIcon
@@ -25,7 +25,7 @@
         skip-hidden-item-layout
       >
         <JImage
-          custom-class="relative after:block after:content-[''] after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:bg-[rgba(0,0,0,.2)]"
+          custom-class="relative after:block after:content-[''] after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:bg-[rgba(0,0,0,.22)]"
           :src="song.al.picUrl"
           width="100%"
           height="100%"
@@ -39,22 +39,22 @@
             :name="song.name"
             :singers=" song.ar"
             :song-id="song.id"
-            catch:menu="onShowPlaylist"
+            @menu="isShowPlaylist = true"
           />
         </template>
       </swiper-item>
     </swiper>
 
-    <!-- <PlaylistPopup
-      wx:if="{{ songs }}"
-      is-show="{{ isShowPlaylist }}"
-      playlist="{{ playlist }}"
-      songs="{{ songs }}"
-      song="{{ playViews[currentView] }}"
-      current-index="{{ currentSongIndex }}"
-      bind:close="onShowPlaylist"
-      bind:change="updateView"
-    /> -->
+    <PlaylistPopup
+      v-if="isShowPlaylist"
+      :playlist="audioStore.playlist"
+      :songs="audioStore.songs"
+      :song="playViews[currentView]"
+      :is-play="audioStore.isPlay"
+      :current-index="audioStore.currentSongIndex"
+      @change="(song, index) => { audioStore.setCurrentSong(song, index); updateView() }"
+      @animation-finish="isShowPlaylist = false"
+    />
 
     <JIcon
       v-show="!audioStore.isPlay"
@@ -69,16 +69,17 @@ import type { Song } from '@/api/interface/Song'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
+import PlaylistPopup from './components/PlaylistPopup/PlaylistPopup.vue'
 
 defineEmits(['back'])
 
 const audioStore = useAudioStore()
 
+const statusBarHeight = ref(0)
 const currentView = ref(1) // * 当前显示的view索引
 const playViews = shallowReactive<Song[]>([]) // * 播放view对应playlist中的指针
-// const isShowPlaylist = ref(false)
+const isShowPlaylist = ref(false)
 
-const statusBarHeight = ref(0)
 uni.getSystemInfo({
   success({ statusBarHeight: height }) {
     height && (statusBarHeight.value = height)

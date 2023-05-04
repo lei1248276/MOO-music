@@ -68,7 +68,7 @@ let moved = -1 // * 被移动的距离
 
 const hidden = ref(true)
 const x = ref(pivot)
-const popup = ref<UniPopupInstance>()
+const popup = shallowRef<UniPopupInstance>()
 
 onShow(() => { hidden.value = true })
 onHide(() => { hidden.value = false })

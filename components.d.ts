@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
     Play: typeof import('./src/components/Play/Play.vue')['default']
     PlayController: typeof import('./src/components/PlayController/PlayController.vue')['default']
+    PlaylistPopup: typeof import('./src/components/Play/components/PlaylistPopup/PlaylistPopup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Song: typeof import('./src/components/Song/Song.vue')['default']

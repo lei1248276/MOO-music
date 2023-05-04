@@ -29,7 +29,7 @@
         </view>
         <JIcon
           custom-class="icon-menu text-[66rpx]"
-          @click="onMenu"
+          @click="$emit('menu')"
         />
       </view>
     </view>
@@ -46,12 +46,9 @@ defineProps<{
   singers: Song['ar']
   songId: number
 }>()
+defineEmits(['menu'])
 
 const isCollect = ref(false)
-
-function onMenu() {
-
-}
 
 function onCollect() {
 
