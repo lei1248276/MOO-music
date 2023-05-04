@@ -21,7 +21,11 @@
           个性好歌推荐
         </text>
       </view>
-      <JIcon custom-class="icon-play text-[80rpx] text-yellow-1" />
+      <JIcon
+        :type="isRun ? 'icon-pause' : 'icon-play'"
+        custom-class="text-[80rpx] text-yellow-1"
+        @click="onPlay"
+      />
     </view>
   </view>
 </template>
@@ -29,11 +33,30 @@
 <script setup lang="ts">
 import type { Recommend } from '@/api/interface/Recommend'
 import { getRecommend } from '@/api/home'
-import { shuffle } from '@/utils/util'
+import { getPlaylist } from '@/api/home'
+import { shuffle, rangeRandom } from '@/utils/util'
+
+const audioStore = useAudioStore()
 
 const recommendList = shallowRef<Recommend[]>([])
+const isRun = ref(false)
 
 fetchRecommend()
+
+async function onPlay() {
+  isRun.value = true
+
+  // * 随机获取推荐歌单中某一个
+  const randomIndex = rangeRandom(0, recommendList.value.length - 1)
+  const { id } = recommendList.value[randomIndex]
+  const { playlist } = await getPlaylist(id)
+
+  audioStore.playlist = playlist
+  audioStore.songs = playlist.tracks
+  await audioStore.setCurrentSong(playlist.tracks[0], 0)
+
+  isRun.value = false
+}
 
 async function fetchRecommend() {
   const { result } = await getRecommend(10)
