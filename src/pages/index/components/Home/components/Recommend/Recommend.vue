@@ -63,6 +63,10 @@ async function fetchRecommend() {
 
   recommendList.value = shuffle(result).slice(0, 3)
 }
+
+defineExpose({
+  fetchRecommend
+})
 </script>
 
 <style scoped lang="scss">

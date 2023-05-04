@@ -2,9 +2,9 @@
   <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
     <Carousel />
 
-    <Recommend />
+    <Recommend ref="recommend" />
 
-    <NewSonglist />
+    <NewSonglist ref="newSonglist" />
 
     <NewSong />
 
@@ -21,4 +21,12 @@ import NewSonglist from './components/NewSonglist/NewSonglist.vue'
 import NewSong from './components/NewSong/NewSong.vue'
 import NewAlbum from './components/NewAlbum/NewAlbum.vue'
 import SearchTags from './components/SearchTags/SearchTags.vue'
+
+const recommend = shallowRef<InstanceType<typeof Recommend>>()
+const newSonglist = shallowRef<InstanceType<typeof NewSonglist>>()
+
+defineExpose({
+  recommend,
+  newSonglist
+})
 </script>

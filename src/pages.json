@@ -3,7 +3,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -22,10 +23,21 @@
 		}
 	],
 	"globalStyle": {
+		"backgroundColor": "#1a191b",
+		"backgroundColorTop": "#1a191b",
+		"backgroundColorBottom": "#1a191b",
 		"app-plus": {
 			"background": "#1a191b",
 			"animationType": "slide-in-right",
-			"animationDuration": "200"
+			"animationDuration": "200",
+			"pullToRefresh": {
+				"offset": "50px"
+			}
+		},
+		"h5": {
+			"pullToRefresh": {
+				"offset": "50px"
+			}
 		}
 	}
 }

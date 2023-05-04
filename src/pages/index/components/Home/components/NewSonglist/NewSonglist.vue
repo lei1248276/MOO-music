@@ -23,4 +23,8 @@ async function fetchNewSonglist() {
 
   newSonglist.value = playlists
 }
+
+defineExpose({
+  fetchNewSonglist
+})
 </script>
