@@ -1,13 +1,14 @@
 <template>
   <view class="w-screen h-screen relative">
-    <!-- <NavBar
-      title=""
-      left-arrow
-      placeholder="{{ false }}"
-      custom-style="background: transparent;"
-      icon-style="color: #fffeff;"
-      bind:back="onBack"
-    /> -->
+    <view
+      class="fixed top-[44px] left-0 z-[999] flex items-center"
+      :style="{ height: statusBarHeight + 'px'}"
+    >
+      <JIcon
+        custom-class="icon-arrow text-[40rpx] text-white-1 rotate-180 p-5"
+        @click="$emit('back')"
+      />
+    </view>
 
     <swiper
       class="w-full h-full"
@@ -69,11 +70,20 @@ import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
 
+defineEmits(['back'])
+
 const audioStore = useAudioStore()
 
 const currentView = ref(1) // * 当前显示的view索引
-const playViews = ref<Song[]>([]) // * 播放view对应playlist中的指针
+const playViews = shallowReactive<Song[]>([]) // * 播放view对应playlist中的指针
 // const isShowPlaylist = ref(false)
+
+const statusBarHeight = ref(0)
+uni.getSystemInfo({
+  success({ statusBarHeight: height }) {
+    height && (statusBarHeight.value = height)
+  }
+})
 
 // * 初始化view
 updateView()
@@ -120,7 +130,7 @@ function onChangeView({ detail: { current, source }}: SwiperOnChangeEvent) {
 // * 更新view：主要依赖2个数组,播放试图页面"playViews"和全局歌曲列表"songs"
 // * passive: 主动滑动切歌/被动播放完毕自动下一曲
 function updateView(from?: number, to?: number, passive = false) {
-  if (!audioStore.songs) return
+  if (!audioStore.songs.length) return
 
   const { songs } = audioStore
   const lastSongIndex = songs.length - 1
@@ -132,7 +142,7 @@ function updateView(from?: number, to?: number, passive = false) {
     const bottom = currentSongIndex === lastSongIndex ? 0 : currentSongIndex + 1
     const views = [songs[top], songs[currentSongIndex], songs[bottom]]
 
-    playViews.value = views
+    views.forEach((v, i) => { playViews[i] = v })
     currentView.value = 1
   } else if (from - to === -1 || from - to === 2) {
     // * 向上滑动进入下一个view（播放下一首），并修改"to"的下一个view
@@ -141,7 +151,7 @@ function updateView(from?: number, to?: number, passive = false) {
     const nextView = to === 2 ? 0 : to + 1
     const nextViewSong = currentSongIndex === lastSongIndex ? 0 : currentSongIndex + 1
 
-    playViews.value[nextView] = songs[nextViewSong]
+    playViews[nextView] = songs[nextViewSong]
   } else {
     // * 向下滑动进入上一个view（播放上一首），并修改"to"的上一个view
     !passive && audioStore.setPreSong()
@@ -149,7 +159,7 @@ function updateView(from?: number, to?: number, passive = false) {
     const preView = to === 0 ? 2 : to - 1
     const preViewSong = currentSongIndex === 0 ? lastSongIndex : currentSongIndex - 1
 
-    playViews.value[preView] = songs[preViewSong]
+    playViews[preView] = songs[preViewSong]
   }
 }
 </script>
