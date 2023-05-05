@@ -80,14 +80,16 @@ import Creator from './components/Creator/Creator.vue'
 
 const audioStore = useAudioStore()
 
-const isShowPage = ref(true)
 const title = ref('')
 const playlist = shallowRef<Playlist>()
 const songs = shallowReactive<Song[]>([])
 
+// #ifdef H5
+const isShowPage = ref(true)
 function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
   !isShow && uni.navigateBack()
 }
+// #endif
 
 onLoad(async() => {
   // @ts-ignore

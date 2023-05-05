@@ -31,16 +31,18 @@ import type { UniTransitionOnChangeEvent } from '@uni-helper/uni-ui-types'
 import { getSonglist } from '@/api/songlist'
 import type { Songlist } from '@/api/interface/Songlist'
 
-const isShowPage = ref(true)
 const songlist = shallowReactive<Songlist[]>([])
 const limit = 20
 let total = 0
 
 fetchSonglist()
 
+// #ifdef H5
+const isShowPage = ref(true)
 function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
   !isShow && uni.navigateBack()
 }
+// #endif
 
 onReachBottom(() => {
   songlist.length !== total && fetchSonglist()
