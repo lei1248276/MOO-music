@@ -7,7 +7,7 @@
   >
     <JImage
       class="mr-5"
-      :src="song.al.picUrl"
+      :src="song.al.picUrl + '?param=100y100'"
       width="140rpx"
       height="140rpx"
       radius="12rpx"

@@ -1,7 +1,7 @@
 <template>
   <view class="flex flex-col justify-between items-center gap-y-5 mb-[20rpx]">
     <JImage
-      :src="image"
+      :src="image + '?param=300y300'"
       width="500rpx"
       height="450rpx"
       radius="20rpx"

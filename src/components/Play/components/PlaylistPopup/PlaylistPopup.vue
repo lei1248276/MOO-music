@@ -8,7 +8,7 @@
       <view class="w-full pb-[50rpx]">
         <view class="flex items-center gap-x-[50rpx]">
           <JImage
-            :src="song.al.picUrl"
+            :src="song.al.picUrl + '?param=200y200'"
             width="300rpx"
             height="300rpx"
             radius="12rpx"

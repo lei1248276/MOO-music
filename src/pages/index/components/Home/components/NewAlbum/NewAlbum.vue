@@ -11,7 +11,7 @@
   >
     <view class="flex-1 flex items-center">
       <JImage
-        :src="album.coverUrl"
+        :src="album.coverUrl + '?param=200y200'"
         width="300rpx"
         height="300rpx"
         radius="12rpx"

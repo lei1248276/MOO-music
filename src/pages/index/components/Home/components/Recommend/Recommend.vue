@@ -7,7 +7,7 @@
         :class="'img-' + (index + 1)"
         class="w-[180rpx] h-full absolute bottom-0"
         custom-class="absolute bottom-0"
-        :src="item.picUrl"
+        :src="item.picUrl + '?param=100y100'"
         width="180rpx"
         :height="index === 1 ? '120%' : '100%'"
         radius="8rpx"
@@ -77,7 +77,7 @@ defineExpose({
 }
 .img-2 {
   left: 20%;
-  z-index: 10;
+  z-index: 20;
 }
 .img-3 {
   left: 40%;

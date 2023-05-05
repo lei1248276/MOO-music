@@ -10,7 +10,7 @@
       @click="toPlaylist(item)"
     >
       <JImage
-        :src="item.coverImgUrl"
+        :src="item.coverImgUrl + '?param=200y200'"
         width="100%"
         height="322rpx"
         radius="20rpx"

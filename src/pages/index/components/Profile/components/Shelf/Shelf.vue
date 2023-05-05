@@ -10,7 +10,7 @@
       >
         <image
           v-if="list[index]"
-          :src="list[index]"
+          :src="list[index] + '?param=100y100'"
           class="absolute w-[50%] h-full"
           :class="'pic-' + index"
         />

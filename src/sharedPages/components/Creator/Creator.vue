@@ -2,7 +2,7 @@
   <view class="text-grey-1 mb-[20rpx]">
     <view class="flex items-center gap-x-2 mb-[20rpx]">
       <JImage
-        :src="userinfo.avatarUrl"
+        :src="userinfo.avatarUrl + '?param=70y70'"
         width="80rpx"
         height="80rpx"
         radius="50%"
