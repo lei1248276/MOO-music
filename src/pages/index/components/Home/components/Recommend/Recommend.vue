@@ -4,7 +4,9 @@
       <JImage
         v-for="(item, index) in recommendList"
         :key="item.id"
-        :custom-class="'absolute bottom-0 ' + 'img-' + (index + 1)"
+        :class="'img-' + (index + 1)"
+        class="w-[180rpx] h-full absolute bottom-0"
+        custom-class="absolute bottom-0"
         :src="item.picUrl"
         width="180rpx"
         :height="index === 1 ? '120%' : '100%'"

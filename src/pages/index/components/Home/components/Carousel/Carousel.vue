@@ -40,17 +40,10 @@ const currentIndex = ref(0)
 
 fetchBanner()
 
-onShow(() => { autoplay.value = true })
-onHide(() => { autoplay.value = false })
-
 onMounted(() => {
   const observer = uni.createIntersectionObserver(getCurrentInstance()?.proxy)
-  observer.relativeToViewport({ bottom: 100 }).observe(`.carousel`, (res) => {
-    autoplay.value = false
-
-    if (res.intersectionRatio === 0) return
-
-    autoplay.value = true
+  observer.relativeToViewport({ bottom: 20 }).observe(`.carousel`, () => {
+    autoplay.value = !autoplay.value
   })
 })
 
