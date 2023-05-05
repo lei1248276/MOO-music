@@ -19,6 +19,12 @@
 				"navigationStyle": "custom",
 				"onReachBottomDistance": 1000
 			}
+		},
+		{
+			"path": "sharedPages/play/play",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

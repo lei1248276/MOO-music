@@ -1,90 +1,94 @@
 <template>
-  <view class="w-screen h-screen relative">
-    <view
-      class="fixed top-[44px] left-0 z-10 flex items-center"
-      :style="{ height: statusBarHeight + 'px'}"
-    >
+  <!-- #ifdef H5 -->
+  <uni-transition
+    :mode-class="['slide-right']"
+    :show="isShowPage"
+    @change="onShowPage"
+  >
+    <!-- #endif -->
+    <view class="w-screen h-screen relative">
+      <NavBack @back="isShowPage = false" />
+
+      <swiper
+        class="w-full h-full"
+        vertical
+        circular
+        :duration="200"
+        :current="currentView"
+        @change="onChangeView"
+        @click="audioStore.toggle"
+      >
+        <swiper-item
+          v-for="(song, index) in playViews"
+          :key="index"
+          skip-hidden-item-layout
+        >
+          <JImage
+            custom-class="relative after:block after:content-[''] after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:bg-[rgba(0,0,0,.22)]"
+            :src="song.al.picUrl + '?param=400y400'"
+            width="100%"
+            height="100%"
+          />
+
+          <template v-if="currentView === index">
+            <Lyric :song-id="song.id" />
+
+            <SongInfo
+              :tags="audioStore?.playlist?.tags || []"
+              :name="song.name"
+              :singers=" song.ar"
+              :song-id="song.id"
+              @menu="isShowPlaylist = true"
+            />
+          </template>
+        </swiper-item>
+      </swiper>
+
+      <PlaylistPopup
+        v-if="isShowPlaylist"
+        :playlist="audioStore.playlist"
+        :songs="audioStore.songs"
+        :song="playViews[currentView]"
+        :is-play="audioStore.isPlay"
+        :current-index="audioStore.currentSongIndex"
+        @change="(song, index) => { audioStore.setCurrentSong(song, index); updateView() }"
+        @animation-finish="isShowPlaylist = false"
+      />
+
       <JIcon
-        custom-class="icon-arrow text-[40rpx] text-white-1 rotate-180 p-5"
-        @click="$emit('back')"
+        v-show="!audioStore.isPlay"
+        custom-class="icon-audioPlay text-[100rpx] text-white-1 mid"
+        @click="audioStore.toggle"
       />
     </view>
+  <!-- #ifdef H5 -->
+  </uni-transition>
+  <!-- #endif -->
 
-    <swiper
-      class="w-full h-full"
-      vertical
-      circular
-      :duration="200"
-      :current="currentView"
-      @change="onChangeView"
-      @click="audioStore.toggle"
-    >
-      <swiper-item
-        v-for="(song, index) in playViews"
-        :key="index"
-        skip-hidden-item-layout
-      >
-        <JImage
-          custom-class="relative after:block after:content-[''] after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:bg-[rgba(0,0,0,.22)]"
-          :src="song.al.picUrl + '?param=400y400'"
-          width="100%"
-          height="100%"
-        />
-
-        <template v-if="currentView === index">
-          <Lyric :song-id="song.id" />
-
-          <SongInfo
-            :tags="audioStore?.playlist?.tags || []"
-            :name="song.name"
-            :singers=" song.ar"
-            :song-id="song.id"
-            @menu="isShowPlaylist = true"
-          />
-        </template>
-      </swiper-item>
-    </swiper>
-
-    <PlaylistPopup
-      v-if="isShowPlaylist"
-      :playlist="audioStore.playlist"
-      :songs="audioStore.songs"
-      :song="playViews[currentView]"
-      :is-play="audioStore.isPlay"
-      :current-index="audioStore.currentSongIndex"
-      @change="(song, index) => { audioStore.setCurrentSong(song, index); updateView() }"
-      @animation-finish="isShowPlaylist = false"
-    />
-
-    <JIcon
-      v-show="!audioStore.isPlay"
-      custom-class="icon-audioPlay text-[100rpx] text-white-1 mid"
-      @click="audioStore.toggle"
-    />
-  </view>
+  <PlayController />
 </template>
 
 <script setup lang="ts">
+import type { UniTransitionOnChangeEvent } from '@uni-helper/uni-ui-types'
 import type { Song } from '@/api/interface/Song'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
+import NavBack from './components/NavBack/NavBack.vue'
 import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
 import PlaylistPopup from './components/PlaylistPopup/PlaylistPopup.vue'
 
-defineEmits(['back'])
-
 const audioStore = useAudioStore()
 
-const statusBarHeight = ref(0)
 const currentView = ref(1) // * 当前显示的view索引
 const playViews = shallowReactive<Song[]>([]) // * 播放view对应playlist中的指针
 const isShowPlaylist = ref(false)
 
-uni.getSystemInfo({
-  success({ statusBarHeight: height }) {
-    height && (statusBarHeight.value = height)
-  }
-})
+// #ifdef H5
+const isShowPage = ref(true)
+function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
+  !isShow && uni.navigateBack()
+}
+// #endif
 
 // * 初始化view
 updateView()

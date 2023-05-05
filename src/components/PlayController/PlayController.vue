@@ -1,7 +1,7 @@
 <template>
   <view
     v-show="hidden"
-    class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[2%] left-[6%] z-[9999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
+    class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] left-[6%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
     :style="{ width: area + 'rpx'}"
   >
     <Countdown />
@@ -24,7 +24,7 @@
           :height="size + 'rpx'"
           class="will-change-transform"
           :class="audioStore.isPlay ? 'play-controller--play' : 'play-controller--pause'"
-          @click="onShowPlay"
+          @click="toPlay"
         />
       </movable-view>
     </movable-area>
@@ -42,22 +42,21 @@
   </view>
 
   <!-- * 兼容小程序（因为uni-popup会自动打开） -->
-  <uni-popup
+  <!-- <uni-popup
     v-if="audioStore.currentSongInfo || audioStore.songs.length"
     ref="popup"
     type="right"
     class="play-popup"
   >
     <Play
-      v-if="isShowPlay"
-      @back="onShowPlay"
+      v-if="audioStore.isShowPlayPage"
+      @back="toPlay"
     />
-  </uni-popup>
+  </uni-popup> -->
 </template>
 
 <script setup lang="ts">
 import type { MovableViewOnChangeEvent } from '@uni-helper/uni-app-types'
-import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 
 const audioStore = useAudioStore()
 
@@ -68,25 +67,17 @@ let moved = -1 // * 被移动的距离
 
 const hidden = ref(true)
 const x = ref(pivot)
-const popup = shallowRef<UniPopupInstance>()
 
 onShow(() => { hidden.value = true })
 onHide(() => { hidden.value = false })
 
-const isShowPlay = ref(false)
-function onShowPlay() {
-  if (!audioStore.currentSongInfo || !popup.value) return
+function toPlay() {
+  if (!audioStore.currentSongInfo) return
 
-  if (!isShowPlay.value) {
-    // @ts-ignore
-    popup.value.closeMask?.() // ! 强行关闭mask
-    popup.value.open?.()
-    isShowPlay.value = true
-    return
-  }
+  const url = 'sharedPages/play/play'
+  if (getCurrentPages().pop()?.route === url) return uni.navigateBack()
 
-  popup.value.close?.()
-  setTimeout(() => { isShowPlay.value = false }, 1000) // * 等待close动画结束（模拟closeFinish）
+  uni.navigateTo({ url: '/' + url, fail: (err) => { console.error(err) } })
 }
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {
@@ -122,16 +113,6 @@ function onMoveEnd() {
   }
 }
 </script>
-
-<style lang="scss">
-// * 为了覆盖Navbar和兼容多平台
-.play-popup{
-  z-index: 999 !important;
-  .uni-popup{
-    z-index: 999 !important;
-  }
-}
-</style>
 
 <style scoped lang="scss">
 .play-controller--play {

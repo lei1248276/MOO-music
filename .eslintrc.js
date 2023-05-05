@@ -16,7 +16,8 @@ module.exports = {
     './.eslintrc-auto-import.json'
   ],
   globals: {
-    uni: true
+    uni: true,
+    getCurrentPages: true
   },
 
   // add your custom rules here
