@@ -1,5 +1,5 @@
 <template>
-  <view class="min-h-screen bg-black-2 flex flex-col justify-stretch">
+  <view class="h-screen bg-black-2 flex flex-col justify-stretch overflow-hidden">
     <Navbar />
 
     <NavTitle
@@ -10,13 +10,10 @@
     <Search />
 
     <!-- * 解决小程序真机上swiper使用flex-grow无效的问题 -->
-    <view
-      class="bg-black-2 grow relative"
-      @touchmove.stop
-    >
+    <view class="bg-black-2 grow relative">
       <swiper
         class="!h-full absolute top-0 left-0 right-0 bottom-0"
-        :duration="300"
+        :duration="200"
         @change="onChangePage"
       >
         <swiper-item skip-hidden-item-layout>
