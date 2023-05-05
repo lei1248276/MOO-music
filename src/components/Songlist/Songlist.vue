@@ -32,7 +32,7 @@ defineProps<{
 
 function toPlaylist(item: Songlist) {
   uni.navigateTo({
-    url: `/sharedPages/playlist`,
+    url: `/sharedPages/playlist/playlist`,
     success: (res) => {
       res.eventChannel.emit('acceptSonglist', item)
     },

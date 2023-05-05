@@ -3,19 +3,18 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true
+				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/index/songlist",
+			"path": "pages/songlist/songlist",
 			"style": {
 				"navigationStyle": "custom",
 				"onReachBottomDistance": 1000
 			}
 		},
 		{
-			"path": "sharedPages/playlist",
+			"path": "sharedPages/playlist/playlist",
 			"style": {
 				"navigationStyle": "custom",
 				"onReachBottomDistance": 1000
