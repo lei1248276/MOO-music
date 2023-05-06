@@ -16,7 +16,7 @@
         radius="20rpx"
         lazy-load
       />
-      <JIcon custom-class="icon-music text-grey-2 text-[42rpx] bg-white-1 p-[4rpx] rounded-[50%] absolute right-[3%] top-[60%]" />
+      <JIcon custom-class="icon-music text-grey-2 text-[42rpx] bg-white-1 p-[4rpx] rounded-[50%] !absolute right-[3%] top-[60%]" />
       <text class="line-clamp-2">{{ item.name }}</text>
     </view>
   </view>

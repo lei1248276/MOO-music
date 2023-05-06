@@ -47,14 +47,27 @@
         },
         "nvueLaunchMode" : ""
     },
+    "h5": {
+        "optimization": {
+            "prefetch": true,
+            "preload": true,
+            "treeShaking": {
+                "enable": true
+            }
+        }
+    },
     /* 快应用特有相关 */
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
         "appid" : "wx11671b2bdd3c757b",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6": false,
+            "postcss": true,
+            "minified": true
         },
+        "lazyCodeLoading": "requiredComponents",
         "usingComponents" : true,
         "requiredBackgroundModes": ["audio"]
     },
