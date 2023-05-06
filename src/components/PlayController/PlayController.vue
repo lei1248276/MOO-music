@@ -58,6 +58,10 @@
 <script setup lang="ts">
 import type { MovableViewOnChangeEvent } from '@uni-helper/uni-app-types'
 
+const emit = defineEmits<{
+  (e: 'record', isStop: (is: boolean) => boolean): void
+}>()
+
 const audioStore = useAudioStore()
 
 const area = 450
@@ -74,10 +78,11 @@ onHide(() => { hidden.value = false })
 function toPlay() {
   if (!audioStore.currentSongInfo) return
 
-  const url = 'sharedPages/play/play'
-  if (getCurrentPages().pop()?.route === url) return uni.navigateBack()
+  let isStop
+  emit('record', (is) => (isStop = is))
+  if (isStop) return
 
-  uni.navigateTo({ url: '/' + url, fail: (err) => { console.error(err) } })
+  uni.navigateTo({ url: '/sharedPages/play/play', fail: (err) => { console.error(err) } })
 }
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {

@@ -37,21 +37,21 @@
         </swiper-item>
       </swiper>
 
-      <SongInfo
-        v-if="playViews[currentView]"
-        :tags="audioStore?.playlist?.tags || []"
-        :name="playViews[currentView].name"
-        :singers=" playViews[currentView].ar"
-        :song-id="playViews[currentView].id"
-        @menu="isShowPlaylist = true"
-      />
+      <template v-if="playViews[currentView]">
+        <SongInfo
+          :tags="audioStore?.playlist?.tags || []"
+          :name="playViews[currentView].name"
+          :singers=" playViews[currentView].ar"
+          :song-id="playViews[currentView].id"
+          @menu="isShowPlaylist = true"
+        />
 
-      <PlaylistPopup
-        v-if="isShowPlaylist"
-        :song="playViews[currentView]"
-        @change="updateView"
-        @animation-finish="isShowPlaylist = false"
-      />
+        <PlaylistPopup
+          v-model:is-show="isShowPlaylist"
+          :song="playViews[currentView]"
+          @change="updateView"
+        />
+      </template>
 
       <JIcon
         v-show="!audioStore.isPlay"
@@ -63,7 +63,7 @@
   </uni-transition>
   <!-- #endif -->
 
-  <PlayController />
+  <PlayController @record="onPlayController" />
 </template>
 
 <script setup lang="ts">
@@ -79,13 +79,34 @@ const audioStore = useAudioStore()
 
 const currentView = ref(1) // * 当前显示的view索引
 const playViews = shallowReactive<Song[]>([]) // * 播放view对应playlist中的指针
-const isShowPlaylist = ref(false)
+const isShowPlaylist = ref(false) // * 是否显示播放列表
 
 // #ifdef H5
 const isShowPage = ref(true)
 function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
   !isShow && uni.navigateBack()
 }
+// #endif
+
+function onPlayController(isStop: (is: boolean) => boolean) {
+  // * 在播放列表弹窗开启的情况下点击controller（或误操作），先执行关闭列表弹窗
+  if (isShowPlaylist.value) return isStop(!(isShowPlaylist.value = false))
+
+  // #ifdef H5
+  isShowPage.value = false // * 为了保证H5端退出时有过渡效果
+  // #endif
+
+  // #ifndef H5
+  uni.navigateBack()
+  // #endif
+
+  return isStop(true) // * 取消点击controller的默认行为
+}
+
+// #ifndef MP-WEIXIN
+onBackPress(() => { // * 在播放列表弹窗开启的情况下进行返回操作（或误操作），先执行关闭列表弹窗
+  if (isShowPlaylist.value) return !(isShowPlaylist.value = false)
+})
 // #endif
 
 // * 初始化view

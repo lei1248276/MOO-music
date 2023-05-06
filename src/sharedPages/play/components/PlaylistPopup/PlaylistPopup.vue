@@ -68,12 +68,14 @@
 import type { Song } from '@/api/interface/Song'
 import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 
-defineProps<{
+const props = defineProps<{
+  isShow: boolean
   song: Song
 }>()
 const emit = defineEmits<{
   (e: 'animationFinish'): void
   (e: 'change'): void
+  (e: 'update:isShow', isShow: boolean): void
 }>()
 
 const audioStore = useAudioStore()
@@ -82,13 +84,21 @@ const popup = shallowRef<UniPopupInstance>()
 const isShowed = ref(false)
 
 onMounted(() => {
-  popup.value?.open?.()
+  watch(() => props.isShow, isShow => {
+    if (!popup.value) return setTimeout(() => { popup.value?.open?.() }, 100)
+
+    isShow ? popup.value.open?.() : onClose()
+  }, { immediate: true })
+
   setTimeout(() => { isShowed.value = true }, 333)
 })
 
 function onClose() {
   popup.value?.close?.()
-  setTimeout(() => { emit('animationFinish') }, 1000)
+  setTimeout(() => {
+    emit('update:isShow', false)
+    emit('animationFinish')
+  }, 333)
 }
 
 function onSong(id: number) {
@@ -105,7 +115,7 @@ const lazyList = shallowReactive<Song[]>(audioStore.songs.slice(topOffset, botto
 // * 向上滚加载更多
 function onScrollToUpper() {
   const start = topOffset <= limit ? topOffset - topOffset : topOffset - limit
-  if (topOffset === start || topOffset === 0) return
+  if (topOffset === start || topOffset <= 0) return
   console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToUpper', { topOffset, start })
 
   lazyList.unshift(...audioStore.songs.slice(start, topOffset))
@@ -114,7 +124,7 @@ function onScrollToUpper() {
 // * 向下滚加载更多
 function onScrollToLower() {
   const end = bottomOffset + limit
-  if (bottomOffset === end || bottomOffset === audioStore.songs.length - 1) return
+  if (bottomOffset === end || bottomOffset >= audioStore.songs.length - 1) return
   console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToLower', { bottomOffset, end })
 
   lazyList.push(...audioStore.songs.slice(bottomOffset, end))
