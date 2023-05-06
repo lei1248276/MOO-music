@@ -12,21 +12,24 @@
     <view class="flex flex-col justify-between gap-5 mt-[20rpx] text-white-1 font-bold">
       <view class="flex justify-between items-center">
         <view class="text-[48rpx] mr-[20rpx]">{{ name }}</view>
+
         <JIcon
           :color="isCollect ? 'text-red-1' : 'text-white-1'"
           custom-class="icon-heart text-[60rpx]"
           @click="onCollect"
         />
       </view>
+
       <view class="flex justify-between items-center">
         <view class="flex-1 truncate text-[38rpx] mr-[20rpx]">
           <template
-            v-for="item in singers"
-            :key="item.name"
+            v-for="(item, index) in singers"
+            :key="index"
           >
             {{ item.name }}.
           </template>
         </view>
+
         <JIcon
           custom-class="icon-menu text-[66rpx]"
           @click="$emit('menu')"

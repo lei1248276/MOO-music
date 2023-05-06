@@ -45,16 +45,18 @@
           enable-passive
           scroll-anchoring
           scroll-with-animation
-          :scroll-into-view="'_' + songs[currentIndex].id"
+          :scroll-into-view="'_' + audioStore.songs[audioStore.currentSongIndex].id"
+          @scrolltoupper="onScrollToUpper"
+          @scrolltolower="onScrollToLower"
         >
           <Song
-            v-for="(item, index) in songs"
+            v-for="item in lazyList"
             :id="'_' + item.id"
             :key="item.id"
             :song="item"
-            :is-play="isPlay"
+            :is-play="audioStore.isPlay"
             :is-run="song.id === item.id"
-            @click="onSong(index)"
+            @click="onSong(item.id)"
           />
         </scroll-view>
       </template>
@@ -64,20 +66,17 @@
 
 <script setup lang="ts">
 import type { Song } from '@/api/interface/Song'
-import type { Playlist } from '@/api/interface/Playlist'
 import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 
-const props = defineProps<{
+defineProps<{
   song: Song
-  songs: Song[]
-  currentIndex: number
-  isPlay: boolean
-  playlist?: Playlist
 }>()
 const emit = defineEmits<{
   (e: 'animationFinish'): void
-  (e: 'change', song: Song, index: number): void
+  (e: 'change'): void
 }>()
+
+const audioStore = useAudioStore()
 
 const popup = shallowRef<UniPopupInstance>()
 const isShowed = ref(false)
@@ -92,7 +91,33 @@ function onClose() {
   setTimeout(() => { emit('animationFinish') }, 1000)
 }
 
-function onSong(index: number) {
-  emit('change', props.songs[index], index)
+function onSong(id: number) {
+  const index = audioStore.songs.findIndex(v => v.id === id)
+  audioStore.setCurrentSong(audioStore.songs[index], index)
+  emit('change')
+}
+
+// * 根据滚动方向来动态改变对应的指针‘offset’
+const limit = 5
+let topOffset = audioStore.currentSongIndex < limit ? 0 : audioStore.currentSongIndex - limit
+let bottomOffset = audioStore.currentSongIndex + limit
+const lazyList = shallowReactive<Song[]>(audioStore.songs.slice(topOffset, bottomOffset))
+// * 向上滚加载更多
+function onScrollToUpper() {
+  const start = topOffset <= limit ? topOffset - topOffset : topOffset - limit
+  if (topOffset === start || topOffset === 0) return
+  console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToUpper', { topOffset, start })
+
+  lazyList.unshift(...audioStore.songs.slice(start, topOffset))
+  topOffset = start
+}
+// * 向下滚加载更多
+function onScrollToLower() {
+  const end = bottomOffset + limit
+  if (bottomOffset === end || bottomOffset === audioStore.songs.length - 1) return
+  console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToLower', { bottomOffset, end })
+
+  lazyList.push(...audioStore.songs.slice(bottomOffset, end))
+  bottomOffset = end
 }
 </script>
