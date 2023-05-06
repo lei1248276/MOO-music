@@ -1,7 +1,6 @@
 <template>
-  <icon
-    type=""
-    class="iconfont"
+  <text
+    class="iconfont relative after:content-[''] after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx]"
     :class="type + ' ' + customClass"
     :style="{ ...(size ? {fontSize: size} : {}), ...(color ? {color: color} : {}) }"
     @click.stop="$emit('click')"

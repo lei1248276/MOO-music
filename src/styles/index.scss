@@ -12,14 +12,14 @@
   }
 
   .mid{
-    @apply absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
+    @apply !absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
   }
 
   .y-mid{
-    @apply absolute top-[50%] translate-y-[-50%]
+    @apply !absolute top-[50%] translate-y-[-50%]
   }
 
   .x-mid{
-    @apply absolute left-[50%] translate-x-[-50%]
+    @apply !absolute left-[50%] translate-x-[-50%]
   }
 }
