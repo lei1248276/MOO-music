@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Countdown: typeof import('./src/components/Countdown/Countdown.vue')['default']
+    H5BackTransition: typeof import('./src/components/H5BackTransition/H5BackTransition.vue')['default']
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     JSearch: typeof import('./src/components/JSearch/JSearch.vue')['default']

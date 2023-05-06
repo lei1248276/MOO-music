@@ -7,11 +7,7 @@
 
   <template v-if="playlist">
     <!-- #ifdef H5 -->
-    <uni-transition
-      :mode-class="['slide-right']"
-      :show="isShowPage"
-      @change="onShowPage"
-    >
+    <H5BackTransition :show="isShowPage">
       <!-- #endif -->
       <view class="min-h-screen px-[28rpx] bg-black-2 after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
         <Cover
@@ -61,7 +57,7 @@
         />
       </view>
       <!-- #ifdef H5 -->
-    </uni-transition>
+    </H5BackTransition>
     <!-- #endif -->
   </template>
 
@@ -69,7 +65,6 @@
 </template>
 
 <script setup lang="ts">
-import type { UniTransitionOnChangeEvent } from '@uni-helper/uni-ui-types'
 import type { Songlist } from '@/api/interface/Songlist'
 import type { Playlist } from '@/api/interface/Playlist'
 import type { Song } from '@/api/interface/Song'
@@ -86,9 +81,6 @@ const songs = shallowReactive<Song[]>([])
 
 // #ifdef H5
 const isShowPage = ref(true)
-function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
-  !isShow && uni.navigateBack()
-}
 // #endif
 
 onLoad(async() => {

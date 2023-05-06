@@ -1,10 +1,6 @@
 <template>
   <!-- #ifdef H5 -->
-  <uni-transition
-    :mode-class="['slide-right']"
-    :show="isShowPage"
-    @change="onShowPage"
-  >
+  <H5BackTransition :show="isShowPage">
     <!-- #endif -->
     <view class="w-screen h-screen relative">
       <NavBack @back="isShowPage = false" />
@@ -60,14 +56,13 @@
       />
     </view>
   <!-- #ifdef H5 -->
-  </uni-transition>
+  </H5BackTransition>
   <!-- #endif -->
 
   <PlayController @record="onPlayController" />
 </template>
 
 <script setup lang="ts">
-import type { UniTransitionOnChangeEvent } from '@uni-helper/uni-ui-types'
 import type { Song } from '@/api/interface/Song'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import NavBack from './components/NavBack/NavBack.vue'
@@ -83,9 +78,6 @@ const isShowPlaylist = ref(false) // * 是否显示播放列表
 
 // #ifdef H5
 const isShowPage = ref(true)
-function onShowPage({ detail: isShow }: UniTransitionOnChangeEvent) {
-  !isShow && uni.navigateBack()
-}
 // #endif
 
 function onPlayController(isStop: (is: boolean) => boolean) {
