@@ -9,6 +9,8 @@ interface SongInfo {
   urlInfo: SongURL
 }
 
+let cacheStore: ReturnType<typeof useCacheStore>
+
 export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
   const isPlay = ref(false)
@@ -61,7 +63,10 @@ export const useAudioStore = defineStore('audio', () => {
     audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
     audio.coverImgUrl = song.al.picUrl
     audio.src = urlInfo.url
-    // cacheStore.setHistoryPlay(song)
+
+    // * 添加历史播放歌曲
+    cacheStore || (cacheStore = useCacheStore())
+    if (songs.value !== cacheStore.historyPlays) cacheStore.historyPlays.unshift(song)
   }
 
   function toggle() {
