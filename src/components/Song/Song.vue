@@ -1,6 +1,7 @@
 <template>
   <view
     class="w-auto h-[140rpx] mb-5 flex justify-center items-center"
+    :class="customClass"
     hover-stay-time="100"
     hover-class="bg-grey-1/10"
     @click="$emit('click')"
@@ -51,6 +52,7 @@ defineProps<{
   song: Song
   isRun: boolean
   isPlay: boolean
+  customClass?: string
 }>()
 defineEmits(['click'])
 </script>

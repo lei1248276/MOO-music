@@ -16,7 +16,7 @@
         <JIcon
           type="icon-heart"
           size="60rpx"
-          :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-grey-1 transition-colors'"
+          :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-white-1 transition-colors'"
           @click="onCollect"
         />
       </view>
@@ -55,6 +55,10 @@ defineEmits(['menu'])
 const cacheStore = useCacheStore()
 
 const isCollect = ref(!!cacheStore.collectSongs.find(v => v.id === props.song.id))
+
+watch(() => props.name, () => {
+  isCollect.value = !!cacheStore.collectSongs.find(v => v.id === props.song.id)
+})
 
 function onCollect() {
   console.log('onCollect')
