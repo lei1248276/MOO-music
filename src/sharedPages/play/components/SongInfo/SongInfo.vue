@@ -14,8 +14,9 @@
         <view class="text-[48rpx] mr-[20rpx]">{{ name }}</view>
 
         <JIcon
-          :color="isCollect ? 'text-red-1' : 'text-white-1'"
-          custom-class="icon-heart text-[60rpx]"
+          type="icon-heart"
+          size="60rpx"
+          :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-grey-1 transition-colors'"
           @click="onCollect"
         />
       </view>
@@ -43,17 +44,27 @@
 import type { Playlist } from '@/api/interface/Playlist'
 import type { Song } from '@/api/interface/Song'
 
-defineProps<{
+const props = defineProps<{
   tags: Playlist['tags']
   name: string
   singers: Song['ar']
-  songId: number
+  song: Song
 }>()
 defineEmits(['menu'])
 
-const isCollect = ref(false)
+const cacheStore = useCacheStore()
+
+const isCollect = ref(!!cacheStore.collectSongs.find(v => v.id === props.song.id))
 
 function onCollect() {
+  console.log('onCollect')
+  if (isCollect.value) {
+    const index = cacheStore.collectSongs.findIndex(v => v.id === props.song.id)
+    cacheStore.collectSongs.splice(index, 1)
+  } else {
+    cacheStore.collectSongs.unshift(props.song)
+  }
 
+  isCollect.value = !isCollect.value
 }
 </script>

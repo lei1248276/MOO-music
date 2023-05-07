@@ -38,7 +38,7 @@
           :tags="audioStore?.playlist?.tags || []"
           :name="playViews[currentView].name"
           :singers=" playViews[currentView].ar"
-          :song-id="playViews[currentView].id"
+          :song="playViews[currentView]"
           @menu="isShowPlaylist = true"
         />
 
