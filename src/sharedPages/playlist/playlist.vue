@@ -11,7 +11,7 @@
       <!-- #endif -->
       <view class="min-h-screen px-[28rpx] bg-black-2 after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
         <Cover
-          :id="playlist.id"
+          :playlist="playlist"
           :image="playlist.coverImgUrl"
           :description="playlist.description"
         />

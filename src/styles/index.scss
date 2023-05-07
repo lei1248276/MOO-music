@@ -22,4 +22,14 @@
   .x-mid{
     @apply !absolute left-[50%] translate-x-[-50%]
   }
+
+  .repeat-0{
+    animation-iteration-count: 0;
+  }
+  .repeat-1{
+    animation-iteration-count: 1;
+  }
+  .repeat-infinite{
+    animation-iteration-count: infinite;
+  }
 }

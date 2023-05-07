@@ -12,7 +12,8 @@
 
       <JIcon
         type="icon-heart"
-        :custom-class="isCollect ? 'text-red-1 text-[60rpx]' : 'text-grey-1 text-[60rpx]'"
+        size="60rpx"
+        :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-grey-1 transition-colors'"
         @click="onCollect"
       />
     </view>
@@ -20,15 +21,27 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  id: number
+import type { Playlist } from '@/api/interface/Playlist'
+
+const props = defineProps<{
+  playlist: Playlist
   image: string
   description: string
 }>()
 
-const isCollect = ref(false)
+const cacheStore = useCacheStore()
+
+const isCollect = ref(!!cacheStore.collectPlaylist.find(v => v.id === props.playlist.id))
 
 function onCollect() {
   console.log('onCollect')
+  if (isCollect.value) {
+    const index = cacheStore.collectPlaylist.findIndex(v => v.id === props.playlist.id)
+    cacheStore.collectPlaylist.splice(index, 1)
+  } else {
+    cacheStore.collectPlaylist.unshift(props.playlist)
+  }
+
+  isCollect.value = !isCollect.value
 }
 </script>
