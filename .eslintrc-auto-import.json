@@ -92,6 +92,7 @@
     "useCssModule": true,
     "useCssVars": true,
     "useSlots": true,
+    "useStatusBarHeight": true,
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,

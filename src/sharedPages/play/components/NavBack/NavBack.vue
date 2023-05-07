@@ -11,13 +11,7 @@
 <script setup lang="ts">
 const emit = defineEmits(['back'])
 
-const statusBarHeight = ref(0)
-
-uni.getSystemInfo({
-  success({ statusBarHeight: height }) {
-    height && (statusBarHeight.value = height)
-  }
-})
+const statusBarHeight = useStatusBarHeight()
 
 function onBack() {
   emit('back')
