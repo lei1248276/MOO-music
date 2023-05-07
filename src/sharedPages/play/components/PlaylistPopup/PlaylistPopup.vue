@@ -46,6 +46,8 @@
           scroll-anchoring
           scroll-with-animation
           :scroll-into-view="'_' + audioStore.songs[audioStore.currentSongIndex].id"
+          :upper-threshold="500"
+          :lower-threshold="500"
           @scrolltoupper="onScrollToUpper"
           @scrolltolower="onScrollToLower"
         >

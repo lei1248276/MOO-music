@@ -43,6 +43,7 @@
         />
 
         <PlaylistPopup
+          v-if="isShowPlaylist"
           v-model:is-show="isShowPlaylist"
           :song="playViews[currentView]"
           @change="updateView"

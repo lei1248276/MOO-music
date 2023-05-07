@@ -7,7 +7,7 @@
     <Countdown />
 
     <movable-area
-      class="h-[110rpx] absolute left-0 top-0"
+      class="h-[110rpx] absolute left-0 top-0 z-10"
       :style="{ width: area + 'rpx'}"
     >
       <movable-view
