@@ -37,15 +37,11 @@ function toPlaylist() {
 
 function onSong(index: number) {
   console.log('🚀 ~ file: NewSong.vue:43 ~ onSong ~ song:', songs[index])
-  if (audioStore.playlist !== playlist.value) {
-    audioStore.playlist = playlist.value
-  }
-
-  if (audioStore.songs !== songs || audioStore.songs.length !== songs.length) {
-    audioStore.songs = songs
-  }
-
-  audioStore.setCurrentSong(songs[index], index)
+  audioStore.$patch(state => {
+    if (state.playlist !== playlist.value) state.playlist = playlist.value
+    if (state.songs !== songs) state.songs = songs
+    audioStore.setCurrentSong(songs[index], index)
+  })
 }
 
 async function fetchNewSong() {
