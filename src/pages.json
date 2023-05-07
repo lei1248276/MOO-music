@@ -14,6 +14,27 @@
 			}
 		},
 		{
+			"path": "pages/collectSongs/collectSongs",
+			"style": {
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 1000
+			}
+		},
+		{
+			"path": "pages/collectPlaylist/collectPlaylist",
+			"style": {
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 1000
+			}
+		},
+		{
+			"path": "pages/historyPlays/historyPlays",
+			"style": {
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 1000
+			}
+		},
+		{
 			"path": "sharedPages/playlist/playlist",
 			"style": {
 				"navigationStyle": "custom",
