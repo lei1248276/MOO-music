@@ -13,7 +13,7 @@ declare module '@vue/runtime-core' {
     H5BackTransition: typeof import('./src/components/H5BackTransition/H5BackTransition.vue')['default']
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
-    JSearch: typeof import('./src/components/JSearch/JSearch.vue')['default']
+    JSearchBar: typeof import('./src/components/JSearchBar/JSearchBar.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
     PlayController: typeof import('./src/components/PlayController/PlayController.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
