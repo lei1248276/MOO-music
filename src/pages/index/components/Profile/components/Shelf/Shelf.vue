@@ -1,26 +1,26 @@
 <template>
   <view
     class="w-[330rpx] h-[220rpx] relative"
-    catch:tap="toNavigate"
+    @click="toNavigate"
   >
     <view class="relative flex items-end w-[88%] h-[60%] mx-auto">
       <template
-        v-for="index in 3"
+        v-for="(src, index) in list"
         :key="index"
       >
         <image
-          v-if="list[index]"
-          :src="list[index] + '?param=100y100'"
+          v-if="src"
+          :src="src + '?param=100y100'"
           class="absolute w-[50%] h-full"
-          :class="'pic-' + index"
+          :class="'pic-' + (index + 1)"
         />
         <view
-          wx:else
+          v-else
           class="absolute w-[50%] h-full bg-grey-1 shadow-[4rpx_0_6rpx_#666]"
-          :class="'pic-' + index"
+          :class="'pic-' + (index + 1)"
         >
           <JIcon
-            v-if="index === 1"
+            v-if="index === 0"
             :type="'icon-' + icon"
             custom-class="text-white-1 text-[80rpx] mid"
           />
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-export interface IShelf {
+export interface ShelfProps {
   description: string
   count: number
   icon: string
@@ -44,7 +44,20 @@ export interface IShelf {
   url: string
 }
 
-defineProps<IShelf>()
+const props = defineProps<ShelfProps>()
+const emit = defineEmits(['click'])
+
+function toNavigate() {
+  emit('click')
+  if (!props.url) return
+
+  uni.navigateTo({
+    url: props.url,
+    fail: err => {
+      console.error(err)
+    }
+  })
+}
 </script>
 
 <style scoped lang="scss">

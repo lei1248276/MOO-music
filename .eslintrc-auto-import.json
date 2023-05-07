@@ -88,6 +88,7 @@
     "unref": true,
     "useAttrs": true,
     "useAudioStore": true,
+    "useCacheStore": true,
     "useCssModule": true,
     "useCssVars": true,
     "useSlots": true,

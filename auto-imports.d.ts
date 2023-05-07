@@ -85,6 +85,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAudioStore: typeof import('./src/store/audio')['useAudioStore']
+  const useCacheStore: typeof import('./src/store/cache')['useCacheStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useSlots: typeof import('vue')['useSlots']
@@ -183,6 +184,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAudioStore: UnwrapRef<typeof import('./src/store/audio')['useAudioStore']>
+    readonly useCacheStore: UnwrapRef<typeof import('./src/store/cache')['useCacheStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>

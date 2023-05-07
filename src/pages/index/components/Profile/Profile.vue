@@ -5,25 +5,30 @@
         <JIcon custom-class="icon-user mr-[20rpx]" />
         <text class="name">Jaye</text>
       </view>
-    <!--<view class="flex justify-between items-center text-grey-1">
-      <view class="text">
-        <text>关注</text>
-        <text class="count">0</text>
+      <view class="flex justify-between items-center text-grey-1">
+        <view class="flex-1">
+          <text>关注</text>
+          <text>0</text>
+        </view>
+
+        <view class="flex-1">
+          <text>粉丝</text>
+          <text>0</text>
+        </view>
+
+        <button
+          size="mini"
+          class="font-bold bg-yellow-1 text-black-1 rounded-full"
+        >
+          免费VIP活动
+        </button>
       </view>
-      <view class="text">
-        <text>粉丝</text>
-        <text class="count">0</text>
-      </view>
-      <view class="vip">
-        <text class="text">免费VIP活动</text>
-      </view>
-    </view>-->
     </view>
 
     <view class="flex flex-wrap justify-around items-center mt-5">
       <Shelf
-        v-for="item in shelf"
-        :key="item.description"
+        v-for="(item, index) in shelf"
+        :key="index"
         :description="item.description"
         :count="item.count"
         :icon="item.icon"
@@ -35,13 +40,38 @@
 </template>
 
 <script setup lang="ts">
-import type { IShelf } from './components/Shelf/Shelf.vue'
 import Shelf from './components/Shelf/Shelf.vue'
 
-const shelf = ref<IShelf[]>([
-  { description: '收藏音乐', count: 0, icon: 'heart', list: [], url: './profile/collectSongs/index' },
-  { description: '收藏歌单', count: 0, icon: 'playlist', list: [], url: './profile/collectPlaylist/index' },
-  { description: '本地歌曲', count: 0, icon: 'file', list: [], url: '' },
-  { description: '最近播放', count: 0, icon: 'time', list: [], url: './profile/historyPlays/index' }
+const cacheStore = useCacheStore()
+
+const shelf = reactive([
+  {
+    description: '收藏音乐',
+    count: computed(() => cacheStore.collectSongs.length),
+    icon: 'heart',
+    list: computed(() => ['', '', ''].map((v, i) => cacheStore.collectSongs[i]?.al.picUrl || v)),
+    url: '../collectSongs/collectSongs'
+  },
+  {
+    description: '收藏歌单',
+    count: computed(() => cacheStore.collectPlaylist.length),
+    icon: 'playlist',
+    list: computed(() => ['', '', ''].map((v, i) => cacheStore.collectPlaylist[i]?.coverImgUrl || v)),
+    url: '../collectPlaylist/collectPlaylist'
+  },
+  {
+    description: '本地歌曲',
+    count: 0,
+    icon: 'file',
+    list: ['', '', ''],
+    url: ''
+  },
+  {
+    description: '最近播放',
+    count: computed(() => cacheStore.historyPlays.length),
+    icon: 'time',
+    list: computed(() => ['', '', ''].map((v, i) => cacheStore.historyPlays[i]?.al.picUrl || v)),
+    url: '../historyPlays/historyPlays'
+  }
 ])
 </script>
