@@ -8,11 +8,13 @@
         v-for="(src, index) in list"
         :key="index"
       >
-        <image
+        <JImage
           v-if="src"
           :src="src + '?param=100y100'"
-          class="absolute w-[50%] h-full"
+          class="absolute"
           :class="'pic-' + (index + 1)"
+          width="50%"
+          height="100%"
         />
         <view
           v-else
