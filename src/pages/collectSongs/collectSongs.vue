@@ -36,7 +36,6 @@
         <uni-swipe-action-item
           v-for="(song, index) in lazyList"
           :key="song.id"
-          class="mb-5"
           :right-options="rightBtnStyle"
           :auto-close="false"
           @click="onClick(index)"
@@ -45,7 +44,6 @@
             :song="song"
             :is-play="audioStore.isPlay"
             :is-run="audioStore.currentSongInfo?.song.id === song.id"
-            custom-class="mb-0"
             @click="onSong(index)"
           />
         </uni-swipe-action-item>

@@ -34,13 +34,12 @@
         <uni-swipe-action-item
           v-for="(playlist, index) in lazyList"
           :key="playlist.id"
-          class="mb-5"
           :right-options="rightBtnStyle"
           :auto-close="false"
           @click="onClick(index)"
         >
           <view
-            class="flex items-center h-[200rpx] gap-x-5"
+            class="flex items-center h-[200rpx] gap-x-5 mb-5"
             @click="toPlaylist(index)"
           >
             <JImage
