@@ -3,13 +3,15 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 MOO"
 			}
 		},
 		{
 			"path": "pages/songlist/songlist",
 			"style": {
 				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 歌单列表",
 				"onReachBottomDistance": 1000
 			}
 		},
@@ -17,6 +19,7 @@
 			"path": "pages/collectSongs/collectSongs",
 			"style": {
 				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 收藏音乐",
 				"onReachBottomDistance": 1000
 			}
 		},
@@ -24,6 +27,7 @@
 			"path": "pages/collectPlaylist/collectPlaylist",
 			"style": {
 				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 收藏歌单",
 				"onReachBottomDistance": 1000
 			}
 		},
@@ -31,6 +35,7 @@
 			"path": "pages/historyPlays/historyPlays",
 			"style": {
 				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 最近播放",
 				"onReachBottomDistance": 1000
 			}
 		},

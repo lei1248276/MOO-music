@@ -11,6 +11,7 @@ const app = process.env.UNI_PLATFORM === 'app'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
     uni(),
     ...(isH5 || app ? [] : [uvwt()]),
@@ -46,5 +47,8 @@ export default defineConfig({
   },
   css: {
     postcss
+  },
+  esbuild: {
+    pure: ['console.log']
   }
 })
