@@ -27,6 +27,8 @@
 
 <script setup lang="ts">
 import type { ImageProps } from '@uni-helper/uni-app-types'
+import { transHTTPS } from '@/utils/util'
+
 interface ImgProps extends ImageProps {
   src: string
   width: string
@@ -68,9 +70,4 @@ onMounted(() => {
     observer?.disconnect()
   })
 })
-
-function transHTTPS(url: string) {
-  const reg = /^http:/
-  return reg.test(url) ? url.replace(reg, 'https:') : url
-}
 </script>

@@ -3,6 +3,7 @@ import type { Song } from '@/api/interface/Song'
 import type { SongURL } from '@/api/interface/SongURL'
 import { getSongURL } from '@/api/play'
 import toast from '@/utils/toast'
+import { transHTTPS } from '@/utils/util'
 
 interface SongInfo {
   song: Song
@@ -62,7 +63,7 @@ export const useAudioStore = defineStore('audio', () => {
     audio.epname = song.al.name
     audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
     audio.coverImgUrl = song.al.picUrl
-    audio.src = urlInfo.url
+    audio.src = transHTTPS(urlInfo.url)
 
     // * 添加历史播放歌曲
     cacheStore || (cacheStore = useCacheStore())

@@ -11,3 +11,8 @@ export function shuffle(array: any[]) {
   }
   return array
 }
+
+export function transHTTPS(url: string) {
+  const reg = /^http:/
+  return reg.test(url) ? url.replace(reg, 'https:') : url
+}
