@@ -1,6 +1,6 @@
 <template>
   <view
-    class="h-[50rpx] flex justify-center items-center gap-x-2 px-[20rpx] py-[10rpx] m-[20rpx]"
+    class="flex justify-center items-center gap-x-2 px-2 py-[4rpx] m-[20rpx]"
     :class="customClass"
     :style="{borderRadius: radius, backgroundColor: bgColor }"
     @click="isActive = true"
@@ -15,8 +15,7 @@
 
     <input
       v-if="isActive"
-      ref="input"
-      v-model="search"
+      :value="modelValue"
       class="flex-1 text-[30rpx]"
       :placeholder="placeholder"
       :placeholder-style="placeholderStyle"
@@ -26,12 +25,13 @@
       confirm-type="search"
       type="text"
       :style="{ color }"
+      @input="$emit('update:modelValue', $event.detail.value)"
     >
 
     <view
       v-if="isActive && clearButton"
-      v-show="search"
-      @click="search = ''; emit('clear')"
+      v-show="modelValue"
+      @click="$emit('update:modelValue', ''); emit('clear')"
     >
       <slot name="clearIcon">
         <uni-icons
@@ -45,9 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import type { InputProps } from '@uni-helper/uni-app-types'
-
-interface JSearchProps extends InputProps {
+interface JSearchProps {
   modelValue: string
   placeholder?: string
   placeholderStyle?: string
@@ -61,7 +59,7 @@ interface JSearchProps extends InputProps {
   customClass?: string
 }
 
-const props = withDefaults(defineProps<JSearchProps>(), {
+withDefaults(defineProps<JSearchProps>(), {
   placeholder: '',
   placeholderStyle: '',
   radius: '10rpx',
@@ -79,8 +77,4 @@ const emit = defineEmits<{
 }>()
 
 const isActive = ref(false)
-const search = ref<string>('')
-
-watch(() => props.modelValue, (value) => { search.value = value })
-watch(search, (value) => { emit('update:modelValue', value) })
 </script>
