@@ -11,9 +11,10 @@
         <JImage
           v-if="src"
           :src="src + '?param=100y100'"
-          class="absolute"
+          class="absolute !w-[50%] h-full"
           :class="'pic-' + (index + 1)"
-          width="50%"
+          custom-class="absolute"
+          width="100%"
           height="100%"
         />
         <view

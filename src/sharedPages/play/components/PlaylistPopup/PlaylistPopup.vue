@@ -69,6 +69,7 @@
 <script setup lang="ts">
 import type { Song } from '@/api/interface/Song'
 import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
+import { throttle } from '@/utils/util'
 
 const props = defineProps<{
   isShow: boolean
@@ -114,14 +115,15 @@ let topOffset = audioStore.currentSongIndex < limit ? 0 : audioStore.currentSong
 let bottomOffset = audioStore.currentSongIndex + limit
 const lazyList = shallowReactive<Song[]>(audioStore.songs.slice(topOffset, bottomOffset))
 // * 向上滚加载更多
-function onScrollToUpper() {
+const onScrollToUpper = throttle(function onScrollToUpper() {
   const start = topOffset <= limit ? topOffset - topOffset : topOffset - limit
   if (topOffset === start || topOffset <= 0) return
   console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToUpper', { topOffset, start })
 
   lazyList.unshift(...audioStore.songs.slice(start, topOffset))
   topOffset = start
-}
+}, 100)
+
 // * 向下滚加载更多
 function onScrollToLower() {
   const end = bottomOffset + limit

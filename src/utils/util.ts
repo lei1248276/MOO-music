@@ -16,3 +16,24 @@ export function transHTTPS(url: string) {
   const reg = /^http:/
   return reg.test(url) ? url.replace(reg, 'https:') : url
 }
+
+export function debounce(fn: Function, delay: number) {
+  let timer: null | number = null
+
+  return function(this:any, ...arg: any[]) {
+    timer && clearTimeout(timer)
+    timer = setTimeout(() => { fn.apply(this, arg) }, delay)
+  }
+}
+
+export function throttle(fn: Function, threshold: number) {
+  let time = Date.now()
+
+  return function(this: any, ...arg: any[]) {
+    console.log(Date.now() - time)
+
+    if (Date.now() - time < threshold) return
+    fn.apply(this, ...arg)
+    time = Date.now()
+  }
+}
