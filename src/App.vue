@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Playlist } from './api/interface/Playlist'
-import type { Song } from './api/interface/Song'
 import toast from './utils/toast'
 
 const audioStore = useAudioStore()
@@ -57,14 +55,14 @@ onLaunch(() => {
 })
 
 onShow(() => {
-  uni.getStorage({
+  !cacheStore.collectSongs.length && uni.getStorage({
     key: 'collectSongs',
-    success({ data }) { data && data.forEach((v: Song, i: number) => { cacheStore.collectSongs[i] = v }) },
+    success({ data }) { data && cacheStore.collectSongs.push(...data) },
     fail(err) { console.error(err) }
   })
-  uni.getStorage({
+  !cacheStore.collectPlaylist.length && uni.getStorage({
     key: 'collectPlaylist',
-    success({ data }) { data && data.forEach((v: Playlist, i: number) => { cacheStore.collectPlaylist[i] = v }) },
+    success({ data }) { data && cacheStore.collectPlaylist.push(...data) },
     fail(err) { console.error(err) }
   })
 })

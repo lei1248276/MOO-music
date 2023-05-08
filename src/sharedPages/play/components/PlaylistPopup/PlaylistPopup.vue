@@ -87,12 +87,11 @@ const isShowed = ref(false)
 
 onMounted(() => {
   watch(() => props.isShow, isShow => {
-    if (!popup.value) return setTimeout(() => { popup.value?.open?.() }, 100)
+    if (!isShow) return onClose()
 
-    isShow ? popup.value.open?.() : onClose()
+    popup.value?.open?.()
+    setTimeout(() => { isShowed.value = true }, 333)
   }, { immediate: true })
-
-  setTimeout(() => { isShowed.value = true }, 333)
 })
 
 function onClose() {
