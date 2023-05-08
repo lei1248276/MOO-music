@@ -14,7 +14,7 @@
       v-if="!lazyLoad || loading || loaded"
       class="w-full h-full"
       :style="{ transition: 'opacity 1s', opacity: loaded ? 1 : 0 }"
-      :src="src"
+      :src="transHTTPS(src)"
       :mode="mode"
       :fade-show="fadeShow"
       :webp="webp"
@@ -68,4 +68,9 @@ onMounted(() => {
     observer?.disconnect()
   })
 })
+
+function transHTTPS(url: string) {
+  const reg = /^http:/
+  return reg.test(url) ? url.replace(reg, 'https:') : url
+}
 </script>
