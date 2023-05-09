@@ -32,10 +32,11 @@
         </template>
       </Subtitle>
 
-      <uni-swipe-action>
+      <uni-swipe-action class="animate-enter-content">
         <uni-swipe-action-item
           v-for="(song, index) in lazyList"
           :key="song.id"
+          class="animate-content"
           :right-options="rightBtnStyle"
           :auto-close="false"
           @click="onClick(index)"

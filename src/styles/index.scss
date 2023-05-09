@@ -32,4 +32,47 @@
   .repeat-infinite{
     animation-iteration-count: infinite;
   }
+
+  @keyframes enter {
+    0% {
+      opacity: 0;
+      transform: translateY(10px)
+    }
+
+    to {
+      opacity: 1;
+      transform: none
+    }
+  }
+
+  .animate-enter {
+    --stagger: 0;
+    --delay: 120ms;
+    --start: 0ms;
+  }
+
+  @media (prefers-reduced-motion:no-preference) {
+    .animate-enter {
+      animation: enter .6s both 1;
+      animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+    }
+  }
+
+  .animate-enter-content > .animate-content {
+    --stagger: 0;
+    --delay: 150ms;
+    --start: 0ms;
+    animation: enter 1s both 1;
+    animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
+  }
+  .animate-enter-content > .animate-content:nth-child(1) { --stagger: 1; }
+  .animate-enter-content > .animate-content:nth-child(2) { --stagger: 2; }
+  .animate-enter-content > .animate-content:nth-child(3) { --stagger: 3; }
+  .animate-enter-content > .animate-content:nth-child(4) { --stagger: 4; }
+  .animate-enter-content > .animate-content:nth-child(5) { --stagger: 5; }
+  .animate-enter-content > .animate-content:nth-child(6) { --stagger: 6; }
+  .animate-enter-content > .animate-content:nth-child(7) { --stagger: 7; }
+  .animate-enter-content > .animate-content:nth-child(8) { --stagger: 8; }
+  .animate-enter-content > .animate-content:nth-child(9) { --stagger: 9; }
+  .animate-enter-content > .animate-content:nth-child(10) { --stagger: 10; }
 }

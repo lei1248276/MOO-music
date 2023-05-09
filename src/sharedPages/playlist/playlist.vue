@@ -47,14 +47,17 @@
           </template>
         </Subtitle>
 
-        <Song
-          v-for="(song, index) in songs"
-          :key="song.id"
-          :song="song"
-          :is-play="audioStore.isPlay"
-          :is-run="audioStore.currentSongInfo?.song.id === song.id"
-          @click="onSong(index)"
-        />
+        <view class="animate-enter-content">
+          <Song
+            v-for="(song, index) in songs"
+            :key="song.id"
+            class="animate-content"
+            :song="song"
+            :is-play="audioStore.isPlay"
+            :is-run="audioStore.currentSongInfo?.song.id === song.id"
+            @click="onSong(index)"
+          />
+        </view>
       </view>
       <!-- #ifdef H5 -->
     </H5BackTransition>

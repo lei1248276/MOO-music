@@ -12,7 +12,7 @@
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 歌单列表",
-				"onReachBottomDistance": 1000
+				"onReachBottomDistance": 100
 			}
 		},
 		{
@@ -20,7 +20,7 @@
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 收藏音乐",
-				"onReachBottomDistance": 1000
+				"onReachBottomDistance": 100
 			}
 		},
 		{
@@ -28,7 +28,7 @@
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 收藏歌单",
-				"onReachBottomDistance": 1000
+				"onReachBottomDistance": 100
 			}
 		},
 		{
@@ -36,14 +36,14 @@
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 最近播放",
-				"onReachBottomDistance": 1000
+				"onReachBottomDistance": 100
 			}
 		},
 		{
 			"path": "sharedPages/playlist/playlist",
 			"style": {
 				"navigationStyle": "custom",
-				"onReachBottomDistance": 1000
+				"onReachBottomDistance": 100
 			}
 		},
 		{
