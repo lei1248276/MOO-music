@@ -37,7 +37,7 @@
     <!-- ! 隐形的占位事件触发元素，避免icon覆盖movable -->
     <view
       class="absolute right-0 z-50 bg-yellow-1 opacity-0 w-[100rpx] h-full"
-      @click="audioStore.toggle"
+      @tap="audioStore.toggle"
     />
   </view>
 

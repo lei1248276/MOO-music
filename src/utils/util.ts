@@ -30,10 +30,8 @@ export function throttle(fn: Function, threshold: number) {
   let time = Date.now()
 
   return function(this: any, ...arg: any[]) {
-    console.log(Date.now() - time)
-
     if (Date.now() - time < threshold) return
-    fn.apply(this, ...arg)
+    fn.apply(this, arg)
     time = Date.now()
   }
 }

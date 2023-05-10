@@ -3,7 +3,7 @@
     class="flex justify-center items-center gap-x-2 px-2 py-[4rpx] m-[20rpx]"
     :class="customClass"
     :style="{borderRadius: radius, backgroundColor: bgColor }"
-    @click="isActive = true"
+    @tap="isActive = true"
   >
     <slot name="searchIcon">
       <uni-icons
@@ -31,7 +31,7 @@
     <view
       v-if="isActive && clearButton"
       v-show="modelValue"
-      @click="$emit('update:modelValue', ''); emit('clear')"
+      @tap="$emit('update:modelValue', ''); emit('clear')"
     >
       <slot name="clearIcon">
         <uni-icons

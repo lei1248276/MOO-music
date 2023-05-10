@@ -4,7 +4,7 @@
     :class="customClass"
     hover-stay-time="100"
     hover-class="bg-grey-1/10"
-    @click="$emit('click')"
+    @tap="$emit('click')"
   >
     <JImage
       class="mr-5"

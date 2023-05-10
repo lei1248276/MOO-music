@@ -12,7 +12,7 @@
         :duration="200"
         :current="currentView"
         @change="onChangeView"
-        @click="audioStore.toggle"
+        @tap="audioStore.toggle"
       >
         <swiper-item
           v-for="(song, index) in playViews"

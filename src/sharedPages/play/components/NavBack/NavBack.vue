@@ -2,7 +2,7 @@
   <view
     class="fixed top-[44px] left-0 z-10 flex items-center rotate-180"
     :style="{ height: statusBarHeight + 'px'}"
-    @click="onBack"
+    @tap="onBack"
   >
     <JIcon custom-class="icon-arrow text-[40rpx] text-white-1 p-5" />
   </view>

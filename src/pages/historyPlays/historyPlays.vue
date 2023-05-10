@@ -20,7 +20,7 @@
             <button
               class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
               size="mini"
-              @click="onSong(0)"
+              @tap="onSong(0)"
             >
               <JIcon custom-class="icon-play text-[42rpx]" />
             </button>

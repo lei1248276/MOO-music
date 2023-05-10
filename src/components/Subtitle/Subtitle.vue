@@ -4,7 +4,7 @@
     :class="customClass"
     :hover-class="clickable ? 'bg-grey-1/10' : ''"
     hover-stay-time="50"
-    @click="onSubtitle"
+    @tap="onSubtitle"
   >
     <slot name="title">
       <text class="title">
