@@ -1,5 +1,5 @@
 <template>
-  <view class="w-screen h-full box-border px-[28rpx]">
+  <view class="w-full h-full box-border px-[28rpx]">
     <view class="h-[300rpx] p-[30rpx] rounded-[20rpx] bg-black-1 text-[38rpx] box-border flex flex-col justify-between font-bold">
       <view class="text-white-1">
         <JIcon custom-class="icon-user mr-[20rpx]" />

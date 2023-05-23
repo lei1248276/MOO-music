@@ -1,5 +1,5 @@
 <template>
-  <view class="h-screen bg-black-2 flex flex-col justify-stretch overflow-hidden">
+  <view class="h-full bg-black-2 flex flex-col justify-stretch overflow-hidden">
     <Navbar />
 
     <NavTitle

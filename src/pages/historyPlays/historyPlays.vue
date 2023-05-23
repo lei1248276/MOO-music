@@ -6,7 +6,10 @@
   />
 
   <!-- #ifdef H5 -->
-  <H5BackTransition :show="isShowPage">
+  <H5BackTransition
+    :show="isShowPage"
+    class="w-full h-full"
+  >
     <!-- #endif -->
     <view class="animate-enter-content bg-black-2 px-[28rpx] after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
       <Subtitle

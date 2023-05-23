@@ -7,9 +7,12 @@
 
   <template v-if="playlist">
     <!-- #ifdef H5 -->
-    <H5BackTransition :show="isShowPage">
+    <H5BackTransition
+      :show="isShowPage"
+      class="w-full h-full"
+    >
       <!-- #endif -->
-      <view class="min-h-screen px-[28rpx] bg-black-2 after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+      <view class="min-h-full px-[28rpx] bg-black-2 after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
         <Cover
           :playlist="playlist"
           :image="playlist.coverImgUrl"
