@@ -99,6 +99,8 @@ function onSong(index: number) {
   audioStore.$patch(state => {
     if (state.songs !== cacheStore.collectSongs) state.songs = cacheStore.collectSongs
 
+    if (audioStore.playlist) audioStore.playlist = undefined
+
     audioStore.setCurrentSong(cacheStore.collectSongs[index], index)
   })
 }

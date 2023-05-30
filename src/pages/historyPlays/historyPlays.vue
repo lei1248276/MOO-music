@@ -65,6 +65,8 @@ function onSong(index: number) {
   audioStore.$patch(state => {
     if (state.songs !== cacheStore.historyPlays) state.songs = cacheStore.historyPlays
 
+    if (audioStore.playlist) audioStore.playlist = undefined
+
     audioStore.setCurrentSong(cacheStore.historyPlays[index], index)
   })
 }
