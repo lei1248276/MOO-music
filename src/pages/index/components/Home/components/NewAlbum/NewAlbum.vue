@@ -26,14 +26,11 @@
     </view>
 
     <view class="flex-1 flex flex-col justify-evenly items-start">
-      <text class="font-[38rpx] font-bold text-white-1 line-clamp-2">{{ album.albumName }}</text>
-      <text class="font-[32rpx] text-grey-1">{{ album.artistName }}</text>
-      <button
-        size="mini"
-        class="font-bold bg-yellow-1 text-black-1 rounded-full m-0"
-      >
+      <text class="text-[38rpx] font-bold text-white-1 line-clamp-2">{{ album.albumName }}</text>
+      <text class="text-[32rpx] text-grey-1">{{ album.artistName }}</text>
+      <text class="inline-block px-4 py-1 text-[13px] text-black-1 font-bold bg-yellow-1 rounded-full m-0">
         #Hot
-      </button>
+      </text>
     </view>
   </view>
 </template>

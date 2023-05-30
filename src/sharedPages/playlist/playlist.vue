@@ -21,14 +21,13 @@
 
         <Creator :userinfo="playlist.creator" />
 
-        <button
-          v-for="tag in playlist.tags"
-          :key="tag"
-          size="mini"
-          class="rounded-full bg-yellow-1 text-black-1 mr-[20rpx] mb-[20rpx] font-bold"
+        <text
+          v-for="(tag, index) in playlist.tags"
+          :key="index"
+          class="inline-block px-4 py-1 text-[13px] text-black-1 rounded-full bg-yellow-1 mr-[20rpx] mb-[20rpx] font-bold"
         >
           {{ tag }}
-        </button>
+        </text>
 
         <Subtitle
           icon="icon-menu"
@@ -39,6 +38,7 @@
               <button
                 class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
                 size="mini"
+                @tap="onSong(0)"
               >
                 <JIcon custom-class="icon-play text-[42rpx]" />
               </button>

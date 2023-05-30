@@ -1,13 +1,12 @@
 <template>
   <view class="w-[80%] absolute left-[50%] bottom-[18%] translate-x-[-50%] translate-y-[-10%]">
-    <button
+    <text
       v-for="(tag, index) in tags"
       :key="index"
-      size="mini"
-      class="font-bold bg-yellow-1 text-black-1 rounded-full mr-[20rpx] mb-[20rpx]"
+      class="inline-block px-4 py-1 text-[13px] text-black-1 font-bold bg-yellow-1 rounded-full mr-[20rpx] mb-[20rpx]"
     >
       {{ tag }}
-    </button>
+    </text>
 
     <view class="flex flex-col justify-between gap-5 mt-[20rpx] text-white-1 font-bold">
       <view class="flex justify-between items-center">
