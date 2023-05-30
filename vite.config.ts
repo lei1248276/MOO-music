@@ -8,6 +8,7 @@ import path from 'path'
 
 const isH5 = process.env.UNI_PLATFORM === 'h5'
 const app = process.env.UNI_PLATFORM === 'app'
+const isProd = process.env.NODE_ENV === 'production'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -49,6 +50,6 @@ export default defineConfig({
     postcss
   },
   esbuild: {
-    pure: ['console.log']
+    drop: isProd ? ['console', 'debugger'] : []
   }
 })
