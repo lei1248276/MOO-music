@@ -13,12 +13,13 @@
       <view class="flex justify-between items-center">
         <view class="text-[48rpx] mr-[20rpx]">{{ name }}</view>
 
-        <JIcon
-          type="icon-heart"
-          size="60rpx"
-          :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-white-1 transition-colors'"
-          @click="onCollect"
-        />
+        <view @tap.stop="onCollect">
+          <JIcon
+            type="icon-heart"
+            size="60rpx"
+            :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-white-1 transition-colors'"
+          />
+        </view>
       </view>
 
       <view class="flex justify-between items-center">
@@ -31,10 +32,9 @@
           </template>
         </view>
 
-        <JIcon
-          custom-class="icon-menu text-[66rpx]"
-          @click="$emit('menu')"
-        />
+        <view @tap.stop="$emit('menu')">
+          <JIcon custom-class="icon-menu text-[66rpx]" />
+        </view>
       </view>
     </view>
   </view>

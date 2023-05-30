@@ -29,29 +29,26 @@
             height="100%"
           />
 
-          <Lyric
-            v-if="currentView === index"
-            :song-id="song.id"
-          />
+          <template v-if="currentView === index">
+            <Lyric :song-id="song.id" />
+
+            <SongInfo
+              :tags="audioStore?.playlist?.tags || []"
+              :name="playViews[currentView].name"
+              :singers=" playViews[currentView].ar"
+              :song="playViews[currentView]"
+              @menu="isShowPlaylist = true"
+            />
+          </template>
         </swiper-item>
       </swiper>
 
-      <template v-if="playViews[currentView]">
-        <SongInfo
-          :tags="audioStore?.playlist?.tags || []"
-          :name="playViews[currentView].name"
-          :singers=" playViews[currentView].ar"
-          :song="playViews[currentView]"
-          @menu="isShowPlaylist = true"
-        />
-
-        <PlaylistPopup
-          v-if="isShowPlaylist"
-          v-model:is-show="isShowPlaylist"
-          :song="playViews[currentView]"
-          @change="updateView"
-        />
-      </template>
+      <PlaylistPopup
+        v-if="isShowPlaylist"
+        v-model:is-show="isShowPlaylist"
+        :song="playViews[currentView]"
+        @change="updateView"
+      />
 
       <JIcon
         v-show="!audioStore.isPlay"
