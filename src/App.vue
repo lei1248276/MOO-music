@@ -16,6 +16,7 @@ onLaunch(() => {
 
     console.log('onCanplay.duration: ', audio.duration)
     audioStore.duration = audio.duration
+    audio.play()
   }
   audio.onCanplay(getDuration)
 
