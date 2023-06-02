@@ -30,7 +30,6 @@ export const useAudioStore = defineStore('audio', () => {
     const currentIndex = currentSongIndex.value
     const preIndex = currentIndex === 0 ? last : currentIndex - 1
     setCurrentSong(songs.value[preIndex], preIndex)
-    uni.$emit('onPreSong', preIndex)
   }
 
   function setNextSong() {
@@ -40,7 +39,6 @@ export const useAudioStore = defineStore('audio', () => {
     const currentIndex = currentSongIndex.value
     const nextIndex = currentIndex === last ? 0 : currentIndex + 1
     setCurrentSong(songs.value[nextIndex], nextIndex)
-    uni.$emit('onNextSong', nextIndex)
   }
 
   async function setCurrentSong(song: Song, index: number) {
