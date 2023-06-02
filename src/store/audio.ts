@@ -49,7 +49,7 @@ export const useAudioStore = defineStore('audio', () => {
     console.log('🚀 ~ file: audio.ts:58 ~ setCurrentSong ~ urlInfo:', urlInfo)
 
     if (!urlInfo.url) {
-      (audio.stop(), toast.fail('播放地址失效'))
+      (audio.pause(), toast.fail('播放地址失效'))
       currentSongInfo.value = undefined
       isPlay.value = false
       duration.value = 0
