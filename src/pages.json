@@ -57,6 +57,7 @@
 		"backgroundColor": "#1a191b",
 		"backgroundColorTop": "#1a191b",
 		"backgroundColorBottom": "#1a191b",
+		"navigationBarTextStyle": "white",
 		"app-plus": {
 			"background": "#1a191b",
 			"animationType": "slide-in-right",
