@@ -60,6 +60,7 @@
 		"navigationBarTextStyle": "white",
 		"app-plus": {
 			"background": "#1a191b",
+			"titleColor": "#fff",
 			"animationType": "slide-in-right",
 			"animationDuration": "200",
 			"pullToRefresh": {
