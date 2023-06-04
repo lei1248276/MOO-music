@@ -16,7 +16,7 @@
         :x="x + 'rpx'"
         direction="horizontal"
         @change="onMoveChange"
-        @touchend="onMoveEnd"
+        @touchend.passive="onMoveEnd"
       >
         <JImage
           src="/static/record.png"
@@ -40,19 +40,6 @@
       @tap="audioStore.toggle"
     />
   </view>
-
-  <!-- * 兼容小程序（因为uni-popup会自动打开） -->
-  <!-- <uni-popup
-    v-if="audioStore.currentSongInfo || audioStore.songs.length"
-    ref="popup"
-    type="right"
-    class="play-popup"
-  >
-    <Play
-      v-if="audioStore.isShowPlayPage"
-      @back="toPlay"
-    />
-  </uni-popup> -->
 </template>
 
 <script setup lang="ts">
