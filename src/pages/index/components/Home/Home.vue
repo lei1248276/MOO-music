@@ -1,17 +1,29 @@
 <template>
-  <view class="h-full px-[28rpx] overflow-y-auto after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
-    <Carousel />
+  <scroll-view
+    class="box-border h-full overflow-hidden"
+    scroll-y
+    enable-passive
+    scroll-anchoring
+    enable-back-to-top
+    refresher-enabled
+    refresher-background="#1a191b"
+    :refresher-triggered="refreshTrigger"
+    @refresherrefresh="onRefresh"
+  >
+    <view class="px-[28rpx] pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+      <Carousel />
 
-    <Recommend ref="recommend" />
+      <Recommend ref="recommend" />
 
-    <NewSonglist ref="newSonglist" />
+      <NewSonglist ref="newSonglist" />
 
-    <NewSong />
+      <NewSong />
 
-    <NewAlbum />
+      <NewAlbum />
 
-    <SearchTags />
-  </view>
+      <SearchTags />
+    </view>
+  </scroll-view>
 </template>
 
 <script setup lang="ts">
@@ -24,9 +36,14 @@ import SearchTags from './components/SearchTags/SearchTags.vue'
 
 const recommend = shallowRef<InstanceType<typeof Recommend>>()
 const newSonglist = shallowRef<InstanceType<typeof NewSonglist>>()
+const refreshTrigger = ref(false)
 
-defineExpose({
-  recommend,
-  newSonglist
-})
+async function onRefresh() {
+  refreshTrigger.value = true
+
+  await recommend.value?.fetchRecommend()
+  await newSonglist.value?.fetchNewSonglist()
+
+  refreshTrigger.value = false
+}
 </script>

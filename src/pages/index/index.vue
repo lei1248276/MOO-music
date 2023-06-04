@@ -17,7 +17,7 @@
         @change="onChangePage"
       >
         <swiper-item skip-hidden-item-layout>
-          <Home ref="home" />
+          <Home />
         </swiper-item>
 
         <swiper-item skip-hidden-item-layout>
@@ -39,15 +39,6 @@ import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 
 const pages = ['home', 'profile']
 const currentPage = ref<typeof pages[number]>('home')
-
-onPullDownRefresh(async() => {
-  const { home } = getCurrentInstance()?.refs as { home: InstanceType<typeof Home> }
-  console.log('onPullDownRefresh', home.recommend, home.newSonglist)
-
-  await home.recommend?.fetchRecommend()
-  await home.newSonglist?.fetchNewSonglist()
-  uni.stopPullDownRefresh()
-})
 
 function onChangePage({ detail: { current }}: SwiperOnChangeEvent) {
   currentPage.value = pages[current] as typeof pages[number]
