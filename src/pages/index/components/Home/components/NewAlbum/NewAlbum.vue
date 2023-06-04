@@ -7,9 +7,9 @@
   <view
     v-for="album in newAlbum"
     :key="album.albumId"
-    class="flex items-stretch gap-x-[50rpx] mb-5"
+    class="flex items-stretch mb-5"
   >
-    <view class="flex-1 flex items-center">
+    <view class="flex-1 flex items-center mr-[50rpx]">
       <JImage
         :src="album.coverUrl + '?param=200y200'"
         width="300rpx"

@@ -43,7 +43,7 @@
           @click="onClick(index)"
         >
           <view
-            class="flex items-center h-[200rpx] gap-x-5 mb-5"
+            class="flex items-center h-[200rpx] mb-5"
             @click="toPlaylist(index)"
           >
             <JImage
@@ -54,7 +54,7 @@
               lazy-load
             />
 
-            <view class="h-full flex flex-col justify-evenly text-bold">
+            <view class="ml-5 h-full flex flex-col justify-evenly text-bold">
               <view class="w-[450rpx] line-clamp-2 text-[36rpx] text-white-1">
                 {{ playlist.name }}
               </view>

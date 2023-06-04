@@ -1,5 +1,5 @@
 <template>
-  <view class="flex flex-col justify-between items-center gap-y-5 mb-[20rpx]">
+  <view class="flex flex-col justify-between items-center mb-[20rpx]">
     <JImage
       :src="image + '?param=300y300'"
       width="500rpx"
@@ -7,7 +7,7 @@
       radius="20rpx"
     />
 
-    <view class="w-full flex justify-between items-center">
+    <view class="mt-5 w-full flex justify-between items-center">
       <view class="flex-[0.95] line-clamp-6 text-[42rpx] font-bold text-white-1">{{ description }}</view>
 
       <JIcon

@@ -6,7 +6,7 @@
   >
     <view class="relative z-20 box-border w-full h-[80vh] rounded-b-2xl pt-[100rpx] px-[28rpx] backdrop-blur">
       <view class="w-full pb-[50rpx]">
-        <view class="flex items-center gap-x-[50rpx]">
+        <view class="flex items-center">
           <JImage
             :src="song.al.picUrl + '?param=200y200'"
             width="300rpx"
@@ -15,7 +15,7 @@
             custom-class="flex-1"
           />
 
-          <view class="flex-1">
+          <view class="flex-1 ml-[50rpx]">
             <view class="text-white-1 line-clamp-3 text-[48rpx]">
               {{ song.name }}
             </view>

@@ -1,6 +1,6 @@
 <template>
   <view
-    class="flex justify-center items-center gap-x-2 px-2 py-[4rpx] m-[20rpx]"
+    class="flex justify-center items-center px-2 py-[4rpx] m-[20rpx]"
     :class="customClass"
     :style="{borderRadius: radius, backgroundColor: bgColor }"
     @tap="isActive = true"
@@ -16,7 +16,7 @@
     <input
       v-if="isActive"
       :value="modelValue"
-      class="flex-1 text-[30rpx]"
+      class="flex-1 text-[30rpx] mx-2"
       :placeholder="placeholder"
       :placeholder-style="placeholderStyle"
       :focus="focus || isActive"

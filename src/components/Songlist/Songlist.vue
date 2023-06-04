@@ -1,12 +1,12 @@
 <template>
   <view
-    class="animate-enter-content w-auto gap-[20rpx] flex justify-between flex-wrap overflow-hidden"
+    class="animate-enter-content w-auto flex justify-between flex-wrap overflow-hidden"
     :class="customClass"
   >
     <view
       v-for="item in songlist"
       :key="item.id"
-      class="animate-content w-[48%] h-[420rpx] rounded-[20rpx] font-bold text-white-1 relative"
+      class="animate-content w-[48%] h-[420rpx] mb-[20rpx] rounded-[20rpx] font-bold text-white-1 relative"
       @click="toPlaylist(item)"
     >
       <JImage
