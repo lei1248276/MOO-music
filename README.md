@@ -14,7 +14,7 @@
 
 
 ### 看图吧
-![playgif](https://moo.osrc.com/static/play.gif)
-![home](https://moo.osrc.com/static/home.png)
-![playlist](https://moo.osrc.com/static/playlist.png)
-![play](https://moo.osrc.com/static/play.png)
+![playgif](./src/static/play.gif)
+![home](./src/static/home.png)
+![playlist](./src/static/playlist.png)
+![play](./src/static/play.png)
