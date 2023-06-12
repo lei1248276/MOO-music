@@ -13,10 +13,6 @@
       "@dcloudio/uni-helper-json"
       ]
   },
-  "vueCompilerOptions": {
-    "experimentalRuntimeMode": "runtime-uni-app",
-    "nativeTags": ["block", "component", "template", "slot"]
-  },
   "include": [
     "src/**/*.ts", 
     "src/**/*.d.ts", 
