@@ -11,7 +11,7 @@
     class="w-full h-full"
   >
     <!-- #endif -->
-    <view class="animate-enter-content bg-black-2 px-[28rpx] after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+    <view class="animate-enter-content bg-black-2 px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
       <Subtitle
         icon="icon-menu"
         icon-size="60rpx"

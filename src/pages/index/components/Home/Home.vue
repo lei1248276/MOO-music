@@ -7,6 +7,7 @@
     enable-back-to-top
     refresher-enabled
     refresher-background="#1a191b"
+    :refresher-threshold="100"
     :refresher-triggered="refreshTrigger"
     @refresherrefresh="onRefresh"
   >

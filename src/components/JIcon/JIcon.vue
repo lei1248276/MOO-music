@@ -1,6 +1,6 @@
 <template>
   <text
-    class="iconfont relative after:content-[''] after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx]"
+    class="iconfont relative after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx]"
     :class="type + ' ' + customClass"
     :style="{ ...(size ? {fontSize: size} : {}), ...(color ? {color: color} : {}) }"
     @tap="$emit('click')"

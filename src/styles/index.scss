@@ -73,6 +73,11 @@
   .animate-enter-content > .animate-content:nth-child(6) { --stagger: 6; }
   .animate-enter-content > .animate-content:nth-child(7) { --stagger: 7; }
   .animate-enter-content > .animate-content:nth-child(8) { --stagger: 8; }
-  .animate-enter-content > .animate-content:nth-child(9) { --stagger: 9; }
-  .animate-enter-content > .animate-content:nth-child(10) { --stagger: 10; }
+}
+
+@layer base {
+  ::before,
+  ::after {
+    --tw-content: '';
+  }
 }

@@ -14,7 +14,7 @@
       <!-- #endif -->
       <Songlist
         :songlist="songlist"
-        custom-class="min-h-full bg-black-2 px-[28rpx] after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]"
+        custom-class="min-h-full bg-black-2 px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]"
       />
     <!-- #ifdef H5 -->
     </H5BackTransition>

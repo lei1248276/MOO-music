@@ -11,7 +11,7 @@
     class="w-full h-full"
   >
     <!-- #endif -->
-    <view class="bg-black-2 px-[28rpx] after:block after:content-[''] after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+    <view class="bg-black-2 px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
       <Subtitle
         icon="icon-more"
         class="z-50 sticky top-[44px] left-0 right-0 bg-black-2"
