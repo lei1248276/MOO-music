@@ -13,7 +13,7 @@ import { getNewSonglist } from '@/api/home'
 import type { Songlist } from '@/api/interface/Songlist'
 import { rangeRandom } from '@/utils/util'
 
-const newSonglist = shallowRef<Songlist[]>([])
+const newSonglist = shallowRef<Songlist[]>(new Array(4).fill({}))
 
 fetchNewSonglist()
 

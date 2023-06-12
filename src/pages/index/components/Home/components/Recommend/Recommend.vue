@@ -3,7 +3,7 @@
     <view class="flex-1 relative flex justify-start h-full">
       <JImage
         v-for="(item, index) in recommendList"
-        :key="item.id"
+        :key="index"
         :class="'img-' + (index + 1)"
         class="w-[180rpx] h-full absolute bottom-0"
         custom-class="absolute bottom-0"
@@ -40,7 +40,7 @@ import { shuffle, rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
 
-const recommendList = shallowRef<Recommend[]>([])
+const recommendList = shallowRef<Recommend[]>(new Array(3).fill({}))
 const isRun = ref(false)
 
 fetchRecommend()

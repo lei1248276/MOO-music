@@ -18,7 +18,7 @@
       >
         <JImage
           :id="index"
-          :src="item.pic"
+          :src="item.pic || ''"
           :lazy-load="currentIndex !== index"
           width="100%"
           height="100%"
@@ -35,7 +35,7 @@ import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import type { Banner } from '@/api/interface/Banner'
 
 const autoplay = ref(false)
-const bannerList = shallowRef<Banner[]>([])
+const bannerList = shallowRef<Banner[]>([{} as Banner])
 const currentIndex = ref(0)
 
 fetchBanner()
