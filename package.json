@@ -84,6 +84,6 @@
     "unplugin-vue-components": "^0.24.1",
     "vite": "4.3.9",
     "vue-tsc": "^1.6.5",
-    "weapp-tailwindcss-webpack-plugin": "^2.1.2"
+    "weapp-tailwindcss-webpack-plugin": "^2.4.3"
   }
 }
