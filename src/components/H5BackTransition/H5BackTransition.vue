@@ -5,7 +5,10 @@
     :mode-class="['slide-right']"
     @change="onShowChange"
   >
-    <slot />
+    <!-- * 嵌套一层"view"用于解决'uni-transition'重新渲染状态重置问题（网页端"view"也是组件） -->
+    <view class="w-full h-full">
+      <slot />
+    </view>
   </uni-transition>
 </template>
 
