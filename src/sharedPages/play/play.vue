@@ -55,6 +55,11 @@
         custom-class="icon-audioPlay text-[100rpx] text-white-1 mid"
         @click="audioStore.toggle"
       />
+
+      <!-- #ifdef APP-PLUS -->
+      <!-- ! ios端滑动到后台时会触发swiper滚动，所以添加一个占位元素 -->
+      <view class="w-full h-[50rpx] absolute bottom-0 right-0 left-0" />
+      <!-- #endif -->
     </view>
   <!-- #ifdef H5 -->
   </H5BackTransition>
