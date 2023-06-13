@@ -65,11 +65,16 @@ onHide(() => { hidden.value = false })
 function toPlay() {
   if (!audioStore.currentSongInfo) return
 
+  // * 通过自定义事件的参数回调来确认是否取消后续默认行为
   let isStop
   emit('record', (is) => (isStop = is))
   if (isStop) return
 
-  uni.navigateTo({ url: '/sharedPages/play/play', fail: (err) => { console.error(err) } })
+  // * 默认点击跳转到"play"页面，如果上一页面就是"play"那么直接返回
+  const path = 'sharedPages/play/play'
+  getCurrentPages().at(-2)?.route === path
+    ? uni.navigateBack()
+    : uni.navigateTo({ url: `/${path}`, fail: (err) => { console.error(err) } })
 }
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {
