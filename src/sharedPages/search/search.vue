@@ -16,6 +16,7 @@
     @click="isOpen = true; popupRef?.open?.()"
     @cancel="isOpen = false; popupRef?.close?.()"
     @clear="suggests = []; searchResultRef?.clear()"
+    @confirm="searchResultRef?.fetchSongs(search); cacheStore.addHistorySearch(search)"
   >
     <template #searchIcon>
       <JIcon custom-class="icon-search text-[60rpx] text-yellow-1" />
@@ -63,6 +64,8 @@ import { getSearchSuggest } from '@/api/search'
 const isShowPage = ref(true)
 // #endif
 
+const cacheStore = useCacheStore()
+
 const search = ref('')
 const suggests = shallowRef<Suggests[]>([])
 const isOpen = ref(false)
@@ -84,6 +87,6 @@ watch(search, (val, oldVal) => {
 async function fetchSearchSuggest(keywords:string) {
   const { result: { allMatch }} = await getSearchSuggest(keywords)
   console.log('🚀 ~ file: Search.vue:102 ~ fetchSearchSuggest ~ allMatch:', allMatch)
-  suggests.value = allMatch || []
+  if (allMatch) suggests.value = allMatch
 }
 </script>
