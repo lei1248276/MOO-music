@@ -8,7 +8,7 @@
 			}
 		},
 		{
-			"path": "pages/songlist/songlist",
+			"path": "pages/index/songlist/songlist",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 歌单列表",
@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"path": "pages/collectSongs/collectSongs",
+			"path": "pages/index/collectSongs/collectSongs",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 收藏音乐",
@@ -24,7 +24,7 @@
 			}
 		},
 		{
-			"path": "pages/collectPlaylist/collectPlaylist",
+			"path": "pages/index/collectPlaylist/collectPlaylist",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 收藏歌单",
@@ -32,7 +32,7 @@
 			}
 		},
 		{
-			"path": "pages/historyPlays/historyPlays",
+			"path": "pages/index/historyPlays/historyPlays",
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 最近播放",

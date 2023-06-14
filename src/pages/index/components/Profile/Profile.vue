@@ -50,14 +50,14 @@ const shelf = reactive([
     count: computed(() => cacheStore.collectSongs.length),
     icon: 'heart',
     list: computed(() => ['', '', ''].map((v, i) => cacheStore.collectSongs[i]?.al.picUrl || v)),
-    url: '../collectSongs/collectSongs'
+    url: './collectSongs/collectSongs'
   },
   {
     description: '收藏歌单',
     count: computed(() => cacheStore.collectPlaylist.length),
     icon: 'playlist',
     list: computed(() => ['', '', ''].map((v, i) => cacheStore.collectPlaylist[i]?.coverImgUrl || v)),
-    url: '../collectPlaylist/collectPlaylist'
+    url: './collectPlaylist/collectPlaylist'
   },
   {
     description: '本地歌曲',
@@ -71,7 +71,7 @@ const shelf = reactive([
     count: computed(() => cacheStore.historyPlays.length),
     icon: 'time',
     list: computed(() => ['', '', ''].map((v, i) => cacheStore.historyPlays[i]?.al.picUrl || v)),
-    url: '../historyPlays/historyPlays'
+    url: './historyPlays/historyPlays'
   }
 ])
 </script>
