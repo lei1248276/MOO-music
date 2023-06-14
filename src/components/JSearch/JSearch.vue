@@ -28,8 +28,10 @@
         confirm-type="search"
         type="text"
         :style="{ color }"
-        v-bind="$attrs"
         @input="$emit('update:modelValue', $event.detail.value)"
+        @focus="$emit('focus')"
+        @blur="$emit('blur')"
+        @confirm="$emit('confirm')"
       >
 
       <view
