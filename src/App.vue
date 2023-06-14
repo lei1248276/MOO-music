@@ -55,29 +55,10 @@ onLaunch(() => {
   })
 })
 
-onShow(() => {
-  !cacheStore.collectSongs.length && uni.getStorage({
-    key: 'collectSongs',
-    success({ data }) { data && cacheStore.collectSongs.push(...data) },
-    fail(err) { console.error(err) }
-  })
-  !cacheStore.collectPlaylist.length && uni.getStorage({
-    key: 'collectPlaylist',
-    success({ data }) { data && cacheStore.collectPlaylist.push(...data) },
-    fail(err) { console.error(err) }
-  })
-})
 onHide(() => {
-  uni.setStorage({
-    key: 'collectSongs',
-    data: cacheStore.collectSongs,
-    fail(err) { console.error(err) }
-  })
-  uni.setStorage({
-    key: 'collectPlaylist',
-    data: cacheStore.collectPlaylist,
-    fail(err) { console.error(err) }
-  })
+  cacheStore.setCollectSongs()
+  cacheStore.setCollectPlaylist()
+  cacheStore.setHistorySearch()
 })
 </script>
 

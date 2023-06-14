@@ -17,6 +17,42 @@ export const useCacheStore = defineStore('cache', () => {
     if (historySearch.length > 10) historySearch.length = 10
   }
 
+  function setCollectSongs() {
+    uni.setStorage({
+      key: 'collectSongs',
+      data: collectSongs,
+      fail(err) { console.error(err) }
+    })
+  }
+
+  function setCollectPlaylist() {
+    uni.setStorage({
+      key: 'collectPlaylist',
+      data: collectPlaylist,
+      fail(err) { console.error(err) }
+    })
+  }
+
+  function setHistorySearch() {
+    uni.setStorage({
+      key: 'historySearch',
+      data: historySearch,
+      fail(err) { console.error(err) }
+    })
+  }
+
+  uni.getStorage({
+    key: 'collectSongs',
+    success({ data }) { data && collectSongs.push(...data) },
+    fail(err) { console.error(err) }
+  })
+
+  uni.getStorage({
+    key: 'collectPlaylist',
+    success({ data }) { data && collectPlaylist.push(...data) },
+    fail(err) { console.error(err) }
+  })
+
   uni.getStorage({
     key: 'historySearch',
     success({ data }) { data && historySearch.push(...data) },
@@ -28,6 +64,9 @@ export const useCacheStore = defineStore('cache', () => {
     historyPlays,
     collectSongs,
     collectPlaylist,
-    addHistorySearch
+    addHistorySearch,
+    setCollectSongs,
+    setCollectPlaylist,
+    setHistorySearch
   }
 })

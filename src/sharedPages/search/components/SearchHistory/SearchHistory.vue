@@ -19,13 +19,4 @@ defineEmits<{
 }>()
 
 const cacheStore = useCacheStore()
-
-watch(cacheStore.historySearch, (list) => {
-  console.log('🚀 ~ file: SearchHistory.vue:19 ~ watch ~ list:', list)
-  uni.setStorage({
-    key: 'historySearch',
-    data: list,
-    fail(err) { console.error(err) }
-  })
-})
 </script>
