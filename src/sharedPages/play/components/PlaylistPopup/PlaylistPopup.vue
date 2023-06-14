@@ -116,9 +116,12 @@ function onSong(id: number) {
 
 // * 根据滚动方向来动态改变对应的指针‘offset’
 const limit = 5
-let topOffset = audioStore.currentSongIndex < limit ? 0 : audioStore.currentSongIndex - limit
+let topOffset = 0
+// ! ios全端向上滚加载更多都会发生偏移，暂时禁用向上滚懒加载
+// let topOffset = audioStore.currentSongIndex < limit ? 0 : audioStore.currentSongIndex - limit
 let bottomOffset = audioStore.currentSongIndex + limit
 const lazyList = shallowReactive<Song[]>(audioStore.songs.slice(topOffset, bottomOffset))
+
 // * 向上滚加载更多
 const onScrollToUpper = throttle(function onScrollToUpper() {
   const start = topOffset <= limit ? topOffset - topOffset : topOffset - limit
