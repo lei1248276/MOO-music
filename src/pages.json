@@ -51,6 +51,13 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "sharedPages/search/search",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 搜索"
+			}
 		}
 	],
 	"globalStyle": {

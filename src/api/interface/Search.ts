@@ -1,7 +1,12 @@
-export interface SongResponse {
-  songs: Song[]
-  privileges: Privilege[]
+export interface SearchResponse {
+  result: Result
   code: number
+}
+
+export interface Result {
+  searchQcReminder: any
+  songs: Song[]
+  songCount: number
 }
 
 export interface Song {
@@ -10,7 +15,7 @@ export interface Song {
   pst: number
   t: number
   ar: Ar[]
-  alia: any[]
+  alia: string[]
   pop: number
   st: number
   rt?: string
@@ -22,7 +27,7 @@ export interface Song {
   dt: number
   h: H
   m: M
-  l: L
+  l?: L
   sq?: Sq
   hr?: Hr
   a: any
@@ -42,21 +47,22 @@ export interface Song {
   version: number
   songJumpInfo: any
   entertainmentTags: any
-  awardTags?: any
   single: number
   noCopyrightRcmd: any
-  cp: number
   rtype: number
   rurl: any
   mst: number
+  cp: number
   mv: number
   publishTime: number
+  privilege: Privilege
+  tns?: string[]
 }
 
 export interface Ar {
   id: number
   name: string
-  tns: any[]
+  tns: string[]
   alias: any[]
 }
 

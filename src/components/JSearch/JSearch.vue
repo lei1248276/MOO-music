@@ -35,7 +35,7 @@
       <view
         v-if="clearButton"
         v-show="modelValue"
-        @tap="$emit('update:modelValue', ''); $emit('clear')"
+        @tap="$emit('update:modelValue', ''); $emit('clear');"
       >
         <slot name="clearIcon">
           <uni-icons
