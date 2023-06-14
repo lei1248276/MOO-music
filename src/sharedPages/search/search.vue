@@ -27,12 +27,13 @@
   <H5BackTransition
     :show="isShowPage"
     :mode-class="['fade', 'zoom-in']"
-    class="px-[28rpx]"
   >
     <!-- #endif -->
-    <TopArtists />
+    <view class="px-[28rpx]">
+      <TopArtists @select="onSearch" />
 
-    <TopSearch />
+      <TopSearch @select="onSearch" />
+    </view>
   <!-- #ifdef H5 -->
   </H5BackTransition>
   <!-- #endif -->
@@ -83,6 +84,15 @@ watch(search, (val, oldVal) => {
     searchResultRef.value?.clear()
   }
 })
+
+function onSearch(keyword: string) {
+  isOpen.value = true
+  popupRef.value?.open?.()
+  nextTick(() => {
+    searchResultRef.value?.fetchSongs(keyword)
+    cacheStore.addHistorySearch(keyword)
+  })
+}
 
 async function fetchSearchSuggest(keywords:string) {
   const { result: { allMatch }} = await getSearchSuggest(keywords)

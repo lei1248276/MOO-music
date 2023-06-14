@@ -5,6 +5,7 @@
       v-for="artist in topArtists"
       :key="artist.id"
       class="mr-3"
+      @tap="$emit('select', artist.name)"
     >
       <JImage
         :src="artist.picUrl + '?param=120y120'"
@@ -21,6 +22,10 @@
 <script setup lang="ts">
 import type { Artist } from '@/api/interface/TopArtists'
 import { getTopArtists } from '@/api/search'
+
+defineEmits<{
+  (e: 'select', name: string): void
+}>()
 
 const topArtists = shallowRef<Artist[]>()
 
