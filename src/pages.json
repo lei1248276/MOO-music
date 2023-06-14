@@ -58,6 +58,14 @@
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "🎵 搜索"
 			}
+		},
+		{
+			"path": "sharedPages/searchSongs/searchSongs",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 搜索歌曲列表",
+				"onReachBottomDistance": 100
+			}
 		}
 	],
 	"globalStyle": {

@@ -5,14 +5,14 @@
   >
     <template v-if="!songs.length">
       <view
-        v-for="({keyword}, index) in suggests"
+        v-for="(item, index) in suggests"
         :key="index"
         hover-class="bg-grey-1/10"
         hover-stay-time="50"
         class="text-white-1 text-base mb-1"
-        @tap="fetchSongs(keyword)"
+        @tap="keyword = item.keyword; fetchSongs(item.keyword)"
       >
-        {{ keyword }}
+        {{ item.keyword }}
       </view>
     </template>
 
@@ -21,6 +21,7 @@
         title="歌曲"
         clickable
         custom-class="mt-0"
+        :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
       />
 
       <Song
@@ -47,11 +48,8 @@ defineProps<{
 const statusBarHeight = useStatusBarHeight()
 const audioStore = useAudioStore()
 
+const keyword = ref('')
 const songs = shallowRef<Song[]>([])
-
-function clear() {
-  songs.value = []
-}
 
 function onSong(index: number) {
   audioStore.$patch(state => {
@@ -72,6 +70,10 @@ async function fetchSongs(keyword: string) {
 async function fetchArtist(keyword: string) {
   const { result } = await getSearch(keyword, 100, 0, 10)
   console.log('🚀 ~ file: SearchResult.vue:68 ~ fetchArtist ~ result:', result)
+}
+
+function clear() {
+  songs.value = []
 }
 
 defineExpose({ clear })
