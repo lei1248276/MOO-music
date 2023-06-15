@@ -1,6 +1,6 @@
 <template>
   <view
-    v-show="hidden"
+    v-show="!hidden"
     class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] left-[6%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
     :style="{ width: area + 'rpx'}"
   >
@@ -56,11 +56,11 @@ const size = 130
 const pivot = (area / 2) - (size / 2) // * 中心点
 let moved = -1 // * 被移动的距离
 
-const hidden = ref(true)
+const hidden = ref(false)
 const x = ref(pivot)
 
-onShow(() => { hidden.value = true })
-onHide(() => { hidden.value = false })
+onShow(() => { hidden.value = false })
+onHide(() => { hidden.value = true })
 
 function toPlay() {
   if (!audioStore.currentSongInfo) return

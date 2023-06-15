@@ -8,7 +8,17 @@ const audioStore = useAudioStore()
 const minute = ref('00')
 const seconds = ref('00')
 
-watch(() => audioStore.currentTime, () => {
+let unwatch: ReturnType<typeof watch> | undefined
+
+onShow(() => {
+  unwatch = watch(() => audioStore.currentTime, onWatchTime)
+})
+
+onHide(() => {
+  unwatch?.()
+})
+
+function onWatchTime() {
   if (!audioStore.duration) return
 
   const time = Math.floor(audioStore.duration - audioStore.currentTime)
@@ -22,5 +32,5 @@ watch(() => audioStore.currentTime, () => {
 
   minute.value = m
   seconds.value = s
-})
+}
 </script>
