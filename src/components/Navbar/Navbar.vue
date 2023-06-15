@@ -2,7 +2,7 @@
   <uni-nav-bar
     v-bind="$attrs"
     class="font-bold"
-    :title="$attrs.title as string || 'MOO'"
+    :title="$attrs.title as string || '🎵 MOO'"
     :left-icon="$props.leftArrow ? 'back' : undefined"
     background-color="#1a191b"
     color="#fffeff"

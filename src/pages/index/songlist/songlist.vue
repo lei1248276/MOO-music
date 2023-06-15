@@ -1,6 +1,6 @@
 <template>
   <Navbar
-    title="歌单列表"
+    title="🎵 歌单列表"
     left-arrow
     @click-left-icon="isShowPage = false"
   />

@@ -1,10 +1,10 @@
 <template>
   <view
-    class="box-border flex items-center mx-[28rpx] my-[20rpx]"
+    class="flex items-center mx-[28rpx] my-[20rpx]"
     :class="customClass"
   >
     <view
-      class="flex-1 flex justify-center items-center px-2 py-[4rpx]"
+      class="box-border h-[74rpx] flex-1 flex justify-center items-center px-2 py-[4rpx]"
       :style="{borderRadius: radius, backgroundColor: bgColor }"
       @tap="$emit('click')"
     >
@@ -19,7 +19,7 @@
       <input
         v-if="!readonly || focus || placeholder"
         :value="modelValue"
-        class="flex-1 text-[30rpx] mx-2"
+        class="flex-1 h-full text-[30rpx] mx-2"
         :placeholder="placeholder"
         :placeholder-style="placeholderStyle"
         :focus="focus"
@@ -37,6 +37,7 @@
       <view
         v-if="clearButton"
         v-show="modelValue"
+        class="btn-zoom"
         @tap="$emit('update:modelValue', ''); $emit('clear');"
       >
         <slot name="clearIcon">
@@ -54,7 +55,7 @@
       name="cancel"
     >
       <view
-        class="ml-[28rpx] text-white-1"
+        class="ml-[28rpx] text-white-1 btn-zoom"
         @tap="$emit('update:modelValue', ''); $emit('cancel')"
       >
         取消

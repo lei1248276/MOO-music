@@ -1,6 +1,6 @@
 <template>
   <Navbar
-    title="搜索"
+    title="🎵 搜索"
     left-arrow
     @click-left-icon="isShowPage = false"
   />

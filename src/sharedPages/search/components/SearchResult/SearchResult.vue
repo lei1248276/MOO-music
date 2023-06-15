@@ -14,7 +14,7 @@
         :key="index"
         hover-class="bg-grey-1/10"
         hover-stay-time="50"
-        class="text-white-1 text-base mb-1"
+        class="text-white-1 text-lg truncate py-1"
         @tap="onSelect(item.keyword)"
       >
         {{ item.keyword }}

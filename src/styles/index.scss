@@ -33,6 +33,10 @@
     animation-iteration-count: infinite;
   }
 
+  .btn-zoom{
+    @apply relative after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx]
+  }
+
   @keyframes enter {
     0% {
       opacity: 0;

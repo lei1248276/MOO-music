@@ -1,6 +1,6 @@
 <template>
   <Navbar
-    title="收藏音乐"
+    title="🎵 收藏音乐"
     left-arrow
     @click-left-icon="isShowPage = false"
   />

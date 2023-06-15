@@ -1,6 +1,6 @@
 <template>
   <Navbar
-    title="最近播放"
+    title="🎵 最近播放"
     left-arrow
     @click-left-icon="isShowPage = false"
   />
