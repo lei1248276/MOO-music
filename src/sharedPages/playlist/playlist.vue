@@ -21,13 +21,15 @@
 
         <Creator :userinfo="playlist.creator" />
 
-        <text
-          v-for="(tag, index) in playlist.tags"
-          :key="index"
-          class="inline-block px-4 py-1 text-[13px] text-black-1 rounded-full bg-yellow-1 mr-[20rpx] mb-[20rpx] font-bold"
+        <button
+          v-for="tag in playlist.tags"
+          :key="tag"
+          size="mini"
+          class="font-bold bg-yellow-1 text-black-1 rounded-full mr-[20rpx]"
+          @tap="toSearchSongs(tag)"
         >
-          {{ tag }}
-        </text>
+          #{{ tag }}
+        </button>
 
         <Subtitle
           icon="icon-menu"
@@ -121,6 +123,13 @@ onReachBottom(() => {
   fetchSongs()
 })
 
+function toSearchSongs(tag: string) {
+  uni.navigateTo({
+    url: `/sharedPages/searchSongs/searchSongs?keyword=${tag}`,
+    fail: (err) => { console.error(err) }
+  })
+}
+
 function onSong(index: number) {
   console.log('🚀 ~ file: playlist.vue:121 ~ onSong ~ song:', songs[index])
   audioStore.$patch(state => {
@@ -140,7 +149,6 @@ async function fetchSongs() {
   console.log('🚀 ~ file: playlist.vue:129 ~ fetchSongs ~ newSongs:', newSongs)
 
   songs.push(...newSongs)
-  // this.setData(spreadArray(newSongs, songs, 'songs'))
 }
 
 async function fetchPlaylist(id: number) {
