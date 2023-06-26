@@ -71,11 +71,10 @@ function toPlay() {
   if (isStop) return
 
   // * 默认点击跳转到"play"页面，如果上一页面就是"play"那么直接返回
-  const path = 'sharedPages/play/play'
-  const pages = getCurrentPages()
-  pages[pages.length - 2]?.route === path
-    ? uni.navigateBack()
-    : uni.navigateTo({ url: `/${path}`, fail: (err) => { console.error(err) } })
+  uni.navigateTo({
+    url: `/sharedPages/play/play`,
+    fail: (err) => { console.error(err) }
+  })
 }
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {
