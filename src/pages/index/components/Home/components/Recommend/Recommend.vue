@@ -4,11 +4,11 @@
       <JImage
         v-for="(item, index) in recommendList"
         :key="index"
-        :class="index === 0 ? 'left-0' : index === 1 ? 'x-mid z-10' : 'right-0'"
-        custom-class="absolute bottom-0 w-[180rpx] h-full"
+        :class="index === 0 ? 'left-0' : index === 1 ? 'x-mid z-10 !h-[120%]' : 'right-0'"
+        class="absolute bottom-0 w-[180rpx] h-full"
         :src="item.picUrl + '?param=100y100'"
         width="180rpx"
-        :height="index === 1 ? '120%' : '100%'"
+        height="100%"
         radius="8rpx"
         @click="toPlaylist(item)"
       />
@@ -45,11 +45,12 @@ const isRun = ref(false)
 
 fetchRecommend()
 
-function toPlaylist(item: Recommend) {
+async function toPlaylist(item: Recommend) {
+  const { playlist } = await getPlaylist(item.id)
+
   uni.navigateTo({
     url: `/sharedPages/playlist/playlist?id=${item.id}`,
-    success: async(res) => {
-      const { playlist } = await getPlaylist(item.id)
+    success: (res) => {
       res.eventChannel.emit('acceptPlaylist', playlist)
     },
     fail: (err) => { console.error(err) }
