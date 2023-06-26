@@ -15,6 +15,7 @@
       <Songlist
         :songlist="songlist"
         custom-class="min-h-full bg-black-2 px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]"
+        @click="toPlaylist"
       />
     <!-- #ifdef H5 -->
     </H5BackTransition>
@@ -41,6 +42,16 @@ fetchSonglist()
 onReachBottom(() => {
   songlist.length !== total && fetchSonglist()
 })
+
+function toPlaylist(item: Songlist) {
+  uni.navigateTo({
+    url: `/sharedPages/playlist/playlist`,
+    success: (res) => {
+      res.eventChannel.emit('acceptSonglist', item)
+    },
+    fail: (err) => { console.error(err) }
+  })
+}
 
 async function fetchSonglist() {
   const { playlists, total: _total } = await getSonglist(songlist.length, limit)

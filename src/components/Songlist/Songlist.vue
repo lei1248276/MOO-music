@@ -7,7 +7,7 @@
       v-for="item in songlist"
       :key="item.id"
       class="animate-content w-[48%] h-[420rpx] mb-[20rpx] rounded-[20rpx] font-bold text-white-1 relative"
-      @click="toPlaylist(item)"
+      @click="$emit('click',item)"
     >
       <JImage
         :src="item.coverImgUrl + '?param=200y200'"
@@ -30,13 +30,7 @@ defineProps<{
   customClass?: string
 }>()
 
-function toPlaylist(item: Songlist) {
-  uni.navigateTo({
-    url: `/sharedPages/playlist/playlist`,
-    success: (res) => {
-      res.eventChannel.emit('acceptSonglist', item)
-    },
-    fail: (err) => { console.error(err) }
-  })
-}
+defineEmits<{
+  (e: 'click', item: Songlist): void
+}>()
 </script>
