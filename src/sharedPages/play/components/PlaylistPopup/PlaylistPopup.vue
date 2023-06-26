@@ -143,8 +143,18 @@ function onScrollToLower() {
 }
 
 function toPlaylist() {
+  const routes = getCurrentPages()
+  const from = routes[routes.length - 2]
+  const isPlaylist = from.route === 'sharedPages/playlist/playlist'
+
+  // @ts-ignore
+  if (isPlaylist && Number(from.$page?.options?.id) === audioStore.playlist?.id) {
+    onClose()
+    return uni.navigateBack()
+  }
+
   uni.navigateTo({
-    url: `/sharedPages/playlist/playlist`,
+    url: `/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`,
     success: (res) => {
       res.eventChannel.emit('acceptPlaylist', audioStore.playlist)
       onClose()

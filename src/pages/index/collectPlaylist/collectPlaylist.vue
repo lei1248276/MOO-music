@@ -105,7 +105,7 @@ onReachBottom(() => {
 
 function toPlaylist(index: number) {
   uni.navigateTo({
-    url: `/sharedPages/playlist/playlist`,
+    url: `/sharedPages/playlist/playlist?id=${lazyList[index].id}`,
     success: (res) => { res.eventChannel.emit('acceptPlaylist', lazyList[index]) },
     fail: (err) => { console.error(err) }
   })

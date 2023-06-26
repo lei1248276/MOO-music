@@ -29,7 +29,7 @@ fetchNewSong()
 
 function toPlaylist() {
   uni.navigateTo({
-    url: `/sharedPages/playlist/playlist`,
+    url: `/sharedPages/playlist/playlist?id=${playlist.value?.id}`,
     success: (res) => { res.eventChannel.emit('acceptPlaylist', playlist.value) },
     fail: (err) => { console.error(err) }
   })

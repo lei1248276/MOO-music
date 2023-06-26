@@ -86,12 +86,6 @@ const isShowPlaylist = ref(false) // * 是否显示播放列表
 const isShowPage = ref(true)
 // #endif
 
-// #ifndef MP-WEIXIN
-onBackPress(() => { // * 在播放列表弹窗开启的情况下进行返回操作（或误操作），先执行关闭列表弹窗
-  if (isShowPlaylist.value) return !(isShowPlaylist.value = false)
-})
-// #endif
-
 function onPlayController(isStop: (is: boolean) => boolean) {
   // * 在播放列表弹窗开启的情况下点击controller（或误操作），先执行关闭列表弹窗
   if (isShowPlaylist.value) return isStop(!(isShowPlaylist.value = false))

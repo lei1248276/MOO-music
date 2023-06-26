@@ -45,7 +45,7 @@ onReachBottom(() => {
 
 function toPlaylist(item: Songlist) {
   uni.navigateTo({
-    url: `/sharedPages/playlist/playlist`,
+    url: `/sharedPages/playlist/playlist?id=${item.id}`,
     success: (res) => {
       res.eventChannel.emit('acceptSonglist', item)
     },

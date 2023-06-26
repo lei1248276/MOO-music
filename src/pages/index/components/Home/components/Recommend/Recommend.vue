@@ -47,7 +47,7 @@ fetchRecommend()
 
 function toPlaylist(item: Recommend) {
   uni.navigateTo({
-    url: `/sharedPages/playlist/playlist`,
+    url: `/sharedPages/playlist/playlist?id=${item.id}`,
     success: async(res) => {
       const { playlist } = await getPlaylist(item.id)
       res.eventChannel.emit('acceptPlaylist', playlist)
