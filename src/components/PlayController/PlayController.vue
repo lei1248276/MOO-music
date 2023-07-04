@@ -23,7 +23,11 @@
           :width="size + 'rpx'"
           :height="size + 'rpx'"
           class="will-change-transform"
-          :class="audioStore.isPlay ? 'play-controller--play' : 'play-controller--pause'"
+          :class="audioStore.isLoading
+            ? 'animate-bounce [animation-delay:400ms]'
+            : audioStore.isPlay
+              ? 'animate-spin [animation-duration:5s]'
+              : 'animate-spin [animation-duration:5s] [animation-play-state:paused]'"
           @click="toPlay"
         />
       </movable-view>
@@ -110,23 +114,3 @@ function onMoveEnd() {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.play-controller--play {
-  animation: audioPlay 5s linear infinite;
-  animation-play-state: running;
-}
-.play-controller--pause {
-  animation: audioPlay 5s linear infinite;
-  animation-play-state: paused;
-}
-
-@keyframes audioPlay {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-</style>
