@@ -10,7 +10,14 @@ interface SongInfo {
   urlInfo: SongURL
 }
 
-let cacheStore: ReturnType<typeof useCacheStore>
+// * 懒加载：使用时再进行重写
+const cacheStore: {value: ReturnType<typeof useCacheStore>} = {
+  get value() {
+    // @ts-ignore
+    delete this.value
+    return (this.value = useCacheStore())
+  }
+}
 
 export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
@@ -61,8 +68,7 @@ export const useAudioStore = defineStore('audio', () => {
       audio.src = transHTTPS(urlInfo.url)
 
       // * 添加历史播放歌曲
-      cacheStore || (cacheStore = useCacheStore())
-      if (songs.value !== cacheStore.historyPlays) cacheStore.historyPlays.unshift(song)
+      if (songs.value !== cacheStore.value.historyPlays) cacheStore.value.historyPlays.unshift(song)
     } catch (error) {
       (audio.pause(), toast.fail('播放地址失效'))
       currentSongInfo.value = undefined

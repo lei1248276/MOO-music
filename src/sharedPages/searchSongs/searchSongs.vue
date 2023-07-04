@@ -1,6 +1,6 @@
 <template>
   <Navbar
-    title="🎵 搜索歌曲列表"
+    :title="'🎵 ' + title"
     left-arrow
     @click-left-icon="isShowPage = false"
   />
@@ -63,12 +63,13 @@ const isShowPage = ref(true)
 const statusBarHeight = useStatusBarHeight()
 const audioStore = useAudioStore()
 
+const title = ref('搜索歌曲列表')
 const keyword = ref('')
 const songs = shallowReactive<Song[]>([])
 const songCount = ref(0)
 
 onLoad((query) => {
-  keyword.value = (query as { keyword: string }).keyword
+  title.value = keyword.value = (query as { keyword: string }).keyword
   console.log('🚀 ~ file: searchSongs.vue:9 ~ onLoad ~ keyword:', keyword.value)
   fetchSongs(keyword.value)
 })
