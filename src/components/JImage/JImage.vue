@@ -7,20 +7,20 @@
   >
     <view
       v-if="!loaded"
-      class="alt w-full h-full"
+      class="relative alt w-full h-full before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 animate-pulse"
     />
 
     <image
-      v-if="!lazyLoad || loading || loaded"
-      class="w-full h-full"
-      :style="{ transition: 'opacity 1s', opacity: loaded ? 1 : 0 }"
+      v-if="!lazyLoad || loading"
+      class="w-full h-full transition-opacity duration-1000"
+      :class="loaded ? 'opacity-100' : 'opacity-0'"
       :src="transHTTPS(src)"
       :mode="mode"
       :fade-show="fadeShow"
       :webp="webp"
       :show-menu-by-longpress="showMenuByLongpress"
       :draggable="draggable"
-      @load="() => loaded = true"
+      @load="loaded = true"
     />
   </view>
 </template>
