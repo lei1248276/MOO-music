@@ -15,8 +15,11 @@ onLaunch(() => {
     if (!audio.duration) return setTimeout(() => { getDuration() }, 333)
 
     console.log('onCanplay.duration: ', audio.duration)
-    audioStore.duration = audio.duration
-    audio.play()
+    audioStore.$patch((state) => {
+      state.isLoading = false
+      state.duration = audio.duration
+      audio.play()
+    })
   }
   audio.onCanplay(getDuration)
 
@@ -52,6 +55,10 @@ onLaunch(() => {
   audio.onError((err) => {
     toast.fail('链接无效')
     console.error(err)
+    audioStore.$patch((state) => {
+      state.isLoading = false
+      state.isPlay = false
+    })
   })
 })
 

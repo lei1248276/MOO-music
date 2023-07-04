@@ -14,6 +14,7 @@ let cacheStore: ReturnType<typeof useCacheStore>
 
 export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
+  const isLoading = ref(false) // * 是否缓冲中
   const isPlay = ref(false)
   const duration = ref(0) // * 当前歌曲时长
   const currentTime = ref(0) // * 当前歌曲播放时间
@@ -44,28 +45,31 @@ export const useAudioStore = defineStore('audio', () => {
   async function setCurrentSong(song: Song, index: number) {
     if (currentSongInfo.value?.song.id === song.id) return (audio.seek(0), audio.play())
 
-    currentSongIndex.value = index
-    const { data: [urlInfo] } = await getSongURL(song.id)
-    console.log('🚀 ~ file: audio.ts:58 ~ setCurrentSong ~ urlInfo:', urlInfo)
+    try {
+      isLoading.value = true
+      currentSongIndex.value = index
+      const { data: [urlInfo] } = await getSongURL(song.id)
+      console.log('🚀 ~ file: audio.ts:58 ~ setCurrentSong ~ urlInfo:', urlInfo)
 
-    if (!urlInfo.url) {
+      if (!urlInfo.url) throw new Error('播放地址失效')
+
+      currentSongInfo.value = { song, urlInfo }
+      audio.title = song.name
+      audio.epname = song.al.name
+      audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
+      audio.coverImgUrl = song.al.picUrl
+      audio.src = transHTTPS(urlInfo.url)
+
+      // * 添加历史播放歌曲
+      cacheStore || (cacheStore = useCacheStore())
+      if (songs.value !== cacheStore.historyPlays) cacheStore.historyPlays.unshift(song)
+    } catch (error) {
       (audio.pause(), toast.fail('播放地址失效'))
       currentSongInfo.value = undefined
+      isLoading.value = false
       isPlay.value = false
       duration.value = 0
-      return
     }
-
-    currentSongInfo.value = { song, urlInfo }
-    audio.title = song.name
-    audio.epname = song.al.name
-    audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
-    audio.coverImgUrl = song.al.picUrl
-    audio.src = transHTTPS(urlInfo.url)
-
-    // * 添加历史播放歌曲
-    cacheStore || (cacheStore = useCacheStore())
-    if (songs.value !== cacheStore.historyPlays) cacheStore.historyPlays.unshift(song)
   }
 
   function toggle() {
@@ -76,6 +80,7 @@ export const useAudioStore = defineStore('audio', () => {
 
   return {
     audio,
+    isLoading,
     isPlay,
     duration,
     currentTime,
