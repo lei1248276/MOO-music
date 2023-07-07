@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import type { BannerResponse } from '@/api/interface/Banner'
 import type { RecommendResponse } from '@/api/interface/Recommend'
-import type { AlbumResponse } from '@/api/interface/Album'
+import type { NewAlbumResponse } from '@/api/interface/NewAlbum'
 import type { SonglistResponse } from '@/api/interface/Songlist'
 
 export { getPlaylist } from '@/api/playlist'
@@ -27,6 +27,6 @@ export function getNewSong() {
 }
 
 // * 获取新专辑
-export function getNewAlbum(limit = 3) {
-  return request.get<any, AlbumResponse>(`/album/list?limit=${limit}`)
+export function getNewAlbum() {
+  return request.get<any, NewAlbumResponse>(`/album/newest`)
 }
