@@ -6,7 +6,7 @@
   />
 
   <Song
-    v-for="(song, index) in songs"
+    v-for="(song, index) in songs.slice(0, 4)"
     :key="song.id"
     :song="song"
     :is-play="audioStore.isPlay"
@@ -44,14 +44,18 @@ function onSong(index: number) {
 }
 
 async function fetchNewSong() {
-  // const data = await getNewSong()
-  // console.log('🚀 ~ file: NewSong.vue:53 ~ fetchNewSong ~ data:', data)
+  const { result } = await getNewSong()
+  console.log('🚀 ~ file: NewSong.vue:48 ~ fetchNewSong ~ result:', result)
+  songs.push(...result.map(({ song }) => ({
+    id: song.id,
+    name: song.name,
+    ar: song.artists,
+    al: song.album
+  })))
+
+  // * 后续重写新歌页面
   const { result: [{ id }] } = await getRecommend(1)
   const { playlist: _playlist } = await getPlaylist(id)
-  const tracks = _playlist.tracks ? _playlist.tracks.slice(0, 4) : []
-  console.log('🚀 ~ file: NewSong.vue:31 ~ fetchNewSong ~ tracks:', tracks)
-
   playlist.value = _playlist
-  songs.push(...tracks)
 }
 </script>

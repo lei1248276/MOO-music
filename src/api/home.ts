@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 import type { BannerResponse } from '@/api/interface/Banner'
 import type { RecommendResponse } from '@/api/interface/Recommend'
+import type { NewSongResponse } from './interface/NewSong'
 import type { NewAlbumResponse } from '@/api/interface/NewAlbum'
 import type { SonglistResponse } from '@/api/interface/Songlist'
 
@@ -23,7 +24,7 @@ export function getNewSonglist(offset: number, limit: number) {
 
 // * 获取新歌
 export function getNewSong() {
-  return request.get(`/personalized/newsong`)
+  return request.get<any, NewSongResponse>(`/personalized/newsong`)
 }
 
 // * 获取新专辑
