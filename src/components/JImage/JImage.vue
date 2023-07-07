@@ -11,7 +11,7 @@
     />
 
     <image
-      v-if="!lazyLoad || loading"
+      v-if="!lazyLoad || loading || loaded"
       class="w-full h-full transition-opacity duration-1000"
       :class="loaded ? 'opacity-100' : 'opacity-0'"
       :src="transHTTPS(src)"
@@ -58,10 +58,11 @@ defineEmits(['click'])
 const loading = ref(false)
 const loaded = ref(false)
 
+let observer: ReturnType<typeof uni.createIntersectionObserver> | undefined
 onMounted(() => {
   if (!props.lazyLoad) return
 
-  const observer = uni.createIntersectionObserver(getCurrentInstance()?.proxy)
+  observer = uni.createIntersectionObserver(getCurrentInstance()?.proxy)
   observer.relativeToViewport({ bottom: 100 }).observe(`.alt`, (res) => {
     if (res.intersectionRatio === 0) return
 
@@ -69,5 +70,8 @@ onMounted(() => {
     // console.log('🚀', res.intersectionRatio)
     observer?.disconnect()
   })
+})
+onUnmounted(() => {
+  observer?.disconnect()
 })
 </script>
