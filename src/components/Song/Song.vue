@@ -46,7 +46,20 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/api/interface/Song'
+export interface Song {
+  id: number
+  name: string
+  ar: {
+    id: number
+    name: string
+  }[],
+  al: {
+    id: number
+    name: string
+    picUrl: string
+    pic: number
+  }
+}
 
 defineProps<{
   song: Song

@@ -1,5 +1,5 @@
 import type { Playlist } from '@/api/interface/Playlist'
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 import type { SongURL } from '@/api/interface/SongURL'
 import { getSongURL } from '@/api/play'
 import toast from '@/utils/toast'

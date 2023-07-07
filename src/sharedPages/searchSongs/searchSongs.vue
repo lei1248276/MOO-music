@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/api/interface/Search'
 import { getSearch } from '@/api/search'
 
 // #ifdef H5

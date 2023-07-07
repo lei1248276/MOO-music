@@ -18,12 +18,11 @@
 <script setup lang="ts">
 import { getRecommend, getPlaylist, getNewSong } from '@/api/home'
 import type { Playlist } from '@/api/interface/Playlist'
-import type { Song } from '@/api/interface/Song'
 
 const audioStore = useAudioStore()
 
 const playlist = shallowRef<Playlist>()
-const songs = shallowReactive<Song[]>([])
+const songs = shallowReactive<Playlist['tracks']>([])
 
 fetchNewSong()
 

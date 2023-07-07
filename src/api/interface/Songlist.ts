@@ -1,4 +1,4 @@
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 
 export interface SonglistResponse {
   playlists: Songlist[]

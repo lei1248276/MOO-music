@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import type { Playlist } from '@/api/interface/Playlist'
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 
 const props = defineProps<{
   tags: Playlist['tags']

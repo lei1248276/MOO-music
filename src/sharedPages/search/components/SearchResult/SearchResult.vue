@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import type { Suggests } from '@/api/interface/SearchSuggest'
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 import { getSearch } from '@/api/search'
 import SearchHistory from '../SearchHistory/SearchHistory.vue'
 

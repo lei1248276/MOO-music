@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 import { throttle } from '@/utils/util'
 

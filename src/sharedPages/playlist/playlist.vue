@@ -75,7 +75,6 @@
 <script setup lang="ts">
 import type { Songlist } from '@/api/interface/Songlist'
 import type { Playlist } from '@/api/interface/Playlist'
-import type { Song } from '@/api/interface/Song'
 import { getPlaylist } from '@/api/playlist'
 import { getSongs } from '@/api/playlist'
 import Cover from './components/Cover/Cover.vue'
@@ -85,7 +84,7 @@ const audioStore = useAudioStore()
 
 const title = ref('')
 const playlist = shallowRef<Playlist>()
-const songs = shallowReactive<Song[]>([])
+const songs = shallowReactive<Playlist['tracks']>([])
 
 // #ifdef H5
 const isShowPage = ref(true)

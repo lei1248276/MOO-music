@@ -1,4 +1,4 @@
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 import type { Playlist } from '@/api/interface/Playlist'
 
 export const useCacheStore = defineStore('cache', () => {

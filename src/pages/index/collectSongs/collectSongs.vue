@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 
 const audioStore = useAudioStore()
 const cacheStore = useCacheStore()

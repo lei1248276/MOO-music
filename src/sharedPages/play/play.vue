@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/api/interface/Song'
+import type { Song } from '@/components/Song/Song.vue'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 import NavBack from './components/NavBack/NavBack.vue'
 import SongInfo from './components/SongInfo/SongInfo.vue'
