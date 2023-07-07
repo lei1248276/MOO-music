@@ -3,6 +3,7 @@
   <uni-transition
     v-bind="$attrs"
     :mode-class="['slide-right']"
+    class="w-full h-full"
     @change="onShowChange"
   >
     <!-- * 嵌套一层"view"用于解决'uni-transition'重新渲染状态重置问题（网页端"view"也是组件） -->

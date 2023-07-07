@@ -7,10 +7,7 @@
 
   <template v-if="songlist.length">
     <!-- #ifdef H5 -->
-    <H5BackTransition
-      :show="isShowPage"
-      class="w-full h-full"
-    >
+    <H5BackTransition :show="isShowPage">
       <!-- #endif -->
       <Songlist
         :songlist="songlist"

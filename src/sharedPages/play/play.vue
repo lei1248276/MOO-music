@@ -1,9 +1,6 @@
 <template>
   <!-- #ifdef H5 -->
-  <H5BackTransition
-    :show="isShowPage"
-    class="w-full h-full"
-  >
+  <H5BackTransition :show="isShowPage">
     <!-- #endif -->
     <view class="w-full h-full relative">
       <NavBack @back="isShowPage = false" />
