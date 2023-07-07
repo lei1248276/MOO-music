@@ -7,8 +7,11 @@ import type { SonglistResponse } from '@/api/interface/Songlist'
 
 export { getPlaylist } from '@/api/playlist'
 
-// * 获取轮播图（0: pc 1: android 2: iphone 3: ipad）
-export function getBanner(type: 0 | 1 | 2 | 3 = 1) {
+/**
+ * @description 获取轮播图
+ * @param type: 0 pc, 1 android, 2 iphone, 3 ipad（默认：2）
+*/
+export function getBanner(type: 0 | 1 | 2 | 3 = 2) {
   return request.get<any, BannerResponse>(`/banner?type=${type}`)
 }
 
