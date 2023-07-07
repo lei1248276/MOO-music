@@ -2,6 +2,7 @@
   <Subtitle
     title="MOO Album_专辑"
     clickable
+    url="./albumList/albumList"
   />
 
   <Album

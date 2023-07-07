@@ -16,6 +16,14 @@
 			}
 		},
 		{
+			"path": "pages/index/albumList/albumList",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 专辑列表",
+				"onReachBottomDistance": 100
+			}
+		},
+		{
 			"path": "pages/index/collectSongs/collectSongs",
 			"style": {
 				"navigationStyle": "custom",
