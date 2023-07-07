@@ -8,7 +8,7 @@
   <!-- #ifdef H5 -->
   <H5BackTransition :show="isShowPage">
     <!-- #endif -->
-    <view class="box-border px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+    <view class="box-border overflow-x-hidden px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
       <template
         v-for="album in albumList"
         :key="album.id"
