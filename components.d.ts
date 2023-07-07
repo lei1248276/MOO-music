@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Album: typeof import('./src/components/Album/Album.vue')['default']
     Countdown: typeof import('./src/components/Countdown/Countdown.vue')['default']
     H5BackTransition: typeof import('./src/components/H5BackTransition/H5BackTransition.vue')['default']
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
