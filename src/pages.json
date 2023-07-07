@@ -66,6 +66,13 @@
 				"navigationBarTitleText": "🎵 搜索歌曲列表",
 				"onReachBottomDistance": 100
 			}
+		},
+		{
+			"path": "sharedPages/album/album",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 专辑"
+			}
 		}
 	],
 	"globalStyle": {
