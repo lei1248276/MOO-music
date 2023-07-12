@@ -1,6 +1,14 @@
 import type { Song } from '@/components/Song/Song.vue'
 import type { Playlist } from '@/api/interface/Playlist'
 
+const audioStore: {value: ReturnType<typeof useAudioStore>} = {
+  get value() {
+    // @ts-ignore
+    delete this.value
+    return (this.value = useAudioStore())
+  }
+}
+
 export const useCacheStore = defineStore('cache', () => {
   const historySearch = shallowReactive<string[]>([])
   const historyPlays = shallowReactive<Song[]>([])
@@ -17,23 +25,19 @@ export const useCacheStore = defineStore('cache', () => {
     if (historySearch.length > 10) historySearch.length = 10
   }
 
-  function setCollectSongs() {
+  function setupCache() {
     uni.setStorage({
       key: 'collectSongs',
       data: collectSongs,
       fail(err) { console.error(err) }
     })
-  }
 
-  function setCollectPlaylist() {
     uni.setStorage({
       key: 'collectPlaylist',
       data: collectPlaylist,
       fail(err) { console.error(err) }
     })
-  }
 
-  function setHistorySearch() {
     uni.setStorage({
       key: 'historySearch',
       data: historySearch,
@@ -59,14 +63,26 @@ export const useCacheStore = defineStore('cache', () => {
     fail(err) { console.error(err) }
   })
 
+  audioStore.value.$onAction(({ name, after }) => {
+    // * 添加历史播放歌曲
+    after(() => {
+      const { currentSongIndex, songs } = audioStore.value
+      if (!songs.length) return
+
+      switch (name) {
+        case 'setPreSong':
+        case 'setNextSong':
+        case 'setCurrentSong': historyPlays.unshift(songs[currentSongIndex])
+      }
+    })
+  })
+
   return {
     historySearch,
     historyPlays,
     collectSongs,
     collectPlaylist,
     addHistorySearch,
-    setCollectSongs,
-    setCollectPlaylist,
-    setHistorySearch
+    setupCache
   }
 })

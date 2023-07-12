@@ -11,13 +11,13 @@ interface SongInfo {
 }
 
 // * 懒加载：使用时再进行重写
-const cacheStore: {value: ReturnType<typeof useCacheStore>} = {
+/* const cacheStore: {value: ReturnType<typeof useCacheStore>} = {
   get value() {
     // @ts-ignore
     delete this.value
     return (this.value = useCacheStore())
   }
-}
+} */
 
 export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
@@ -60,15 +60,7 @@ export const useAudioStore = defineStore('audio', () => {
 
       if (!urlInfo.url) throw new Error('播放地址失效')
 
-      currentSongInfo.value = { song, urlInfo }
-      audio.title = song.name
-      audio.epname = song.al.name
-      audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
-      audio.coverImgUrl = song.al.picUrl
-      audio.src = transHTTPS(urlInfo.url)
-
-      // * 添加历史播放歌曲
-      if (songs.value !== cacheStore.value.historyPlays) cacheStore.value.historyPlays.unshift(song)
+      setBackgroundAudio(currentSongInfo.value = { song, urlInfo })
     } catch (error) {
       (audio.pause(), toast.fail('播放地址失效'))
       currentSongInfo.value = undefined
@@ -78,10 +70,71 @@ export const useAudioStore = defineStore('audio', () => {
     }
   }
 
+  function setBackgroundAudio({ song, urlInfo }: SongInfo) {
+    audio.title = song.name
+    audio.epname = song.al.name
+    audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
+    audio.coverImgUrl = song.al.picUrl
+    audio.src = transHTTPS(urlInfo.url)
+  }
+
   function toggle() {
     if (!currentSongInfo.value) return
 
     isPlay.value ? audio.pause() : audio.play()
+  }
+
+  function setupAudio() {
+  // @ts-ignore
+    audio.autoplay = true
+
+    // * 小程序的BUG：需要多次获取
+    function getDuration() {
+      if (!audio.duration) return setTimeout(() => { getDuration() }, 333)
+
+      console.log('onCanplay.duration: ', audio.duration)
+      isLoading.value = false
+      duration.value = audio.duration
+      audio.play()
+    }
+    audio.onCanplay(getDuration)
+
+    audio.onPlay(() => {
+      console.log('onPlay: ')
+      isPlay.value = true
+    })
+
+    audio.onPause(() => {
+      console.log('onPause: ')
+      isPlay.value = false
+    })
+
+    audio.onEnded(() => {
+      console.log('onEnded: ')
+      setNextSong()
+    })
+
+    audio.onTimeUpdate(() => {
+      currentTime.value = audio.currentTime
+    })
+
+    audio.onNext?.(() => {
+      console.log('onNext: ')
+      setNextSong()
+    })
+
+    audio.onPrev?.(() => {
+      console.log('onPrev: ')
+      setPreSong()
+    })
+
+    audio.onError((err) => {
+      toast.fail('链接无效')
+      console.error(err)
+
+      isLoading.value = false
+      isPlay.value = false
+    })
   }
 
   return {
@@ -97,6 +150,7 @@ export const useAudioStore = defineStore('audio', () => {
     setPreSong,
     setCurrentSong,
     setNextSong,
-    toggle
+    toggle,
+    setupAudio
   }
 })
