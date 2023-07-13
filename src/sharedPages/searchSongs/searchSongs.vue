@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/api/interface/Search'
+import type { SearchSongResponse, Song } from '@/api/interface/SearchSong'
 import { getSearch } from '@/api/search'
 
 // #ifdef H5
@@ -88,7 +88,7 @@ function onSong(index: number) {
 }
 
 async function fetchSongs(keyword: string) {
-  const { result } = await getSearch(keyword, 1, songs.length, 20)
+  const { result } = await getSearch<SearchSongResponse>(keyword, 1, songs.length, 20)
   console.log('🚀 ~ file: Search.vue:93 ~ fetchSongs ~ songs:', result.songs, result.songCount)
   songs.push(...result.songs as Song[])
   songCount.value = result.songCount

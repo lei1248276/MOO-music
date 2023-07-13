@@ -15,8 +15,8 @@
     :cancel-button="isOpen"
     @click="isOpen = true; popupRef?.open?.()"
     @cancel="isOpen = false; popupRef?.close?.()"
-    @clear="suggests = []; searchResultRef?.clear()"
-    @confirm="searchResultRef?.fetchSongs(search); cacheStore.addHistorySearch(search)"
+    @clear="searchResultRef?.clear()"
+    @confirm="onSearch(search)"
   >
     <template #searchIcon>
       <JIcon custom-class="icon-search text-[60rpx] text-yellow-1" />
@@ -45,8 +45,7 @@
   >
     <SearchResult
       ref="searchResultRef"
-      :suggests="suggests"
-      @vnode-unmounted="suggests = []"
+      v-model:suggests="suggests"
     />
   </uni-popup>
 
@@ -65,8 +64,6 @@ import { getSearchSuggest } from '@/api/search'
 const isShowPage = ref(true)
 // #endif
 
-const cacheStore = useCacheStore()
-
 const search = ref('')
 const suggests = shallowRef<Suggests[]>([])
 const isOpen = ref(false)
@@ -81,17 +78,15 @@ onMounted(() => {
 watch(search, (val, oldVal) => {
   if (val && val.trim() !== oldVal.trim()) {
     fetchSearchSuggest(val)
-    searchResultRef.value?.clear()
   }
 })
 
 function onSearch(keyword: string) {
-  isOpen.value = true
-  popupRef.value?.open?.()
-  nextTick(() => {
-    searchResultRef.value?.fetchSongs(keyword)
-    cacheStore.addHistorySearch(keyword)
-  })
+  if (!isOpen.value) {
+    isOpen.value = true
+    popupRef.value?.open?.()
+  }
+  nextTick(() => { searchResultRef.value?.onSelect(keyword) })
 }
 
 async function fetchSearchSuggest(keywords:string) {
