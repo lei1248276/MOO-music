@@ -59,7 +59,10 @@ const keyword = ref('')
 const songs = shallowRef<Song[]>([])
 
 // #ifdef H5
-onMounted(() => {
+onShow(() => {
+  document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+})
+onHide(() => {
   // * 因为uni-popup禁止了页面滚动导致后续跳转页面滚动失效，所以将其还原
   document.getElementsByTagName('body')[0].style.overflow = 'visible'
 })
