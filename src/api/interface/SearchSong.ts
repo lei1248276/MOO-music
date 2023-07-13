@@ -1,9 +1,9 @@
-export interface SearchResponse {
-  result: Result
+export interface SearchSongResponse {
+  result: SongResult
   code: number
 }
 
-export interface Result {
+export interface SongResult {
   searchQcReminder: any
   songs: Song[]
   songCount: number
