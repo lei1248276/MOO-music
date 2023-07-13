@@ -43,6 +43,7 @@
         title="专辑"
         clickable
         custom-class="mt-0"
+        :url="`/sharedPages/searchAlbums/searchAlbums?keyword=${keyword}`"
       />
       <Album
         v-for="album in albums"

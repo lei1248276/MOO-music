@@ -51,13 +51,22 @@
 			"path": "sharedPages/playlist/playlist",
 			"style": {
 				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 歌单",
 				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "sharedPages/album/album",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 专辑"
 			}
 		},
 		{
 			"path": "sharedPages/play/play",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵"
 			}
 		},
 		{
@@ -76,10 +85,11 @@
 			}
 		},
 		{
-			"path": "sharedPages/album/album",
+			"path": "sharedPages/searchAlbums/searchAlbums",
 			"style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "🎵 专辑"
+				"navigationBarTitleText": "🎵 搜索专辑列表",
+				"onReachBottomDistance": 100
 			}
 		}
 	],
