@@ -8,10 +8,11 @@
   <!-- #ifdef H5 -->
   <H5BackTransition :show="isShowPage">
     <!-- #endif -->
-    <view class="box-border overflow-x-hidden px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
-      <template
+    <view class="animate-enter-content box-border overflow-x-hidden px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+      <view
         v-for="album in albumList"
         :key="album.id"
+        class="animate-content"
       >
         <text class="inline-block text-grey-1 text-[30rpx] font-bold mb-2">
           更新于  {{ parseTime(album.publishTime, '{y}-{m}-{d}') }}
@@ -20,7 +21,7 @@
           :album="album"
           @click="toAlbum(album.id)"
         />
-      </template>
+      </view>
     </view>
   <!-- #ifdef H5 -->
   </H5BackTransition>

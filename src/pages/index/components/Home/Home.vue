@@ -11,7 +11,7 @@
     :refresher-triggered="refreshTrigger"
     @refresherrefresh="onRefresh"
   >
-    <view class="px-[28rpx] pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+    <view class="px-[28rpx] pb-[var(--save-bottom)]">
       <Carousel />
 
       <Recommend ref="recommend" />

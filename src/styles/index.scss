@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import '@/styles/iconfont/iconfont.css';
+
 @layer components {
   .alt {
     width: 100%;
@@ -80,6 +82,14 @@
 }
 
 @layer base {
+  page{
+    --save-bottom: calc(150rpx + env(safe-area-inset-bottom));
+
+    width: 100%;
+    height: 100%;
+    background-color: #1a191b !important;
+  }
+
   ::before,
   ::after {
     --tw-content: '';

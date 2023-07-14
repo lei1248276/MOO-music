@@ -9,7 +9,7 @@
     <!-- #ifdef H5 -->
     <H5BackTransition :show="isShowPage">
       <!-- #endif -->
-      <view class="px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+      <view class="px-[28rpx] after:block after:pb-[var(--save-bottom)]">
         <JImage
           :src="album.picUrl + '?param=300y300'"
           width="500rpx"

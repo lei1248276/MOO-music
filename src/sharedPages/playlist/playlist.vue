@@ -9,7 +9,7 @@
     <!-- #ifdef H5 -->
     <H5BackTransition :show="isShowPage">
       <!-- #endif -->
-      <view class="min-h-full px-[28rpx] bg-black-2 after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+      <view class="min-h-full px-[28rpx] bg-black-2 after:block after:pb-[var(--save-bottom)]">
         <Cover
           :playlist="playlist"
           :image="playlist.coverImgUrl"

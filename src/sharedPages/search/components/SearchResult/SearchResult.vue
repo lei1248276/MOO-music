@@ -1,6 +1,6 @@
 <template>
   <view
-    class="bg-black-2 fixed bottom-0 right-0 left-0 px-[28rpx] overflow-y-auto after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]"
+    class="bg-black-2 fixed bottom-0 right-0 left-0 px-[28rpx] overflow-y-auto after:block after:pb-[var(--save-bottom)]"
     :style="{ top: `calc(44px + 94rpx + ${useStatusBarHeight().value}px)`}"
   >
     <SearchHistory
