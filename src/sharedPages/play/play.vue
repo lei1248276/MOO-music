@@ -35,7 +35,7 @@
             <SongInfo
               :tags="audioStore?.playlist?.tags || []"
               :name="playViews[currentView].name"
-              :singers=" playViews[currentView].ar"
+              :singers="playViews[currentView].ar"
               :song="playViews[currentView]"
               @menu="isShowPlaylist = true"
             />
@@ -100,6 +100,16 @@ function onPlayController(isStop: (is: boolean) => boolean) {
 
   return isStop(true) // * 取消点击controller的默认行为
 }
+
+// #ifdef H5
+onMounted(() => {
+  setTimeout(() => {
+    watch(currentView, (view) => {
+      document.title = '🎵 ' + playViews[view]?.name || ''
+    }, { immediate: true })
+  }, 500)
+})
+// #endif
 
 // * 初始化view
 onShow(() => { initViews() })
