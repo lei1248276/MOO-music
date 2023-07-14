@@ -1,7 +1,7 @@
 <template>
   <view
     class="bg-black-2 fixed bottom-0 right-0 left-0 px-[28rpx] overflow-y-auto after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]"
-    :style="{ top: `calc(44px + 94rpx + ${statusBarHeight}px)`}"
+    :style="{ top: `calc(44px + 94rpx + ${useStatusBarHeight().value}px)`}"
   >
     <SearchHistory
       v-show="!suggests.length && !songs.length"
@@ -22,24 +22,24 @@
     </template>
 
     <template v-else>
-      <template v-if="songs.length">
-        <Subtitle
-          title="歌曲"
-          clickable
-          custom-class="mt-0"
-          :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
-        />
-        <Song
-          v-for="(song, index) in songs"
-          :key="song.id"
-          :song="song"
-          :is-play="audioStore.isPlay"
-          :is-run="audioStore.currentSongInfo?.song.id === song.id"
-          @click="onSong(index)"
-        />
-      </template>
+      <Subtitle
+        v-if="songs.length"
+        title="歌曲"
+        clickable
+        custom-class="mt-0"
+        :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
+      />
+      <Song
+        v-for="(song, index) in songs"
+        :key="song.id"
+        :song="song"
+        :is-play="audioStore.isPlay"
+        :is-run="audioStore.currentSongInfo?.song.id === song.id"
+        @click="onSong(index)"
+      />
 
       <Subtitle
+        v-if="albums.length"
         title="专辑"
         clickable
         custom-class="mt-0"
@@ -69,7 +69,6 @@ const emit = defineEmits<{
   (e: 'update:suggests', value: Suggests[]): void
 }>()
 
-const statusBarHeight = useStatusBarHeight()
 const audioStore = useAudioStore()
 const cacheStore = useCacheStore()
 
@@ -135,6 +134,7 @@ async function fetchAlbum(_keyword: string) {
 defineExpose({
   clear() {
     songs.value = []
+    albums.value = []
     emit('update:suggests', [])
   },
   onSelect
