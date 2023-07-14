@@ -38,8 +38,12 @@
             custom-class="icon-playlist text-[60rpx]"
             @click="toPlaylist"
           />
+          <JIcon
+            v-if="audioStore.currentSongInfo?.song"
+            custom-class="icon-album text-[60rpx]"
+            @click="toAlbum"
+          />
           <JIcon custom-class="icon-message text-[60rpx]" />
-          <JIcon custom-class="icon-album text-[60rpx]" />
         </view>
       </view>
 
@@ -100,6 +104,8 @@ onMounted(() => {
   }, { immediate: true })
 })
 
+onHide(() => { onClose() })
+
 function onClose() {
   popup.value?.close?.()
   setTimeout(() => {
@@ -143,23 +149,42 @@ function onScrollToLower() {
 }
 
 function toPlaylist() {
-  const routes = getCurrentPages()
-  const from = routes[routes.length - 2]
-  const isPlaylist = from.route === 'sharedPages/playlist/playlist'
+  const from = getFromPage()
+  const to = 'sharedPages/playlist/playlist'
+  const playlistId = audioStore.playlist?.id
 
   // @ts-ignore
-  if (isPlaylist && Number(from.$page?.options?.id) === audioStore.playlist?.id) {
-    onClose()
-    return uni.navigateBack()
+  if (from.route === to && Number(from.$page?.options?.id) === playlistId) {
+    uni.navigateBack()
+    return
   }
 
   uni.navigateTo({
-    url: `/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`,
-    success: (res) => {
-      res.eventChannel.emit('acceptPlaylist', audioStore.playlist)
-      onClose()
-    },
+    url: `/${to}?id=${playlistId}`,
+    success: (res) => { res.eventChannel.emit('acceptPlaylist', audioStore.playlist) },
     fail: (err) => { console.error(err) }
   })
+}
+
+function toAlbum() {
+  const from = getFromPage()
+  const to = 'sharedPages/album/album'
+  const albumId = audioStore.currentSongInfo?.song.al.id
+
+  // @ts-ignore
+  if (from.route === to && Number(from.$page?.options?.id) === albumId) {
+    uni.navigateBack()
+    return
+  }
+
+  uni.navigateTo({
+    url: `/${to}?id=${albumId}`,
+    fail(err) { console.error(err) }
+  })
+}
+
+function getFromPage() {
+  const routes = getCurrentPages()
+  return routes[routes.length - 2]
 }
 </script>
