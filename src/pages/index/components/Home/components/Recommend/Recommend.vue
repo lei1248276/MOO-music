@@ -40,8 +40,15 @@ import { shuffle, rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
 
+let cacheList: Recommend[] = []
 const recommendList = shallowRef<Recommend[]>(new Array(3).fill({}))
 const isRun = ref(false)
+
+onShow(() => {
+  if (!cacheList.length) return
+
+  freshRecommend()
+})
 
 fetchRecommend()
 
@@ -72,10 +79,16 @@ async function onPlay() {
   isRun.value = false
 }
 
-async function fetchRecommend() {
-  const { result } = await getRecommend(10)
+function freshRecommend() {
+  recommendList.value = shuffle(cacheList).slice(0, 3)
+}
 
-  recommendList.value = shuffle(result).slice(0, 3)
+async function fetchRecommend() {
+  const { result } = await getRecommend(20)
+  console.log('🚀 ~ file: Recommend.vue:77 ~ fetchRecommend ~ result:', result)
+
+  cacheList = result
+  freshRecommend()
 }
 
 defineExpose({

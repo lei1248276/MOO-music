@@ -14,9 +14,16 @@
 <script setup lang="ts">
 import { getNewSonglist } from '@/api/home'
 import type { Songlist } from '@/api/interface/Songlist'
-import { rangeRandom } from '@/utils/util'
+import { rangeRandom, shuffle } from '@/utils/util'
 
+let cacheList: Songlist[] = []
 const newSonglist = shallowRef<Songlist[]>(new Array(4).fill({}))
+
+onShow(() => {
+  if (!cacheList.length) return
+
+  freshSonglist()
+})
 
 fetchNewSonglist()
 
@@ -30,11 +37,16 @@ function toPlaylist(item: Songlist) {
   })
 }
 
+function freshSonglist() {
+  newSonglist.value = shuffle(cacheList).slice(0, 4)
+}
+
 async function fetchNewSonglist() {
-  const { playlists } = await getNewSonglist(rangeRandom(0, 100), 4)
+  const { playlists } = await getNewSonglist(rangeRandom(0, 100), 20)
   console.log('🚀 ~ file: NewSonglist.vue:17 ~ fetchNewSonglist ~ playlists:', playlists)
 
-  newSonglist.value = playlists
+  cacheList = playlists
+  freshSonglist()
 }
 
 defineExpose({
