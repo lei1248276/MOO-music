@@ -44,33 +44,34 @@ import Shelf from './components/Shelf/Shelf.vue'
 
 const cacheStore = useCacheStore()
 
+const threeArr = ['', '', '']
 const shelf = reactive([
   {
     description: '收藏音乐',
     count: computed(() => cacheStore.collectSongs.length),
     icon: 'heart',
-    list: computed(() => ['', '', ''].map((v, i) => cacheStore.collectSongs[i]?.al.picUrl || v)),
+    list: computed(() => threeArr.map((v, i) => cacheStore.collectSongs[i]?.al.picUrl || v)),
     url: './collectSongs/collectSongs'
   },
   {
     description: '收藏歌单',
     count: computed(() => cacheStore.collectPlaylist.length),
     icon: 'playlist',
-    list: computed(() => ['', '', ''].map((v, i) => cacheStore.collectPlaylist[i]?.coverImgUrl || v)),
+    list: computed(() => threeArr.map((v, i) => cacheStore.collectPlaylist[i]?.coverImgUrl || v)),
     url: './collectPlaylist/collectPlaylist'
   },
   {
-    description: '本地歌曲',
-    count: 0,
-    icon: 'file',
-    list: ['', '', ''],
-    url: ''
+    description: '收藏专辑',
+    count: computed(() => cacheStore.collectAlbums.length),
+    icon: 'album',
+    list: computed(() => threeArr.map((v, i) => cacheStore.collectAlbums[i]?.picUrl || v)),
+    url: './collectAlbums/collectAlbums'
   },
   {
     description: '最近播放',
     count: computed(() => cacheStore.historyPlays.length),
     icon: 'time',
-    list: computed(() => ['', '', ''].map((v, i) => cacheStore.historyPlays[i]?.al.picUrl || v)),
+    list: computed(() => threeArr.map((v, i) => cacheStore.historyPlays[i]?.al.picUrl || v)),
     url: './historyPlays/historyPlays'
   }
 ])

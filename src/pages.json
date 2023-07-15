@@ -40,6 +40,14 @@
 			}
 		},
 		{
+			"path": "pages/index/collectAlbums/collectAlbums",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 收藏专辑",
+				"onReachBottomDistance": 100
+			}
+		},
+		{
 			"path": "pages/index/historyPlays/historyPlays",
 			"style": {
 				"navigationStyle": "custom",

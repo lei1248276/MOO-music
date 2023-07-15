@@ -10,48 +10,7 @@
     <H5BackTransition :show="isShowPage">
       <!-- #endif -->
       <view class="px-[28rpx] after:block after:pb-[var(--save-bottom)]">
-        <JImage
-          :src="album.picUrl + '?param=300y300'"
-          width="500rpx"
-          height="450rpx"
-          radius="20rpx"
-          custom-class="m-auto mt-5"
-        />
-
-        <view class="pt-[40rpx]">
-          <text class="inline-block text-grey-1 text-[28rpx]">
-            更新于  {{ parseTime(album.publishTime, '{y}-{m}-{d}') }}
-          </text>
-
-          <view class="text-white-1 mb-[20rpx]">
-            <view class="flex justify-between items-center">
-              <text class="inline-block w-4/5 truncate text-[40rpx]">{{ album.name }}</text>
-
-              <JIcon
-                type="icon-heart"
-                size="60rpx"
-                custom-class="text-grey-1"
-              />
-            </view>
-
-            <view class="flex items-center my-[20rpx]">
-              <JImage
-                :src="album.artist.picUrl + '?param=70y70'"
-                width="80rpx"
-                height="80rpx"
-                radius="50%"
-              />
-              <text class="ml-2">{{ album.artist.name }}</text>
-            </view>
-
-            <text class="line-clamp-6 text-[42rpx]">{{ album.description }}</text>
-
-            <view class="mt-[20rpx] text-grey-2 text-[28rpx]">
-              <text class="mr-3">分享 {{ album.info.shareCount }}</text>
-              <text>喜欢 {{ album.info.likedCount }}</text>
-            </view>
-          </view>
-        </view>
+        <AlbumInfo :album="album" />
 
         <Subtitle
           icon="icon-menu"
@@ -99,7 +58,7 @@
 <script setup lang="ts">
 import type { Album, Song } from '@/api/interface/Album'
 import { getAlbumDetail } from '@/api/album'
-import { parseTime } from '@/utils/util'
+import AlbumInfo from './components/AlbumInfo/AlbumInfo.vue'
 
 // #ifdef H5
 const isShowPage = ref(true)
