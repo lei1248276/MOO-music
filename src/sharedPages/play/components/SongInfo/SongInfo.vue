@@ -12,7 +12,7 @@
 
     <view class="flex flex-col justify-between mt-[20rpx] text-white-1 font-bold">
       <view class="flex justify-between items-center mb-5">
-        <view class="text-[48rpx] mr-[20rpx]">{{ name }}</view>
+        <view class="flex-1 truncate text-[48rpx] mr-[20rpx]">{{ name }}</view>
 
         <view @tap.stop="onCollect">
           <JIcon
