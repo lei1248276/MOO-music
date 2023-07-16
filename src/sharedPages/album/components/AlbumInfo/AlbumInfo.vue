@@ -31,7 +31,12 @@
           height="80rpx"
           radius="50%"
         />
-        <text class="ml-2">{{ album.artist.name }}</text>
+        <text
+          class="ml-2 active:text-grey-1"
+          @tap.stop="toArtist(album.artist.id)"
+        >
+          {{ album.artist.name }}
+        </text>
       </view>
 
       <text class="line-clamp-6 text-[42rpx]">{{ album.description }}</text>
@@ -66,5 +71,12 @@ function onCollect() {
   }
 
   isCollect.value = !isCollect.value
+}
+
+function toArtist(id: number) {
+  uni.navigateTo({
+    url: `/sharedPages/artist/artist?id=${id}`,
+    fail: (err) => { console.error(err) }
+  })
 }
 </script>

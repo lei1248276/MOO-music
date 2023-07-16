@@ -24,13 +24,15 @@
       </view>
 
       <view class="flex justify-between items-center">
-        <view class="flex-1 truncate text-[38rpx] mr-[20rpx]">
-          <template
+        <view class="flex-1 truncate space-x-1 text-[38rpx] mr-[20rpx]">
+          <text
             v-for="(item, index) in singers"
             :key="index"
+            class="active:text-grey-1"
+            @tap.stop="toArtist(item.id)"
           >
             {{ item.name }}.
-          </template>
+          </text>
         </view>
 
         <view @tap.stop="$emit('menu')">
@@ -64,6 +66,13 @@ watch(() => props.name, () => {
 function toSearchSongs(tag: string) {
   uni.navigateTo({
     url: `/sharedPages/searchSongs/searchSongs?keyword=${tag}`,
+    fail: (err) => { console.error(err) }
+  })
+}
+
+function toArtist(id: number) {
+  uni.navigateTo({
+    url: `/sharedPages/artist/artist?id=${id}`,
     fail: (err) => { console.error(err) }
   })
 }

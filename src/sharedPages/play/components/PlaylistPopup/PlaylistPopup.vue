@@ -19,13 +19,15 @@
             <view class="text-white-1 line-clamp-3 text-[48rpx]">
               {{ song.name }}
             </view>
-            <view class="flex-1 text-grey-1 line-clamp-2 text-[38rpx]">
-              <template
+            <view class="flex-1 space-x-1 text-grey-1 line-clamp-2 text-[38rpx]">
+              <text
                 v-for="(item, index) in song.ar"
                 :key="index"
+                class="active:text-white-1"
+                @tap.stop="toArtist(item.id)"
               >
                 {{ item.name }}.
-              </template>
+              </text>
             </view>
           </view>
         </view>
@@ -180,6 +182,13 @@ function toAlbum() {
   uni.navigateTo({
     url: `/${to}?id=${albumId}`,
     fail(err) { console.error(err) }
+  })
+}
+
+function toArtist(id: number) {
+  uni.navigateTo({
+    url: `/sharedPages/artist/artist?id=${id}`,
+    fail: (err) => { console.error(err) }
   })
 }
 
