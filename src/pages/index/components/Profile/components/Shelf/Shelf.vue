@@ -16,6 +16,7 @@
           custom-class="absolute"
           width="100%"
           height="100%"
+          lazy-load
         />
         <view
           v-else

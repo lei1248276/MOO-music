@@ -33,7 +33,7 @@
             <Lyric :song-id="song.id" />
 
             <SongInfo
-              :tags="audioStore?.playlist?.tags || []"
+              :tags="audioStore?.playlist?.tags || ['热门', '流行', '另类']"
               :name="playViews[currentView].name"
               :singers="playViews[currentView].ar"
               :song="playViews[currentView]"
