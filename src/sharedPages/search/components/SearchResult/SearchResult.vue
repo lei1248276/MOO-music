@@ -22,35 +22,45 @@
     </template>
 
     <template v-else>
-      <Subtitle
-        v-if="songs.length"
-        title="歌曲"
-        clickable
-        custom-class="mt-0"
-        :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
-      />
-      <Song
-        v-for="(song, index) in songs"
-        :key="song.id"
-        :song="song"
-        :is-play="audioStore.isPlay"
-        :is-run="audioStore.currentSongInfo?.song.id === song.id"
-        @click="onSong(index)"
-      />
+      <template v-if="artist">
+        <view class="mb-[20rpx] py-[20rpx] text-[34rpx] font-bold text-white-1">歌手</view>
+        <Artist
+          :artist="artist"
+          @click="toArtist(artist.id)"
+        />
+      </template>
 
-      <Subtitle
-        v-if="albums.length"
-        title="专辑"
-        clickable
-        custom-class="mt-0"
-        :url="`/sharedPages/searchAlbums/searchAlbums?keyword=${keyword}`"
-      />
-      <Album
-        v-for="album in albums"
-        :key="album.id"
-        :album="album"
-        @click="toAlbum(album.id)"
-      />
+      <template v-if="songs.length">
+        <Subtitle
+          title="歌曲"
+          clickable
+          custom-class="mt-0"
+          :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
+        />
+        <Song
+          v-for="(song, index) in songs"
+          :key="song.id"
+          :song="song"
+          :is-play="audioStore.isPlay"
+          :is-run="audioStore.currentSongInfo?.song.id === song.id"
+          @click="onSong(index)"
+        />
+      </template>
+
+      <template v-if="albums.length">
+        <Subtitle
+          title="专辑"
+          clickable
+          custom-class="mt-0"
+          :url="`/sharedPages/searchAlbums/searchAlbums?keyword=${keyword}`"
+        />
+        <Album
+          v-for="album in albums"
+          :key="album.id"
+          :album="album"
+          @click="toAlbum(album.id)"
+        />
+      </template>
     </template>
   </view>
 </template>
@@ -59,6 +69,7 @@
 import type { Suggests } from '@/api/interface/SearchSuggest'
 import type { SearchSongResponse, Song } from '@/api/interface/SearchSong'
 import type { SearchAlbumResponse, Album } from '@/api/interface/SearchAlbum'
+import type { SearchArtistResponse, Artist } from '@/api/interface/SearchArtist'
 import { getSearch } from '@/api/search'
 import SearchHistory from '../SearchHistory/SearchHistory.vue'
 
@@ -75,6 +86,7 @@ const cacheStore = useCacheStore()
 const keyword = ref('')
 const songs = shallowRef<Song[]>([])
 const albums = shallowRef<Album[]>([])
+const artist = shallowRef<Artist>()
 
 // #ifdef H5
 onShow(() => {
@@ -90,6 +102,7 @@ onUnmounted(() => { emit('update:suggests', []) })
 
 function onSelect(_keyword: string) {
   fetchSongs(_keyword)
+  fetchArtist(_keyword)
   fetchAlbum(_keyword)
   cacheStore.addHistorySearch(_keyword)
   emit('update:suggests', [])
@@ -103,6 +116,13 @@ function onSong(index: number) {
     if (state.songs !== songs.value) state.songs = songs.value
 
     audioStore.setCurrentSong(songs.value[index], index)
+  })
+}
+
+function toArtist(id: number) {
+  uni.navigateTo({
+    url: `/sharedPages/artist/artist?id=${id}`,
+    fail(err) { console.error(err) }
   })
 }
 
@@ -126,15 +146,17 @@ async function fetchAlbum(_keyword: string) {
   albums.value = result.albums
 }
 
-/* async function fetchArtist(keyword: string) {
-  const { result } = await getSearch(keyword, 100, 0, 10)
-  console.log('🚀 ~ file: SearchResult.vue:68 ~ fetchArtist ~ result:', result)
-} */
+async function fetchArtist(keyword: string) {
+  const { result } = await getSearch<SearchArtistResponse>(keyword, 100, 0, 10)
+  console.log('🚀 ~ file: SearchResult.vue:68 ~ fetchArtist ~ artists:', result.artists)
+  artist.value = result.artists.shift()
+}
 
 defineExpose({
   clear() {
     songs.value = []
     albums.value = []
+    artist.value = undefined
     emit('update:suggests', [])
   },
   onSelect
