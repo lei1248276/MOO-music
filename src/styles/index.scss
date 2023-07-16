@@ -90,6 +90,10 @@
     background-color: #1a191b !important;
   }
 
+  ::-webkit-scrollbar{
+    display: none;
+  }
+
   ::before,
   ::after {
     --tw-content: '';
