@@ -1,10 +1,13 @@
 <template>
   <view
-    class="fixed top-[44px] left-0 z-10 flex items-center rotate-180"
-    :style="{ height: statusBarHeight + 'px'}"
+    class="fixed left-0 z-10 flex items-center rotate-180"
+    :style="{ top: 11 + statusBarHeight + 'px'}"
     @tap="onBack"
   >
-    <JIcon custom-class="icon-arrow text-[40rpx] text-white-1 p-5" />
+    <JIcon
+      custom-class="icon-arrow text-white-1 p-2"
+      size="18px"
+    />
   </view>
 </template>
 
