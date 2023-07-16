@@ -1,6 +1,10 @@
 @font-face {
   font-family: "iconfont";
-  src: url("./iconfont.ttf?t=1618320788190") format("truetype")
+  src: url("./iconfont.ttf?t=1618320788190") format('truetype');
+}
+@font-face {
+  font-family: "iconfont";
+  src: url('./iconfont2.ttf?t=1689512796085') format('truetype');
 }
 
 .iconfont {
@@ -108,4 +112,8 @@
 
 .icon-user:before {
   content: "\e64d";
+}
+
+.icon-singer:before {
+  content: "\e631";
 }

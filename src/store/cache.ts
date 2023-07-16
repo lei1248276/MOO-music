@@ -1,6 +1,7 @@
 import type { Song } from '@/components/Song/Song.vue'
 import type { Playlist } from '@/api/interface/Playlist'
 import type { Album } from '@/components/Album/Album.vue'
+import type { Artist } from '@/components/Artist/Artist.vue'
 
 const audioStore: {value: ReturnType<typeof useAudioStore>} = {
   get value() {
@@ -16,6 +17,7 @@ export const useCacheStore = defineStore('cache', () => {
   const collectSongs = shallowReactive<Song[]>([])
   const collectPlaylist = shallowReactive<Playlist[]>([])
   const collectAlbums = shallowReactive<Album[]>([])
+  const collectArtists = shallowReactive<Artist[]>([])
 
   function addHistorySearch(keyword: string) {
     const index = historySearch.findIndex(v => v === keyword)
@@ -51,6 +53,12 @@ export const useCacheStore = defineStore('cache', () => {
       data: historySearch,
       fail(err) { console.error(err) }
     })
+
+    uni.setStorage({
+      key: 'collectArtists',
+      data: collectArtists,
+      fail(err) { console.error(err) }
+    })
   }
 
   uni.getStorage({
@@ -77,6 +85,12 @@ export const useCacheStore = defineStore('cache', () => {
     fail(err) { console.error(err) }
   })
 
+  uni.getStorage({
+    key: 'collectArtists',
+    success({ data }) { data && collectArtists.push(...data) },
+    fail(err) { console.error(err) }
+  })
+
   audioStore.value.$onAction(({ name, after }) => {
     // * 添加历史播放歌曲
     after(() => {
@@ -97,6 +111,7 @@ export const useCacheStore = defineStore('cache', () => {
     collectSongs,
     collectPlaylist,
     collectAlbums,
+    collectArtists,
     addHistorySearch,
     setupCache
   }

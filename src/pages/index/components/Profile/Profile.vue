@@ -68,6 +68,13 @@ const shelf = reactive([
     url: './collectAlbums/collectAlbums'
   },
   {
+    description: '收藏歌手',
+    count: computed(() => cacheStore.collectArtists.length),
+    icon: 'singer',
+    list: computed(() => threeArr.map((v, i) => cacheStore.collectArtists[i]?.avatar || v)),
+    url: './collectArtists/collectArtists'
+  },
+  {
     description: '最近播放',
     count: computed(() => cacheStore.historyPlays.length),
     icon: 'time',

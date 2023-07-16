@@ -1,6 +1,6 @@
 <template>
   <view
-    class="flex items-center"
+    class="flex items-center mb-5"
     @tap="$emit('click')"
   >
     <JImage

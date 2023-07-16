@@ -48,6 +48,14 @@
 			}
 		},
 		{
+			"path": "pages/index/collectArtists/collectArtists",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 收藏歌手",
+				"onReachBottomDistance": 100
+			}
+		},
+		{
 			"path": "pages/index/historyPlays/historyPlays",
 			"style": {
 				"navigationStyle": "custom",
