@@ -33,7 +33,7 @@
         >
           <Album
             :album="album"
-            @click="toAlbum(album.id)"
+            @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
           />
         </uni-swipe-action-item>
       </uni-swipe-action>
@@ -72,13 +72,6 @@ onReachBottom(() => {
 
   lazyList.push(...cacheStore.collectAlbums.slice(len, len + limit))
 })
-
-function toAlbum(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/album/album?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
-}
 
 function onClick(index: number) {
   cacheStore.collectAlbums.splice(index, 1)

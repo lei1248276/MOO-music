@@ -23,7 +23,7 @@
           :key="tag"
           size="mini"
           class="font-bold bg-yellow-1 text-black-1 rounded-full mr-[20rpx]"
-          @tap="toSearchSongs(tag)"
+          @tap="useNavigateTo(`/sharedPages/searchSongs/searchSongs?keyword=${tag}`)"
         >
           #{{ tag }}
         </button>
@@ -118,13 +118,6 @@ onReachBottom(() => {
 
   fetchSongs()
 })
-
-function toSearchSongs(tag: string) {
-  uni.navigateTo({
-    url: `/sharedPages/searchSongs/searchSongs?keyword=${tag}`,
-    fail: (err) => { console.error(err) }
-  })
-}
 
 function onSong(index: number) {
   console.log('🚀 ~ file: playlist.vue:121 ~ onSong ~ song:', songs[index])

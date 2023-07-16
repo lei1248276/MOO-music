@@ -17,12 +17,12 @@
 
     <view class="flex-1 flex flex-col justify-around h-full">
       <text class="w-[420rpx] text-[38rpx] font-bold truncate text-white-1">{{ song.name }}</text>
-      <view class="w-[420rpx] space-x-1 text-[32rpx] truncate text-grey-1">
+      <view class="w-[420rpx] h-[40rpx] space-x-1 text-[28rpx] truncate text-grey-1">
         <text
           v-for="item in song.ar"
           :key="item.name"
           class="active:text-white-1"
-          @tap.stop="toArtist(item.id)"
+          @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${item.id}`)"
         >
           {{ item.name }}.
         </text>
@@ -70,13 +70,6 @@ defineProps<{
   customClass?: string
 }>()
 defineEmits(['click'])
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
-}
 </script>
 
 <style scoped lang="scss">

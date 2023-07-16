@@ -33,7 +33,7 @@
         />
         <text
           class="ml-2 active:text-grey-1"
-          @tap.stop="toArtist(album.artist.id)"
+          @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${album.artist.id}`)"
         >
           {{ album.artist.name }}
         </text>
@@ -71,12 +71,5 @@ function onCollect() {
   }
 
   isCollect.value = !isCollect.value
-}
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
 }
 </script>

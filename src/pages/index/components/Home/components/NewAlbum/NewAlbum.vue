@@ -9,7 +9,7 @@
     v-for="album in newAlbum.slice(0, 3)"
     :key="album.id"
     :album="album"
-    @click="toAlbum(album.id)"
+    @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
   />
 </template>
 
@@ -20,13 +20,6 @@ import type { Album } from '@/api/interface/NewAlbum'
 const newAlbum = shallowRef<Album[]>([])
 
 fetchNewAlbum()
-
-function toAlbum(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/album/album?id=${id}`,
-    fail(err) { console.error(err) }
-  })
-}
 
 async function fetchNewAlbum() {
   const { albums } = await getNewAlbum()

@@ -24,7 +24,7 @@
                 v-for="(item, index) in song.ar"
                 :key="index"
                 class="active:text-white-1"
-                @tap.stop="toArtist(item.id)"
+                @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${item.id}`)"
               >
                 {{ item.name }}.
               </text>
@@ -43,7 +43,7 @@
           <JIcon
             v-if="audioStore.currentSongInfo?.song"
             custom-class="icon-album text-[60rpx]"
-            @click="toAlbum"
+            @click="useNavigateTo(`/sharedPages/album/album?id=${song.al.id}`)"
           />
           <JIcon custom-class="icon-message text-[60rpx]" />
         </view>
@@ -151,49 +151,10 @@ function onScrollToLower() {
 }
 
 function toPlaylist() {
-  const from = getFromPage()
-  const to = 'sharedPages/playlist/playlist'
-  const playlistId = audioStore.playlist?.id
-
-  // @ts-ignore
-  if (from.route === to && Number(from.$page?.options?.id) === playlistId) {
-    uni.navigateBack()
-    return
-  }
-
-  uni.navigateTo({
-    url: `/${to}?id=${playlistId}`,
+  useNavigateTo({
+    url: `/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`,
     success: (res) => { res.eventChannel.emit('acceptPlaylist', audioStore.playlist) },
     fail: (err) => { console.error(err) }
   })
-}
-
-function toAlbum() {
-  const from = getFromPage()
-  const to = 'sharedPages/album/album'
-  const albumId = audioStore.currentSongInfo?.song.al.id
-
-  // @ts-ignore
-  if (from.route === to && Number(from.$page?.options?.id) === albumId) {
-    uni.navigateBack()
-    return
-  }
-
-  uni.navigateTo({
-    url: `/${to}?id=${albumId}`,
-    fail(err) { console.error(err) }
-  })
-}
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
-}
-
-function getFromPage() {
-  const routes = getCurrentPages()
-  return routes[routes.length - 2]
 }
 </script>

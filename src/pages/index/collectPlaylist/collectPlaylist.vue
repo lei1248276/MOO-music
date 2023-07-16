@@ -33,7 +33,7 @@
         >
           <view
             class="flex items-center h-[200rpx] mb-5"
-            @click="toPlaylist(index)"
+            @click="toPlaylist(playlist)"
           >
             <JImage
               :src="playlist.coverImgUrl + '?param=200y200'"
@@ -91,10 +91,10 @@ onReachBottom(() => {
   lazyList.push(...cacheStore.collectPlaylist.slice(len, len + limit))
 })
 
-function toPlaylist(index: number) {
-  uni.navigateTo({
-    url: `/sharedPages/playlist/playlist?id=${lazyList[index].id}`,
-    success: (res) => { res.eventChannel.emit('acceptPlaylist', lazyList[index]) },
+function toPlaylist(playlist: Playlist) {
+  useNavigateTo({
+    url: `/sharedPages/playlist/playlist?id=${playlist.id}`,
+    success: (res) => { res.eventChannel.emit('acceptPlaylist', playlist) },
     fail: (err) => { console.error(err) }
   })
 }

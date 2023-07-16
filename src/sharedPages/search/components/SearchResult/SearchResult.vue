@@ -26,7 +26,7 @@
         <view class="mb-[20rpx] py-[20rpx] text-[34rpx] font-bold text-white-1">歌手</view>
         <Artist
           :artist="artist"
-          @click="toArtist(artist.id)"
+          @click="useNavigateTo(`/sharedPages/artist/artist?id=${artist.id}`)"
         />
       </template>
 
@@ -58,7 +58,7 @@
           v-for="album in albums"
           :key="album.id"
           :album="album"
-          @click="toAlbum(album.id)"
+          @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
         />
       </template>
     </template>
@@ -116,20 +116,6 @@ function onSong(index: number) {
     if (state.songs !== songs.value) state.songs = songs.value
 
     audioStore.setCurrentSong(songs.value[index], index)
-  })
-}
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail(err) { console.error(err) }
-  })
-}
-
-function toAlbum(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/album/album?id=${id}`,
-    fail(err) { console.error(err) }
   })
 }
 

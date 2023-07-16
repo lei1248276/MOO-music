@@ -19,7 +19,7 @@
         </text>
         <Album
           :album="album"
-          @click="toAlbum(album.id)"
+          @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
         />
       </view>
     </view>
@@ -48,13 +48,6 @@ fetchAlbumList()
 onReachBottom(() => {
   albumList.length !== total && fetchAlbumList()
 })
-
-function toAlbum(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/album/album?id=${id}`,
-    fail(err) { console.error(err) }
-  })
-}
 
 async function fetchAlbumList() {
   const { albums, total: _total } = await getAlbumList('ALL', albumList.length, limit)

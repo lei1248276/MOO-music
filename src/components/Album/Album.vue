@@ -23,7 +23,7 @@
       <text class="text-[38rpx] font-bold text-white-1 line-clamp-2">{{ album.name }}</text>
       <text
         class="text-[32rpx] text-grey-1 active:text-white-1"
-        @tap.stop="toArtist(album.artist.id)"
+        @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${album.artist.id}`)"
       >
         {{ album.artist.name }}
       </text>
@@ -53,11 +53,4 @@ defineProps<{
 defineEmits<{
   (e: 'click'):void
 }>()
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
-}
 </script>

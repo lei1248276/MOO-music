@@ -17,7 +17,7 @@
         :key="album.id"
         class="animate-content"
         :album="album"
-        @click="toAlbum(album.id)"
+        @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
       />
     </template>
   </view>
@@ -45,13 +45,6 @@ const unwatch = watch(() => props.lazyLoad, async ok => {
     unwatch()
   }
 }, { immediate: true })
-
-function toAlbum(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/album/album?id=${id}`,
-    fail(err) { console.error(err) }
-  })
-}
 
 function loadMore(limit = 8) {
   if (albums.length === cacheList.value.length) return

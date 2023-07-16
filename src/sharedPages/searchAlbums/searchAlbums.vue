@@ -19,7 +19,7 @@
         </text>
         <Album
           :album="album"
-          @click="toAlbum(album.id)"
+          @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
         />
       </view>
     </view>
@@ -55,13 +55,6 @@ onReachBottom(() => {
 
   fetchAlbum(keyword.value)
 })
-
-function toAlbum(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/album/album?id=${id}`,
-    fail(err) { console.error(err) }
-  })
-}
 
 async function fetchAlbum(_keyword: string) {
   const { result } = await getSearch<SearchAlbumResponse>(_keyword, 10, 0, 10)

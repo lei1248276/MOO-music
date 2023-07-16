@@ -91,6 +91,7 @@
     "useCacheStore": true,
     "useCssModule": true,
     "useCssVars": true,
+    "useNavigateTo": true,
     "useSlots": true,
     "useStatusBarHeight": true,
     "watch": true,

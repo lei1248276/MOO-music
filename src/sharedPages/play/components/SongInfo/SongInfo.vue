@@ -5,7 +5,7 @@
       :key="tag"
       size="mini"
       class="font-bold bg-yellow-1 text-black-1 rounded-full mr-[20rpx]"
-      @tap.stop="toSearchSongs(tag)"
+      @tap.stop="useNavigateTo(`/sharedPages/searchSongs/searchSongs?keyword=${tag}`)"
     >
       #{{ tag }}
     </button>
@@ -29,7 +29,7 @@
             v-for="(item, index) in singers"
             :key="index"
             class="active:text-grey-1"
-            @tap.stop="toArtist(item.id)"
+            @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${item.id}`)"
           >
             {{ item.name }}.
           </text>
@@ -62,20 +62,6 @@ const isCollect = ref(!!cacheStore.collectSongs.find(v => v.id === props.song.id
 watch(() => props.name, () => {
   isCollect.value = !!cacheStore.collectSongs.find(v => v.id === props.song.id)
 })
-
-function toSearchSongs(tag: string) {
-  uni.navigateTo({
-    url: `/sharedPages/searchSongs/searchSongs?keyword=${tag}`,
-    fail: (err) => { console.error(err) }
-  })
-}
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
-}
 
 function onCollect() {
   console.log('onCollect')

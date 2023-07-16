@@ -33,7 +33,7 @@
         >
           <Artist
             :artist="artist"
-            @click="toArtist(artist.id)"
+            @click="useNavigateTo(`/sharedPages/artist/artist?id=${artist.id}`)"
           />
         </uni-swipe-action-item>
       </uni-swipe-action>
@@ -72,13 +72,6 @@ onReachBottom(() => {
 
   lazyList.push(...cacheStore.collectArtists.slice(len, len + limit))
 })
-
-function toArtist(id: number) {
-  uni.navigateTo({
-    url: `/sharedPages/artist/artist?id=${id}`,
-    fail: (err) => { console.error(err) }
-  })
-}
 
 function onClick(index: number) {
   cacheStore.collectArtists.splice(index, 1)

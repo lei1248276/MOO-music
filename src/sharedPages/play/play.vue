@@ -91,11 +91,11 @@ function onPlayController(isStop: (is: boolean) => boolean) {
   if (isShowPlaylist.value) return isStop(!(isShowPlaylist.value = false))
 
   // #ifdef H5
-  isShowPage.value = false // * 为了保证H5端退出时有过渡效果
+  isShowPage.value = false // * H5端特有返回，为了保证H5端退出时有过渡效果
   // #endif
 
   // #ifndef H5
-  uni.navigateBack()
+  uni.navigateBack() // * 不是H5端执行正常返回
   // #endif
 
   return isStop(true) // * 取消点击controller的默认行为
