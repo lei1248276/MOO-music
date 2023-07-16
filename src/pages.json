@@ -79,6 +79,14 @@
 			}
 		},
 		{
+			"path": "sharedPages/artist/artist",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 歌手",
+				"onReachBottomDistance": 0
+			}
+		},
+		{
 			"path": "sharedPages/play/play",
 			"style": {
 				"navigationStyle": "custom",
