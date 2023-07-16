@@ -14,7 +14,7 @@
     placeholder="搜索音乐 专辑 歌手 歌单 用户"
     :cancel-button="isOpen"
     @click="isOpen = true; popupRef?.open?.()"
-    @cancel="isOpen = false; popupRef?.close?.()"
+    @cancel="searchResultRef?.clear(); isOpen = false; popupRef?.close?.()"
     @clear="searchResultRef?.clear()"
     @confirm="onSearch(search)"
   >
