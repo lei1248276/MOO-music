@@ -111,8 +111,8 @@ onMounted(() => {
 })
 // #endif
 
-// * 初始化view
-onShow(() => { initViews() })
+// ! 初始化view
+initViews()
 
 let isPassive = true // ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
 

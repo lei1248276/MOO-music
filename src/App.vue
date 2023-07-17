@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const audioStore = useAudioStore()
+import { setupAudio } from './store/audio'
 const cacheStore = useCacheStore()
 
 onLaunch(() => {
   console.log('App Launch')
-  audioStore.setupAudio()
+  setupAudio()
 })
 
 onHide(() => {

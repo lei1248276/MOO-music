@@ -84,59 +84,6 @@ export const useAudioStore = defineStore('audio', () => {
     isPlay.value ? audio.pause() : audio.play()
   }
 
-  function setupAudio() {
-  // @ts-ignore
-    audio.autoplay = true
-
-    // * 小程序的BUG：需要多次获取
-    function getDuration() {
-      if (!audio.duration) return setTimeout(() => { getDuration() }, 333)
-
-      console.log('onCanplay.duration: ', audio.duration)
-      isLoading.value = false
-      duration.value = audio.duration
-      audio.play()
-    }
-    audio.onCanplay(getDuration)
-
-    audio.onPlay(() => {
-      console.log('onPlay: ')
-      isPlay.value = true
-    })
-
-    audio.onPause(() => {
-      console.log('onPause: ')
-      isPlay.value = false
-    })
-
-    audio.onEnded(() => {
-      console.log('onEnded: ')
-      setNextSong()
-    })
-
-    audio.onTimeUpdate(() => {
-      currentTime.value = audio.currentTime
-    })
-
-    audio.onNext?.(() => {
-      console.log('onNext: ')
-      setNextSong()
-    })
-
-    audio.onPrev?.(() => {
-      console.log('onPrev: ')
-      setPreSong()
-    })
-
-    audio.onError((err) => {
-      toast.fail('链接无效')
-      console.error(err)
-
-      isLoading.value = false
-      isPlay.value = false
-    })
-  }
-
   return {
     audio,
     isLoading,
@@ -150,7 +97,61 @@ export const useAudioStore = defineStore('audio', () => {
     setPreSong,
     setCurrentSong,
     setNextSong,
-    toggle,
-    setupAudio
+    toggle
   }
 })
+
+export function setupAudio() {
+  const audioStore = useAudioStore()
+  const { audio } = audioStore
+  // @ts-ignore
+  audio.autoplay = true
+
+  // * 小程序的BUG：需要多次获取
+  function getDuration() {
+    if (!audio.duration) return setTimeout(() => { getDuration() }, 333)
+
+    console.log('onCanplay.duration: ', audio.duration)
+    audioStore.isLoading = false
+    audioStore.duration = audio.duration
+    audio.play()
+  }
+  audio.onCanplay(getDuration)
+
+  audio.onPlay(() => {
+    console.log('onPlay: ')
+    audioStore.isPlay = true
+  })
+
+  audio.onPause(() => {
+    console.log('onPause: ')
+    audioStore.isPlay = false
+  })
+
+  audio.onEnded(() => {
+    console.log('onEnded: ')
+    audioStore.setNextSong()
+  })
+
+  audio.onTimeUpdate(() => {
+    audioStore.currentTime = audio.currentTime
+  })
+
+  audio.onNext?.(() => {
+    console.log('onNext: ')
+    audioStore.setNextSong()
+  })
+
+  audio.onPrev?.(() => {
+    console.log('onPrev: ')
+    audioStore.setPreSong()
+  })
+
+  audio.onError((err) => {
+    toast.fail('链接无效')
+    console.error(err)
+
+    audioStore.isLoading = false
+    audioStore.isPlay = false
+  })
+}
