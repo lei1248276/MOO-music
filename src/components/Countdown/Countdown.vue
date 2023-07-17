@@ -19,9 +19,9 @@ onHide(() => {
 })
 
 function onWatchTime() {
-  if (!audioStore.duration) return
-
   const time = Math.floor(audioStore.duration - audioStore.currentTime)
+  if (time < 0) return
+
   let m = Math.floor(time / 60) + ''
   let s = time % 60 + ''
   m.length === 1 && (m = '0' + m)

@@ -107,16 +107,12 @@ export function setupAudio() {
   // @ts-ignore
   audio.autoplay = true
 
-  // * 小程序的BUG：需要多次获取
-  function getDuration() {
-    if (!audio.duration) return setTimeout(() => { getDuration() }, 333)
-
-    console.log('onCanplay.duration: ', audio.duration)
+  audio.onCanplay(() => {
     audioStore.isLoading = false
-    audioStore.duration = audio.duration
+    audioStore.duration = audioStore.currentSongInfo?.urlInfo.time! / 1000
     audio.play()
-  }
-  audio.onCanplay(getDuration)
+    console.log('onCanplay.duration: ', audioStore.duration)
+  })
 
   audio.onPlay(() => {
     console.log('onPlay: ')
