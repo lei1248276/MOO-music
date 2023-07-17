@@ -74,6 +74,8 @@ declare global {
   const resolveComponent: typeof import('vue')['resolveComponent']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
+  const setupAudio: typeof import('./src/store/audio')['setupAudio']
+  const setupCache: typeof import('./src/store/cache')['setupCache']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -85,6 +87,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAudioStore: typeof import('./src/store/audio')['useAudioStore']
+  const useCache: typeof import('./src/store/cache')['useCache']
   const useCacheStore: typeof import('./src/store/cache')['useCacheStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
@@ -175,6 +178,8 @@ declare module 'vue' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
+    readonly setupAudio: UnwrapRef<typeof import('./src/store/audio')['setupAudio']>
+    readonly setupCache: UnwrapRef<typeof import('./src/store/cache')['setupCache']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
@@ -186,6 +191,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAudioStore: UnwrapRef<typeof import('./src/store/audio')['useAudioStore']>
+    readonly useCache: UnwrapRef<typeof import('./src/store/cache')['useCache']>
     readonly useCacheStore: UnwrapRef<typeof import('./src/store/cache')['useCacheStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>

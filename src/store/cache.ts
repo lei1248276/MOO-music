@@ -29,68 +29,6 @@ export const useCacheStore = defineStore('cache', () => {
     if (historySearch.length > 10) historySearch.length = 10
   }
 
-  function setupCache() {
-    uni.setStorage({
-      key: 'collectSongs',
-      data: collectSongs,
-      fail(err) { console.error(err) }
-    })
-
-    uni.setStorage({
-      key: 'collectPlaylist',
-      data: collectPlaylist,
-      fail(err) { console.error(err) }
-    })
-
-    uni.setStorage({
-      key: 'collectAlbums',
-      data: collectAlbums,
-      fail(err) { console.error(err) }
-    })
-
-    uni.setStorage({
-      key: 'historySearch',
-      data: historySearch,
-      fail(err) { console.error(err) }
-    })
-
-    uni.setStorage({
-      key: 'collectArtists',
-      data: collectArtists,
-      fail(err) { console.error(err) }
-    })
-  }
-
-  uni.getStorage({
-    key: 'collectSongs',
-    success({ data }) { data && collectSongs.push(...data) },
-    fail(err) { console.error(err) }
-  })
-
-  uni.getStorage({
-    key: 'collectPlaylist',
-    success({ data }) { data && collectPlaylist.push(...data) },
-    fail(err) { console.error(err) }
-  })
-
-  uni.getStorage({
-    key: 'historySearch',
-    success({ data }) { data && historySearch.push(...data) },
-    fail(err) { console.error(err) }
-  })
-
-  uni.getStorage({
-    key: 'collectAlbums',
-    success({ data }) { data && collectAlbums.push(...data) },
-    fail(err) { console.error(err) }
-  })
-
-  uni.getStorage({
-    key: 'collectArtists',
-    success({ data }) { data && collectArtists.push(...data) },
-    fail(err) { console.error(err) }
-  })
-
   audioStore.value.$onAction(({ name, after }) => {
     // * 添加历史播放歌曲
     after(() => {
@@ -112,7 +50,44 @@ export const useCacheStore = defineStore('cache', () => {
     collectPlaylist,
     collectAlbums,
     collectArtists,
-    addHistorySearch,
-    setupCache
+    addHistorySearch
   }
 })
+
+export function useCache() {
+  const cacheStore = useCacheStore()
+
+  uni.getStorageInfo({
+    success(res) {
+      res.keys.forEach(key => {
+        const cacheList = cacheStore[key as keyof typeof cacheStore]
+        if (!cacheList) return
+
+        uni.getStorage({
+          key,
+          success({ data }) { if (data && Array.isArray(cacheList)) cacheList.push(...data) },
+          fail(err) { console.error(err) }
+        })
+      })
+    }
+  })
+}
+
+export function setupCache() {
+  const cacheStore = useCacheStore()
+  const keys = [
+    'historySearch',
+    'collectSongs',
+    'collectPlaylist',
+    'collectAlbums',
+    'collectArtists'
+  ]
+
+  keys.forEach((key) => {
+    uni.setStorage({
+      key,
+      data: cacheStore[key as keyof typeof cacheStore],
+      fail(err) { console.error(err) }
+    })
+  })
+}
