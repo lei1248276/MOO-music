@@ -65,7 +65,12 @@ export function useCache() {
 
         uni.getStorage({
           key,
-          success({ data }) { if (data && Array.isArray(cacheList)) cacheList.push(...data) },
+          success({ data }) {
+            if (data && Array.isArray(cacheList)) {
+              // @ts-ignore
+              data.forEach((v, i) => { cacheList[i] = v })
+            }
+          },
           fail(err) { console.error(err) }
         })
       })
