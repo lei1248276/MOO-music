@@ -38,8 +38,9 @@
         :key="song.id"
         class="animate-content"
         :song="song"
-        :is-play="audioStore.isPlay"
+        :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
         :is-run="audioStore.currentSongInfo?.song.id === song.id"
+        :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
         @click="onSong(index)"
       />
     </view>

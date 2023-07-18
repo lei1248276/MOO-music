@@ -5,7 +5,7 @@ import { getSongURL } from '@/api/play'
 import toast from '@/utils/toast'
 import { transHTTPS } from '@/utils/util'
 
-interface SongInfo {
+export interface SongInfo {
   song: Song
   urlInfo: SongURL
 }
@@ -50,24 +50,33 @@ export const useAudioStore = defineStore('audio', () => {
   }
 
   async function setCurrentSong(song: Song, index: number) {
-    if (currentSongInfo.value?.song.id === song.id) return (audio.seek(0), audio.play())
+    currentSongIndex.value = index
+
+    // * 重复点击，重新播放
+    if (currentSongInfo.value?.song.id === song.id && currentSongInfo.value.urlInfo.url) {
+      return (audio.seek(0), audio.play())
+    }
 
     try {
       isLoading.value = true
-      currentSongIndex.value = index
       const { data: [urlInfo] } = await getSongURL(song.id)
       console.log('🚀 ~ file: audio.ts:58 ~ setCurrentSong ~ urlInfo:', urlInfo)
-      currentSongInfo.value = { song, urlInfo }
 
-      if (!urlInfo.url) throw new Error('播放地址失效')
+      const oldSongInfo = currentSongInfo.value
+      const newSongInfo = currentSongInfo.value = { song, urlInfo }
+      // * 有 url 正常播放
+      if (newSongInfo.urlInfo.url) return setBackgroundAudio(currentSongInfo.value)
 
-      setBackgroundAudio(currentSongInfo.value)
+      // * url为空自动下一首
+      if (!oldSongInfo || oldSongInfo.urlInfo.url) return setNextSong()
+
+      // ! 连续两次请求 url 都为空直接报错退出（避免无限循环下一首）
+      throw new Error('播放地址失效')
     } catch (error) {
-      (audio.pause(), toast.fail('播放地址失效'))
-      currentSongInfo.value = undefined
+      audio.pause()
+      console.error(error)
       isLoading.value = false
       isPlay.value = false
-      duration.value = 0
     }
   }
 
@@ -80,9 +89,9 @@ export const useAudioStore = defineStore('audio', () => {
   }
 
   function toggle() {
-    if (!currentSongInfo.value) return
-
-    isPlay.value ? audio.pause() : audio.play()
+    if (currentSongInfo.value?.urlInfo.url) {
+      isPlay.value ? audio.pause() : audio.play()
+    }
   }
 
   return {

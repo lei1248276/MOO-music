@@ -67,8 +67,9 @@
             :id="'_' + item.id"
             :key="item.id"
             :song="item"
-            :is-play="audioStore.isPlay"
-            :is-run="song.id === item.id"
+            :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
+            :is-run="audioStore.currentSongInfo?.song.id === item.id"
+            :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
             @click="onSong(item.id)"
           />
         </scroll-view>
