@@ -57,10 +57,11 @@ export const useAudioStore = defineStore('audio', () => {
       currentSongIndex.value = index
       const { data: [urlInfo] } = await getSongURL(song.id)
       console.log('🚀 ~ file: audio.ts:58 ~ setCurrentSong ~ urlInfo:', urlInfo)
+      currentSongInfo.value = { song, urlInfo }
 
       if (!urlInfo.url) throw new Error('播放地址失效')
 
-      setBackgroundAudio(currentSongInfo.value = { song, urlInfo })
+      setBackgroundAudio(currentSongInfo.value)
     } catch (error) {
       (audio.pause(), toast.fail('播放地址失效'))
       currentSongInfo.value = undefined

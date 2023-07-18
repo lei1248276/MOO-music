@@ -1,13 +1,13 @@
 <template>
   <view
-    class="w-auto h-[140rpx] mb-5 flex justify-center items-center"
+    class="group w-auto h-[140rpx] mb-5 flex justify-center items-center"
     :class="customClass"
     hover-stay-time="100"
     hover-class="bg-grey-1/10"
     @tap="$emit('click')"
   >
     <JImage
-      class="mr-5"
+      class="group-active:animate-back mr-5"
       :src="song.al.picUrl + '?param=100y100'"
       width="140rpx"
       height="140rpx"
@@ -15,7 +15,7 @@
       lazy-load
     />
 
-    <view class="flex-1 flex flex-col justify-around h-full">
+    <view class="group-active:animate-back flex-1 flex flex-col justify-around h-full">
       <text class="w-[420rpx] text-[38rpx] font-bold truncate text-white-1">{{ song.name }}</text>
       <view class="w-[420rpx] h-[40rpx] space-x-1 text-[28rpx] truncate text-grey-1">
         <text
@@ -31,7 +31,7 @@
 
     <view
       v-if="isRun"
-      class="w-[44rpx] h-[70rpx] flex items-end"
+      class="group-active:animate-back w-[44rpx] h-[70rpx] flex items-end"
     >
       <i
         v-for="index in 4"
