@@ -18,7 +18,7 @@ export interface Song {
   alia: string[]
   pop: number
   st: number
-  rt?: string
+  rt: string
   fee: number
   v: number
   crbt: any
@@ -27,7 +27,7 @@ export interface Song {
   dt: number
   h: H
   m: M
-  l?: L
+  l: L
   sq?: Sq
   hr?: Hr
   a: any
@@ -62,7 +62,7 @@ export interface Song {
 export interface Ar {
   id: number
   name: string
-  tns: string[]
+  tns: any[]
   alias: any[]
 }
 
@@ -71,7 +71,7 @@ export interface Al {
   name: string
   picUrl: string
   tns: any[]
-  pic_str?: string
+  pic_str: string
   pic: number
 }
 
@@ -141,6 +141,7 @@ export interface Privilege {
   flLevel: string
   rscl: any
   freeTrialPrivilege: FreeTrialPrivilege
+  rightSource: number
   chargeInfoList: ChargeInfoList[]
 }
 
@@ -148,6 +149,7 @@ export interface FreeTrialPrivilege {
   resConsumable: boolean
   userConsumable: boolean
   listenType: any
+  cannotListenReason: any
 }
 
 export interface ChargeInfoList {

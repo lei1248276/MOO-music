@@ -44,7 +44,7 @@ export interface Artist {
   picUrl: string
   img1v1Url: string
   albumSize: number
-  alias: string[]
+  alias: any[]
   trans: string
   musicSize: number
   picId_str: string
