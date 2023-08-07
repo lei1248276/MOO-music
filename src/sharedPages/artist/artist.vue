@@ -1,91 +1,91 @@
 <template>
   <Navbar
-    :title="'🎵 ' + artist?.name"
+    :title="'🎵 ' + (artist?.name || 'MOO')"
     left-arrow
     @click-left-icon="isShowPage = false"
   />
 
-  <!-- #ifdef H5 -->
-  <H5BackTransition
-    class="h-full"
-    :show="isShowPage"
-  >
-    <!-- #endif -->
-    <template v-if="artist">
+  <template v-if="artist">
+    <!-- #ifdef H5 -->
+    <H5BackTransition
+      class="h-full"
+      :show="isShowPage"
+    >
+      <!-- #endif -->
       <JImage
-        :src="artist.cover + '?param=400y400'"
+        :src="artist?.cover + '?param=400y400'"
         width="100%"
         height="550rpx"
         mode="aspectFill"
       />
 
       <ArtistInfo :artist="artist" />
-    </template>
 
-    <view class="h-full mt-[40rpx]">
-      <view
-        class="px-[28rpx] z-50 sticky top-0 left-0 right-0 flex justify-between items-center text-center bg-black-2"
-        :style="{ top: 44 + useStatusBarHeight().value + 'px' }"
-      >
-        <text
-          v-for="(item, index) in ['热门歌曲', '热门专辑']"
-          :key="item"
-          class="flex-1 py-2 text-grey-1"
-          :class="{'text-white-1 [border-bottom:1px_solid] font-bold': currentPage === index}"
-          @tap="currentPage = index"
+      <view class="h-full mt-[40rpx]">
+        <view
+          class="px-[28rpx] z-50 sticky top-0 left-0 right-0 flex justify-between items-center text-center bg-black-2"
+          :style="{ top: 44 + useStatusBarHeight().value + 'px' }"
         >
-          {{ item }}
-        </text>
+          <text
+            v-for="(item, index) in ['热门歌曲', '热门专辑']"
+            :key="item"
+            class="flex-1 py-2 text-grey-1"
+            :class="{'text-white-1 [border-bottom:1px_solid] font-bold': currentPage === index}"
+            @tap="currentPage = index"
+          >
+            {{ item }}
+          </text>
+        </view>
+
+        <swiper
+          class="h-full"
+          :duration="400"
+          :current="currentPage"
+          @change="({detail: { current}}) => {currentPage = current}"
+        >
+          <swiper-item skip-hidden-item-layout>
+            <scroll-view
+              class="h-full overscroll-none"
+              :scroll-y="isScroll"
+              :upper-threshold="0"
+              @scrolltoupper="isScroll = false"
+              @scrolltolower="artistSongsRef?.loadMore()"
+            >
+              <ArtistSongs
+                v-if="id"
+                :id="id"
+                ref="artistSongsRef"
+                :name="artist?.name || ''"
+                :lazy-load="currentPage !== 0"
+              />
+            </scroll-view>
+          </swiper-item>
+
+          <swiper-item skip-hidden-item-layout>
+            <scroll-view
+              class="h-full overscroll-none"
+              :scroll-y="isScroll"
+              :upper-threshold="0"
+              @scrolltoupper="isScroll = false"
+              @scrolltolower="artistAlbumsRef?.loadMore()"
+            >
+              <ArtistAlbums
+                v-if="id"
+                :id="id"
+                ref="artistAlbumsRef"
+                :name="artist?.name || ''"
+                :lazy-load="currentPage !== 1"
+              />
+            </scroll-view>
+          </swiper-item>
+
+          <!-- <swiper-item skip-hidden-item-layout>MV</swiper-item> -->
+        </swiper>
       </view>
-
-      <swiper
-        class="h-full"
-        :duration="400"
-        :current="currentPage"
-        @change="({detail: { current}}) => {currentPage = current}"
-      >
-        <swiper-item skip-hidden-item-layout>
-          <scroll-view
-            class="h-full overscroll-none"
-            :scroll-y="isScroll"
-            :upper-threshold="0"
-            @scrolltoupper="isScroll = false"
-            @scrolltolower="artistSongsRef?.loadMore()"
-          >
-            <ArtistSongs
-              v-if="id"
-              :id="id"
-              ref="artistSongsRef"
-              :name="artist?.name || ''"
-              :lazy-load="currentPage !== 0"
-            />
-          </scroll-view>
-        </swiper-item>
-
-        <swiper-item skip-hidden-item-layout>
-          <scroll-view
-            class="h-full overscroll-none"
-            :scroll-y="isScroll"
-            :upper-threshold="0"
-            @scrolltoupper="isScroll = false"
-            @scrolltolower="artistAlbumsRef?.loadMore()"
-          >
-            <ArtistAlbums
-              v-if="id"
-              :id="id"
-              ref="artistAlbumsRef"
-              :name="artist?.name || ''"
-              :lazy-load="currentPage !== 1"
-            />
-          </scroll-view>
-        </swiper-item>
-
-      <!-- <swiper-item skip-hidden-item-layout>MV</swiper-item> -->
-      </swiper>
-    </view>
-  <!-- #ifdef H5 -->
-  </H5BackTransition>
-  <!-- #endif -->
+      <!-- #ifdef H5 -->
+    </H5BackTransition>
+    <!-- #endif -->
+  </template>
 
   <PlayController />
 </template>
