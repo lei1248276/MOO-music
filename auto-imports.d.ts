@@ -77,6 +77,7 @@ declare global {
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const setupAudio: typeof import('./src/store/audio')['setupAudio']
   const setupCache: typeof import('./src/store/cache')['setupCache']
+  const setupLogin: typeof import('./src/store/user')['setupLogin']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -96,6 +97,7 @@ declare global {
   const useNavigateTo: typeof import('./src/hooks/useNavigateTo')['default']
   const useSlots: typeof import('vue')['useSlots']
   const useStatusBarHeight: typeof import('./src/hooks/useStatusBarHeight')['default']
+  const useUserStore: typeof import('./src/store/user')['useUserStore']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -201,6 +203,7 @@ declare module 'vue' {
     readonly useNavigateTo: UnwrapRef<typeof import('./src/hooks/useNavigateTo')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStatusBarHeight: UnwrapRef<typeof import('./src/hooks/useStatusBarHeight')['default']>
+    readonly useUserStore: UnwrapRef<typeof import('./src/store/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
@@ -300,6 +303,7 @@ declare module '@vue/runtime-core' {
     readonly useNavigateTo: UnwrapRef<typeof import('./src/hooks/useNavigateTo')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStatusBarHeight: UnwrapRef<typeof import('./src/hooks/useStatusBarHeight')['default']>
+    readonly useUserStore: UnwrapRef<typeof import('./src/store/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

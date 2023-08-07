@@ -115,6 +115,13 @@
 				"navigationBarTitleText": "🎵 搜索专辑列表",
 				"onReachBottomDistance": 100
 			}
+		},
+		{
+			"path": "sharedPages/login/login",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 登录"
+			}
 		}
 	],
 	"globalStyle": {

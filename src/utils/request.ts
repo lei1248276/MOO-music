@@ -1,31 +1,38 @@
 import Request from '@/utils/luch-request'
 import toast from './toast'
 
+export const BASE_URL = 'https://netease-music-api.fe-mm.com'
+export const MOO_API = 'https://www.mooapi.link'
+
 const request = new Request({
-  // baseURL: 'https://netease-cloud-music-api-jaye.vercel.app'
-  baseURL: 'https://netease-music-api.fe-mm.com'
+  baseURL: BASE_URL,
+  withCredentials: true
 })
 
-request.interceptors.request.use(
+/* request.interceptors.request.use(
   (config) => {
     // console.log('🚀 ~ file: request.ts:11 ~ config:', config)
     return config
   }, (err) => {
     toast.fail()
     return Promise.reject(err)
-  })
+  }) */
 
 request.interceptors.response.use(
   (response) => {
     // console.log('🚀 ~ file: request.ts:20 ~ response:', response)
-    const { data, statusCode } = response
-    if (!data) return (toast.fail(), response)
+    const { data } = response
+    const code = data.code || data.data?.code
 
-    if (data.code !== 200 || statusCode !== 200) {
-      return (toast.fail(), Promise.reject(new Error(data.message || '请求失败')))
+    switch (code) {
+      case 800: // * 登录二维码过期
+      case 801: // * 等待扫码
+      case 802: // * 待确认
+      case 803: // * 授权登录成功
+      case 200: return data
     }
 
-    return data
+    return (toast.fail(), Promise.reject(new Error(data.message || '请求失败')))
   }, (err) => {
     console.error(err)
     toast.fail()

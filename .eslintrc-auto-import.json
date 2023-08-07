@@ -101,6 +101,8 @@
     "watchEffect": true,
     "watchPostEffect": true,
     "watchSyncEffect": true,
-    "toValue": true
+    "toValue": true,
+    "useUserStore": true,
+    "setupLogin": true
   }
 }
