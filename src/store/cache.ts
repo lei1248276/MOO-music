@@ -38,7 +38,13 @@ export const useCacheStore = defineStore('cache', () => {
       switch (name) {
         case 'setPreSong':
         case 'setNextSong':
-        case 'setCurrentSong': historyPlays.unshift(songs[currentSongIndex])
+        case 'setCurrentSong': {
+          const song = songs[currentSongIndex]
+          const index = historyPlays.findIndex(v => v.id === song.id)
+          index === -1
+            ? historyPlays.unshift(song)
+            : historyPlays.unshift(...historyPlays.splice(index, 1))
+        }
       }
     })
   })
@@ -81,6 +87,7 @@ export function useCache() {
 export function setupCache() {
   const cacheStore = useCacheStore()
   const keys = [
+    'historyPlays',
     'historySearch',
     'collectSongs',
     'collectPlaylist',
