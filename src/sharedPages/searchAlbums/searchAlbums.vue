@@ -30,6 +30,12 @@
   <PlayController />
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import type { SearchAlbumResponse, Album } from '@/api/interface/SearchAlbum'
 import { getSearch } from '@/api/search'

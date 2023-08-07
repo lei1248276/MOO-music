@@ -70,6 +70,12 @@
   <PlayController />
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import type { Songlist } from '@/api/interface/Songlist'
 import type { Playlist } from '@/api/interface/Playlist'

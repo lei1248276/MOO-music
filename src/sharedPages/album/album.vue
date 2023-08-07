@@ -56,6 +56,12 @@
   <PlayController />
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
+
 <script setup lang="ts">
 import type { Album, Song } from '@/api/interface/Album'
 import { getAlbumDetail } from '@/api/album'
