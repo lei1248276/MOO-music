@@ -2,8 +2,26 @@
   <view class="bg-black-2 text-white-1 text-[70rpx] px-[28rpx] pb-[20rpx]">
     <view class="flex justify-between items-center">
       <text>{{ isHome ? 'DISCOVER' : 'PROFILE' }}</text>
+
       <JIcon
-        :type="isHome ? 'icon-user' : 'icon-setting'"
+        v-if="!userStore.profile"
+        v-show="isHome"
+        type="icon-user"
+        custom-class="text-white-1 text-[60rpx]"
+        @click="useNavigateTo('/sharedPages/login/login')"
+      />
+      <JImage
+        v-else
+        v-show="isHome"
+        :src="userStore.profile.avatarUrl"
+        width="75rpx"
+        height="75rpx"
+        radius="50%"
+      />
+
+      <JIcon
+        v-show="!isHome"
+        type="icon-setting"
         custom-class="text-white-1 text-[60rpx]"
       />
     </view>
@@ -24,6 +42,8 @@ const props = defineProps<{
   pages: string[]
   currentPage: string
 }>()
+
+const userStore = useUserStore()
 
 const isHome = computed(() => props.currentPage === 'home')
 </script>

@@ -1,9 +1,28 @@
 <template>
-  <view class="w-full h-full box-border px-[28rpx]">
+  <view class="w-full h-full box-border px-[28rpx] pb-[calc(200rpx_+_var(--save-bottom))] overflow-y-scroll">
     <view class="h-[300rpx] p-[30rpx] rounded-[20rpx] bg-black-1 text-[38rpx] box-border flex flex-col justify-between font-bold">
-      <view class="text-white-1">
-        <JIcon custom-class="icon-user mr-[20rpx]" />
-        <text class="name">Jaye</text>
+      <view class="flex items-center space-x-3 text-white-1">
+        <template v-if="userStore.profile">
+          <JImage
+            :src="userStore.profile.avatarUrl"
+            width="75rpx"
+            height="75rpx"
+            radius="50%"
+          />
+          <text>{{ userStore.profile.nickname }}</text>
+        </template>
+
+        <view
+          v-else
+          class="flex items-center text-base"
+          @click="useNavigateTo('/sharedPages/login/login')"
+        >
+          <JIcon
+            type="icon-user"
+            custom-class="text-white-1 text-[60rpx] mr-3"
+          />
+          点击登录
+        </view>
       </view>
       <view class="flex justify-between items-center text-grey-1">
         <view class="flex-1">
@@ -16,12 +35,12 @@
           <text>0</text>
         </view>
 
-        <button
-          size="mini"
-          class="font-bold bg-yellow-1 text-black-1 rounded-full"
+        <view
+          v-if="userStore.profile?.vipType"
+          class="w-[100rpx] h-[50rpx] leading-[50rpx] text-center text-[28rpx] font-bold bg-yellow-1 text-black-1 rounded-full"
         >
-          免费VIP活动
-        </button>
+          VIP
+        </view>
       </view>
     </view>
 
@@ -36,12 +55,21 @@
         :url="item.url"
       />
     </view>
+
+    <button
+      v-if="userStore.profile"
+      class="bg-black-1 text-white-1 rounded-full mt-10 mx-10"
+      @tap="userStore.logout()"
+    >
+      退出登录
+    </button>
   </view>
 </template>
 
 <script setup lang="ts">
 import Shelf from './components/Shelf/Shelf.vue'
 
+const userStore = useUserStore()
 const cacheStore = useCacheStore()
 
 const threeArr = ['', '', '']
