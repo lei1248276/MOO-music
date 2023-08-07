@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 'latest'
@@ -16,6 +17,7 @@ module.exports = {
     './.eslintrc-auto-import.json'
   ],
   globals: {
+    UniApp: true,
     uni: true,
     getCurrentPages: true
   },

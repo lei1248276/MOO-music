@@ -14,19 +14,19 @@
   }
 
   .mid{
-    @apply !absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
+    @apply !absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%];
   }
 
   .y-mid{
-    @apply !absolute top-[50%] translate-y-[-50%]
+    @apply !absolute top-[50%] translate-y-[-50%];
   }
 
   .x-mid{
-    @apply !absolute left-[50%] translate-x-[-50%]
+    @apply !absolute left-[50%] translate-x-[-50%];
   }
 
   .btn-zoom{
-    @apply relative after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx]
+    @apply relative after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx];
   }
 }
 
