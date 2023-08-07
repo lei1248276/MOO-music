@@ -1,10 +1,7 @@
 <script setup lang="ts">
 onLaunch(() => {
   console.log('App Launch')
-  uni.getStorage({
-    key: 'cookie',
-    success(res) { if (res.data) useUserStore().login(res.data) }
-  })
+  setupLogin()
   setupAudio()
   useCache()
 })

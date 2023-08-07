@@ -68,12 +68,31 @@
 
 <script setup lang="ts">
 import Shelf from './components/Shelf/Shelf.vue'
+import { getUserPlaylist } from '@/api/profile'
+import type { Playlist } from '@/api/interface/UserPlaylist'
 
 const userStore = useUserStore()
 const cacheStore = useCacheStore()
 
 const threeArr = ['', '', '']
+const userPlaylist = shallowReactive<Playlist[]>([])
+
+watch(() => userStore.profile, async(profile) => {
+  if (profile?.userId) {
+    const { playlist } = await getUserPlaylist(profile.userId, 0, 2)
+    console.log('🚀 ~ file: Profile.vue:81 ~ getUserPlaylist:', playlist)
+    userPlaylist.push(...playlist)
+  }
+}, { immediate: true })
+
 const shelf = reactive([
+  {
+    description: '网易云歌单',
+    count: computed(() => userStore.subcount?.createdPlaylistCount || 0),
+    icon: 'playlist',
+    list: computed(() => threeArr.map((v, i) => userPlaylist[i]?.coverImgUrl || v)),
+    url: './neteasePlaylist/neteasePlaylist'
+  },
   {
     description: '收藏音乐',
     count: computed(() => cacheStore.collectSongs.length),

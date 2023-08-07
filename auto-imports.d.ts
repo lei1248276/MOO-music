@@ -184,6 +184,7 @@ declare module 'vue' {
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly setupAudio: UnwrapRef<typeof import('./src/store/audio')['setupAudio']>
     readonly setupCache: UnwrapRef<typeof import('./src/store/cache')['setupCache']>
+    readonly setupLogin: UnwrapRef<typeof import('./src/store/user')['setupLogin']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
@@ -284,6 +285,7 @@ declare module '@vue/runtime-core' {
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly setupAudio: UnwrapRef<typeof import('./src/store/audio')['setupAudio']>
     readonly setupCache: UnwrapRef<typeof import('./src/store/cache')['setupCache']>
+    readonly setupLogin: UnwrapRef<typeof import('./src/store/user')['setupLogin']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>

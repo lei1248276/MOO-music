@@ -8,6 +8,14 @@
 			}
 		},
 		{
+			"path": "pages/index/neteasePlaylist/neteasePlaylist",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "🎵 网易云歌单",
+				"onReachBottomDistance": 100
+			}
+		},
+		{
 			"path": "pages/index/songlist/songlist",
 			"style": {
 				"navigationStyle": "custom",

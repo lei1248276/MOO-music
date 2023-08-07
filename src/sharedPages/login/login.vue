@@ -82,7 +82,7 @@ async function login() {
 
         isLoading.value = false
         isLogin.value = true
-        useUserStore().login(cookie)
+        setupLogin(cookie) // ! 执行登录
         uni.setStorage({ key: 'cookie', data: cookies })
         uni.reLaunch({ url: '/pages/index/index' })
         break
