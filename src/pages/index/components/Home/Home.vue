@@ -1,30 +1,17 @@
 <template>
-  <scroll-view
-    class="box-border h-full overflow-hidden"
-    scroll-y
-    enable-passive
-    scroll-anchoring
-    enable-back-to-top
-    refresher-enabled
-    refresher-background="#1a191b"
-    :refresher-threshold="100"
-    :refresher-triggered="refreshTrigger"
-    @refresherrefresh="onRefresh"
-  >
-    <view class="px-[28rpx] pb-[var(--save-bottom)]">
-      <Carousel />
+  <view class="box-border overflow-y-scroll h-full px-[28rpx] pb-[var(--save-bottom)]">
+    <Carousel />
 
-      <Recommend ref="recommend" />
+    <Recommend />
 
-      <NewSonglist ref="newSonglist" />
+    <NewSonglist />
 
-      <NewSong />
+    <NewSong />
 
-      <NewAlbum />
+    <NewAlbum />
 
-      <SearchTags />
-    </view>
-  </scroll-view>
+    <SearchTags />
+  </view>
 </template>
 
 <script setup lang="ts">
@@ -34,17 +21,4 @@ import NewSonglist from './components/NewSonglist/NewSonglist.vue'
 import NewSong from './components/NewSong/NewSong.vue'
 import NewAlbum from './components/NewAlbum/NewAlbum.vue'
 import SearchTags from './components/SearchTags/SearchTags.vue'
-
-const recommend = shallowRef<InstanceType<typeof Recommend>>()
-const newSonglist = shallowRef<InstanceType<typeof NewSonglist>>()
-const refreshTrigger = ref(false)
-
-async function onRefresh() {
-  refreshTrigger.value = true
-
-  await recommend.value?.fetchRecommend()
-  await newSonglist.value?.fetchNewSonglist()
-
-  refreshTrigger.value = false
-}
 </script>
