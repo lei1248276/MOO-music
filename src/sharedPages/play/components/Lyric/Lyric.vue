@@ -25,22 +25,21 @@ const audioStore = useAudioStore()
 
 const lyrics = shallowRef<string[]>([])
 
-let unwatch: Function | null = null
-watch(() => props.songId, async() => {
-  console.log('🚀 ~ file: Lyric.vue:27 ~ watch ~ props.songId:', props.songId)
-  if (unwatch) unwatch()
-
+onBeforeMount(async() => {
   const lyricMatches = await fetchLyric()
   if (!lyricMatches) return
 
-  unwatch = watch(() => audioStore.currentTime, (currentTime) => {
+  watch(() => audioStore.currentTime, (currentTime) => {
+    if (audioStore.currentSongInfo?.song.id !== props.songId) return
+
+    // * 生成多个版本的歌词
     const _lyrics = lyricMatches
       .map((matches) => matchLyric(matches, currentTime))
       .filter(Boolean) as string[]
 
-    _lyrics.length && (lyrics.value = _lyrics)
+    if (_lyrics.length) lyrics.value = _lyrics
   })
-}, { immediate: true })
+})
 
 function matchLyric(matches: Matches[], currentTime: number) {
   if (!matches[0] || matches[0].time > currentTime) return
@@ -74,6 +73,7 @@ function transLyric(lyric: string) {
 }
 
 async function fetchLyric(): Promise<Array<Matches[]> | null> {
+  // * 获取 原歌词 和 翻译歌词
   const { lrc, tlyric, needDesc } = await getLyric(props.songId)
   console.log('🚀 ~ file: index.ts:76 ~ fetchLyric ~ tlyric:', tlyric)
   console.log('🚀 ~ file: index.ts:76 ~ fetchLyric ~ lrc:', lrc)
