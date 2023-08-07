@@ -2,7 +2,7 @@
   <Subtitle
     title="MOO Track_新歌"
     clickable
-    @title="toPlaylist"
+    @title="playlist?.id && useNavigateTo(`/sharedPages/playlist/playlist?id=${playlist.id}`)"
   />
 
   <Song
@@ -26,14 +26,6 @@ const playlist = shallowRef<Playlist>()
 const songs = shallowReactive<Playlist['tracks']>([])
 
 fetchNewSong()
-
-function toPlaylist() {
-  uni.navigateTo({
-    url: `/sharedPages/playlist/playlist?id=${playlist.value?.id}`,
-    success: (res) => { res.eventChannel.emit('acceptPlaylist', playlist.value) },
-    fail: (err) => { console.error(err) }
-  })
-}
 
 function onSong(index: number) {
   console.log('🚀 ~ file: NewSong.vue:43 ~ onSong ~ song:', songs[index])

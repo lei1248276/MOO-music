@@ -10,7 +10,7 @@
         width="180rpx"
         height="100%"
         radius="8rpx"
-        @click="toPlaylist(item)"
+        @click="useNavigateTo(`/sharedPages/playlist/playlist?id=${item.id}`)"
       />
     </view>
 
@@ -51,18 +51,6 @@ onShow(() => {
 })
 
 fetchRecommend()
-
-async function toPlaylist(item: Recommend) {
-  const { playlist } = await getPlaylist(item.id)
-
-  uni.navigateTo({
-    url: `/sharedPages/playlist/playlist?id=${item.id}`,
-    success: (res) => {
-      res.eventChannel.emit('acceptPlaylist', playlist)
-    },
-    fail: (err) => { console.error(err) }
-  })
-}
 
 async function onPlay() {
   isRun.value = true

@@ -77,7 +77,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { Songlist } from '@/api/interface/Songlist'
 import type { Playlist } from '@/api/interface/Playlist'
 import { getPlaylist } from '@/api/playlist'
 import { getSongs } from '@/api/playlist'
@@ -94,30 +93,8 @@ const songs = shallowReactive<Playlist['tracks']>([])
 const isShowPage = ref(true)
 // #endif
 
-onLoad(async() => {
-  // @ts-ignore
-  const opener = getCurrentInstance().proxy.getOpenerEventChannel()
-
-  // *（tracks === songs）歌单歌曲列表，每个歌单会额外携带前20首歌曲
-  opener.on('acceptSonglist', async(songlist: Songlist) => {
-    console.log('🚀 ~ file: playlist.vue:35 ~ opener.on ~ songlist:', songlist)
-    const { id, name, tracks } = songlist
-    // ! 歌单播放列表有可能为null，需要重新请求歌单
-    if (!tracks) return fetchPlaylist(id)
-
-    // ! songlist少了一些playlist属性，不过暂时用不到，所以断言逃逸掉（避免多发一次请求）
-    title.value = name
-    playlist.value = songlist as Playlist
-    songs.push(...tracks)
-  })
-
-  // * 针对有缓存playlist的场景或提前获取的
-  opener.on('acceptPlaylist', (_playlist: Playlist) => {
-    console.log('🚀 ~ file: playlist.vue:25 ~ opener.on ~ _playlist:', _playlist)
-    title.value = _playlist.name
-    playlist.value = _playlist
-    songs.push(..._playlist.tracks)
-  })
+onLoad((options) => {
+  fetchPlaylist(Number((options as { id: string }).id))
 })
 
 onReachBottom(() => {

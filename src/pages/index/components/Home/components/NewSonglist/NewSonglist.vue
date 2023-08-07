@@ -7,7 +7,7 @@
 
   <Songlist
     :songlist="newSonglist"
-    @click="toPlaylist"
+    @click="(songlist) => {useNavigateTo(`/sharedPages/playlist/playlist?id=${songlist.id}`)}"
   />
 </template>
 
@@ -26,16 +26,6 @@ onShow(() => {
 })
 
 fetchNewSonglist()
-
-function toPlaylist(item: Songlist) {
-  uni.navigateTo({
-    url: `/sharedPages/playlist/playlist?id=${item.id}`,
-    success: (res) => {
-      res.eventChannel.emit('acceptSonglist', item)
-    },
-    fail: (err) => { console.error(err) }
-  })
-}
 
 function freshSonglist() {
   newSonglist.value = shuffle(cacheList).slice(0, 4)

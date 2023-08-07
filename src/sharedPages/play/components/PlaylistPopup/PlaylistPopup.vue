@@ -38,7 +38,7 @@
           <JIcon
             v-if="audioStore.playlist"
             custom-class="icon-playlist text-[60rpx]"
-            @click="toPlaylist"
+            @click="useNavigateTo(`/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`)"
           />
           <JIcon
             v-if="audioStore.currentSongInfo?.song"
@@ -149,13 +149,5 @@ function onScrollToLower() {
 
   lazyList.push(...audioStore.songs.slice(bottomOffset, end))
   bottomOffset = end
-}
-
-function toPlaylist() {
-  useNavigateTo({
-    url: `/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`,
-    success: (res) => { res.eventChannel.emit('acceptPlaylist', audioStore.playlist) },
-    fail: (err) => { console.error(err) }
-  })
 }
 </script>

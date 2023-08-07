@@ -12,7 +12,7 @@
       <Songlist
         :songlist="songlist"
         custom-class="min-h-full bg-black-2 px-[28rpx]"
-        @click="toPlaylist"
+        @click="(songlist) => { useNavigateTo(`/sharedPages/playlist/playlist?id=${songlist.id}`)}"
       />
     <!-- #ifdef H5 -->
     </H5BackTransition>
@@ -39,16 +39,6 @@ fetchSonglist()
 onReachBottom(() => {
   songlist.length !== total && fetchSonglist()
 })
-
-function toPlaylist(item: Songlist) {
-  uni.navigateTo({
-    url: `/sharedPages/playlist/playlist?id=${item.id}`,
-    success: (res) => {
-      res.eventChannel.emit('acceptSonglist', item)
-    },
-    fail: (err) => { console.error(err) }
-  })
-}
 
 async function fetchSonglist() {
   const { playlists, total: _total } = await getSonglist(songlist.length, limit)

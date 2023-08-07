@@ -8,9 +8,15 @@
     />
 
     <view class="mt-5 w-full flex justify-between items-center">
-      <view class="flex-[0.95] line-clamp-6 text-[42rpx] font-bold text-white-1">{{ description }}</view>
+      <view
+        v-if="description"
+        class="flex-[0.95] line-clamp-6 text-[42rpx] font-bold text-white-1"
+      >
+        {{ description }}
+      </view>
 
       <JIcon
+        v-if="userStore.profile?.nickname !== playlist.creator.nickname"
         type="icon-heart"
         size="60rpx"
         :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-grey-1 transition-colors'"
@@ -26,10 +32,11 @@ import type { Playlist } from '@/api/interface/Playlist'
 const props = defineProps<{
   playlist: Playlist
   image: string
-  description: string
+  description: string | null
 }>()
 
 const cacheStore = useCacheStore()
+const userStore = useUserStore()
 
 const isCollect = ref(!!cacheStore.collectPlaylist.find(v => v.id === props.playlist.id))
 
