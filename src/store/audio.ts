@@ -19,6 +19,14 @@ export interface SongInfo {
   }
 } */
 
+const userStore: {value: ReturnType<typeof useUserStore>} = {
+  get value() {
+    // @ts-ignore
+    delete this.value
+    return (this.value = useUserStore())
+  }
+}
+
 export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
   const isLoading = ref(false) // * 是否缓冲中
@@ -59,7 +67,7 @@ export const useAudioStore = defineStore('audio', () => {
 
     try {
       isLoading.value = true
-      const { data: [urlInfo] } = await getSongURL(song.id)
+      const { data: [urlInfo] } = await getSongURL(song.id, userStore.value.profile ? 'lossless' : 'standard')
       console.log('🚀 ~ file: audio.ts:58 ~ setCurrentSong ~ urlInfo:', urlInfo)
 
       const oldSongInfo = currentSongInfo.value
