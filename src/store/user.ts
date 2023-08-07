@@ -33,15 +33,14 @@ export const useUserStore = defineStore('user', () => {
   }
 })
 
-export function setupLogin(cookie = uni.getStorageSync('cookie')) {
+export async function setupLogin(cookie = uni.getStorageSync('cookie')) {
   if (!cookie) return
 
   const userStore = useUserStore()
-  userStore.login(cookie)
+  await userStore.login(cookie)
 
   // * 存入用户订阅信息到仓库
-  getUserSubcount().then(res => {
-    console.log('🚀 ~ file: user.ts:41 ~ getUserSubcount ~ res:', res)
-    userStore.subcount = res
-  })
+  const res = await getUserSubcount()
+  console.log('🚀 ~ file: user.ts:41 ~ getUserSubcount ~ res:', res)
+  userStore.subcount = res
 }
