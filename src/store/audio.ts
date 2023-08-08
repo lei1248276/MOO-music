@@ -92,8 +92,18 @@ export const useAudioStore = defineStore('audio', () => {
     audio.title = song.name
     audio.epname = song.al.name
     audio.singer = song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
-    audio.coverImgUrl = song.al.picUrl
+    audio.coverImgUrl = song.al.picUrl + '?param=500y500'
     audio.src = transHTTPS(urlInfo.url)
+
+    // #ifdef H5
+    // * 设置浏览器的音乐播放器信息   p.s: 就是插件栏右边的那个音乐按钮
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.name,
+      artist: song.al.name,
+      album: audio.epname,
+      artwork: [{ src: song.al.picUrl + '?param=500y500', sizes: '500x500', type: 'image/png' }]
+    })
+    // #endif
   }
 
   function toggle() {
@@ -151,16 +161,6 @@ export function setupAudio() {
     audioStore.currentTime = audio.currentTime
   })
 
-  audio.onNext?.(() => {
-    console.log('onNext: ')
-    audioStore.setNextSong()
-  })
-
-  audio.onPrev?.(() => {
-    console.log('onPrev: ')
-    audioStore.setPreSong()
-  })
-
   audio.onError((err) => {
     toast.fail('链接无效')
     console.error(err)
@@ -168,4 +168,22 @@ export function setupAudio() {
     audioStore.isLoading = false
     audioStore.isPlay = false
   })
+
+  // #ifndef H5
+  audio.onNext(() => {
+    console.log('onNext: ')
+    audioStore.setNextSong()
+  })
+
+  audio.onPrev(() => {
+    console.log('onPrev: ')
+    audioStore.setPreSong()
+  })
+  // #endif
+
+  // #ifdef H5
+  // * 监听浏览器的音乐播放器操作   p.s: 就是插件栏右边的那个音乐按钮
+  navigator.mediaSession.setActionHandler('previoustrack', audioStore.setNextSong)
+  navigator.mediaSession.setActionHandler('nexttrack', audioStore.setNextSong)
+  // #endif
 }

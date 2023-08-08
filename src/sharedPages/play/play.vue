@@ -103,7 +103,7 @@ function onPlayController(isStop: (is: boolean) => boolean) {
 onMounted(() => {
   setTimeout(() => {
     watch(currentView, (view) => {
-      document.title = '🎵 ' + playViews[view]?.name || ''
+      document.title = '🎵 ' + playViews[view]?.name + ' - ' + playViews[view]?.ar.reduce((acc, { name }) => (acc += name + '. '), '')
     }, { immediate: true })
   }, 500)
 })
