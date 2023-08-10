@@ -34,6 +34,8 @@ request.interceptors.response.use(
 
     return (toast.fail(), Promise.reject(new Error(data.message || '请求失败')))
   }, (err) => {
+    if (err.errMsg === 'request:fail abort') return Promise.reject(err)
+
     console.error(err)
     toast.fail()
     return Promise.reject(err)

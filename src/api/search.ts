@@ -25,6 +25,6 @@ export function getSearch<T>(keywords: string, type = 1, offset = 0, limit = 30)
 /**
  * @description 说明 : 调用此接口 , 传入搜索关键词可获得搜索建议 , 搜索结果同时包含单曲 , 歌手 , 歌单信息
  */
-export function getSearchSuggest(keywords: string, type = 'mobile') {
-  return request.get<any, SearchSuggestResponse>(`/search/suggest?keywords=${keywords}&type=${type}`)
+export function getSearchSuggest(keywords: string, config?: Parameters<typeof request.get>[1]) {
+  return request.get<any, SearchSuggestResponse>(`/search/suggest?keywords=${keywords}&type=mobile`, config)
 }

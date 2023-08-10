@@ -31,7 +31,7 @@
         @input="$emit('update:modelValue', $event.detail.value)"
         @focus="$emit('focus')"
         @blur="$emit('blur')"
-        @confirm="$emit('confirm')"
+        @confirm="$emit('confirm', $event.detail.value)"
       >
 
       <view
@@ -98,7 +98,7 @@ defineEmits<{
   (e: 'clear'): void
   (e: 'click'): void
   (e: 'focus'): void
-  (e: 'confirm'): void
+  (e: 'confirm', value: string): void
   (e: 'blur'): void
   (e: 'cancel'): void
 }>()

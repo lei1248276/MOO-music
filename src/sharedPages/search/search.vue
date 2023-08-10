@@ -16,7 +16,7 @@
     @click="isOpen = true; popupRef?.open?.()"
     @cancel="searchResultRef?.clear(); isOpen = false; popupRef?.close?.()"
     @clear="searchResultRef?.clear()"
-    @confirm="onSearch(search)"
+    @confirm="onConfirm"
   >
     <template #searchIcon>
       <JIcon custom-class="icon-search text-[60rpx] text-yellow-1" />
@@ -75,9 +75,23 @@ onMounted(() => {
   popupRef.value && popupRef.value.closeMask() // * 强行关闭popup的mask
 })
 
-watch(search, (val, oldVal) => {
-  if (val && val.trim() !== oldVal.trim()) {
-    fetchSearchSuggest(val)
+const abortTask: UniApp.RequestTask[] = [] // ! 收集“RequestTask”用于在函数外也能控制请求“abort”
+watch(search, async(val, oldVal) => {
+  try {
+    if (val.length && val.length > oldVal.length && val.trim() !== oldVal.trim()) {
+      const { result: { allMatch }} = await getSearchSuggest(val, {
+        getTask(task) {
+          // * 如果发起下一个请求，abort之前的
+          abortTask.pop()?.abort()
+          abortTask.push(task)
+        }
+      })
+
+      console.log('🚀 ~ file: Search.vue:102 ~ fetchSearchSuggest ~ allMatch:', allMatch)
+      if (allMatch) suggests.value = allMatch
+    }
+  } catch (error: any) {
+    console.error(error.errMsg)
   }
 })
 
@@ -89,9 +103,11 @@ function onSearch(keyword: string) {
   nextTick(() => { searchResultRef.value?.onSelect(keyword) })
 }
 
-async function fetchSearchSuggest(keywords:string) {
-  const { result: { allMatch }} = await getSearchSuggest(keywords)
-  console.log('🚀 ~ file: Search.vue:102 ~ fetchSearchSuggest ~ allMatch:', allMatch)
-  if (allMatch) suggests.value = allMatch
+function onConfirm(keywords: string) {
+  if (!keywords) return
+
+  // ! confirm以后“abort”所有剩下的（如果有的话）“suggests”请求
+  abortTask.forEach(task => { task.abort() })
+  onSearch(keywords)
 }
 </script>
