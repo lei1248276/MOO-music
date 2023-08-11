@@ -45,11 +45,22 @@ let cacheList: Recommend[] = []
 const recommendList = shallowRef<Recommend[]>(new Array(3).fill({}))
 const isRun = ref(false)
 
+// * 每过2分钟就更新一次
+const timeout = 120 * 1000
+let tick = Date.now()
+let timer: number | undefined
 onShow(() => {
-  if (!cacheList.length) return
+  timer = setInterval(() => {
+    freshRecommend()
+    tick = Date.now()
+  }, timeout)
 
-  freshRecommend()
+  if (cacheList.length && Date.now() - tick > timeout) {
+    freshRecommend()
+    tick = Date.now()
+  }
 })
+onHide(() => { clearInterval(timer) })
 
 watch(() => userStore.profile, (profile) => {
   fetchRecommend(!!profile)
