@@ -38,12 +38,17 @@
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "schemes" : "orpheuswidget",
+                "abiFilters" : [ "arm64-v8a" ]
             },
             /* ios打包配置 */
             "ios" : {
                 "dSYMs" : false,
-                "UIBackgroundModes" : [ "audio" ]
+                "UIBackgroundModes" : [ "audio" ],
+                "urltypes" : "orpheuswidget",
+                "urlschemewhitelist" : "orpheuswidget",
+                "idfa" : true
             },
             /* SDK配置 */
             "sdkConfigs" : {
@@ -106,7 +111,8 @@
         "setting" : {
             "urlCheck" : false,
             "es6" : false,
-            "minified" : true
+            "minified" : true,
+            "postcss" : false
         },
         "mergeVirtualHostAttributes" : true,
         "lazyCodeLoading" : "requiredComponents",

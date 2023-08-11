@@ -11,14 +11,14 @@ export function createQRKey() {
   return request.get<
     any,
     Response<{unikey: string}>
-  >(`${MOO_API}/login/qr/key?timestamp=${Date.now()}`)
+  >(`/login/qr/key?timestamp=${Date.now()}`)
 }
 
 export function createQRImg(key:string) {
   return request.get<
     any,
     Response<{qrimg: string, qrurl: string}>
-  >(`${MOO_API}/login/qr/create?key=${key}&qrimg=true&timestamp=${Date.now()}`)
+  >(`/login/qr/create?key=${key}&qrimg=true&timestamp=${Date.now()}`)
 }
 
 export function checkQRStatus(key: string) {

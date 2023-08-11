@@ -19,7 +19,8 @@ module.exports = {
   globals: {
     UniApp: true,
     uni: true,
-    getCurrentPages: true
+    getCurrentPages: true,
+    plus: true
   },
 
   // add your custom rules here
