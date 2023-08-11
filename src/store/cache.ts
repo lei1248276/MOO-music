@@ -44,6 +44,9 @@ export const useCacheStore = defineStore('cache', () => {
           index === -1
             ? historyPlays.unshift(song)
             : historyPlays.unshift(...historyPlays.splice(index, 1))
+
+          // * 超过50个就丢弃
+          if (historyPlays.length > 50) historyPlays.length = 50
         }
       }
     })
