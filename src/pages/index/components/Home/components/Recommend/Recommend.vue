@@ -34,7 +34,8 @@
 
 <script setup lang="ts">
 import type { Recommend } from '@/api/interface/Recommend'
-import { getRecommend, getPersonalRecommend } from '@/api/home'
+import type { RecommendSongs } from '@/api/interface/RecommendSongs'
+import { getRecommend, getPersonalRecommend, getRecommendSongs } from '@/api/home'
 import { getPlaylist } from '@/api/home'
 import { shuffle, rangeRandom } from '@/utils/util'
 
@@ -43,7 +44,17 @@ const userStore = useUserStore()
 
 let cacheList: Recommend[] = []
 const recommendList = shallowRef<Recommend[]>(new Array(3).fill({}))
-const isRun = ref(false)
+const recommendSongs = shallowRef<RecommendSongs[]>()
+
+watch(() => userStore.profile, (profile) => {
+  if (profile) {
+    fetchRecommend(true)
+    fetchRecommendSongs()
+  } else {
+    fetchRecommend(false)
+    recommendSongs.value = undefined
+  }
+}, { immediate: true })
 
 // * 每过2分钟就更新一次
 const timeout = 120 * 1000
@@ -62,21 +73,24 @@ onShow(() => {
 })
 onHide(() => { clearInterval(timer) })
 
-watch(() => userStore.profile, (profile) => {
-  fetchRecommend(!!profile)
-}, { immediate: true })
-
+const isRun = ref(false)
 async function onPlay() {
   isRun.value = true
 
-  // * 随机获取推荐歌单中某一个
-  const randomIndex = rangeRandom(0, recommendList.value.length - 1)
-  const { id } = recommendList.value[randomIndex]
-  const { playlist } = await getPlaylist(id)
+  if (recommendSongs.value) {
+    audioStore.playlist = undefined
+    audioStore.songs = recommendSongs.value
+    await audioStore.setCurrentSong(recommendSongs.value[0], 0)
+  } else {
+    // * 随机获取推荐歌单中某一个
+    const randomIndex = rangeRandom(0, recommendList.value.length - 1)
+    const { id } = recommendList.value[randomIndex]
+    const { playlist } = await getPlaylist(id)
 
-  audioStore.playlist = playlist
-  audioStore.songs = playlist.tracks
-  await audioStore.setCurrentSong(playlist.tracks[0], 0)
+    audioStore.playlist = playlist
+    audioStore.songs = playlist.tracks
+    await audioStore.setCurrentSong(playlist.tracks[0], 0)
+  }
 
   isRun.value = false
 }
@@ -91,6 +105,12 @@ async function fetchRecommend(isLogin: boolean) {
 
   cacheList = data.result || data.recommend!
   freshRecommend()
+}
+
+async function fetchRecommendSongs() {
+  const { data: { dailySongs }} = await getRecommendSongs()
+  console.log('🚀 ~ file: Recommend.vue:98 ~ fetchRecommendSongs ~ dailySongs:', dailySongs)
+  recommendSongs.value = dailySongs
 }
 
 defineExpose({

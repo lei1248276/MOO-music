@@ -1,12 +1,13 @@
 import request from '@/utils/request'
 import { MOO_API } from '@/utils/request'
-import type { BannerResponse } from '@/api/interface/Banner'
-import type { RecommendResponse } from '@/api/interface/Recommend'
+import type { BannerResponse } from './interface/Banner'
+import type { RecommendResponse } from './interface/Recommend'
+import type { RecommendSongsResponse } from './interface/RecommendSongs'
 import type { NewSongResponse } from './interface/NewSong'
-import type { NewAlbumResponse } from '@/api/interface/NewAlbum'
-import type { SonglistResponse } from '@/api/interface/Songlist'
+import type { NewAlbumResponse } from './interface/NewAlbum'
+import type { SonglistResponse } from './interface/Songlist'
 
-export { getPlaylist } from '@/api/playlist'
+export { getPlaylist } from './playlist'
 
 /**
  * @description 获取轮播图
@@ -24,6 +25,11 @@ export function getRecommend(limit: number) {
 // * 获取私人推荐歌单
 export function getPersonalRecommend() {
   return request.get<any, RecommendResponse>(`${MOO_API}/recommend/resource`)
+}
+
+// * 获取私人推荐歌曲
+export function getRecommendSongs() {
+  return request.get<any, RecommendSongsResponse>(`${MOO_API}/recommend/songs`)
 }
 
 // * 获取新歌单
