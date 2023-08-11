@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import { MOO_API } from '@/utils/request'
 import type { BannerResponse } from '@/api/interface/Banner'
 import type { RecommendResponse } from '@/api/interface/Recommend'
 import type { NewSongResponse } from './interface/NewSong'
@@ -18,6 +19,11 @@ export function getBanner(type: 0 | 1 | 2 | 3 = 2) {
 // * 获取推荐歌单
 export function getRecommend(limit: number) {
   return request.get<any, RecommendResponse>(`/personalized?limit=${limit}`)
+}
+
+// * 获取私人推荐歌单
+export function getPersonalRecommend() {
+  return request.get<any, RecommendResponse>(`${MOO_API}/recommend/resource`)
 }
 
 // * 获取新歌单

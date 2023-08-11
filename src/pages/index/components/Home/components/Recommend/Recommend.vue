@@ -34,11 +34,12 @@
 
 <script setup lang="ts">
 import type { Recommend } from '@/api/interface/Recommend'
-import { getRecommend } from '@/api/home'
+import { getRecommend, getPersonalRecommend } from '@/api/home'
 import { getPlaylist } from '@/api/home'
 import { shuffle, rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
+const userStore = useUserStore()
 
 let cacheList: Recommend[] = []
 const recommendList = shallowRef<Recommend[]>(new Array(3).fill({}))
@@ -50,7 +51,9 @@ onShow(() => {
   freshRecommend()
 })
 
-fetchRecommend()
+watch(() => userStore.profile, (profile) => {
+  fetchRecommend(!!profile)
+}, { immediate: true })
 
 async function onPlay() {
   isRun.value = true
@@ -71,11 +74,11 @@ function freshRecommend() {
   recommendList.value = shuffle(cacheList).slice(0, 3)
 }
 
-async function fetchRecommend() {
-  const { result } = await getRecommend(20)
-  console.log('🚀 ~ file: Recommend.vue:77 ~ fetchRecommend ~ result:', result)
+async function fetchRecommend(isLogin: boolean) {
+  const data = isLogin ? await getPersonalRecommend() : await getRecommend(20)
+  console.log('🚀 ~ file: Recommend.vue:77 ~ fetchRecommend ~ data:', data)
 
-  cacheList = result
+  cacheList = data.result || data.recommend!
   freshRecommend()
 }
 

@@ -2,7 +2,8 @@ export interface RecommendResponse {
   hasTaste: boolean
   code: number
   category: number
-  result: Recommend[]
+  result?: Recommend[]
+  recommend?: Recommend[]
 }
 
 export interface Recommend {
