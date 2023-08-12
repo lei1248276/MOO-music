@@ -79,6 +79,7 @@
     "setMapStoreSuffix": true,
     "setupAudio": true,
     "setupCache": true,
+    "setupLogin": true,
     "shallowReactive": true,
     "shallowReadonly": true,
     "shallowRef": true,
@@ -86,6 +87,7 @@
     "toRaw": true,
     "toRef": true,
     "toRefs": true,
+    "toValue": true,
     "triggerRef": true,
     "unref": true,
     "useAttrs": true,
@@ -97,12 +99,10 @@
     "useNavigateTo": true,
     "useSlots": true,
     "useStatusBarHeight": true,
+    "useUserStore": true,
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "toValue": true,
-    "useUserStore": true,
-    "setupLogin": true
+    "watchSyncEffect": true
   }
 }

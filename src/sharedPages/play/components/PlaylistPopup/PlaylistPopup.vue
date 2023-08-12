@@ -33,8 +33,8 @@
         </view>
 
         <view class="flex justify-between items-center text-white-1 pt-[30rpx]">
-          <JIcon custom-class="icon-download text-[60rpx]" />
           <JIcon custom-class="icon-send text-[60rpx]" />
+          <JIcon custom-class="icon-download text-[60rpx]" />
           <JIcon
             v-if="audioStore.playlist"
             custom-class="icon-playlist text-[60rpx]"
@@ -49,31 +49,28 @@
         </view>
       </view>
 
-      <template v-if="isShowed">
-        <scroll-view
-          class="h-[calc(100%_-_446rpx)]"
-          scroll-y
-          enable-passive
-          scroll-anchoring
-          scroll-with-animation
-          :scroll-into-view="'_' + audioStore.songs[audioStore.currentSongIndex].id"
-          :upper-threshold="500"
-          :lower-threshold="500"
-          @scrolltoupper="onScrollToUpper"
-          @scrolltolower="onScrollToLower"
-        >
-          <Song
-            v-for="item in lazyList"
-            :id="'_' + item.id"
-            :key="item.id"
-            :song="item"
-            :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
-            :is-run="audioStore.currentSongInfo?.song.id === item.id"
-            :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
-            @click="onSong(item.id)"
-          />
-        </scroll-view>
-      </template>
+      <scroll-view
+        v-if="isShowed"
+        class="h-[calc(100%_-_446rpx)]"
+        scroll-y
+        enable-passive
+        scroll-anchoring
+        scroll-with-animation
+        :scroll-into-view="scrollIntoView"
+        :lower-threshold="500"
+        @scrolltolower="onScrollToLower"
+      >
+        <Song
+          v-for="item in lazyList"
+          :id="'_' + item.id"
+          :key="item.id"
+          :song="item"
+          :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
+          :is-run="audioStore.currentSongInfo?.song.id === item.id"
+          :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
+          @click="onSong(item.id)"
+        />
+      </scroll-view>
     </view>
   </uni-popup>
 </template>
@@ -81,7 +78,7 @@
 <script setup lang="ts">
 import type { Song } from '@/components/Song/Song.vue'
 import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
-import { throttle } from '@/utils/util'
+import { sleep } from '@/utils/util'
 
 const props = defineProps<{
   isShow: boolean
@@ -96,25 +93,33 @@ const emit = defineEmits<{
 const audioStore = useAudioStore()
 
 const popup = shallowRef<UniPopupInstance>()
+const scrollIntoView = ref('')
 const isShowed = ref(false)
-
-onMounted(() => {
-  watch(() => props.isShow, isShow => {
-    if (!isShow) return onClose()
-
-    popup.value?.open?.()
-    setTimeout(() => { isShowed.value = true }, 333)
-  }, { immediate: true })
-})
 
 onHide(() => { onClose() })
 
-function onClose() {
+onMounted(() => {
+  watch(() => props.isShow, async(isShow) => {
+    if (!isShow) return onClose()
+
+    popup.value?.open?.()
+
+    await sleep(333) //* 等待“333ms”后再加载歌曲列表，因为popup动画会持续300ms
+    isShowed.value = true
+
+    await sleep(100) //* 等待“100ms”后监听并定位到当前播放歌曲
+    watch(() => audioStore.currentSongIndex, (index) => {
+      scrollIntoView.value = '_' + audioStore.songs[index].id
+    }, { immediate: true })
+  }, { immediate: true })
+})
+
+async function onClose() {
   popup.value?.close?.()
-  setTimeout(() => {
-    emit('update:isShow', false)
-    emit('animationFinish')
-  }, 333)
+
+  await sleep(333) //* 等待“333ms”后发出事件，模拟动画结束
+  emit('update:isShow', false)
+  emit('animationFinish')
 }
 
 function onSong(id: number) {
@@ -125,21 +130,20 @@ function onSong(id: number) {
 
 // * 根据滚动方向来动态改变对应的指针‘offset’
 const limit = 5
-let topOffset = 0
-// ! ios全端向上滚加载更多都会发生偏移，暂时禁用向上滚懒加载
-// let topOffset = audioStore.currentSongIndex < limit ? 0 : audioStore.currentSongIndex - limit
+// ! ios全端向上滚加载更多都会发生偏移，暂时禁用向上滚动加载
+const topOffset = audioStore.currentSongIndex < limit * 2 ? 0 : audioStore.currentSongIndex - limit * 2
 let bottomOffset = audioStore.currentSongIndex + limit
 const lazyList = shallowReactive<Song[]>(audioStore.songs.slice(topOffset, bottomOffset))
 
 // * 向上滚加载更多
-const onScrollToUpper = throttle(function onScrollToUpper() {
+/* const onScrollToUpper = function onScrollToUpper() {
   const start = topOffset <= limit ? topOffset - topOffset : topOffset - limit
   if (topOffset === start || topOffset <= 0) return
   console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToUpper', { topOffset, start })
 
   lazyList.unshift(...audioStore.songs.slice(start, topOffset))
   topOffset = start
-}, 100)
+} */
 
 // * 向下滚加载更多
 function onScrollToLower() {

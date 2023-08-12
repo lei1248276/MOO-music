@@ -63,7 +63,10 @@
   </H5BackTransition>
   <!-- #endif -->
 
-  <PlayController @record="onPlayController" />
+  <PlayController
+    v-show="!isShowPlaylist"
+    @record="onPlayController"
+  />
 </template>
 
 <script setup lang="ts">
@@ -74,20 +77,17 @@ import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
 import PlaylistPopup from './components/PlaylistPopup/PlaylistPopup.vue'
 
-const audioStore = useAudioStore()
-
-const currentView = ref(1) // * 当前显示的view索引（默认显示中间的“View”）
-const playViews = shallowReactive<Song[]>(new Array(3)) // ! 只显示3个view，每次切歌动态更新下一个view
-const isShowPlaylist = ref(false) // * 是否显示播放列表
-
 // #ifdef H5
 const isShowPage = ref(true)
 // #endif
 
-function onPlayController(isStop: (is: boolean) => boolean) {
-  // * 在播放列表弹窗开启的情况下点击controller（或误操作），先执行关闭列表弹窗
-  if (isShowPlaylist.value) return isStop(!(isShowPlaylist.value = false))
+const audioStore = useAudioStore()
 
+const currentView = ref(1) // * 当前显示的view索引（默认显示中间的“View”）
+const playViews = shallowReactive<Song[]>(new Array(3)) //! 只显示3个view，每次切歌动态更新下一个view
+const isShowPlaylist = ref(false) // * 是否显示播放列表
+
+function onPlayController(isStop: (is: boolean) => boolean) {
   // #ifdef H5
   isShowPage.value = false // * H5端特有返回，为了保证H5端退出时有过渡效果
   // #endif
@@ -112,7 +112,8 @@ onMounted(() => {
 // ! 初始化view
 initViews()
 
-let isPassive = true // ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
+// ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
+let isPassive = true
 
 // * 监听切歌回调，进行被动更新
 audioStore.$onAction(({ name, after }) => {
@@ -127,7 +128,6 @@ audioStore.$onAction(({ name, after }) => {
     }
   })
 })
-
 // * 监听滑动回调，进行主动更新
 function onChangeView({ detail: { current: to, source: isTouch }}: SwiperOnChangeEvent) {
   if (!isTouch) return
@@ -147,47 +147,35 @@ function onChangeView({ detail: { current: to, source: isTouch }}: SwiperOnChang
 }
 
 function initViews() {
-  const { currentSongIndex } = audioStore
-  const { songs } = audioStore
-  const songsLen = songs.length
+  const { currentSongIndex, songs } = audioStore
 
-  playViews[0] = songs[toIndex(currentSongIndex - 1, songsLen)]
+  playViews[0] = songs[toIndex(currentSongIndex - 1, songs.length)]
   playViews[1] = songs[currentSongIndex]
-  playViews[2] = songs[toIndex(currentSongIndex + 1, songsLen)]
+  playViews[2] = songs[toIndex(currentSongIndex + 1, songs.length)]
   currentView.value = 1
 }
 
 // * 向上滑动进入下一个view（播放下一首），并修改"to"的下一个view
 function updateNextView(to: number) {
-  const { currentSongIndex } = audioStore
-  const { songs } = audioStore
-  const songsLen = songs.length
-  const viewsLen = playViews.length
+  const nextViewIndex = toIndex(to + 1, playViews.length)
+  const nextSongIndex = toIndex(audioStore.currentSongIndex + 1, audioStore.songs.length)
 
-  const nextViewIndex = toIndex(to + 1, viewsLen)
-  const nextSongIndex = toIndex(currentSongIndex + 1, songsLen)
-
-  playViews[nextViewIndex] = songs[nextSongIndex]
+  playViews[nextViewIndex] = audioStore.songs[nextSongIndex]
   currentView.value = to
 }
 
 // * 向下滑动进入上一个view（播放上一首），并修改"to"的上一个view
 function updatePrevView(to: number) {
-  const { currentSongIndex } = audioStore
-  const { songs } = audioStore
-  const songsLen = songs.length
-  const viewsLen = playViews.length
+  const prevViewIndex = toIndex(to - 1, playViews.length)
+  const prevSongIndex = toIndex(audioStore.currentSongIndex - 1, audioStore.songs.length)
 
-  const prevViewIndex = toIndex(to - 1, viewsLen)
-  const prevSongIndex = toIndex(currentSongIndex - 1, songsLen)
-
-  playViews[prevViewIndex] = songs[prevSongIndex]
+  playViews[prevViewIndex] = audioStore.songs[prevSongIndex]
   currentView.value = to
 }
 
 function toIndex(to: number, length: number) {
   if (to < 0) return length - 1
 
-  return to % (length + length) % length
+  return to % length
 }
 </script>

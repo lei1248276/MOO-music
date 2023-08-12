@@ -76,3 +76,7 @@ export function parseTime(time: Date | string | number, format = '{y}-{m}-{d} {h
 
   return time_str
 }
+
+export async function sleep(time: number) {
+  return new Promise<void>(resolve => { setTimeout(() => { resolve() }, time) })
+}
