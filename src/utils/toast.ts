@@ -21,7 +21,7 @@ const toast = {
     this.state.count = 0
 
     uni.showToast({
-      icon: 'success',
+      icon: title?.length! > 7 ? 'none' : 'success',
       title,
       duration: 1000,
       complete: callback
@@ -31,7 +31,7 @@ const toast = {
     this.state.count = 0
 
     uni.showToast({
-      icon: 'error',
+      icon: title?.length! > 7 ? 'none' : 'error',
       title: title || '请求失败',
       duration: 2000,
       complete: callback

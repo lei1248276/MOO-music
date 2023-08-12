@@ -59,7 +59,7 @@
     <button
       v-if="userStore.profile"
       class="bg-black-1 text-white-1 rounded-full mt-10 mx-10"
-      @tap="userStore.logout()"
+      @tap="logout"
     >
       退出登录
     </button>
@@ -70,6 +70,7 @@
 import Shelf from './components/Shelf/Shelf.vue'
 import { getUserPlaylist } from '@/api/profile'
 import type { Playlist } from '@/api/interface/UserPlaylist'
+import toast from '@/utils/toast'
 
 const userStore = useUserStore()
 const cacheStore = useCacheStore()
@@ -129,4 +130,10 @@ const shelf = reactive([
     url: './historyPlays/historyPlays'
   }
 ])
+
+async function logout() {
+  toast.start()
+  await userStore.logout()
+  toast.close()
+}
 </script>

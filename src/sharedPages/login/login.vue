@@ -92,18 +92,18 @@ async function login() {
 
 function toNetease() {
   // #ifdef H5
-  H5ToNetease('orpheus://')
+  H5ToNetease()
   // #endif
 
   // #ifdef APP-PLUS
-  APPToNetease('orpheuswidget://')
+  APPToNetease()
   // #endif
 
   // ! 小程序跳不了...
 }
 
 // #ifdef H5
-function H5ToNetease(scheme: string) {
+function H5ToNetease() {
   // * 提前创建一个定时器作为结果预测提示
   const timer = setTimeout(() => {
     console.error('跳转失败。。。')
@@ -121,22 +121,31 @@ function H5ToNetease(scheme: string) {
   }
 
   // * 跳转APP
-  window.location.href = scheme
+  window.location.href = 'orpheus://'
 }
 // #endif
 
 // #ifdef APP-PLUS
-function APPToNetease(scheme: string) {
-  if (!plus.runtime.isApplicationExist({ action: scheme })) {
+function APPToNetease() {
+  const scheme = 'orpheuswidget://'
+  const packageName = 'com.netease.cloudmusic'
+
+  if (!plus.runtime.isApplicationExist({ action: scheme, pname: packageName })) {
     console.error('网易云音乐APP未安装')
     toast.fail('请安装网易云音乐')
     return
   }
 
-  plus.runtime.launchApplication({ action: scheme }, function error(e: any) {
+  function error(e: any) {
     console.error('打开网易云音乐失败: ' + e.message)
     toast.fail('打开网易云音乐失败, 请自行启动')
-  })
+  }
+
+  if (plus.os.name === 'Android') {
+    plus.runtime.launchApplication({ pname: packageName }, error)
+  } else if (plus.os.name === 'iOS') {
+    plus.runtime.launchApplication({ action: scheme }, error)
+  }
 }
 // #endif
 </script>
