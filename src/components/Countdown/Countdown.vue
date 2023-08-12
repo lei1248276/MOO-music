@@ -1,5 +1,5 @@
 <template>
-  <view class="text-grey-1 font-bold text-[48rpx]">{{ minute }}:{{ seconds }}</view>
+  <view class="will-change-contents w-[140rpx] leading-[110rpx] text-grey-1 font-bold text-[48rpx]">{{ minute }}:{{ seconds }}</view>
 </template>
 
 <script setup lang="ts">

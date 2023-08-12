@@ -33,16 +33,17 @@
       </movable-view>
     </movable-area>
 
-    <JIcon
-      :type="audioStore.isPlay ? 'icon-audioPause' : 'icon-audioPlay'"
-      custom-class="text-white-1 text-[60rpx]"
-    />
-
-    <!-- ! 隐形的占位事件触发元素，避免icon覆盖movable -->
-    <view
-      class="absolute right-0 z-50 bg-yellow-1 opacity-0 w-[100rpx] h-full"
-      @tap="audioStore.toggle"
-    />
+    <view class="relative">
+      <JIcon
+        :type="audioStore.isPlay ? 'icon-audioPause' : 'icon-audioPlay'"
+        custom-class="text-white-1 text-[60rpx]"
+      />
+      <!-- ! 隐形的占位事件触发元素，因为播放控制icon被movable区域覆盖了 -->
+      <view
+        class="w-[60rpx] h-full absolute top-0 right-0 z-50 bg-yellow-1 opacity-0 btn-zoom"
+        @tap="audioStore.toggle"
+      />
+    </view>
   </view>
 </template>
 
@@ -55,7 +56,7 @@ const emit = defineEmits<{
 
 const audioStore = useAudioStore()
 
-const area = 450
+const area = 480
 const size = 130
 const pivot = (area / 2) - (size / 2) // * 中心点
 let moved = -1 // * 被移动的距离
