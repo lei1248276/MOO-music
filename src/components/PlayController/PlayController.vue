@@ -51,7 +51,14 @@
       <JIcon
         type="icon-menu"
         custom-class="text-white-1 text-[70rpx] font-bold mr-3"
+        @click="audioStore.songs.length && popup?.open?.()"
       />
+      <uni-popup
+        ref="popup"
+        type="bottom"
+      >
+        <PlaylistPopup />
+      </uni-popup>
 
       <JIcon
         :type="`icon-${audioStore.mode}`"
@@ -64,6 +71,8 @@
 
 <script setup lang="ts">
 import type { MovableViewOnChangeEvent } from '@uni-helper/uni-app-types'
+import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
+import PlaylistPopup from './components/PlaylistPopup/PlaylistPopup.vue'
 
 const emit = defineEmits<{
   (e: 'record', isStop: (is: boolean) => boolean): void
@@ -78,6 +87,8 @@ let moved = -1 // * 被移动的距离
 
 const hidden = ref(false)
 const x = ref(pivot)
+
+const popup = shallowRef<UniPopupInstance>()
 
 onShow(() => { hidden.value = false })
 onHide(() => { hidden.value = true })

@@ -111,6 +111,12 @@ export const useAudioStore = defineStore('audio', () => {
   }
 
   function setPlayMode() {
+    // * 如果因为缓存导致顺序不对，就继续翻转
+    if (playMode[0] !== mode.value) {
+      playMode.unshift(playMode.pop()!)
+      return setPlayMode()
+    }
+
     // * 切换模式
     playMode.unshift(mode.value = playMode.pop()!)
 
