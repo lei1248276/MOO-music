@@ -44,7 +44,7 @@
           :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
           :is-run="audioStore.currentSongInfo?.song.id === song.id"
           :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-          @click="audioStore.onPlay(index, songs)"
+          @click="audioStore.onPlay(0, [songs[index]])"
         />
       </template>
 
