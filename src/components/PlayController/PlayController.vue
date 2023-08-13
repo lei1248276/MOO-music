@@ -51,13 +51,15 @@
       <JIcon
         type="icon-menu"
         custom-class="text-white-1 text-[70rpx] font-bold mr-3"
-        @click="audioStore.songs.length && popup?.open?.()"
+        @click="onOpenPopup"
       />
       <uni-popup
         ref="popup"
         type="bottom"
+        :safe-area="false"
+        @mask-click="onClosePopup"
       >
-        <PlaylistPopup />
+        <PlaylistPopup v-if="isOpenPopup" />
       </uni-popup>
 
       <JIcon
@@ -89,6 +91,7 @@ const hidden = ref(false)
 const x = ref(pivot)
 
 const popup = shallowRef<UniPopupInstance>()
+const isOpenPopup = ref(false)
 
 onShow(() => { hidden.value = false })
 onHide(() => { hidden.value = true })
@@ -136,5 +139,15 @@ function onMoveEnd() {
     console.log('上一首')
     audioStore.setPreSong()
   }
+}
+
+function onOpenPopup() {
+  if (!audioStore.songs.length) return
+  isOpenPopup.value = true
+  popup.value?.open?.()
+}
+
+function onClosePopup() {
+  setTimeout(() => { isOpenPopup.value = false }, 333)
 }
 </script>

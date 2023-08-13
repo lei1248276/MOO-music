@@ -3,7 +3,7 @@
     <Subtitle
       icon="icon-more"
       icon-size="50rpx"
-      class="px-[28rpx] bg-black-2"
+      custom-class="px-[28rpx] bg-black-2"
     >
       <template #title>
         <view class="flex items-center">

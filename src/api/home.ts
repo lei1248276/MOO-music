@@ -24,12 +24,22 @@ export function getRecommend(limit: number) {
 
 // * 获取私人推荐歌单
 export function getPersonalRecommend() {
-  return request.get<any, RecommendResponse>(`${MOO_API}/recommend/resource`)
+  return request.get<any, RecommendResponse>(`${MOO_API}/recommend/resource`,
+    {
+      // #ifdef MP-WEIXIN
+      header: { cookie: uni.getStorageSync('cookie') || '' }
+      // #endif
+    })
 }
 
 // * 获取私人推荐歌曲
 export function getRecommendSongs() {
-  return request.get<any, RecommendSongsResponse>(`${MOO_API}/recommend/songs`)
+  return request.get<any, RecommendSongsResponse>(`${MOO_API}/recommend/songs`,
+    {
+      // #ifdef MP-WEIXIN
+      header: { cookie: uni.getStorageSync('cookie') || '' }
+      // #endif
+    })
 }
 
 // * 获取新歌单
