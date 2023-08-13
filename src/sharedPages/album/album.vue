@@ -23,7 +23,7 @@
               <button
                 class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
                 size="mini"
-                @tap="onSong(0)"
+                @tap="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, songs.length) : 0, songs)"
               >
                 <JIcon custom-class="icon-play text-[40rpx]" />
               </button>
@@ -44,7 +44,7 @@
             :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
             :is-run="audioStore.currentSongInfo?.song.id === song.id"
             :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-            @click="onSong(index)"
+            @click="audioStore.onPlay(index, songs)"
           />
         </view>
       </view>
@@ -66,6 +66,7 @@ export default {
 import type { Album, Song } from '@/api/interface/Album'
 import { getAlbumDetail } from '@/api/album'
 import AlbumInfo from './components/AlbumInfo/AlbumInfo.vue'
+import { rangeRandom } from '@/utils/util'
 
 // #ifdef H5
 const isShowPage = ref(true)
@@ -80,16 +81,6 @@ const songs = shallowReactive<Song[]>([])
 onLoad((options) => {
   fetchAlbumDetail((options as { id: number }).id)
 })
-
-function onSong(index: number) {
-  audioStore.$patch(state => {
-    if (state.songs !== songs) state.songs = songs
-
-    if (audioStore.playlist) audioStore.playlist = undefined
-
-    audioStore.setCurrentSong(songs[index], index)
-  })
-}
 
 async function fetchAlbumDetail(id: number) {
   const { songs: _songs, album: _album } = await getAlbumDetail(id)

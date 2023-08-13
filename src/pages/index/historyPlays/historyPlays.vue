@@ -17,7 +17,7 @@
         <button
           class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
           size="mini"
-          @tap="onSong(0)"
+          @tap="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, cacheStore.historyPlays.length) : 0, cacheStore.historyPlays)"
         >
           <JIcon custom-class="icon-play text-[42rpx]" />
         </button>
@@ -41,7 +41,7 @@
         :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
         :is-run="audioStore.currentSongInfo?.song.id === song.id"
         :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-        @click="onSong(index)"
+        @click="audioStore.onPlay(index, cacheStore.historyPlays)"
       />
     </view>
   <!-- #ifdef H5 -->
@@ -52,20 +52,12 @@
 </template>
 
 <script setup lang="ts">
+import { rangeRandom } from '@/utils/util'
+
 const audioStore = useAudioStore()
 const cacheStore = useCacheStore()
 
 // #ifdef H5
 const isShowPage = ref(true)
 // #endif
-
-function onSong(index: number) {
-  audioStore.$patch(state => {
-    if (state.songs !== cacheStore.historyPlays) state.songs = cacheStore.historyPlays
-
-    if (audioStore.playlist) audioStore.playlist = undefined
-
-    audioStore.setCurrentSong(cacheStore.historyPlays[index], index)
-  })
-}
 </script>

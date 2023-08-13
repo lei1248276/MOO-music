@@ -12,7 +12,7 @@
     :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
     :is-run="audioStore.currentSongInfo?.song.id === song.id"
     :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-    @click="onSong(index)"
+    @click="audioStore.onPlay(index, songs, playlist)"
   />
 </template>
 
@@ -26,15 +26,6 @@ const playlist = shallowRef<Playlist>()
 const songs = shallowReactive<Playlist['tracks']>([])
 
 fetchNewSong()
-
-function onSong(index: number) {
-  console.log('🚀 ~ file: NewSong.vue:43 ~ onSong ~ song:', songs[index])
-  audioStore.$patch(state => {
-    if (state.playlist !== playlist.value) state.playlist = playlist.value
-    if (state.songs !== songs) state.songs = songs
-    audioStore.setCurrentSong(songs[index], index)
-  })
-}
 
 async function fetchNewSong() {
   const { result } = await getNewSong()

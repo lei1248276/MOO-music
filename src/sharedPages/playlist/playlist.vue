@@ -31,13 +31,15 @@
         <Subtitle
           icon="icon-menu"
           icon-size="60rpx"
+          class="z-50 sticky top-[44px] right-0 left-0 bg-black-2"
+          :style="{ top: 44 + useStatusBarHeight().value + 'px' }"
         >
           <template #title>
             <view class="flex items-center">
               <button
                 class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
                 size="mini"
-                @tap="onSong(0)"
+                @tap="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, songs.length) : 0, songs, playlist)"
               >
                 <JIcon custom-class="icon-play text-[42rpx]" />
               </button>
@@ -58,7 +60,7 @@
             :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
             :is-run="audioStore.currentSongInfo?.song.id === song.id"
             :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-            @click="onSong(index)"
+            @click="audioStore.onPlay(index, songs, playlist)"
           />
         </view>
       </view>
@@ -82,6 +84,7 @@ import { getPlaylist } from '@/api/playlist'
 import { getSongs } from '@/api/playlist'
 import Cover from './components/Cover/Cover.vue'
 import Creator from './components/Creator/Creator.vue'
+import { rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
 
@@ -102,15 +105,6 @@ onReachBottom(() => {
 
   fetchSongs()
 })
-
-function onSong(index: number) {
-  console.log('🚀 ~ file: playlist.vue:121 ~ onSong ~ song:', songs[index])
-  audioStore.$patch(state => {
-    if (state.playlist !== playlist.value) state.playlist = playlist.value
-    if (state.songs !== songs) state.songs = songs
-    audioStore.setCurrentSong(songs[index], index)
-  })
-}
 
 async function fetchSongs() {
   if (!playlist.value) return

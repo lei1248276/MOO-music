@@ -44,7 +44,7 @@
           :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
           :is-run="audioStore.currentSongInfo?.song.id === song.id"
           :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-          @click="onSong(index)"
+          @click="audioStore.onPlay(index, songs)"
         />
       </template>
 
@@ -108,16 +108,6 @@ function onSelect(_keyword: string) {
   cacheStore.addHistorySearch(_keyword)
   emit('update:suggests', [])
   keyword.value = _keyword
-}
-
-function onSong(index: number) {
-  audioStore.$patch(state => {
-    if (audioStore.playlist) audioStore.playlist = undefined
-
-    if (state.songs !== songs.value) state.songs = songs.value
-
-    audioStore.setCurrentSong(songs.value[index], index)
-  })
 }
 
 async function fetchSongs(_keyword: string) {

@@ -87,33 +87,10 @@ const currentView = ref(1) // * 当前显示的view索引（默认显示中间�
 const playViews = shallowReactive<Song[]>(new Array(3)) //! 只显示3个view，每次切歌动态更新下一个view
 const isShowPlaylist = ref(false) // * 是否显示播放列表
 
-function onPlayController(isStop: (is: boolean) => boolean) {
-  // #ifdef H5
-  isShowPage.value = false // * H5端特有返回，为了保证H5端退出时有过渡效果
-  // #endif
-
-  // #ifndef H5
-  uni.navigateBack() // * 不是H5端执行正常返回
-  // #endif
-
-  return isStop(true) // * 取消点击controller的默认行为
-}
-
-// #ifdef H5
-onMounted(() => {
-  setTimeout(() => {
-    watch(currentView, (view) => {
-      document.title = '🎵 ' + playViews[view]?.name + ' - ' + playViews[view]?.ar.reduce((acc, { name }) => (acc += name + '. '), '')
-    }, { immediate: true })
-  }, 500)
-})
-// #endif
+let isPassive = true // ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
 
 // ! 初始化view
-initViews()
-
-// ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
-let isPassive = true
+watch(() => audioStore.songs, () => { initViews() }, { immediate: true })
 
 // * 监听切歌回调，进行被动更新
 audioStore.$onAction(({ name, after }) => {
@@ -146,13 +123,13 @@ function onChangeView({ detail: { current: to, source: isTouch }}: SwiperOnChang
   isPassive = true
 }
 
-function initViews() {
+function initViews(current = currentView.value) {
   const { currentSongIndex, songs } = audioStore
+  const viewLen = playViews.length
 
-  playViews[0] = songs[toIndex(currentSongIndex - 1, songs.length)]
-  playViews[1] = songs[currentSongIndex]
-  playViews[2] = songs[toIndex(currentSongIndex + 1, songs.length)]
-  currentView.value = 1
+  playViews[toIndex(current - 1, viewLen)] = songs[toIndex(currentSongIndex - 1, songs.length)]
+  playViews[toIndex(current, viewLen)] = songs[currentSongIndex]
+  playViews[toIndex(current + 1, viewLen)] = songs[toIndex(currentSongIndex + 1, songs.length)]
 }
 
 // * 向上滑动进入下一个view（播放下一首），并修改"to"的下一个view
@@ -177,5 +154,26 @@ function toIndex(to: number, length: number) {
   if (to < 0) return length - 1
 
   return to % length
+}
+
+// #ifdef H5
+onMounted(() => {
+  setTimeout(() => {
+    watch(currentView, (view) => {
+      document.title = '🎵 ' + playViews[view]?.name + ' - ' + playViews[view]?.ar.reduce((acc, { name }) => (acc += name + '. '), '')
+    }, { immediate: true })
+  }, 500)
+})
+// #endif
+function onPlayController(isStop: (is: boolean) => boolean) {
+  // #ifdef H5
+  isShowPage.value = false // * H5端特有返回，为了保证H5端退出时有过渡效果
+  // #endif
+
+  // #ifndef H5
+  uni.navigateBack() // * 不是H5端执行正常返回
+  // #endif
+
+  return isStop(true) // * 取消点击controller的默认行为
 }
 </script>

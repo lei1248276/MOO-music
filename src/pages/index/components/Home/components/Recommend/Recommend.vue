@@ -83,7 +83,7 @@ async function onPlay() {
     await audioStore.setCurrentSong(recommendSongs.value[0], 0)
   } else {
     // * 随机获取推荐歌单中某一个
-    const randomIndex = rangeRandom(0, recommendList.value.length - 1)
+    const randomIndex = rangeRandom(0, recommendList.value.length)
     const { id } = recommendList.value[randomIndex]
     const { playlist } = await getPlaylist(id)
 

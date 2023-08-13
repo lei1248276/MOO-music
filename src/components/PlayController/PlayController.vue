@@ -1,47 +1,62 @@
 <template>
-  <view
-    v-show="!hidden"
-    class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] left-[6%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
-    :style="{ width: area + 'rpx'}"
-  >
-    <Countdown />
-
-    <movable-area
-      class="h-[110rpx] absolute left-0 top-0 z-10"
+  <view>
+    <view
+      v-show="!hidden"
+      class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] left-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
       :style="{ width: area + 'rpx'}"
     >
-      <movable-view
-        class="h-[110rpx] flex items-center"
-        :style="{ width: size + 'rpx'}"
-        :x="x + 'rpx'"
-        direction="horizontal"
-        @change="onMoveChange"
-        @touchend.passive="onMoveEnd"
-      >
-        <JImage
-          src="/static/record.png"
-          :width="size + 'rpx'"
-          :height="size + 'rpx'"
-          class="will-change-transform"
-          :class="audioStore.isLoading
-            ? 'animate-bounce [animation-delay:400ms]'
-            : audioStore.isPlay
-              ? 'animate-spin [animation-duration:5s]'
-              : 'animate-spin [animation-duration:5s] [animation-play-state:paused]'"
-          @click="toPlay"
-        />
-      </movable-view>
-    </movable-area>
+      <Countdown />
 
-    <view class="relative">
+      <movable-area
+        class="h-[110rpx] absolute left-0 top-0 z-10"
+        :style="{ width: area + 'rpx'}"
+      >
+        <movable-view
+          class="h-[110rpx] flex items-center"
+          :style="{ width: size + 'rpx'}"
+          :x="x + 'rpx'"
+          direction="horizontal"
+          @change="onMoveChange"
+          @touchend.passive="onMoveEnd"
+        >
+          <JImage
+            src="/static/record.png"
+            :width="size + 'rpx'"
+            :height="size + 'rpx'"
+            class="will-change-transform"
+            :class="audioStore.isLoading
+              ? 'animate-bounce [animation-delay:400ms]'
+              : audioStore.isPlay
+                ? 'animate-spin [animation-duration:5s]'
+                : 'animate-spin [animation-duration:5s] [animation-play-state:paused]'"
+            @click="toPlay"
+          />
+        </movable-view>
+      </movable-area>
+
+      <view class="relative">
+        <JIcon
+          :type="audioStore.isPlay ? 'icon-audioPause' : 'icon-audioPlay'"
+          custom-class="text-white-1 text-[60rpx]"
+        />
+        <!-- ! 隐形的占位事件触发元素，因为播放控制icon被movable区域覆盖了 -->
+        <view
+          class="w-[60rpx] h-full absolute top-0 right-0 z-50 bg-yellow-1 opacity-0"
+          @tap="audioStore.toggle"
+        />
+      </view>
+    </view>
+
+    <view class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] right-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]">
       <JIcon
-        :type="audioStore.isPlay ? 'icon-audioPause' : 'icon-audioPlay'"
-        custom-class="text-white-1 text-[60rpx]"
+        type="icon-menu"
+        custom-class="text-white-1 text-[70rpx] font-bold mr-3"
       />
-      <!-- ! 隐形的占位事件触发元素，因为播放控制icon被movable区域覆盖了 -->
-      <view
-        class="w-[60rpx] h-full absolute top-0 right-0 z-50 bg-yellow-1 opacity-0 btn-zoom"
-        @tap="audioStore.toggle"
+
+      <JIcon
+        :type="`icon-${audioStore.mode}`"
+        custom-class="text-yellow-1 text-[70rpx]"
+        @click="audioStore.setPlayMode()"
       />
     </view>
   </view>
@@ -91,7 +106,7 @@ function onMoveEnd() {
   if (moved === -1) return
 
   // * 滑动结束后手动归位（避免 moved === pivot 导致无法归位所以-1）
-  x.value = moved - 1
+  x.value = -1
   setTimeout(() => {
     x.value = pivot
     moved = -1

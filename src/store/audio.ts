@@ -3,7 +3,7 @@ import type { Song } from '@/components/Song/Song.vue'
 import type { SongURL } from '@/api/interface/SongURL'
 import { getSongURL } from '@/api/play'
 import toast from '@/utils/toast'
-import { transHTTPS } from '@/utils/util'
+import { shuffle, transHTTPS } from '@/utils/util'
 
 export interface SongInfo {
   song: Song
@@ -27,12 +27,16 @@ const userStore: {value: ReturnType<typeof useUserStore>} = {
   }
 }
 
+let originSongs: Song[] = [] // ! 用于切换模式时保留的原"songs"引用
+const playMode: ('loop' | 'random')[] = ['loop', 'random']
+
 export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
   const isLoading = ref(false) // * 是否缓冲中
-  const isPlay = ref(false)
+  const isPlay = ref(false) // * 是否播放
   const duration = ref(0) // * 当前歌曲时长
   const currentTime = ref(0) // * 当前歌曲播放时间
+  const mode = ref<typeof playMode[0]>('loop') // * 播放模式（默认循环播放）
 
   const playlist = shallowRef<Playlist>()
   const songs = shallowRef<Song[]>([])
@@ -88,6 +92,47 @@ export const useAudioStore = defineStore('audio', () => {
     }
   }
 
+  function onPlay(index: number, _songs: Song[], _playlist?: Playlist) {
+    if (playlist.value !== _playlist) playlist.value = _playlist
+
+    switch (mode.value) {
+      case 'random': {
+        originSongs = _songs
+        songs.value = shuffle(originSongs.slice())
+        const id = _songs[index].id
+        setCurrentSong(_songs[index], songs.value.findIndex(v => v.id === id))
+        break
+      }
+      default: {
+        if (songs.value !== _songs) songs.value = _songs
+        setCurrentSong(_songs[index], index)
+      }
+    }
+  }
+
+  function setPlayMode() {
+    // * 切换模式
+    playMode.unshift(mode.value = playMode.pop()!)
+
+    if (!songs.value.length) return
+
+    switch (mode.value) {
+      case 'loop': {
+        songs.value = originSongs
+        originSongs = []
+        break
+      }
+      case 'random': {
+        originSongs = songs.value
+        songs.value = shuffle(originSongs.slice())
+        break
+      }
+    }
+
+    const id = currentSongInfo.value?.song.id
+    currentSongIndex.value = songs.value.findIndex(v => v.id === id)
+  }
+
   function setBackgroundAudio({ song, urlInfo }: SongInfo) {
     audio.title = song.name
     audio.epname = song.al.name
@@ -118,6 +163,7 @@ export const useAudioStore = defineStore('audio', () => {
     isPlay,
     duration,
     currentTime,
+    mode,
     playlist,
     songs,
     currentSongInfo,
@@ -125,6 +171,8 @@ export const useAudioStore = defineStore('audio', () => {
     setPreSong,
     setCurrentSong,
     setNextSong,
+    setPlayMode,
+    onPlay,
     toggle
   }
 })

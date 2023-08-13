@@ -67,7 +67,7 @@
 }
 
 .icon-menu:before {
-  content: "\e85e";
+  content: "\e60e";
 }
 
 .icon-audioPause:before {
@@ -116,4 +116,12 @@
 
 .icon-singer:before {
   content: "\e631";
+}
+
+.icon-loop:before {
+  content: "\e62b";
+}
+
+.icon-random:before {
+  content: "\e7b8";
 }

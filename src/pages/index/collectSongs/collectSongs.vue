@@ -17,7 +17,7 @@
         <button
           class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
           size="mini"
-          @tap="onSong(0)"
+          @tap="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, cacheStore.collectSongs.length) : 0, cacheStore.collectSongs)"
         >
           <JIcon custom-class="icon-play text-[42rpx]" />
         </button>
@@ -47,7 +47,7 @@
             :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
             :is-run="audioStore.currentSongInfo?.song.id === song.id"
             :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-            @click="onSong(index)"
+            @click="audioStore.onPlay(index, cacheStore.collectSongs)"
           />
         </uni-swipe-action-item>
       </uni-swipe-action>
@@ -61,6 +61,7 @@
 
 <script setup lang="ts">
 import type { Song } from '@/components/Song/Song.vue'
+import { rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
 const cacheStore = useCacheStore()
@@ -91,15 +92,5 @@ onReachBottom(() => {
 function onClick(index: number) {
   cacheStore.collectSongs.splice(index, 1)
   lazyList.splice(index, 1)
-}
-
-function onSong(index: number) {
-  audioStore.$patch(state => {
-    if (state.songs !== cacheStore.collectSongs) state.songs = cacheStore.collectSongs
-
-    if (audioStore.playlist) audioStore.playlist = undefined
-
-    audioStore.setCurrentSong(cacheStore.collectSongs[index], index)
-  })
 }
 </script>

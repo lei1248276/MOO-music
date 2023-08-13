@@ -9,7 +9,7 @@
           <button
             class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
             size="mini"
-            @tap.stop="onSong(0)"
+            @tap.stop="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, songs.length) : 0, songs)"
           >
             <JIcon custom-class="icon-play text-[42rpx]" />
           </button>
@@ -30,7 +30,7 @@
         :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
         :is-run="audioStore.currentSongInfo?.song.id === song.id"
         :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-        @click="onSong(index)"
+        @click="audioStore.onPlay(index, songs)"
       />
     </template>
   </view>
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import type { HotSong } from '@/api/interface/ArtistSongs'
 import { getArtistSongs } from '@/api/artist'
+import { rangeRandom } from '@/utils/util'
 
 const props = defineProps<{
   id: number
@@ -60,15 +61,6 @@ const unwatch = watch(() => props.lazyLoad, async ok => {
     unwatch()
   }
 }, { immediate: true })
-
-function onSong(index: number) {
-  console.log('🚀 ~ file: playlist.vue:121 ~ onSong ~ song:', songs[index])
-  audioStore.$patch(state => {
-    if (state.playlist) state.playlist = undefined
-    if (state.songs !== songs) state.songs = songs
-    audioStore.setCurrentSong(songs[index], index)
-  })
-}
 
 function loadMore(limit = 10) {
   if (songs.length === cacheList.value.length) return

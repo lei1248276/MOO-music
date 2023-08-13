@@ -1,11 +1,17 @@
-// * 生成范围随机数
+/**
+ * @description 生成范围随机数（{min, max-1}）
+ * @param min 最小值
+ * @param max 最大值（不包含）
+ */
 export function rangeRandom(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-// * 数组洗牌
+/**
+ * @description 数组洗牌（原地随机排序）
+ */
 export function shuffle(array: any[]) {
-  for (let i = array.length - 1; i > 0; i--) {
+  for (let i = array.length - 1; i >= 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]]
   }
