@@ -90,7 +90,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAudioStore: typeof import('./src/store/audio')['useAudioStore']
-  const useCache: typeof import('./src/store/cache')['useCache']
+  const useCache: typeof import('./src/hooks/useCache')['default']
   const useCacheStore: typeof import('./src/store/cache')['useCacheStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
@@ -197,7 +197,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAudioStore: UnwrapRef<typeof import('./src/store/audio')['useAudioStore']>
-    readonly useCache: UnwrapRef<typeof import('./src/store/cache')['useCache']>
+    readonly useCache: UnwrapRef<typeof import('./src/hooks/useCache')['default']>
     readonly useCacheStore: UnwrapRef<typeof import('./src/store/cache')['useCacheStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
@@ -298,7 +298,7 @@ declare module '@vue/runtime-core' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAudioStore: UnwrapRef<typeof import('./src/store/audio')['useAudioStore']>
-    readonly useCache: UnwrapRef<typeof import('./src/store/cache')['useCache']>
+    readonly useCache: UnwrapRef<typeof import('./src/hooks/useCache')['default']>
     readonly useCacheStore: UnwrapRef<typeof import('./src/store/cache')['useCacheStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>

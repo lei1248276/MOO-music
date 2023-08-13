@@ -3,7 +3,6 @@ onLaunch(() => {
   console.log('App Launch')
   setupLogin()
   setupAudio()
-  useCache()
 })
 
 onHide(() => {

@@ -12,12 +12,12 @@ const audioStore: {value: ReturnType<typeof useAudioStore>} = {
 }
 
 export const useCacheStore = defineStore('cache', () => {
-  const historySearch = shallowReactive<string[]>([])
-  const historyPlays = shallowReactive<Song[]>([])
-  const collectSongs = shallowReactive<Song[]>([])
-  const collectPlaylist = shallowReactive<Playlist[]>([])
-  const collectAlbums = shallowReactive<Album[]>([])
-  const collectArtists = shallowReactive<Artist[]>([])
+  const historySearch = useCache('historySearch', shallowReactive<string[]>([]))
+  const historyPlays = useCache('historyPlays', shallowReactive<Song[]>([]))
+  const collectSongs = useCache('collectSongs', shallowReactive<Song[]>([]))
+  const collectPlaylist = useCache('collectPlaylist', shallowReactive<Playlist[]>([]))
+  const collectAlbums = useCache('collectAlbums', shallowReactive<Album[]>([]))
+  const collectArtists = useCache('collectArtists', shallowReactive<Artist[]>([]))
 
   function addHistorySearch(keyword: string) {
     const index = historySearch.findIndex(v => v === keyword)
@@ -63,45 +63,27 @@ export const useCacheStore = defineStore('cache', () => {
   }
 })
 
-export function useCache() {
-  const cacheStore = useCacheStore()
-
-  uni.getStorageInfo({
-    success(res) {
-      res.keys.forEach(key => {
-        const cacheList = cacheStore[key as keyof typeof cacheStore]
-        if (!cacheList) return
-
-        uni.getStorage({
-          key,
-          success({ data }) {
-            if (data && Array.isArray(cacheList)) {
-              // @ts-ignore
-              data.forEach((v, i) => { cacheList[i] = v })
-            }
-          },
-          fail(err) { console.error(err) }
-        })
-      })
-    }
-  })
-}
-
 export function setupCache() {
   const cacheStore = useCacheStore()
+  const audioStore = useAudioStore()
   const keys = [
     'historyPlays',
     'historySearch',
     'collectSongs',
     'collectPlaylist',
     'collectAlbums',
-    'collectArtists'
+    'collectArtists',
+    'mode',
+    'playlist',
+    'songs'
   ]
 
   keys.forEach((key) => {
     uni.setStorage({
       key,
-      data: cacheStore[key as keyof typeof cacheStore],
+      data: key in cacheStore
+        ? cacheStore[key as keyof typeof cacheStore]
+        : audioStore[key as keyof typeof audioStore],
       fail(err) { console.error(err) }
     })
   })

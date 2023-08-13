@@ -36,10 +36,10 @@ export const useAudioStore = defineStore('audio', () => {
   const isPlay = ref(false) // * 是否播放
   const duration = ref(0) // * 当前歌曲时长
   const currentTime = ref(0) // * 当前歌曲播放时间
-  const mode = ref<typeof playMode[0]>('loop') // * 播放模式（默认循环播放）
+  const mode = useCache('mode', ref<typeof playMode[0]>('loop')) // * 播放模式（默认循环播放）
 
-  const playlist = shallowRef<Playlist>()
-  const songs = shallowRef<Song[]>([])
+  const playlist = useCache('playlist', shallowRef<Playlist>())
+  const songs = useCache('songs', shallowRef<Song[]>([]))
   const currentSongInfo = shallowRef<SongInfo>()
   const currentSongIndex = ref(-1)
 
