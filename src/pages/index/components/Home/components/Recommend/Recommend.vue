@@ -26,7 +26,7 @@
       <JIcon
         :type="isRun ? 'icon-pause' : 'icon-play'"
         custom-class="text-[80rpx] text-yellow-1"
-        @click="onPlay"
+        @click="(recommendList.length || recommendSongs) && onPlay()"
       />
     </view>
   </view>
@@ -78,21 +78,16 @@ async function onPlay() {
   isRun.value = true
 
   if (recommendSongs.value) {
-    audioStore.playlist = undefined
-    audioStore.songs = recommendSongs.value
-    await audioStore.setCurrentSong(recommendSongs.value[0], 0)
+    audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, recommendSongs.value.length) : 0, recommendSongs.value)
   } else {
     // * 随机获取推荐歌单中某一个
-    const randomIndex = rangeRandom(0, recommendList.value.length)
-    const { id } = recommendList.value[randomIndex]
+    const { id } = recommendList.value[rangeRandom(0, recommendList.value.length)]
     const { playlist } = await getPlaylist(id)
 
-    audioStore.playlist = playlist
-    audioStore.songs = playlist.tracks
-    await audioStore.setCurrentSong(playlist.tracks[0], 0)
+    audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, playlist.tracks.length) : 0, playlist.tracks, playlist)
   }
 
-  isRun.value = false
+  setTimeout(() => { isRun.value = false }, 1000)
 }
 
 function freshRecommend() {
