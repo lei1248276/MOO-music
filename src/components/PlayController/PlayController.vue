@@ -59,7 +59,7 @@
         :safe-area="false"
         @mask-click="onClosePopup"
       >
-        <PlaylistPopup v-if="isOpenPopup" />
+        <PlaylistPopup v-if="isShowPopup" />
       </uni-popup>
 
       <JIcon
@@ -91,7 +91,7 @@ const hidden = ref(false)
 const x = ref(pivot)
 
 const popup = shallowRef<UniPopupInstance>()
-const isOpenPopup = ref(false)
+const isShowPopup = ref(false)
 
 onShow(() => { hidden.value = false })
 onHide(() => { hidden.value = true })
@@ -143,11 +143,11 @@ function onMoveEnd() {
 
 function onOpenPopup() {
   if (!audioStore.songs.length) return
-  isOpenPopup.value = true
+  isShowPopup.value = true
   popup.value?.open?.()
 }
 
 function onClosePopup() {
-  setTimeout(() => { isOpenPopup.value = false }, 333)
+  setTimeout(() => { isShowPopup.value = false }, 333)
 }
 </script>

@@ -37,18 +37,24 @@
               :name="playViews[currentView].name"
               :singers="playViews[currentView].ar"
               :song="playViews[currentView]"
-              @menu="isShowPlaylist = true"
+              @menu="onOpenPopup"
             />
           </template>
         </swiper-item>
       </swiper>
 
-      <PlaylistPopup
-        v-if="isShowPlaylist"
-        v-model:is-show="isShowPlaylist"
-        :song="playViews[currentView]"
-        @change="initViews"
-      />
+      <uni-popup
+        ref="popup"
+        type="top"
+        @mask-click="onClosePopup"
+      >
+        <!-- ! uni-popup的子组件在小程序端会立即创建并且不会销毁，而其余端会在"open"后创建"close"后销毁 -->
+        <PlaylistPopup
+          v-if="isShowPopup"
+          :song="playViews[currentView]"
+          @change="initViews"
+        />
+      </uni-popup>
 
       <JIcon
         v-show="!audioStore.isPlay"
@@ -64,7 +70,7 @@
   <!-- #endif -->
 
   <PlayController
-    v-show="!isShowPlaylist"
+    v-show="!isShowPopup"
     @record="onPlayController"
   />
 </template>
@@ -72,6 +78,7 @@
 <script setup lang="ts">
 import type { Song } from '@/components/Song/Song.vue'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
+import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 import NavBack from './components/NavBack/NavBack.vue'
 import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
@@ -85,7 +92,9 @@ const audioStore = useAudioStore()
 
 const currentView = ref(1) // * 当前显示的view索引（默认显示中间的“View”）
 const playViews = shallowReactive<Song[]>(new Array(3)) //! 只显示3个view，每次切歌动态更新下一个view
-const isShowPlaylist = ref(false) // * 是否显示播放列表
+
+const popup = shallowRef<UniPopupInstance>()
+const isShowPopup = ref(false) // * 是否显示播放列表
 
 let isPassive = true // ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
 
@@ -154,6 +163,15 @@ function toIndex(to: number, length: number) {
   if (to < 0) return length - 1
 
   return to % length
+}
+
+function onOpenPopup() {
+  isShowPopup.value = true
+  popup.value?.open?.()
+}
+
+function onClosePopup() {
+  setTimeout(() => { isShowPopup.value = false }, 333)
 }
 
 // #ifdef H5

@@ -1,136 +1,107 @@
 <template>
-  <uni-popup
-    ref="popup"
-    type="top"
-    @mask-click="onClose"
-  >
-    <view class="relative z-20 box-border w-full h-[80vh] rounded-b-2xl pt-[100rpx] px-[28rpx] backdrop-blur">
-      <view class="w-full pb-[50rpx]">
-        <view class="flex items-center">
-          <JImage
-            :src="song.al.picUrl + '?param=200y200'"
-            width="300rpx"
-            height="300rpx"
-            radius="12rpx"
-            custom-class="flex-1"
-          />
+  <view class="relative z-20 box-border w-full h-[80vh] rounded-b-2xl pt-[100rpx] px-[28rpx] backdrop-blur">
+    <view class="w-full pb-[50rpx]">
+      <view class="flex items-center">
+        <JImage
+          :src="song.al.picUrl + '?param=200y200'"
+          width="300rpx"
+          height="300rpx"
+          radius="12rpx"
+          custom-class="flex-1"
+        />
 
-          <view class="flex-1 ml-[50rpx]">
-            <view class="text-white-1 line-clamp-3 text-[48rpx]">
-              {{ song.name }}
-            </view>
-            <view class="flex-1 space-x-1 text-grey-1 line-clamp-2 text-[38rpx]">
-              <text
-                v-for="(item, index) in song.ar"
-                :key="index"
-                class="active:text-white-1"
-                @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${item.id}`)"
-              >
-                {{ item.name }}.
-              </text>
-            </view>
+        <view class="flex-1 ml-[50rpx]">
+          <view class="text-white-1 line-clamp-3 text-[48rpx]">
+            {{ song.name }}
           </view>
-        </view>
-
-        <view class="flex justify-between items-center text-white-1 pt-[30rpx]">
-          <JIcon custom-class="icon-send text-[60rpx]" />
-          <JIcon custom-class="icon-download text-[60rpx]" />
-          <JIcon
-            v-if="audioStore.playlist"
-            custom-class="icon-playlist text-[60rpx]"
-            @click="useNavigateTo(`/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`)"
-          />
-          <JIcon
-            v-if="audioStore.currentSongInfo?.song"
-            custom-class="icon-album text-[60rpx]"
-            @click="useNavigateTo(`/sharedPages/album/album?id=${song.al.id}`)"
-          />
-          <JIcon custom-class="icon-message text-[60rpx]" />
+          <view class="flex-1 space-x-1 text-grey-1 line-clamp-2 text-[38rpx]">
+            <text
+              v-for="(item, index) in song.ar"
+              :key="index"
+              class="active:text-white-1"
+              @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${item.id}`)"
+            >
+              {{ item.name }}.
+            </text>
+          </view>
         </view>
       </view>
 
-      <scroll-view
-        v-if="isShowed"
-        class="h-[calc(100%_-_446rpx)]"
-        scroll-y
-        enable-passive
-        scroll-anchoring
-        scroll-with-animation
-        :scroll-into-view="scrollIntoView"
-        :lower-threshold="500"
-        @scrolltolower="onScrollToLower"
-      >
+      <view class="flex justify-between items-center text-white-1 pt-[30rpx]">
+        <JIcon custom-class="icon-send text-[60rpx]" />
+        <JIcon custom-class="icon-download text-[60rpx]" />
+        <JIcon
+          v-if="audioStore.playlist"
+          custom-class="icon-playlist text-[60rpx]"
+          @click="useNavigateTo(`/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`)"
+        />
+        <JIcon
+          v-if="audioStore.currentSongInfo?.song"
+          custom-class="icon-album text-[60rpx]"
+          @click="useNavigateTo(`/sharedPages/album/album?id=${song.al.id}`)"
+        />
+        <JIcon custom-class="icon-message text-[60rpx]" />
+      </view>
+    </view>
+
+    <scroll-view
+      class="h-[calc(100%_-_446rpx)]"
+      scroll-y
+      enable-passive
+      scroll-anchoring
+      scroll-with-animation
+      :scroll-into-view="scrollIntoView"
+      :lower-threshold="500"
+      @scrolltolower="onScrollToLower"
+    >
+      <Song
+        v-for="item in lazyList"
+        :id="'_' + item.id"
+        :key="item.id"
+        :song="item"
+        :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
+        :is-run="audioStore.currentSongInfo?.song.id === item.id"
+        :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
+        @click="onSong(item.id)"
+      />
+
+      <template v-if="lazyList.length === 1">
+        <view class="text-lg text-white-1 font-bold text-center [border-bottom:1px_dashed] mb-5">歌曲联想</view>
+
         <Song
-          v-for="item in lazyList"
+          v-for="(item, index) in simiSongs"
           :id="'_' + item.id"
           :key="item.id"
           :song="item"
           :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
           :is-run="audioStore.currentSongInfo?.song.id === item.id"
           :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
-          @click="onSong(item.id)"
+          @click="onSimiSong(index)"
         />
-
-        <template v-if="lazyList.length === 1">
-          <view class="text-lg text-white-1 font-bold text-center [border-bottom:1px_dashed] mb-5">歌曲联想</view>
-
-          <Song
-            v-for="(item, index) in simiSongs"
-            :id="'_' + item.id"
-            :key="item.id"
-            :song="item"
-            :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
-            :is-run="audioStore.currentSongInfo?.song.id === item.id"
-            :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
-            @click="onSimiSong(index)"
-          />
-        </template>
-      </scroll-view>
-    </view>
-  </uni-popup>
+      </template>
+    </scroll-view>
+  </view>
 </template>
 
 <script setup lang="ts">
 import type { Song } from '@/components/Song/Song.vue'
-import type { UniPopupInstance } from '@uni-helper/uni-ui-types'
 import { getSimiSongs } from '@/api/play'
 import { sleep } from '@/utils/util'
 
-const props = defineProps<{
-  isShow: boolean
-  song: Song
-}>()
-const emit = defineEmits<{
-  (e: 'animationFinish'): void
-  (e: 'change'): void
-  (e: 'update:isShow', isShow: boolean): void
-}>()
+defineProps<{ song: Song }>()
+const emit = defineEmits<{ (e: 'change'): void }>()
 
 const audioStore = useAudioStore()
 
-const popup = shallowRef<UniPopupInstance>()
 const scrollIntoView = ref('')
-const isShowed = ref(false)
 
-onHide(() => { onClose() })
+onMounted(async() => {
+  await sleep(333) //* 等待“333ms”后再加载歌曲列表，因为popup动画会持续300ms
 
-onMounted(() => {
-  watch(() => props.isShow, async(isShow) => {
-    if (!isShow) return onClose()
-
-    popup.value?.open?.()
-
-    await sleep(333) //* 等待“333ms”后再加载歌曲列表，因为popup动画会持续300ms
-    isShowed.value = true
-
-    await sleep(100) //* 等待“100ms”后监听并定位到当前播放歌曲
-    watch(() => audioStore.currentSongIndex, (index) => {
-      scrollIntoView.value = '_' + audioStore.songs[index].id
-    }, { immediate: true })
+  watch(() => audioStore.currentSongIndex, (index) => {
+    scrollIntoView.value = '_' + audioStore.songs[index].id
   }, { immediate: true })
-})
 
-watch(isShowed, () => {
   if (lazyList.length === 1) fetchSimiSongs(lazyList[0].id)
 })
 
@@ -171,14 +142,6 @@ function onSong(id: number) {
 function onSimiSong(index: number) {
   audioStore.onPlay(index, simiSongs.value)
   emit('change')
-}
-
-async function onClose() {
-  popup.value?.close?.()
-
-  await sleep(333) //* 等待“333ms”后发出事件，模拟动画结束
-  emit('update:isShow', false)
-  emit('animationFinish')
 }
 
 async function fetchSimiSongs(id: number) {
