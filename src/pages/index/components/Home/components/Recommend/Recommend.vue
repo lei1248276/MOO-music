@@ -75,6 +75,8 @@ onHide(() => { clearInterval(timer) })
 
 const isRun = ref(false)
 async function onPlay() {
+  if (!cacheList.length) return
+
   isRun.value = true
 
   if (recommendSongs.value) {

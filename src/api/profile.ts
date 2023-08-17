@@ -13,7 +13,7 @@ export function getUserPlaylist(uid: number, offset = 0, limit = 30) {
  */
 
 export function getUserSubcount() {
-  return request.get<any, UserSubcountResponse>(`${MOO_API}/user/subcount`,
+  return request.get<any, UserSubcountResponse>(`${MOO_API}/user/subcount?timestamp=${Date.now()}`,
     {
       // #ifdef MP-WEIXIN
       header: { cookie: uni.getStorageSync('cookie') || '' }
