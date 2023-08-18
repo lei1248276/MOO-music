@@ -83,6 +83,7 @@ export const useAudioStore = defineStore('audio', () => {
       if (!oldSongInfo || oldSongInfo.urlInfo.url) return setNextSong()
 
       // ! 连续两次请求 url 都为空直接报错退出（避免无限循环下一首）
+      toast.fail('播放地址失效')
       throw new Error('播放地址失效')
     } catch (error) {
       audio.pause()

@@ -26,7 +26,7 @@
       <JIcon
         :type="isRun ? 'icon-pause' : 'icon-play'"
         custom-class="text-[80rpx] text-yellow-1"
-        @click="(recommendList.length || recommendSongs) && onPlay()"
+        @click="!isRun && onPlay()"
       />
     </view>
   </view>

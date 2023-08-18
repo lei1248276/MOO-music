@@ -13,14 +13,15 @@
     <view class="bg-black-2 grow relative">
       <swiper
         class="!h-full absolute top-0 left-0 right-0 bottom-0"
+        skip-hidden-item-layout
         :duration="200"
         @change="onChangePage"
       >
-        <swiper-item skip-hidden-item-layout>
+        <swiper-item>
           <Home />
         </swiper-item>
 
-        <swiper-item skip-hidden-item-layout>
+        <swiper-item>
           <Profile />
         </swiper-item>
       </swiper>

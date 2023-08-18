@@ -1,10 +1,10 @@
 /**
- * @description 生成范围随机数（{min, max-1}）
+ * @description 生成范围随机数（{min, max-1}）s
  * @param min 最小值
  * @param max 最大值（不包含）
  */
 export function rangeRandom(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(Math.random() * (max - min)) + min
 }
 
 /**
