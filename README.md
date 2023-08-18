@@ -35,6 +35,26 @@
 - 🎵 历史搜索记录
 - 🎵 本地缓存歌单、音乐、歌手、专辑、历史记录
 
+### 安装和使用
+- install
+```shell
+yarn install
+```
+- dev（app请使用HBuilderX）
+```shell
+yarn dev:h5
+```
+```shell
+yarn dev:mp-weixin
+```
+- build（app请使用HBuilderX）
+```shell
+yarn build:h5
+```
+```shell
+yarn build:mp-weixin
+```
+
 
 ### 看图吧
 <div style="display:flex;flex-wrap: wrap;gap: 4px;">
