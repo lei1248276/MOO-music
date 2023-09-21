@@ -91,6 +91,8 @@ const isShowPopup = ref(false) // * 是否显示播放列表
 
 let isPassive = true // ! 用于判断是主动更新还是被动，避免循环调用（因为切歌会更新view，而更新view会切歌）
 
+onHide(() => { popup.value?.close!(); isShowPopup.value = false }) //* 避免导致跳转页面无法滚动
+
 // ! 初始化view
 watch(() => audioStore.songs, () => { initViews() }, { immediate: true })
 
