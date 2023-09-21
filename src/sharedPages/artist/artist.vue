@@ -2,14 +2,13 @@
   <Navbar
     :title="'🎵 ' + (artist?.name || 'MOO')"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <template v-if="artist">
     <!-- #ifdef H5 -->
     <H5BackTransition
+      :ref="(el: any) => el?.open()"
       class="h-full"
-      :show="isShowPage"
     >
       <!-- #endif -->
       <JImage
@@ -102,10 +101,6 @@ import { getArtistDetail } from '@/api/artist'
 import ArtistInfo from './components/ArtistInfo/ArtistInfo.vue'
 import ArtistSongs from './components/ArtistSongs/ArtistSongs.vue'
 import ArtistAlbums from './components/ArtistAlbums/ArtistAlbums.vue'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const id = ref()
 const currentPage = ref(0) // * 当前swiper显示索引

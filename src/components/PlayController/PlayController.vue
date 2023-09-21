@@ -104,8 +104,10 @@ function toPlay() {
   emit('record', (is) => (isStop = is))
   if (isStop) return
 
-  // * 默认点击跳转到"play"页面，如果上一页面就是"play"那么直接返回
-  useNavigateTo(`/sharedPages/play/play`)
+  // * 默认点击跳转到"play"页面，再次点击直接返回
+  getCurrentPages().pop()?.route === 'sharedPages/play/play'
+    ? uni.navigateBack()
+    : useNavigateTo(`/sharedPages/play/play`)
 }
 
 function onMoveChange({ detail: { x, source }}: MovableViewOnChangeEvent) {

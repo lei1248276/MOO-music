@@ -2,11 +2,10 @@
   <Navbar
     :title="'🎵 ' + title"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <!-- #ifdef H5 -->
-  <H5BackTransition :show="isShowPage">
+  <H5BackTransition :ref="(el: any) => el?.open()">
     <!-- #endif -->
     <view class="animate-enter-content box-border overflow-x-hidden px-[28rpx] after:block after:pb-[var(--save-bottom)]">
       <view
@@ -40,10 +39,6 @@ export default {
 import type { SearchAlbumResponse, Album } from '@/api/interface/SearchAlbum'
 import { getSearch } from '@/api/search'
 import { parseTime } from '@/utils/util'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const title = ref('搜索专辑列表')
 const keyword = ref('')

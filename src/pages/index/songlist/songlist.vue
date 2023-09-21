@@ -2,12 +2,11 @@
   <Navbar
     title="🎵 歌单列表"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <template v-if="songlist.length">
     <!-- #ifdef H5 -->
-    <H5BackTransition :show="isShowPage">
+    <H5BackTransition :ref="(el: any) => el?.open()">
       <!-- #endif -->
       <Songlist
         :songlist="songlist"
@@ -29,10 +28,6 @@ import type { Songlist } from '@/api/interface/Songlist'
 const songlist = shallowReactive<Songlist[]>([])
 const limit = 20
 let total = 0
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 fetchSonglist()
 

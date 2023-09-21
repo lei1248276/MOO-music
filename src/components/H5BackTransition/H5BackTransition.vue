@@ -3,6 +3,7 @@
   <uni-transition
     v-bind="$attrs"
     :mode-class="['slide-right']"
+    :show="($attrs.show as boolean | undefined) ?? isShow"
     class="w-full h-auto"
     @change="onShowChange"
   >
@@ -21,7 +22,14 @@ interface TransitionProps extends UniTransitionProps {}
 
 defineProps<TransitionProps>()
 
+const isShow = ref(false)
+
 function onShowChange({ detail: isShow }: UniTransitionOnChangeEvent) {
   !isShow && uni.navigateBack()
 }
+
+defineExpose({
+  open: () => (isShow.value = true),
+  close: () => (isShow.value = false)
+})
 </script>

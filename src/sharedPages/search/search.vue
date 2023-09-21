@@ -2,7 +2,6 @@
   <Navbar
     title="🎵 搜索"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <JSearch
@@ -25,7 +24,7 @@
 
   <!-- #ifdef H5 -->
   <H5BackTransition
-    :show="isShowPage"
+    :ref="(el: any) => el?.open()"
     :mode-class="['fade', 'zoom-in']"
   >
     <!-- #endif -->
@@ -59,10 +58,6 @@ import TopArtists from './components/TopArtists/TopArtists.vue'
 import TopSearch from './components/TopSearch/TopSearch.vue'
 import SearchResult from './components/SearchResult/SearchResult.vue'
 import { getSearchSuggest } from '@/api/search'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const search = ref('')
 const suggests = shallowRef<Suggests[]>([])

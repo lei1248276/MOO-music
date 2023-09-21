@@ -2,11 +2,10 @@
   <Navbar
     title="🎵 专辑列表"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <!-- #ifdef H5 -->
-  <H5BackTransition :show="isShowPage">
+  <H5BackTransition :ref="(el: any) => el?.open()">
     <!-- #endif -->
     <view class="animate-enter-content box-border overflow-x-hidden px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
       <view

@@ -2,12 +2,11 @@
   <Navbar
     :title="album?.name || ''"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <template v-if="album">
     <!-- #ifdef H5 -->
-    <H5BackTransition :show="isShowPage">
+    <H5BackTransition :ref="(el: any) => el?.open()">
       <!-- #endif -->
       <view class="px-[28rpx] after:block after:pb-[var(--save-bottom)]">
         <AlbumInfo :album="album" />
@@ -67,10 +66,6 @@ import type { Album, Song } from '@/api/interface/Album'
 import { getAlbumDetail } from '@/api/album'
 import AlbumInfo from './components/AlbumInfo/AlbumInfo.vue'
 import { rangeRandom } from '@/utils/util'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const statusBarHeight = useStatusBarHeight()
 const audioStore = useAudioStore()

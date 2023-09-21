@@ -2,7 +2,6 @@
   <Navbar
     :title="'🎵 ' + title"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <Subtitle
@@ -30,7 +29,7 @@
   </Subtitle>
 
   <!-- #ifdef H5 -->
-  <H5BackTransition :show="isShowPage">
+  <H5BackTransition :ref="(el: any) => el?.open()">
     <!-- #endif -->
     <view class="animate-enter-content bg-black-2 px-[28rpx] mt-[106rpx] after:block after:pb-[var(--save-bottom)]">
       <Song
@@ -61,10 +60,6 @@ export default {
 import type { SearchSongResponse, Song } from '@/api/interface/SearchSong'
 import { getSearch } from '@/api/search'
 import { rangeRandom } from '@/utils/util'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const audioStore = useAudioStore()
 

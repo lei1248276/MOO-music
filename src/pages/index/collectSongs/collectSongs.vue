@@ -2,7 +2,6 @@
   <Navbar
     title="🎵 收藏音乐"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <Subtitle
@@ -30,7 +29,7 @@
   </Subtitle>
 
   <!-- #ifdef H5 -->
-  <H5BackTransition :show="isShowPage">
+  <H5BackTransition :ref="(el: any) => el?.open()">
     <!-- #endif -->
     <view class="bg-black-2 px-[28rpx] mt-[106rpx] after:block after:pb-[var(--save-bottom)]">
       <uni-swipe-action class="animate-enter-content">
@@ -65,10 +64,6 @@ import { rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
 const cacheStore = useCacheStore()
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const rightBtnStyle = [{
   text: '删除',

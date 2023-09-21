@@ -1,12 +1,12 @@
 <template>
   <!-- #ifdef H5 -->
   <H5BackTransition
-    :show="isShowPage"
+    :ref="(el: any) => el?.open()"
     class="w-full !h-full"
   >
     <!-- #endif -->
     <view class="w-full h-full relative">
-      <NavBack @back="isShowPage = false" />
+      <NavBack />
 
       <swiper
         class="w-full h-full"
@@ -69,10 +69,7 @@
   </H5BackTransition>
   <!-- #endif -->
 
-  <PlayController
-    v-show="!isShowPopup"
-    @record="onPlayController"
-  />
+  <PlayController v-show="!isShowPopup" />
 </template>
 
 <script setup lang="ts">
@@ -83,10 +80,6 @@ import NavBack from './components/NavBack/NavBack.vue'
 import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
 import PlaylistPopup from './components/PlaylistPopup/PlaylistPopup.vue'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const audioStore = useAudioStore()
 
@@ -183,15 +176,4 @@ onMounted(() => {
   }, 500)
 })
 // #endif
-function onPlayController(isStop: (is: boolean) => boolean) {
-  // #ifdef H5
-  isShowPage.value = false // * H5端特有返回，为了保证H5端退出时有过渡效果
-  // #endif
-
-  // #ifndef H5
-  uni.navigateBack() // * 不是H5端执行正常返回
-  // #endif
-
-  return isStop(true) // * 取消点击controller的默认行为
-}
 </script>

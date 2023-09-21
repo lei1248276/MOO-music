@@ -2,12 +2,11 @@
   <Navbar
     :title="title"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <template v-if="playlist">
     <!-- #ifdef H5 -->
-    <H5BackTransition :show="isShowPage">
+    <H5BackTransition :ref="(el: any) => el?.open()">
       <!-- #endif -->
       <view class="min-h-full px-[28rpx] bg-black-2 after:block after:pb-[var(--save-bottom)]">
         <Cover
@@ -91,10 +90,6 @@ const audioStore = useAudioStore()
 const title = ref('')
 const playlist = shallowRef<Playlist>()
 const songs = shallowReactive<Playlist['tracks']>([])
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 onLoad((options) => {
   fetchPlaylist(Number((options as { id: string }).id))

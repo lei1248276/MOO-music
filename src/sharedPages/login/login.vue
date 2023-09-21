@@ -2,12 +2,11 @@
   <Navbar
     title="🎵 登录"
     left-arrow
-    @click-left-icon="isShowPage = false"
   />
 
   <!-- #ifdef H5 -->
   <H5BackTransition
-    :show="isShowPage"
+    :ref="(el: any) => el?.open()"
     class="relative w-full !h-4/5"
   >
     <!-- #endif -->
@@ -41,10 +40,6 @@
 <script setup lang="ts">
 import { createQRKey, createQRImg, checkQRStatus } from '@/api/login'
 import toast from '@/utils/toast'
-
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
 
 const qrimg = ref('')
 const isLoading = ref(false)

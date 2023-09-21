@@ -26,9 +26,7 @@ const emit = defineEmits(['clickLeftIcon', 'clickRightIcon'])
 function onClickLeft() {
   emit('clickLeftIcon')
 
-  // #ifndef H5
   uni.navigateBack()
-  // #endif
 }
 
 function onClickRight() {

@@ -19,8 +19,6 @@ const statusBarHeight = useStatusBarHeight()
 function onBack() {
   emit('back')
 
-  // #ifndef H5
   uni.navigateBack()
-  // #endif
 }
 </script>
