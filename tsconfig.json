@@ -13,6 +13,9 @@
       "@dcloudio/uni-helper-json"
       ]
   },
+  "vueCompilerOptions": {
+    "nativeTags": ["block", "component", "template", "slot"]
+  },
   "include": [
     "src/**/*.ts", 
     "src/**/*.d.ts", 
