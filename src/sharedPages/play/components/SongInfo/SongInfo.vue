@@ -26,7 +26,7 @@
       <view class="flex justify-between items-center">
         <view class="flex-1 truncate space-x-1 text-[38rpx] mr-[20rpx]">
           <text
-            v-for="(item, index) in singers"
+            v-for="(item, index) in singers.slice(0, 3)"
             :key="index"
             class="active:text-grey-1"
             @tap.stop="useNavigateTo(`/sharedPages/artist/artist?id=${item.id}`)"
