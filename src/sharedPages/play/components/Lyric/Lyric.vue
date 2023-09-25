@@ -1,11 +1,6 @@
 <template>
   <view class="lyric w-[80%] max-h-[50%] mid top-[30%] text-center text-[50rpx] text-white-1 whitespace-pre-line line-clamp-6">
-    <template
-      v-for="(item, index) in lyrics"
-      :key="index"
-    >
-      {{ item }}
-    </template>
+    {{ lyrics.join('') }}
   </view>
 </template>
 
@@ -25,13 +20,17 @@ const audioStore = useAudioStore()
 
 const lyrics = shallowRef<string[]>([])
 
-onBeforeMount(async() => {
+let unwatchTime: ReturnType<typeof watch>
+watch(() => audioStore.currentSongInfo, async() => {
+  if (unwatchTime) {
+    unwatchTime()
+    lyrics.value = []
+  }
+
   const lyricMatches = await fetchLyric()
   if (!lyricMatches) return
 
-  watch(() => audioStore.currentTime, (currentTime) => {
-    if (audioStore.currentSongInfo?.song.id !== props.songId) return
-
+  unwatchTime = watch(() => audioStore.currentTime, (currentTime) => {
     // * 生成多个版本的歌词
     const _lyrics = lyricMatches
       .map((matches) => matchLyric(matches, currentTime))
@@ -39,6 +38,10 @@ onBeforeMount(async() => {
 
     if (_lyrics.length) lyrics.value = _lyrics
   })
+}, { immediate: true })
+
+onUnmounted(() => {
+  unwatchTime && unwatchTime()
 })
 
 function matchLyric(matches: Matches[], currentTime: number) {
