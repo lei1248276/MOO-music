@@ -22,5 +22,6 @@ declare module 'vue' {
     Song: typeof import('./src/components/Song/Song.vue')['default']
     Songlist: typeof import('./src/components/Songlist/Songlist.vue')['default']
     Subtitle: typeof import('./src/components/Subtitle/Subtitle.vue')['default']
+    VirtualSwiper: typeof import('./src/components/VirtualSwiper/VirtualSwiper.vue')['default']
   }
 }
