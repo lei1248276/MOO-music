@@ -3,15 +3,9 @@ import type { Playlist } from '@/api/interface/Playlist'
 import type { Album } from '@/components/Album/Album.vue'
 import type { Artist } from '@/components/Artist/Artist.vue'
 
-const audioStore: {value: ReturnType<typeof useAudioStore>} = {
-  get value() {
-    // @ts-ignore
-    delete this.value
-    return (this.value = useAudioStore())
-  }
-}
-
 export const useCacheStore = defineStore('cache', () => {
+  const audioStore = useLazyData(() => useAudioStore())
+
   const historySearch = useCache('historySearch', shallowReactive<string[]>([]))
   const historyPlays = useCache('historyPlays', shallowReactive<Song[]>([]))
   const collectSongs = useCache('collectSongs', shallowReactive<Song[]>([]))

@@ -94,6 +94,7 @@ declare global {
   const useCacheStore: typeof import('./src/store/cache')['useCacheStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useLazyData: typeof import('./src/hooks/useLazyData')['default']
   const useNavigateTo: typeof import('./src/hooks/useNavigateTo')['default']
   const useSlots: typeof import('vue')['useSlots']
   const useStatusBarHeight: typeof import('./src/hooks/useStatusBarHeight')['default']
@@ -201,6 +202,7 @@ declare module 'vue' {
     readonly useCacheStore: UnwrapRef<typeof import('./src/store/cache')['useCacheStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
+    readonly useLazyData: UnwrapRef<typeof import('./src/hooks/useLazyData')['default']>
     readonly useNavigateTo: UnwrapRef<typeof import('./src/hooks/useNavigateTo')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStatusBarHeight: UnwrapRef<typeof import('./src/hooks/useStatusBarHeight')['default']>
@@ -302,6 +304,7 @@ declare module '@vue/runtime-core' {
     readonly useCacheStore: UnwrapRef<typeof import('./src/store/cache')['useCacheStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
+    readonly useLazyData: UnwrapRef<typeof import('./src/hooks/useLazyData')['default']>
     readonly useNavigateTo: UnwrapRef<typeof import('./src/hooks/useNavigateTo')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStatusBarHeight: UnwrapRef<typeof import('./src/hooks/useStatusBarHeight')['default']>

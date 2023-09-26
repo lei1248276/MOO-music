@@ -4,33 +4,19 @@ import type { SongURL } from '@/api/interface/SongURL'
 import { getSongURL } from '@/api/play'
 import toast from '@/utils/toast'
 import { shuffle, transHTTPS } from '@/utils/util'
+import useLazyData from '@/hooks/useLazyData'
 
 export interface SongInfo {
   song: Song
   urlInfo: SongURL
 }
 
-// * 懒加载：使用时再进行重写
-/* const cacheStore: {value: ReturnType<typeof useCacheStore>} = {
-  get value() {
-    // @ts-ignore
-    delete this.value
-    return (this.value = useCacheStore())
-  }
-} */
-
-const userStore: {value: ReturnType<typeof useUserStore>} = {
-  get value() {
-    // @ts-ignore
-    delete this.value
-    return (this.value = useUserStore())
-  }
-}
-
 let originSongs: Song[] = [] // ! 用于切换模式时保留的原"songs"引用
 const playMode: ('loop' | 'random')[] = ['loop', 'random']
 
 export const useAudioStore = defineStore('audio', () => {
+  const userStore = useLazyData(() => useUserStore())
+
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
   const isLoading = ref(false) // * 是否缓冲中
   const isPlay = ref(false) // * 是否播放
