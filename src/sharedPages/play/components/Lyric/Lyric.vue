@@ -1,6 +1,6 @@
 <template>
   <view class="lyric w-[80%] max-h-[50%] mid top-[30%] text-center text-[50rpx] text-white-1 whitespace-pre-line line-clamp-6">
-    {{ lyrics.join('') }}
+    {{ genLyric(audioStore.currentTime) }}
   </view>
 </template>
 
@@ -18,32 +18,26 @@ const props = defineProps<{
 
 const audioStore = useAudioStore()
 
-const lyrics = shallowRef<string[]>([])
+const lyrics = shallowRef<string>('')
+const lyricMatches = ref<Matches[][] | null>(null)
 
-let unwatchTime: ReturnType<typeof watch>
 watch(() => audioStore.currentSongInfo, async() => {
-  if (unwatchTime) {
-    unwatchTime()
-    lyrics.value = []
-  }
-
-  const lyricMatches = await fetchLyric()
-  if (!lyricMatches) return
-
-  unwatchTime = watch(() => audioStore.currentTime, (currentTime) => {
-    // * 生成多个版本的歌词
-    const _lyrics = lyricMatches
-      .map((matches) => matchLyric(matches, currentTime))
-      .filter(Boolean) as string[]
-
-    if (_lyrics.length) lyrics.value = _lyrics
-  })
+  lyricMatches.value = await fetchLyric()
 }, { immediate: true })
 
-onUnmounted(() => {
-  unwatchTime && unwatchTime()
-})
+// * 生成歌词
+function genLyric(currentTime: number) {
+  if (!lyricMatches.value) return lyrics.value
 
+  // * 生成多个版本的歌词
+  const _lyrics = lyricMatches.value
+    .map((matches) => matchLyric(matches, currentTime))
+    .filter(Boolean) as string[]
+
+  return _lyrics.length ? (lyrics.value = _lyrics.join('')) : lyrics.value
+}
+
+// * 匹配歌词
 function matchLyric(matches: Matches[], currentTime: number) {
   if (!matches[0] || matches[0].time > currentTime) return
 
@@ -59,6 +53,7 @@ function matchLyric(matches: Matches[], currentTime: number) {
   return matches.shift()!.lyric
 }
 
+// * 转换歌词
 function transLyric(lyric: string) {
   const regex = /\[(\d{2}:\d{2}\.\d{2,})\]([^[]+)/g
 
@@ -75,20 +70,20 @@ function transLyric(lyric: string) {
   return matches
 }
 
-async function fetchLyric(): Promise<Array<Matches[]> | null> {
+async function fetchLyric(): Promise<Matches[][] | null> {
   // * 获取 原歌词 和 翻译歌词
   const { lrc, tlyric, needDesc } = await getLyric(props.songId)
   console.log('🚀 ~ file: index.ts:76 ~ fetchLyric ~ tlyric:', tlyric)
   console.log('🚀 ~ file: index.ts:76 ~ fetchLyric ~ lrc:', lrc)
 
   if (!lrc.lyric) {
-    lyrics.value = ['暂无歌词']
+    lyrics.value = '暂无歌词'
     return null
   }
 
   // * 纯音乐（直接显示描述）
   if (needDesc) {
-    lyrics.value = transLyric(lrc.lyric).map(({ lyric }) => lyric)
+    lyrics.value = transLyric(lrc.lyric).map(({ lyric }) => lyric).join('')
     return null
   }
 
