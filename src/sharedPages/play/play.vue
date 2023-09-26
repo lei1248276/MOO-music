@@ -5,7 +5,8 @@
     class="w-full !h-full"
   >
     <!-- #endif -->
-    <view class="w-full h-full relative">
+    <!-- ! ios平台滑动到后台时会穿透导致触发swiper滚动，所以添加一个占位伪元素 -->
+    <view class="w-full h-full relative before:w-full before:h-[var(--save-bottom)] before:absolute before:bottom-0 before:right-0 before:left-0 before:z-10">
       <NavBack />
 
       <VirtualSwiper
@@ -61,8 +62,7 @@
         @click="audioStore.toggle"
       />
 
-      <!-- ! ios平台滑动到后台时会穿透导致触发swiper滚动，所以添加一个占位元素 -->
-      <view class="w-full h-[var(--save-bottom)] absolute bottom-0 right-0 left-0" />
+      <PlayProgress />
     </view>
   <!-- #ifdef H5 -->
   </H5BackTransition>
@@ -77,6 +77,7 @@ import NavBack from './components/NavBack/NavBack.vue'
 import SongInfo from './components/SongInfo/SongInfo.vue'
 import Lyric from './components/Lyric/Lyric.vue'
 import PlaylistPopup from './components/PlaylistPopup/PlaylistPopup.vue'
+import PlayProgress from './components/PlayProgress/PlayProgress.vue'
 import VirtualSwiper from '@/components/VirtualSwiper/VirtualSwiper.vue'
 
 const audioStore = useAudioStore()

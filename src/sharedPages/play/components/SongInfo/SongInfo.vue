@@ -1,5 +1,5 @@
 <template>
-  <view class="w-[80%] absolute left-[50%] bottom-[18%] translate-x-[-50%] translate-y-[-10%]">
+  <view class="w-[80%] absolute left-[50%] bottom-[23%] translate-x-[-50%] translate-y-[-10%]">
     <button
       v-for="tag in tags"
       :key="tag"
