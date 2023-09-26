@@ -1,25 +1,12 @@
 <template>
-  <view class="will-change-contents w-[140rpx] leading-[110rpx] text-grey-1 font-bold text-[48rpx]">{{ minute }}:{{ seconds }}</view>
+  <view class="will-change-contents w-[140rpx] leading-[110rpx] text-grey-1 font-bold text-[48rpx]">{{ transTime(audioStore.duration, audioStore.currentTime) }}</view>
 </template>
 
 <script setup lang="ts">
 const audioStore = useAudioStore()
 
-const minute = ref('00')
-const seconds = ref('00')
-
-let unwatch: ReturnType<typeof watch> | undefined
-
-onShow(() => {
-  unwatch = watch(() => audioStore.currentTime, onWatchTime)
-})
-
-onHide(() => {
-  unwatch?.()
-})
-
-function onWatchTime() {
-  const time = Math.floor(audioStore.duration - audioStore.currentTime)
+function transTime(duration: number, currentTime: number) {
+  const time = Math.floor(duration - currentTime)
   if (time < 0) return
 
   let m = Math.floor(time / 60) + ''
@@ -27,10 +14,6 @@ function onWatchTime() {
   m.length === 1 && (m = '0' + m)
   s.length === 1 && (s = '0' + s)
 
-  if (s === seconds.value) return
-  // console.log({ time, m, s })
-
-  minute.value = m
-  seconds.value = s
+  return m + ':' + s
 }
 </script>
