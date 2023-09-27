@@ -75,80 +75,113 @@ interface Props {
   disableTouch?: boolean
   touchable?: boolean
   easingFunction?: 'default' | 'linear' | 'easeInCubic' | 'easeOutCubic' | 'easeInOutCubic'
-  view?: number //* 当前显示的view索引（默认显示中间的“View”）
+  /**
+   * 当前显示的view索引（默认显示中间的“View”）
+   */
+  current?: number
+  /**
+   * 当前渲染的数据索引
+   */
+  currentData?: number
+  /**
+   * 渲染的数据
+   */
   data: any[] //* 数据源
-  currentData: number //* 当前数据索引
 }
 
 const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'transition', event: SwiperOnTransitionEvent): void
   (e: 'animationfinish', event: SwiperOnAnimationfinishEvent): void
-  (e: 'previous', index: number): void
-  (e: 'next', index: number): void
+  (e: 'change', currentView: number, currentData: number): void
+  (e: 'previous', currentView: number, currentData: number): void
+  (e: 'next', currentView: number, currentData: number): void
 }>()
 
-const currentView = ref(props.view || 1) // * 当前显示的view索引（默认显示中间的“View”）
-const playViews = reactive<[any, any, any]>([] as any) //! 只显示3个view，每次切歌动态更新下一个view
+const currentDataIndex = ref(props.currentData || 0) // * 当前数据索引
+const currentView = ref(props.current || 1) // * 当前显示的view索引（默认显示中间的“View”）
+const playViews = reactive<[any, any, any]>([] as any) //! 只显示3个view，每次动态更新下一个view
+const viewLen = 3
 
-watch(() => props.data, () => { initViews() }, { immediate: true })
+watch(
+  [() => props.data, () => props.data.length],
+  () => { initViews() },
+  { immediate: true }
+)
 
-watch(() => props.currentData, (current, oldCurrent) => {
-  if (props.data[current].id === playViews[currentView.value].id) return
+watch(() => props.currentData, (dataIndex = 0, oldDataIndex = 0) => {
+  currentDataIndex.value = dataIndex
+
+  //* 判断view是否已更新
+  if (props.data[dataIndex].id === playViews[currentView.value].id) return
 
   //* 监听被动切换（非滑动切换），先模拟滑动再更新views
-  currentView.value = toIndex(current > oldCurrent ? currentView.value + 1 : currentView.value - 1, 3)
+  currentView.value = toIndex(dataIndex > oldDataIndex ? currentView.value + 1 : currentView.value - 1, viewLen)
   initViews()
 }, { flush: 'post' })
 
-function onChangeView({ detail: { current: to, source: isTouch }}: SwiperOnChangeEvent) {
+function onChangeView({ detail: { current: toView, source: isTouch }}: SwiperOnChangeEvent) {
   if (!isTouch) return
 
   //* 监听主动切换（滑动切换），更新views
-  const from = currentView.value
-  if (from - to === -1 || from - to === 2) {
-    emit('next', to)
-    updateNextView(to)
+  const fromView = currentView.value
+  const fromData = currentDataIndex.value
+
+  if (fromView - toView === -1 || fromView - toView === 2) {
+    const toData = currentDataIndex.value = toIndex(fromData + 1, props.data.length)
+    emit('next', toView, toData)
+    emit('change', toView, toData)
+    updateNextView(toView, toData)
   } else {
-    emit('previous', to)
-    updatePrevView(to)
+    const toData = currentDataIndex.value = toIndex(fromData - 1, props.data.length)
+    emit('previous', toView, toData)
+    emit('change', toView, toData)
+    updatePrevView(toView, toData)
   }
 }
 
 // ! 初始化view
-function initViews(current = currentView.value) {
-  nextTick(() => {
-    const { currentData, data } = props
+function initViews(view = currentView.value) {
+  if (!props.data.length) return
 
-    playViews[toIndex(current - 1, 3)] = data[toIndex(currentData - 1, data.length)]
-    playViews[toIndex(current, 3)] = data[currentData]
-    playViews[toIndex(current + 1, 3)] = data[toIndex(currentData + 1, data.length)]
+  nextTick(() => {
+    const { currentData = 0, data } = props
+
+    playViews[toIndex(view - 1, viewLen)] = data[toIndex(currentData - 1, data.length)]
+    playViews[toIndex(view, viewLen)] = data[currentData]
+    playViews[toIndex(view + 1, viewLen)] = data[toIndex(currentData + 1, data.length)]
   })
 }
 
-function updateNextView(to: number = toIndex(currentView.value + 1, playViews.length)) {
-  if (to === currentView.value) return
+function updateNextView(
+  toView: number = toIndex(currentView.value + 1, viewLen),
+  toData: number = toIndex(currentDataIndex.value + 1, props.data.length)
+) {
+  if (toView === currentView.value) return
 
-  currentView.value = to
-  console.log('🚀 ~ file: VirtualSwiper.vue:99 ~ updateNextView ~ updateNextView:', to)
+  currentView.value = toView
+  currentDataIndex.value = toData
 
   nextTick(() => {
-    const nextViewIndex = toIndex(to + 1, playViews.length)
-    const nextSongIndex = toIndex(props.currentData + 1, props.data.length)
+    const nextViewIndex = toIndex(toView + 1, viewLen)
+    const nextSongIndex = toIndex(toData + 1, props.data.length)
 
     playViews[nextViewIndex] = props.data[nextSongIndex]
   })
 }
 
-function updatePrevView(to: number = toIndex(currentView.value - 1, playViews.length)) {
-  if (to === currentView.value) return
+function updatePrevView(
+  toView: number = toIndex(currentView.value - 1, viewLen),
+  toData: number = toIndex(currentDataIndex.value - 1, props.data.length)
+) {
+  if (toView === currentView.value) return
 
-  currentView.value = to
-  console.log('🚀 ~ file: VirtualSwiper.vue:108 ~ updatePrevView ~ updatePrevView:', to)
+  currentView.value = toView
+  currentDataIndex.value = toData
 
   nextTick(() => {
-    const prevViewIndex = toIndex(to - 1, playViews.length)
-    const prevSongIndex = toIndex(props.currentData - 1, props.data.length)
+    const prevViewIndex = toIndex(toView - 1, viewLen)
+    const prevSongIndex = toIndex(toData - 1, props.data.length)
 
     playViews[prevViewIndex] = props.data[prevSongIndex]
   })
