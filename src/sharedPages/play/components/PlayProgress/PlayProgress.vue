@@ -29,9 +29,12 @@ function onChanging({ detail: { value }}: SliderOnChangingEvent) {
 }
 
 function onChange({ detail: { value }}: SliderOnChangeEvent) {
+  audioStore.isSeeked = true
   isTouch.value = false
   audioStore.currentTime = value / 100 * audioStore.duration
   ;(audioStore.audio.seek(audioStore.currentTime), audioStore.audio.play())
+
+  setTimeout(() => { audioStore.isSeeked = false }, 1000)
 }
 </script>
 

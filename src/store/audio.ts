@@ -20,6 +20,7 @@ export const useAudioStore = defineStore('audio', () => {
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
   const isLoading = ref(false) // * 是否缓冲中
   const isPlay = ref(false) // * 是否播放
+  const isSeeked = ref(false) // * 是否拖动进度条
   const duration = ref(0) // * 当前歌曲时长
   const currentTime = ref(0) // * 当前歌曲播放时间
   const mode = useCache('mode', ref<typeof playMode[0]>('loop')) // * 播放模式（默认循环播放）
@@ -154,6 +155,7 @@ export const useAudioStore = defineStore('audio', () => {
     audio,
     isLoading,
     isPlay,
+    isSeeked,
     duration,
     currentTime,
     mode,

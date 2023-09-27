@@ -19,18 +19,22 @@ const props = defineProps<{
 const audioStore = useAudioStore()
 
 const lyrics = shallowRef<string>('')
-const lyricMatches = ref<Matches[][] | null>(null)
+let lyricMatches: Matches[][] | null = null
 
 watch(() => audioStore.currentSongInfo, async() => {
-  lyricMatches.value = await fetchLyric()
+  lyricMatches = await fetchLyric()
 }, { immediate: true })
+
+watch(() => audioStore.isSeeked, async(is) => {
+  if (is) lyricMatches = await fetchLyric()
+})
 
 // * 生成歌词
 function genLyric(currentTime: number) {
-  if (!lyricMatches.value) return lyrics.value
+  if (!lyricMatches) return lyrics.value
 
   // * 生成多个版本的歌词
-  const _lyrics = lyricMatches.value
+  const _lyrics = lyricMatches
     .map((matches) => matchLyric(matches, currentTime))
     .filter(Boolean) as string[]
 
