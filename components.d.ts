@@ -14,6 +14,7 @@ declare module 'vue' {
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     JSearch: typeof import('./src/components/JSearch/JSearch.vue')['default']
+    MV: typeof import('./src/components/MV/MV.vue')['default']
     Navbar: typeof import('./src/components/Navbar/Navbar.vue')['default']
     PlayController: typeof import('./src/components/PlayController/PlayController.vue')['default']
     PlaylistPopup: typeof import('./src/components/PlayController/components/PlaylistPopup/PlaylistPopup.vue')['default']
