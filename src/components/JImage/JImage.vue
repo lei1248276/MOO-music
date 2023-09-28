@@ -25,14 +25,22 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script setup lang="ts">
 import type { ImageProps } from '@uni-helper/uni-app-types'
 import { transHTTPS } from '@/utils/util'
 
 interface ImgProps extends ImageProps {
   src: string
-  width: string
-  height: string
+  width?: string
+  height?: string
   radius?: string
   lazyLoad?: boolean
   mode?: ImageProps['mode']
@@ -44,6 +52,8 @@ interface ImgProps extends ImageProps {
 }
 
 const props = withDefaults(defineProps<ImgProps>(), {
+  width: '100%',
+  height: '100%',
   radius: '0',
   lazyLoad: false,
   mode: 'scaleToFill',
