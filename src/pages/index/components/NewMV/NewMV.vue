@@ -8,14 +8,11 @@
     @change="onChange"
   >
     <template #default="{item: mv}: {item: typeof newMV[number]}">
-      <video
-        id="myVideo"
-        :src="mv.id === newMV[currentIndex].id && isShow ? mv.url : ''"
+      <MV
+        :src="mv.id === newMV[currentIndex].id && isShow ? (mv.url || '') : ''"
         :poster="mv.cover"
         :direction="90"
         autoplay
-        class="w-full h-[500rpx]"
-        @touchstart.stop
       />
 
       <view
@@ -48,6 +45,8 @@
 import type { NewMVResponse } from '@/api/interface/NewMV'
 import type { MVDetailResponse } from '@/api/interface/MVDetail'
 import { getNewMV, getMVDetail, getMVurl } from '@/api/mv'
+import { shuffle } from '@/utils/util'
+import MV from '@/components/MV/MV.vue'
 
 type NewMv = NewMVResponse['data'][number] & { detail?: MVDetailResponse['data'], url?: string }
 
@@ -78,7 +77,7 @@ function onChange(_: number, current: number) {
 async function fetchNewMV() {
   const { data } = await getNewMV()
   console.log('🚀 ~ file: MV.vue:20 ~ fetchNewMV ~ data:', data)
-  newMV.push(...data)
+  newMV.push(...shuffle(data))
 }
 
 async function fetchMVDetail(id: number) {

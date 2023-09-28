@@ -10,7 +10,7 @@ export function rangeRandom(min: number, max: number) {
 /**
  * @description 数组洗牌（原地随机排序）
  */
-export function shuffle(array: any[]) {
+export function shuffle<T extends any[]>(array: T): T {
   for (let i = array.length - 1; i >= 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]]
