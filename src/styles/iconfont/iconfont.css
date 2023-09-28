@@ -3,12 +3,12 @@
   src: url("./iconfont.ttf?t=1618320788190") format('truetype');
 }
 @font-face {
-  font-family: "iconfont";
+  font-family: "iconfont2";
   src: url('./iconfont2.ttf?t=1689512796085') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: "iconfont", "iconfont2" !important;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
