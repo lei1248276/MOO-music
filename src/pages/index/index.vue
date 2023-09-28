@@ -15,13 +15,15 @@
       <swiper
         class="!h-full absolute top-0 left-0 right-0 bottom-0"
         skip-hidden-item-layout
-        :current="1"
+        :current="currentView"
         :duration="200"
         @change="({detail: {current}}: SwiperOnChangeEvent) => currentPage = pages[current]"
       >
+        <!-- #ifndef APP-PLUS -->
         <swiper-item>
           <NewMV :is-show="isMV" />
         </swiper-item>
+        <!-- #endif -->
 
         <swiper-item>
           <Home />
@@ -45,8 +47,15 @@ import Profile from './components/Profile/Profile.vue'
 import NewMV from './components/NewMV/NewMV.vue'
 import type { SwiperOnChangeEvent } from '@uni-helper/uni-app-types'
 
-const pages = ['mv', 'home', 'profile']
+let currentView = 0
+const pages = ['home', 'profile']
 const currentPage = ref<typeof pages[number]>('home')
 
+// #ifndef APP-PLUS
+currentView = 1
+pages.unshift('mv')
+
 const isMV = computed(() => currentPage.value === 'mv')
+// #endif
+
 </script>
