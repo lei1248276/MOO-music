@@ -49,10 +49,6 @@ import type { Album } from '@/components/Album/Album.vue'
 
 const cacheStore = useCacheStore()
 
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
-
 const rightBtnStyle = [{
   text: '删除',
   style: {

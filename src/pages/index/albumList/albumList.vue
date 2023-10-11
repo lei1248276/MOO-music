@@ -34,10 +34,6 @@ import type { Album } from '@/api/interface/AlbumList'
 import { getAlbumList } from '@/api/albumList'
 import { parseTime } from '@/utils/util'
 
-// #ifdef H5
-const isShowPage = ref(true)
-// #endif
-
 let total = 0
 const limit = 20
 const albumList = shallowReactive<Album[]>([])
