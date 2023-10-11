@@ -4,10 +4,6 @@ onLaunch(() => {
   setupLogin()
   setupAudio()
 })
-
-onHide(() => {
-  setupCache()
-})
 </script>
 
 <style>

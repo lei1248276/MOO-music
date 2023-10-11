@@ -4,7 +4,7 @@ import type { Album } from '@/components/Album/Album.vue'
 import type { Artist } from '@/components/Artist/Artist.vue'
 
 export const useCacheStore = defineStore('cache', () => {
-  const audioStore = useLazyData(() => useAudioStore())
+  const audioStore = useAudioStore()
 
   const historySearch = useCache('historySearch', shallowReactive<string[]>([]))
   const historyPlays = useCache('historyPlays', shallowReactive<Song[]>([]))
@@ -23,27 +23,19 @@ export const useCacheStore = defineStore('cache', () => {
     if (historySearch.length > 10) historySearch.length = 10
   }
 
-  audioStore.value.$onAction(({ name, after }) => {
-    // * 添加历史播放歌曲
-    after(() => {
-      const { currentSongIndex, songs } = audioStore.value
-      if (!songs.length) return
+  // * 添加历史播放歌曲
+  watch(() => audioStore.currentSongInfo, songInfo => {
+    console.log('🚀 ~ file: cache.ts:51 ~ watch ~ songInfo:', '添加历史播放歌曲')
+    if (!songInfo) return
 
-      switch (name) {
-        case 'setPreSong':
-        case 'setNextSong':
-        case 'setCurrentSong': {
-          const song = songs[currentSongIndex]
-          const index = historyPlays.findIndex(v => v.id === song.id)
-          index === -1
-            ? historyPlays.unshift(song)
-            : historyPlays.unshift(...historyPlays.splice(index, 1))
+    const { song } = songInfo
+    const index = historyPlays.findIndex(v => v.id === song.id)
+    index === -1
+      ? historyPlays.unshift(song)
+      : historyPlays.unshift(...historyPlays.splice(index, 1))
 
-          // * 超过50个就丢弃
-          if (historyPlays.length > 50) historyPlays.length = 50
-        }
-      }
-    })
+    // * 超过50个就丢弃
+    if (historyPlays.length > 50) historyPlays.length = 50
   })
 
   return {
@@ -56,29 +48,3 @@ export const useCacheStore = defineStore('cache', () => {
     addHistorySearch
   }
 })
-
-export function setupCache() {
-  const cacheStore = useCacheStore()
-  const audioStore = useAudioStore()
-  const keys = [
-    'historyPlays',
-    'historySearch',
-    'collectSongs',
-    'collectPlaylist',
-    'collectAlbums',
-    'collectArtists',
-    'mode',
-    'playlist',
-    'songs'
-  ]
-
-  keys.forEach((key) => {
-    uni.setStorage({
-      key,
-      data: key in cacheStore
-        ? cacheStore[key as keyof typeof cacheStore]
-        : audioStore[key as keyof typeof audioStore],
-      fail(err) { console.error(err) }
-    })
-  })
-}

@@ -9,12 +9,34 @@ export default function useCache<T>(key: string, fallback: T) {
     success({ data }) {
       if (!data) return
 
-      if (isRef(fallback)) return (fallback.value = data)
+      if (isRef(fallback)) {
+        fallback.value = data
+
+        watch(fallback, (value) => {
+          uni.setStorage({
+            key,
+            data: value,
+            fail(err) { console.error(err) }
+          })
+        })
+
+        return
+      }
 
       if (isReactive(fallback)) {
-        return Array.isArray(data) && Array.isArray(fallback)
+        Array.isArray(data) && Array.isArray(fallback)
           ? data.forEach((v, i) => { fallback[i] = v })
           : Object.assign(fallback as object, data)
+
+        watch(() => fallback, (value) => {
+          uni.setStorage({
+            key,
+            data: value,
+            fail(err) { console.error(err) }
+          })
+        }, { deep: true })
+
+        return
       }
     },
     fail(err) { console.error(err) }
