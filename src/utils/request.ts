@@ -1,10 +1,10 @@
-import Request from '@/utils/luch-request'
+import simpleAxios from './simpleAxios'
 import toast from './toast'
 
 export const BASE_URL = 'https://netease-music-api.fe-mm.com'
 export const MOO_API = 'https://www.mooapi.link'
 
-const request = new Request({
+const request = simpleAxios.create({
   baseURL: BASE_URL,
   withCredentials: true
 })

@@ -75,7 +75,7 @@ watch(search, async(val, oldVal) => {
   try {
     if (val.length && val.length > oldVal.length && val.trim() !== oldVal.trim()) {
       const { result: { allMatch }} = await getSearchSuggest(val, {
-        getTask(task) {
+        getRequestTask(task) {
           // * 如果发起下一个请求，abort之前的
           abortTask.pop()?.abort()
           abortTask.push(task)
