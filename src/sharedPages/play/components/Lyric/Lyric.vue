@@ -1,5 +1,5 @@
 <template>
-  <view class="lyric w-[80%] max-h-[50%] mid top-[30%] text-center text-[50rpx] text-white-1 whitespace-pre-line line-clamp-6">
+  <view class="lyric w-[80%] max-h-[50%] mid top-[30%] text-center text-[50rpx] text-white-1 whitespace-pre-line line-clamp-6 [text-shadow:#0AFFD5_1rpx_0_10rpx]">
     {{ genLyric(audioStore.currentTime) }}
   </view>
 </template>

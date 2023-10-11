@@ -87,9 +87,8 @@ const isShowPopup = ref(false) // * 是否显示播放列表
 
 // #ifdef H5
 onMounted(() => {
-  watch(() => audioStore.currentSongIndex, (index) => {
-    const song = audioStore.songs[index]
-    document.title = '🎵 ' + song?.name + ' - ' + song?.ar.reduce((acc, { name }) => (acc += name + '. '), '')
+  watch(() => audioStore.currentSongInfo, (songInfo) => {
+    document.title = '🎵 ' + songInfo?.song.name + ' - ' + songInfo?.song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
   }, { immediate: true })
 })
 onHide(() => { //! popup不关闭的话会导致跳转页面无法滚动
