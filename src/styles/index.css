@@ -100,7 +100,8 @@
 
 @layer base {
   page{
-    --save-bottom: calc(150rpx + env(safe-area-inset-bottom));
+    --ios-bottom: env(safe-area-inset-bottom);
+    --save-bottom: calc(150rpx + var(--ios-bottom));
 
     width: 100%;
     height: 100%;

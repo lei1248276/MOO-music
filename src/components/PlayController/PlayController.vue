@@ -2,7 +2,7 @@
   <view>
     <view
       v-show="!hidden"
-      class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] left-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]"
+      class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] left-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[var(--ios-bottom)]"
       :style="{ width: area + 'rpx'}"
     >
       <Countdown />
@@ -47,7 +47,7 @@
       </view>
     </view>
 
-    <view class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] right-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[env(safe-area-inset-bottom)]">
+    <view class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] right-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[var(--ios-bottom)]">
       <JIcon
         type="icon-menu"
         custom-class="text-white-1 text-[70rpx] font-bold mr-3"

@@ -7,7 +7,7 @@
   <!-- #ifdef H5 -->
   <H5BackTransition :ref="(el: any) => el?.open()">
     <!-- #endif -->
-    <view class="animate-enter-content box-border overflow-x-hidden px-[28rpx] after:block after:pb-[calc(150rpx_+_env(safe-area-inset-bottom))]">
+    <view class="animate-enter-content box-border overflow-x-hidden px-[28rpx] after:block after:pb-[var(--save-bottom)]">
       <view
         v-for="album in albumList"
         :key="album.id"
