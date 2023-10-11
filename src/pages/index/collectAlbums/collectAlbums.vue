@@ -26,14 +26,21 @@
           v-for="(album, index) in lazyList"
           :key="album.id"
           class="animate-content"
-          :right-options="rightBtnStyle"
           :auto-close="false"
-          @click="onClick(index)"
         >
           <Album
             :album="album"
             @click="useNavigateTo(`/sharedPages/album/album?id=${album.id}`)"
           />
+
+          <template #right>
+            <view
+              class="bg-red-1 ml-1 w-[120rpx] h-[300rpx] leading-[300rpx] text-white-1 text-[30rpx] text-center"
+              @tap="cacheStore.collectAlbums.splice(index, 1)"
+            >
+              删除
+            </view>
+          </template>
         </uni-swipe-action-item>
       </uni-swipe-action>
     </view>
@@ -45,31 +52,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Album } from '@/components/Album/Album.vue'
-
 const cacheStore = useCacheStore()
 
-const rightBtnStyle = [{
-  text: '删除',
-  style: {
-    backgroundColor: '#fd3148',
-    fontSize: '32rpx',
-    color: '#fffeff'
-  }
-}]
-
 const limit = 5
-const lazyList = shallowReactive<Album[]>(cacheStore.collectAlbums.slice(0, limit))
+const offset = ref(10)
+const lazyList = computed(() => cacheStore.collectAlbums.slice(0, offset.value))
 
 onReachBottom(() => {
-  const len = lazyList.length
-  if (len >= cacheStore.collectAlbums.length) return
-
-  lazyList.push(...cacheStore.collectAlbums.slice(len, len + limit))
+  if (lazyList.value.length < cacheStore.collectAlbums.length) offset.value += limit
 })
-
-function onClick(index: number) {
-  cacheStore.collectAlbums.splice(index, 1)
-  lazyList.splice(index, 1)
-}
 </script>

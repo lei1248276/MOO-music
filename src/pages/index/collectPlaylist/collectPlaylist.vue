@@ -26,9 +26,7 @@
           v-for="(playlist, index) in lazyList"
           :key="playlist.id"
           class="animate-content"
-          :right-options="rightBtnStyle"
           :auto-close="false"
-          @click="onClick(index)"
         >
           <view
             class="flex items-center h-[200rpx] mb-5"
@@ -52,6 +50,15 @@
               </view>
             </view>
           </view>
+
+          <template #right>
+            <view
+              class="bg-red-1 ml-1 w-[120rpx] h-[200rpx] leading-[200rpx] text-white-1 text-[30rpx] text-center"
+              @tap="cacheStore.collectPlaylist.splice(index, 1)"
+            >
+              删除
+            </view>
+          </template>
         </uni-swipe-action-item>
       </uni-swipe-action>
     </view>
@@ -63,31 +70,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Playlist } from '@/api/interface/Playlist'
-
 const cacheStore = useCacheStore()
 
-const rightBtnStyle = [{
-  text: '删除',
-  style: {
-    backgroundColor: '#fd3148',
-    fontSize: '32rpx',
-    color: '#fffeff'
-  }
-}]
-
 const limit = 8
-const lazyList = shallowReactive<Playlist[]>(cacheStore.collectPlaylist.slice(0, limit))
+const offset = ref(10)
+const lazyList = computed(() => cacheStore.collectPlaylist.slice(0, offset.value))
 
 onReachBottom(() => {
-  const len = lazyList.length
-  if (len >= cacheStore.collectPlaylist.length) return
-
-  lazyList.push(...cacheStore.collectPlaylist.slice(len, len + limit))
+  if (lazyList.value.length < cacheStore.collectPlaylist.length) offset.value += limit
 })
-
-function onClick(index: number) {
-  cacheStore.collectPlaylist.splice(index, 1)
-  lazyList.splice(index, 1)
-}
 </script>

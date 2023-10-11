@@ -37,9 +37,7 @@
           v-for="(song, index) in lazyList"
           :key="song.id"
           class="animate-content"
-          :right-options="rightBtnStyle"
           :auto-close="false"
-          @click="onClick(index)"
         >
           <Song
             :song="song"
@@ -48,6 +46,15 @@
             :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
             @click="audioStore.onPlay(index, cacheStore.collectSongs)"
           />
+
+          <template #right>
+            <view
+              class="bg-red-1 ml-1 w-[120rpx] h-[140rpx] leading-[140rpx] text-white-1 text-[30rpx] text-center"
+              @tap="cacheStore.collectSongs.splice(index, 1)"
+            >
+              删除
+            </view>
+          </template>
         </uni-swipe-action-item>
       </uni-swipe-action>
     </view>
@@ -59,33 +66,16 @@
 </template>
 
 <script setup lang="ts">
-import type { Song } from '@/components/Song/Song.vue'
 import { rangeRandom } from '@/utils/util'
 
 const audioStore = useAudioStore()
 const cacheStore = useCacheStore()
 
-const rightBtnStyle = [{
-  text: '删除',
-  style: {
-    backgroundColor: '#fd3148',
-    fontSize: '32rpx',
-    color: '#fffeff'
-  }
-}]
-
 const limit = 10
-const lazyList = shallowReactive<Song[]>(cacheStore.collectSongs.slice(0, limit))
+const offset = ref(10)
+const lazyList = computed(() => cacheStore.collectSongs.slice(0, offset.value))
 
 onReachBottom(() => {
-  const len = lazyList.length
-  if (len >= cacheStore.collectSongs.length) return
-
-  lazyList.push(...cacheStore.collectSongs.slice(len, len + limit))
+  if (lazyList.value.length < cacheStore.collectSongs.length) offset.value += limit
 })
-
-function onClick(index: number) {
-  cacheStore.collectSongs.splice(index, 1)
-  lazyList.splice(index, 1)
-}
 </script>

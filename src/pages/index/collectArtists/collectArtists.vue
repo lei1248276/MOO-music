@@ -26,14 +26,21 @@
           v-for="(artist, index) in lazyList"
           :key="artist.id"
           class="animate-content"
-          :right-options="rightBtnStyle"
           :auto-close="false"
-          @click="onClick(index)"
         >
           <Artist
             :artist="artist"
             @click="useNavigateTo(`/sharedPages/artist/artist?id=${artist.id}`)"
           />
+
+          <template #right>
+            <view
+              class="bg-red-1 ml-1 w-[120rpx] h-[140rpx] leading-[140rpx] text-white-1 text-[30rpx] text-center"
+              @tap="cacheStore.collectArtists.splice(index, 1)"
+            >
+              删除
+            </view>
+          </template>
         </uni-swipe-action-item>
       </uni-swipe-action>
     </view>
@@ -45,31 +52,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Artist } from '@/components/Artist/Artist.vue'
-
 const cacheStore = useCacheStore()
 
-const rightBtnStyle = [{
-  text: '删除',
-  style: {
-    backgroundColor: '#fd3148',
-    fontSize: '32rpx',
-    color: '#fffeff'
-  }
-}]
-
 const limit = 10
-const lazyList = shallowReactive<Artist[]>(cacheStore.collectArtists.slice(0, limit))
+const offset = ref(10)
+const lazyList = computed(() => cacheStore.collectArtists.slice(0, offset.value))
 
 onReachBottom(() => {
-  const len = lazyList.length
-  if (len >= cacheStore.collectArtists.length) return
-
-  lazyList.push(...cacheStore.collectArtists.slice(len, len + limit))
+  if (lazyList.value.length < cacheStore.collectArtists.length) offset.value += limit
 })
-
-function onClick(index: number) {
-  cacheStore.collectArtists.splice(index, 1)
-  lazyList.splice(index, 1)
-}
 </script>
