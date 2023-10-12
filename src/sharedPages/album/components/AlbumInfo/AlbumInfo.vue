@@ -4,7 +4,7 @@
     width="500rpx"
     height="450rpx"
     radius="20rpx"
-    custom-class="m-auto mt-5"
+    class="m-auto mt-5"
   />
 
   <view class="pt-[40rpx]">

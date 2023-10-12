@@ -7,7 +7,7 @@
           width="300rpx"
           height="300rpx"
           radius="12rpx"
-          custom-class="flex-1"
+          class="flex-1"
         />
 
         <view class="flex-1 ml-[50rpx]">

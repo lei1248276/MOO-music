@@ -23,7 +23,7 @@
       >
         <template #default="{item: song}">
           <JImage
-            custom-class="relative after:block after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:bg-[rgba(0,0,0,.22)]"
+            class="relative after:block after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0 after:bg-[rgba(0,0,0,.22)]"
             :src="song.al.picUrl + '?param=400y400'"
             width="100vw"
             height="100vh"

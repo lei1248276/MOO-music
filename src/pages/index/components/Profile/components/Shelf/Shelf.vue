@@ -11,9 +11,8 @@
         <JImage
           v-if="src"
           :src="src + '?param=100y100'"
-          class="absolute !w-[50%] h-full"
+          class="!absolute !w-[50%] h-full"
           :class="'pic-' + (index + 1)"
-          custom-class="absolute"
           width="100%"
           height="100%"
           lazy-load

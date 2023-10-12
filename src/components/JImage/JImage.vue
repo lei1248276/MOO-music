@@ -1,20 +1,14 @@
 <template>
   <view
-    class="overflow-hidden"
-    :class="customClass"
-    :style="{ width, height, 'border-radius': radius }"
+    class="relative overflow-hidden"
+    :class="{'before:absolute before:z-50 before:alt before:animate-pulse': !loaded}"
+    :style="{width, height, 'border-radius': radius}"
     @click="$emit('click')"
   >
-    <view
-      v-if="!loaded"
-      class="relative alt w-full h-full before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 animate-pulse"
-    />
-
     <image
-      v-if="!lazyLoad || loading || loaded"
-      class="w-full h-full transition-opacity duration-1000"
+      class="j-image w-full h-full transition-opacity duration-1000"
       :class="loaded ? 'opacity-100' : 'opacity-0'"
-      :src="transHTTPS(src)"
+      :src="(!lazyLoad || loading || loaded) ? transHTTPS(src) : ''"
       :mode="mode"
       :fade-show="fadeShow"
       :webp="webp"
@@ -48,7 +42,6 @@ interface ImgProps extends ImageProps {
   fadeShow?: ImageProps['fadeShow']
   showMenuByLongpress?: ImageProps['showMenuByLongpress']
   draggable?: ImageProps['draggable']
-  customClass?: string
 }
 
 const props = withDefaults(defineProps<ImgProps>(), {
@@ -60,8 +53,7 @@ const props = withDefaults(defineProps<ImgProps>(), {
   fadeShow: true,
   webp: false,
   showMenuByLongpress: false,
-  draggable: true,
-  customClass: ''
+  draggable: true
 })
 defineEmits(['click'])
 
@@ -73,11 +65,10 @@ onMounted(() => {
   if (!props.lazyLoad) return
 
   observer = uni.createIntersectionObserver(getCurrentInstance()?.proxy)
-  observer.relativeToViewport({ bottom: 100 }).observe(`.alt`, (res) => {
+  observer.relativeToViewport({ bottom: 100 }).observe(`.j-image`, (res) => {
     if (res.intersectionRatio === 0) return
 
     loading.value = true
-    // console.log('🚀', res.intersectionRatio)
     observer?.disconnect()
   })
 })
