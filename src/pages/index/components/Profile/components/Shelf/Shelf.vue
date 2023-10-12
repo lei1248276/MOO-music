@@ -12,7 +12,11 @@
           v-if="src"
           :src="src + '?param=100y100'"
           class="!absolute !w-[50%] h-full"
-          :class="'pic-' + (index + 1)"
+          :class="{
+            'left-0 z-[3]': index === 0,
+            'h-[90%] left-1/2 -translate-x-1/2 z-[2]': index === 1,
+            'h-[90%] left-full -translate-x-full z-[1]': index === 2
+          }"
           width="100%"
           height="100%"
           lazy-load
@@ -20,7 +24,11 @@
         <view
           v-else
           class="absolute w-[50%] h-full bg-grey-1 shadow-[4rpx_0_6rpx_#666]"
-          :class="'pic-' + (index + 1)"
+          :class="{
+            'left-0 z-[3]': index === 0,
+            'h-[90%] left-1/2 -translate-x-1/2 z-[2]': index === 1,
+            'h-[90%] left-full -translate-x-full z-[1]': index === 2
+          }"
         >
           <JIcon
             v-if="index === 0"
@@ -62,22 +70,3 @@ function toNavigate() {
   })
 }
 </script>
-
-<style scoped lang="scss">
-.pic-1 {
-  left: 0;
-  z-index: 3;
-}
-.pic-2 {
-  height: 90%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-.pic-3 {
-  height: 90%;
-  left: 100%;
-  transform: translateX(-100%);
-  z-index: 1;
-}
-</style>

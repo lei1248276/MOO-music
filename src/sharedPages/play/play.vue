@@ -57,7 +57,7 @@
       </uni-popup>
 
       <JIcon
-        v-show="!audioStore.isPlay"
+        :class="{'hidden': audioStore.isPlay}"
         class="icon-audioPlay text-[100rpx] text-white-1 mid"
         @click="audioStore.toggle"
       />
@@ -68,7 +68,10 @@
   </H5BackTransition>
   <!-- #endif -->
 
-  <PlayController v-show="!isShowPopup" />
+  <PlayController
+    :class="{'opacity-0': isShowPopup}"
+    class="transition-opacity duration-300"
+  />
 </template>
 
 <script setup lang="ts">

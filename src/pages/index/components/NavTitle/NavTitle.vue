@@ -5,14 +5,13 @@
 
       <JIcon
         v-if="!userStore.profile"
-        v-show="isHome"
-        type="icon-user"
-        class="text-white-1 text-[60rpx]"
+        :class="{'hidden': !isHome}"
+        class="icon-user text-white-1 text-[60rpx]"
         @click="useNavigateTo('/sharedPages/login/login')"
       />
       <JImage
         v-else
-        v-show="isHome"
+        :class="{'hidden': !isHome}"
         :src="userStore.profile.avatarUrl"
         width="75rpx"
         height="75rpx"
@@ -20,7 +19,7 @@
       />
 
       <JIcon
-        v-show="!isHome"
+        :class="{'hidden': isHome}"
         type="icon-setting"
         class="text-white-1 text-[60rpx]"
       />

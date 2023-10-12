@@ -4,7 +4,11 @@
       <JImage
         v-for="(item, index) in recommendList"
         :key="index"
-        :class="index === 0 ? 'left-0' : index === 1 ? 'x-mid z-10 !h-[120%]' : 'right-0'"
+        :class="{
+          'left-0': index === 0,
+          'x-mid z-10 !h-[120%]': index === 1,
+          'right-0': index === 2
+        }"
         class="absolute bottom-0 w-[180rpx] h-full"
         :src="item.picUrl + '?param=100y100'"
         width="180rpx"

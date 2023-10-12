@@ -1,13 +1,14 @@
 <template>
   <view class="w-full h-full box-border px-[28rpx] pb-[var(--save-bottom)] overflow-y-scroll">
     <view class="h-[300rpx] p-[30rpx] rounded-[20rpx] bg-black-1 text-[38rpx] box-border flex flex-col justify-between font-bold">
-      <view class="flex items-center space-x-3 text-white-1">
+      <view class="flex items-center text-white-1">
         <template v-if="userStore.profile">
           <JImage
             :src="userStore.profile.avatarUrl"
             width="75rpx"
             height="75rpx"
             radius="50%"
+            class="mr-3"
           />
           <text>{{ userStore.profile.nickname }}</text>
         </template>

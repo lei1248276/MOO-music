@@ -2,7 +2,7 @@
   <view>
     <view
       class="active:animate-back w-auto h-[140rpx] mb-5 flex justify-center items-center"
-      :class="[customClass, canPlay ? '' : '!opacity-30 pointer-events-none']"
+      :class="{'!opacity-30 pointer-events-none': !canPlay}"
       :hover-stay-time="100"
       hover-class="bg-grey-1/10"
       @tap="$emit('click')"
@@ -49,14 +49,6 @@
   </view>
 </template>
 
-<script lang="ts">
-export default {
-  options: {
-    virtualHost: true
-  }
-}
-</script>
-
 <script setup lang="ts">
 export interface Song {
   id: number
@@ -78,7 +70,6 @@ const props = defineProps<{
   isRun: boolean
   isPlay: boolean
   cannotPlay?: boolean
-  customClass?: string
 }>()
 defineEmits(['click'])
 
