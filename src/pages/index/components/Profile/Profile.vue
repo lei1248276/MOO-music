@@ -21,7 +21,7 @@
             type="icon-user"
             custom-class="text-white-1 text-[60rpx] mr-3"
           />
-          点击登录
+          登录网易云音乐
         </view>
       </view>
       <view class="flex justify-between items-center text-grey-1">
