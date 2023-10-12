@@ -8,6 +8,7 @@
 </template>
 
 <!-- !隐藏微信小程序shadowRoot  p.s：小程序添加此选项"v-show"会失效，需要使用css解决。艹 -->
+// #ifdef MP-WEIXIN
 <script lang="ts">
 export default {
   options: {
@@ -15,6 +16,7 @@ export default {
   }
 }
 </script>
+// #endif
 
 <script setup lang="ts">
 withDefaults(defineProps<{

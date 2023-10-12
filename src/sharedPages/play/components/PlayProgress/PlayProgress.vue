@@ -24,6 +24,7 @@
   <!-- #endif -->
 </template>
 
+// #ifdef MP-WEIXIN
 <script lang="ts">
 export default {
   options: {
@@ -31,6 +32,7 @@ export default {
   }
 }
 </script>
+// #endif
 
 <script setup lang="ts">
 import type { SliderOnChangingEvent, SliderOnChangeEvent } from '@uni-helper/uni-app-types'

@@ -38,6 +38,7 @@
   </swiper>
 </template>
 
+// #ifdef MP-WEIXIN
 <script lang="ts">
 export default {
   options: {
@@ -45,6 +46,7 @@ export default {
   }
 }
 </script>
+// #endif
 
 <script setup lang="ts">
 import type { SwiperOnChangeEvent, SwiperOnTransitionEvent, SwiperOnAnimationfinishEvent } from '@uni-helper/uni-app-types'
