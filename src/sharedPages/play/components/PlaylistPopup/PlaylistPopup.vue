@@ -28,19 +28,19 @@
       </view>
 
       <view class="flex justify-between items-center text-white-1 pt-[30rpx]">
-        <JIcon custom-class="icon-send text-[60rpx]" />
-        <JIcon custom-class="icon-download text-[60rpx]" />
+        <JIcon class="icon-send text-[60rpx]" />
+        <JIcon class="icon-download text-[60rpx]" />
         <JIcon
           v-if="audioStore.playlist"
-          custom-class="icon-playlist text-[60rpx]"
+          class="icon-playlist text-[60rpx]"
           @click="useNavigateTo(`/sharedPages/playlist/playlist?id=${audioStore.playlist?.id}`)"
         />
         <JIcon
           v-if="audioStore.currentSongInfo?.song"
-          custom-class="icon-album text-[60rpx]"
+          class="icon-album text-[60rpx]"
           @click="useNavigateTo(`/sharedPages/album/album?id=${song.al.id}`)"
         />
-        <JIcon custom-class="icon-message text-[60rpx]" />
+        <JIcon class="icon-message text-[60rpx]" />
       </view>
     </view>
 

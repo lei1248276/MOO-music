@@ -1,9 +1,8 @@
 <template>
   <view
     class="my-[20rpx] py-[20rpx] text-[34rpx] font-bold text-white-1 flex justify-between items-center"
-    :class="customClass"
     :hover-class="clickable ? 'bg-grey-1/10' : ''"
-    hover-stay-time="50"
+    :hover-stay-time="50"
     @tap="onSubtitle"
   >
     <slot name="title">
@@ -16,11 +15,19 @@
       <JIcon
         :type="icon"
         :size="iconSize"
-        custom-class="text-grey-1"
+        class="text-grey-1"
       />
     </slot>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
 
 <script setup lang="ts">
 interface Props {
@@ -29,7 +36,6 @@ interface Props {
   iconSize?: string
   url?: string
   clickable?: boolean
-  customClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -37,8 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
   icon: 'icon-arrow',
   iconSize: '40rpx',
   url: '',
-  clickable: false,
-  customClass: ''
+  clickable: false
 })
 const emit = defineEmits(['title'])
 

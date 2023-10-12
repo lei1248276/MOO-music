@@ -3,7 +3,7 @@
     <view
       class="active:animate-back w-auto h-[140rpx] mb-5 flex justify-center items-center"
       :class="[customClass, canPlay ? '' : '!opacity-30 pointer-events-none']"
-      hover-stay-time="100"
+      :hover-stay-time="100"
       hover-class="bg-grey-1/10"
       @tap="$emit('click')"
     >
@@ -43,11 +43,19 @@
       </view>
       <JIcon
         v-else
-        custom-class="icon-more text-grey-1 text-[44rpx]"
+        class="icon-more text-grey-1 text-[44rpx]"
       />
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
 
 <script setup lang="ts">
 export interface Song {

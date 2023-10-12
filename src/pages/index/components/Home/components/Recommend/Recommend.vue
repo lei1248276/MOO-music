@@ -25,7 +25,7 @@
       </view>
       <JIcon
         :type="isRun ? 'icon-pause' : 'icon-play'"
-        custom-class="text-[80rpx] text-yellow-1"
+        class="text-[80rpx] text-yellow-1"
         @click="!isRun && onPlay()"
       />
     </view>

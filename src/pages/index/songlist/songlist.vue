@@ -10,7 +10,7 @@
       <!-- #endif -->
       <Songlist
         :songlist="songlist"
-        custom-class="min-h-full bg-black-2 px-[28rpx]"
+        class="min-h-full bg-black-2 px-[28rpx]"
         @click="(songlist) => { useNavigateTo(`/sharedPages/playlist/playlist?id=${songlist.id}`)}"
       />
     <!-- #ifdef H5 -->

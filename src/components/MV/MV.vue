@@ -47,7 +47,7 @@
         @click="isPlay = true"
       />
       <JIcon
-        custom-class="icon-audioPlay text-[100rpx] text-white-1 mid"
+        class="icon-audioPlay text-[100rpx] text-white-1 mid"
         @click="isPlay = true"
       />
     </template>

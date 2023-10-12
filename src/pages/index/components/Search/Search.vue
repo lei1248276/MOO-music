@@ -1,7 +1,7 @@
 <template>
   <JSearch
     v-model="search"
-    custom-class="mt-0"
+    class="mt-0"
     bg-color="#010001"
     color="#fce939"
     radius="30rpx"
@@ -9,7 +9,7 @@
     @click="toSearch"
   >
     <template #searchIcon>
-      <JIcon custom-class="icon-search text-[60rpx] text-yellow-1" />
+      <JIcon class="icon-search text-[60rpx] text-yellow-1" />
     </template>
   </JSearch>
 </template>

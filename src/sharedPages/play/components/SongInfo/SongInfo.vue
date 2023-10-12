@@ -18,7 +18,7 @@
           <JIcon
             type="icon-heart"
             size="60rpx"
-            :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-white-1 transition-colors'"
+            :class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-white-1 transition-colors'"
           />
         </view>
       </view>
@@ -36,7 +36,7 @@
         </view>
 
         <view @tap.stop="$emit('menu')">
-          <JIcon custom-class="icon-menu text-[66rpx]" />
+          <JIcon class="icon-menu text-[66rpx]" />
         </view>
       </view>
     </view>

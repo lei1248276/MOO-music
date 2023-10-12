@@ -37,7 +37,7 @@
       <view class="relative">
         <JIcon
           :type="audioStore.isPlay ? 'icon-audioPause' : 'icon-audioPlay'"
-          custom-class="text-white-1 text-[60rpx]"
+          class="text-white-1 text-[60rpx]"
         />
         <!-- ! 隐形的占位事件触发元素，因为播放控制icon被movable区域覆盖了 -->
         <view
@@ -50,7 +50,7 @@
     <view class="h-[110rpx] px-[30rpx] rounded-[60rpx] fixed bottom-[4%] right-[3%] z-[999] box-border flex justify-between items-center bg-black-1 mb-[var(--ios-bottom)]">
       <JIcon
         type="icon-menu"
-        custom-class="text-white-1 text-[70rpx] font-bold mr-3"
+        class="text-white-1 text-[70rpx] font-bold mr-3"
         @click="onOpenPopup"
       />
       <uni-popup
@@ -64,12 +64,20 @@
 
       <JIcon
         :type="`icon-${audioStore.mode}`"
-        custom-class="text-yellow-1 text-[70rpx]"
+        class="text-yellow-1 text-[70rpx]"
         @click="audioStore.setPlayMode()"
       />
     </view>
   </view>
 </template>
+
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
 
 <script setup lang="ts">
 import type { MovableViewOnChangeEvent } from '@uni-helper/uni-app-types'

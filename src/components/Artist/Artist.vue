@@ -27,6 +27,14 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script setup lang="ts">
 export interface Artist {
   id: number

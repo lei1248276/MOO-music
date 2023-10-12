@@ -2,6 +2,14 @@
   <view class="will-change-contents w-[140rpx] leading-[110rpx] text-grey-1 font-bold text-[48rpx]">{{ transTime(audioStore.duration, audioStore.currentTime) }}</view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script setup lang="ts">
 const audioStore = useAudioStore()
 

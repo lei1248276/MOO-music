@@ -25,7 +25,7 @@
           <JIcon
             v-if="index === 0"
             :type="'icon-' + icon"
-            custom-class="text-white-1 text-[80rpx] mid"
+            class="text-white-1 text-[80rpx] mid"
           />
         </view>
       </template>

@@ -6,8 +6,7 @@
 
   <Subtitle
     icon="icon-more"
-    class="z-50 fixed left-0 right-0 bg-black-2 px-[28rpx]"
-    custom-class="!my-0"
+    class="z-50 fixed left-0 right-0 bg-black-2 px-[28rpx] !my-0"
     :style="{ top: 44 + useStatusBarHeight().value + 'px' }"
   >
     <template #title>

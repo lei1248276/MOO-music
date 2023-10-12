@@ -5,7 +5,7 @@
     @tap="onBack"
   >
     <JIcon
-      custom-class="icon-arrow text-white-1 p-2"
+      class="icon-arrow text-white-1 p-2"
       size="18px"
     />
   </view>

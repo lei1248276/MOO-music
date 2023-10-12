@@ -19,7 +19,7 @@
         >
           <JIcon
             type="icon-user"
-            custom-class="text-white-1 text-[60rpx] mr-3"
+            class="text-white-1 text-[60rpx] mr-3"
           />
           登录网易云音乐
         </view>

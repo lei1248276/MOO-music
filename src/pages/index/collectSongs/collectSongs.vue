@@ -7,8 +7,7 @@
   <Subtitle
     icon="icon-menu"
     icon-size="60rpx"
-    class="z-50 fixed left-0 right-0 bg-black-2 px-[28rpx]"
-    custom-class="!my-0"
+    class="z-50 fixed left-0 right-0 bg-black-2 px-[28rpx] !my-0"
     :style="{ top: 44 + useStatusBarHeight().value + 'px' }"
   >
     <template #title>
@@ -18,7 +17,7 @@
           size="mini"
           @tap="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, cacheStore.collectSongs.length) : 0, cacheStore.collectSongs)"
         >
-          <JIcon custom-class="icon-play text-[42rpx]" />
+          <JIcon class="icon-play text-[42rpx]" />
         </button>
 
         <text class="text-grey-1 inline-block align-middle ml-5 font-[38rpx]">

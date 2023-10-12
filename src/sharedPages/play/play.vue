@@ -58,7 +58,7 @@
 
       <JIcon
         v-show="!audioStore.isPlay"
-        custom-class="icon-audioPlay text-[100rpx] text-white-1 mid"
+        class="icon-audioPlay text-[100rpx] text-white-1 mid"
         @click="audioStore.toggle"
       />
 

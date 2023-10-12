@@ -40,7 +40,7 @@
                 size="mini"
                 @tap="audioStore.onPlay(audioStore.mode === 'random' ? rangeRandom(0, songs.length) : 0, songs, playlist)"
               >
-                <JIcon custom-class="icon-play text-[42rpx]" />
+                <JIcon class="icon-play text-[42rpx]" />
               </button>
 
               <text class="text-grey-1 inline-block align-middle ml-5 font-[38rpx]">

@@ -3,7 +3,7 @@
     <Subtitle
       icon="icon-more"
       icon-size="50rpx"
-      custom-class="px-[28rpx] bg-black-2"
+      class="px-[28rpx] bg-black-2"
     >
       <template #title>
         <view class="flex items-center">
@@ -12,7 +12,7 @@
             size="mini"
             @tap="onSong(lazyList[audioStore.mode === 'random' ? rangeRandom(0, lazyList.length) : 0].id)"
           >
-            <JIcon custom-class="icon-play text-[42rpx]" />
+            <JIcon class="icon-play text-[42rpx]" />
           </button>
 
           <text class="text-grey-1 inline-block align-middle ml-5 font-[38rpx]">

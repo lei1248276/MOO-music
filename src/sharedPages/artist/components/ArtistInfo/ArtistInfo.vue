@@ -13,7 +13,7 @@
     <JIcon
       type="icon-heart"
       size="60rpx"
-      :custom-class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-grey-1 transition-colors'"
+      :class="isCollect ? 'text-red-1 animate-ping !repeat-1' : 'text-grey-1 transition-colors'"
       @click="onCollect"
     />
   </view>

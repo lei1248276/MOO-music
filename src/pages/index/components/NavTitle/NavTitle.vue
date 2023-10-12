@@ -7,7 +7,7 @@
         v-if="!userStore.profile"
         v-show="isHome"
         type="icon-user"
-        custom-class="text-white-1 text-[60rpx]"
+        class="text-white-1 text-[60rpx]"
         @click="useNavigateTo('/sharedPages/login/login')"
       />
       <JImage
@@ -22,7 +22,7 @@
       <JIcon
         v-show="!isHome"
         type="icon-setting"
-        custom-class="text-white-1 text-[60rpx]"
+        class="text-white-1 text-[60rpx]"
       />
     </view>
 

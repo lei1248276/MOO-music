@@ -14,6 +14,14 @@
   />
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script setup lang="ts">
 import type { UniNavBarProps } from '@uni-helper/uni-ui-types'
 interface NavBarProps extends UniNavBarProps {

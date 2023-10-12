@@ -1,8 +1,5 @@
 <template>
-  <view
-    class="flex items-center mx-[28rpx] my-[20rpx]"
-    :class="customClass"
-  >
+  <view class="flex items-center mx-[28rpx] my-[20rpx]">
     <view
       class="box-border h-[74rpx] flex-1 flex justify-center items-center px-2 py-[4rpx]"
       :style="{borderRadius: radius, backgroundColor: bgColor }"
@@ -64,6 +61,14 @@
   </view>
 </template>
 
+<script lang="ts">
+export default {
+  options: {
+    virtualHost: true
+  }
+}
+</script>
+
 <script setup lang="ts">
 interface JSearchProps {
   modelValue: string
@@ -77,7 +82,6 @@ interface JSearchProps {
   maxlength?: number
   clearButton?: boolean
   cancelButton?: boolean
-  customClass?: string
 }
 
 withDefaults(defineProps<JSearchProps>(), {
@@ -90,8 +94,7 @@ withDefaults(defineProps<JSearchProps>(), {
   readonly: false,
   maxlength: 140,
   clearButton: true,
-  cancelButton: false,
-  customClass: ''
+  cancelButton: false
 })
 defineEmits<{
   (e: 'update:modelValue', value: string): void

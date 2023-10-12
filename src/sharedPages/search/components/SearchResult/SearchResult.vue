@@ -13,7 +13,7 @@
         v-for="(item, index) in suggests"
         :key="index"
         hover-class="bg-grey-1/10"
-        hover-stay-time="50"
+        :hover-stay-time="50"
         class="text-white-1 text-lg truncate py-1"
         @tap="onSelect(item.keyword)"
       >
@@ -34,7 +34,7 @@
         <Subtitle
           title="歌曲"
           clickable
-          custom-class="mt-0"
+          class="mt-0"
           :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
         />
         <Song
@@ -52,7 +52,7 @@
         <Subtitle
           title="专辑"
           clickable
-          custom-class="mt-0"
+          class="mt-0"
           :url="`/sharedPages/searchAlbums/searchAlbums?keyword=${keyword}`"
         />
         <Album
