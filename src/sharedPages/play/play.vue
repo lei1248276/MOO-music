@@ -43,33 +43,32 @@
         </template>
       </VirtualSwiper>
 
-      <uni-popup
-        ref="popup"
-        type="top"
-        @mask-click="onClosePopup"
-      >
-        <!-- ! uni-popup的子组件在小程序端会立即创建并且不会销毁，而其余端会在"open"后创建"close"后销毁 -->
-        <PlaylistPopup
-          v-if="isShowPopup"
-          :song="audioStore.currentSongInfo!.song"
-          @change="onClosePopup"
-        />
-      </uni-popup>
-
-      <JIcon
-        :class="{'hidden': audioStore.isPlay}"
-        class="icon-audioPlay text-[100rpx] text-white-1 mid"
-        @click="audioStore.toggle"
-      />
-
       <PlayProgress />
     </view>
   <!-- #ifdef H5 -->
   </H5BackTransition>
   <!-- #endif -->
 
+  <JIcon
+    :class="{'hidden': audioStore.isPlay}"
+    class="icon-audioPlay text-[100rpx] text-white-1 mid"
+    @click="audioStore.toggle"
+  />
+
+  <uni-popup
+    ref="popup"
+    type="top"
+    @mask-click="onClosePopup"
+  >
+    <!-- ! uni-popup的子组件在小程序端会立即创建并且不会销毁，而其余端会在"open"后创建"close"后销毁 -->
+    <PlaylistPopup
+      v-if="isShowPopup"
+      :song="audioStore.currentSongInfo!.song"
+    />
+  </uni-popup>
+
   <PlayController
-    :class="{'opacity-0': isShowPopup}"
+    :class="{'opacity-0 pointer-events-none': isShowPopup}"
     class="transition-opacity duration-300"
   />
 </template>
