@@ -31,7 +31,10 @@
         </template>
 
         <template #current="{item: currentSong}">
+          <!-- #ifndef MP-WEIXIN -->
+          <!-- ! 微信小程序组件不会销毁，导致泄漏 -->
           <Lyric :song-id="currentSong.id" />
+          <!-- #endif -->
 
           <SongInfo
             :tags="audioStore?.playlist?.tags || ['热门', '流行', '另类']"
@@ -47,6 +50,13 @@
     </view>
   <!-- #ifdef H5 -->
   </H5BackTransition>
+  <!-- #endif -->
+
+  <!-- #ifdef MP-WEIXIN -->
+  <Lyric
+    v-if="audioStore.currentSongInfo"
+    :song-id="audioStore.currentSongInfo?.song.id"
+  />
   <!-- #endif -->
 
   <JIcon
@@ -93,10 +103,10 @@ onMounted(() => {
     document.title = '🎵 ' + songInfo?.song.name + ' - ' + songInfo?.song.ar.reduce((acc, { name }) => (acc += name + '. '), '')
   }, { immediate: true })
 })
+// #endif
 onHide(() => { //! popup不关闭的话会导致跳转页面无法滚动
   onClosePopup()
 })
-// #endif
 
 function onOpenPopup() {
   isShowPopup.value = true

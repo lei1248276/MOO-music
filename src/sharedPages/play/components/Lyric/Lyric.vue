@@ -21,7 +21,8 @@ const audioStore = useAudioStore()
 const lyrics = shallowRef<string>('')
 let lyricMatches: Matches[][] | null = null
 
-watch(() => audioStore.currentSongInfo, async() => {
+watch(() => props.songId, async(id) => {
+  console.log('🚀 ~ file: Lyric.vue:25 ~ watch ~ id:', id)
   lyricMatches = await fetchLyric()
 }, { immediate: true })
 
