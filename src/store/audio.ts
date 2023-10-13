@@ -4,18 +4,17 @@ import type { SongURL } from '@/api/interface/SongURL'
 import { getSongURL } from '@/api/play'
 import toast from '@/utils/toast'
 import { shuffle, transHTTPS } from '@/utils/util'
-import useLazyData from '@/hooks/useLazyData'
+import { getSimiSongs } from '@/api/play'
 
 export interface SongInfo {
   song: Song
   urlInfo: SongURL
 }
 
-let originSongs: Song[] = [] // ! 用于切换模式时保留的原"songs"引用
-const playMode: ('loop' | 'random')[] = ['loop', 'random']
-
 export const useAudioStore = defineStore('audio', () => {
   const userStore = useLazyData(() => useUserStore())
+  //* 播放模式: loop => 循环播放, random => 随机播放
+  const playMode: ('loop' | 'random')[] = ['loop', 'random']
 
   const audio = markRaw(uni.getBackgroundAudioManager?.() || uni.createInnerAudioContext())
   const isLoading = ref(false) // * 是否缓冲中
@@ -29,6 +28,7 @@ export const useAudioStore = defineStore('audio', () => {
   const songs = useCache('songs', shallowRef<Song[]>([]))
   const currentSongInfo = shallowRef<SongInfo>()
   const currentSongIndex = ref(-1)
+  const associationSong = shallowRef<Song>() // * 联想歌曲
 
   function setPreSong() {
     if (!songs.value.length) return
@@ -45,10 +45,22 @@ export const useAudioStore = defineStore('audio', () => {
     const last = songs.value.length - 1
     const currentIndex = currentSongIndex.value
     const nextIndex = currentIndex === last ? 0 : currentIndex + 1
-    setCurrentSong(songs.value[nextIndex], nextIndex)
+
+    if (!associationSong.value || currentIndex !== last) {
+      setCurrentSong(songs.value[nextIndex], nextIndex)
+      return
+    }
+
+    //* 如果处于联想歌曲状态，就继续获取
+    getSimiSongs(songs.value[currentIndex].id).then((_songs) => {
+      associationSong.value = songs.value[currentIndex]
+      songs.value = _songs
+      setCurrentSong(songs.value[nextIndex], nextIndex)
+    })
   }
 
   async function setCurrentSong(song: Song, index: number) {
+    audio.pause()
     currentSongIndex.value = index
 
     // * 重复点击，重新播放
@@ -80,24 +92,29 @@ export const useAudioStore = defineStore('audio', () => {
     }
   }
 
-  function onPlay(index: number, _songs: Song[], _playlist?: Playlist) {
+  //* 模式播放
+  async function onPlay(index: number, _songs: Song[], _playlist?: Playlist, isAssociate?: boolean) {
     if (playlist.value !== _playlist) playlist.value = _playlist
+    //* 退出歌曲联想
+    if (!isAssociate && associationSong.value) associationSong.value = undefined
 
     switch (mode.value) {
       case 'random': {
         originSongs = _songs
         songs.value = shuffle(originSongs.slice())
         const id = _songs[index].id
-        setCurrentSong(_songs[index], songs.value.findIndex(v => v.id === id))
+        await setCurrentSong(_songs[index], songs.value.findIndex(v => v.id === id))
         break
       }
-      default: {
+      case 'loop': {
         if (songs.value !== _songs) songs.value = _songs
-        setCurrentSong(_songs[index], index)
+        await setCurrentSong(_songs[index], index)
+        break
       }
     }
   }
 
+  let originSongs: Song[] = [] // ! 用于切换模式时保留的原"songs"引用
   function setPlayMode() {
     // * 如果因为缓存导致顺序不对，就继续翻转
     if (playMode[0] !== mode.value) {
@@ -161,6 +178,7 @@ export const useAudioStore = defineStore('audio', () => {
     mode,
     playlist,
     songs,
+    associationSong,
     currentSongInfo,
     currentSongIndex,
     setPreSong,

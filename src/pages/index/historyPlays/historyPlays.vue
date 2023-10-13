@@ -39,7 +39,7 @@
         :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
         :is-run="audioStore.currentSongInfo?.song.id === song.id"
         :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-        @click="audioStore.onPlay(index, cacheStore.historyPlays)"
+        @click="audioStore.onPlay(index, cacheStore.historyPlays.slice())"
       />
     </view>
   <!-- #ifdef H5 -->

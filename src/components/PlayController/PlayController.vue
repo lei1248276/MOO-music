@@ -63,9 +63,9 @@
       </uni-popup>
 
       <JIcon
-        :type="`icon-${audioStore.mode}`"
+        :type="iconType"
         class="text-yellow-1 text-[70rpx]"
-        @click="audioStore.setPlayMode()"
+        @click="!audioStore.associationSong && audioStore.setPlayMode()"
       />
     </view>
   </view>
@@ -103,8 +103,16 @@ const x = ref(pivot)
 const popup = shallowRef<UniPopupInstance>()
 const isShowPopup = ref(false)
 
+//! 为了解决uni-popup组件进行更新，状态会发生重置的bug（导致自动关闭），所以在popup关闭后再更新"icon"
+let _iconType = ''
+const iconType = computed(() => {
+  if (isShowPopup.value) return _iconType
+
+  return (_iconType = !isShowPopup.value && audioStore.associationSong ? 'icon-associate' : `icon-${audioStore.mode}`)
+})
+
 onShow(() => { hidden.value = false })
-onHide(() => { hidden.value = true })
+onHide(() => { hidden.value = true; isShowPopup.value && onClosePopup() })
 
 function toPlay() {
   if (!audioStore.currentSongInfo) return
@@ -160,6 +168,7 @@ function onOpenPopup() {
 }
 
 function onClosePopup() {
+  popup.value?.close!()
   setTimeout(() => { isShowPopup.value = false }, 333)
 }
 </script>

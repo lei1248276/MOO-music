@@ -125,3 +125,7 @@
 .icon-random:before {
   content: "\e7b8";
 }
+
+.icon-associate:before {
+  content: "\e61c";
+}

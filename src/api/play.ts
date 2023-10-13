@@ -30,6 +30,14 @@ export function getLyric(id: number) {
  * @description 获取相似歌曲
  * @param id 歌曲id
  */
-export function getSimiSongs(id: number) {
-  return request.get<any, SimiSongsResponse>(`/simi/song?id=${id}`)
+export async function getSimiSongs(id: number) {
+  const { songs } = await request.get<any, SimiSongsResponse>(`/simi/song?id=${id}`)
+  console.log('🚀 ~ file: play.ts:36 ~ getSimiSongs ~ songs:', songs)
+
+  return songs.map(item => ({
+    id: item.id,
+    name: item.name,
+    ar: item.artists,
+    al: item.album
+  }))
 }

@@ -38,13 +38,13 @@
           :url="`/sharedPages/searchSongs/searchSongs?keyword=${keyword}`"
         />
         <Song
-          v-for="(song, index) in songs"
+          v-for="(song) in songs"
           :key="song.id"
           :song="song"
           :is-play="audioStore.currentSongInfo?.song.id === song.id && audioStore.isPlay"
           :is-run="audioStore.currentSongInfo?.song.id === song.id"
           :cannot-play="audioStore.currentSongInfo?.song.id === song.id && !audioStore.currentSongInfo?.urlInfo.url"
-          @click="audioStore.onPlay(0, [songs[index]])"
+          @click="onSong(song)"
         />
       </template>
 
@@ -71,7 +71,7 @@ import type { Suggests } from '@/api/interface/SearchSuggest'
 import type { SearchSongResponse, Song } from '@/api/interface/SearchSong'
 import type { SearchAlbumResponse, Album } from '@/api/interface/SearchAlbum'
 import type { SearchArtistResponse, Artist } from '@/api/interface/SearchArtist'
-import { getSearch } from '@/api/search'
+import { getSearch, getSimiSongs } from '@/api/search'
 import SearchHistory from '../SearchHistory/SearchHistory.vue'
 
 defineProps<{
@@ -108,6 +108,14 @@ function onSelect(_keyword: string) {
   cacheStore.addHistorySearch(_keyword)
   emit('update:suggests', [])
   keyword.value = _keyword
+}
+
+async function onSong(song: Song) {
+  //* 点击搜索歌曲自动进行歌曲联想
+  await audioStore.setCurrentSong(song, 0)
+  const _songs = await getSimiSongs(song.id)
+  audioStore.associationSong = song
+  audioStore.songs = [song, ..._songs]
 }
 
 async function fetchSongs(_keyword: string) {

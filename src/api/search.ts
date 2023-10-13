@@ -3,6 +3,8 @@ import type { TopArtistsResponse } from './interface/TopArtists'
 import type { TopSearchResponse } from './interface/TopSearch'
 import type { SearchSuggestResponse } from './interface/SearchSuggest'
 
+export { getSimiSongs } from './play'
+
 // * 获取热门歌手数据
 export function getTopArtists(offset = 0, limit = 30) {
   return request.get<any, TopArtistsResponse>(`/top/artists?offset=${offset}&limit=${limit}`)

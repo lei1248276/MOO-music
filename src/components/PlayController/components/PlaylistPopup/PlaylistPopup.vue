@@ -1,90 +1,57 @@
 <template>
   <view class="bg-black-2 rounded-tl-lg rounded-tr-lg overflow-hidden">
-    <Subtitle
-      icon="icon-more"
-      icon-size="50rpx"
-      class="px-[28rpx] bg-black-2"
+    <PlayQueue
+      class="box-border px-[28rpx] h-[50vh]"
+      save-area
     >
-      <template #title>
-        <view class="flex items-center">
-          <button
-            class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
-            size="mini"
-            @tap="onSong(lazyList[audioStore.mode === 'random' ? rangeRandom(0, lazyList.length) : 0].id)"
-          >
-            <JIcon class="icon-play text-[42rpx]" />
-          </button>
+      <template #default="{list}">
+        <Subtitle class="bg-black-2">
+          <template #title>
+            <view class="flex items-center">
+              <button
+                class="h-[64rpx] !leading-[64rpx] m-0 rounded-full bg-yellow-1 text-black-1"
+                size="mini"
+                @tap="audioStore.setCurrentSong(list[0], 0)"
+              >
+                <JIcon class="icon-play text-[42rpx]" />
+              </button>
 
-          <text class="text-grey-1 inline-block align-middle ml-5 font-[38rpx]">
-            {{ audioStore.songs.length }}
-          </text>
-        </view>
+              <text class="text-grey-1 inline-block align-middle ml-5 font-[38rpx]">
+                {{ audioStore.songs.length }}
+              </text>
+            </view>
+          </template>
+
+          <template #icon>
+            <JIcon
+              :class="[
+                audioStore.currentSongInfo ? 'icon-associate': 'pointer-events-none',
+                audioStore.associationSong?.id === audioStore.currentSongInfo?.song.id ? 'text-yellow-1' : 'text-white-1'
+              ]"
+              class="text-[50rpx] transition-all duration-300"
+              @click="onAssociate(audioStore.currentSongInfo?.song)"
+            />
+          </template>
+        </Subtitle>
       </template>
-    </Subtitle>
-
-    <scroll-view
-      class="h-[50vh]"
-      scroll-y
-      enable-passive
-      scroll-anchoring
-      scroll-with-animation
-      :scroll-into-view="scrollIntoView"
-      :lower-threshold="500"
-      @scrolltolower="onScrollToLower"
-    >
-      <view class="box-border px-[28rpx] pb-[var(--save-bottom)]">
-        <Song
-          v-for="item in lazyList"
-          :id="'_' + item.id"
-          :key="item.id"
-          :song="item"
-          :is-play="audioStore.currentSongInfo?.song.id === item.id && audioStore.isPlay"
-          :is-run="audioStore.currentSongInfo?.song.id === item.id"
-          :cannot-play="audioStore.currentSongInfo?.song.id === item.id && !audioStore.currentSongInfo?.urlInfo.url"
-          @click="onSong(item.id)"
-        />
-      </view>
-    </scroll-view>
+    </PlayQueue>
   </view>
 </template>
 
 <script setup lang="ts">
 import type { Song } from '@/components/Song/Song.vue'
-import { rangeRandom, sleep } from '@/utils/util'
+import { getSimiSongs } from '@/api/play'
 
 const audioStore = useAudioStore()
 
-const scrollIntoView = ref('')
+async function onAssociate(song?: Song) {
+  if (!song || song.id === audioStore.associationSong?.id) return
 
-onMounted(async() => {
-  await sleep(333)
+  const songs = await getSimiSongs(song.id)
+  console.log('🚀 ~ file: PlaylistPopup.vue:50 ~ onAssociate ~ songs:', songs)
 
-  watch(() => audioStore.currentSongIndex, (index) => {
-    if (!audioStore.currentSongInfo?.song) return
-
-    scrollIntoView.value = '_' + audioStore.songs[index].id
-  }, { immediate: true })
-})
-
-// * 根据滚动方向来动态改变对应的指针‘offset’
-const limit = 5
-// ! ios全端向上滚加载更多都会发生偏移，暂时禁用向上滚动加载
-const topOffset = audioStore.currentSongIndex < limit * 2 ? 0 : audioStore.currentSongIndex - limit * 2
-let bottomOffset = audioStore.currentSongIndex + limit
-const lazyList = shallowReactive<Song[]>(audioStore.songs.slice(topOffset, bottomOffset))
-
-// * 向下滚加载更多
-function onScrollToLower() {
-  const end = bottomOffset + limit
-  if (bottomOffset === end || bottomOffset >= audioStore.songs.length - 1) return
-  console.log('🚀 ~ file: PlaylistPopup.vue:94 ~ onScrollToLower', { bottomOffset, end })
-
-  lazyList.push(...audioStore.songs.slice(bottomOffset, end))
-  bottomOffset = end
-}
-
-function onSong(id: number) {
-  const index = audioStore.songs.findIndex(v => v.id === id)
-  audioStore.setCurrentSong(audioStore.songs[index], index)
+  audioStore.associationSong = song
+  audioStore.currentSongIndex = 0
+  audioStore.songs = [song, ...songs]
 }
 </script>
