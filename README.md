@@ -38,21 +38,21 @@
 ### 安装和使用
 - install
 ```shell
-yarn install
+pnpm install
 ```
 - dev（app请使用HBuilderX）
 ```shell
-yarn dev:h5
+pnpm dev:h5
 ```
 ```shell
-yarn dev:mp-weixin
+pnpm dev:mp-weixin
 ```
 - build（app请使用HBuilderX）
 ```shell
-yarn build:h5
+pnpm build:h5
 ```
 ```shell
-yarn build:mp-weixin
+pnpm build:mp-weixin
 ```
 
 
