@@ -8,7 +8,7 @@
       enable-passive
       scroll-anchoring
       scroll-with-animation
-      :scroll-into-view="audioStore.associationSong ? undefined : '_' + audioStore.songs[audioStore.currentSongIndex]?.id"
+      :scroll-into-view="audioStore.associationSong ? undefined : scrollIntoView"
       :lower-threshold="500"
       @scrolltolower="onScrollToLower"
     >
@@ -64,10 +64,24 @@ export default {
 // #endif
 
 <script setup lang="ts">
+import { sleep } from '@/utils/util'
+
 defineProps<{ saveArea?: boolean }>()
 const emit = defineEmits<{ (e: 'change'): void }>()
 
 const audioStore = useAudioStore()
+
+const scrollIntoView = ref('')
+// * 添加延迟为了兼容APP端
+onMounted(async() => {
+  await sleep(333)
+
+  watch(() => audioStore.currentSongIndex, (index) => {
+    if (!audioStore.currentSongInfo?.song) return
+
+    scrollIntoView.value = '_' + audioStore.songs[index].id
+  }, { immediate: true })
+})
 
 // * 根据滚动方向来动态改变对应的指针‘offset’
 const limit = 10
