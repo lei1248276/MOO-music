@@ -1,8 +1,8 @@
 import simpleAxios from './simpleAxios'
 import toast from './toast'
 
-export const BASE_URL = 'https://netease-music-api.fe-mm.com'
-export const MOO_API = 'https://www.mooapi.link'
+export const BASE_URL = 'https://mooapi.vercel.app'
+export const MOO_API = BASE_URL
 
 const request = simpleAxios.create({
   baseURL: BASE_URL,
