@@ -1,7 +1,7 @@
 import simpleAxios from './simpleAxios'
 import toast from './toast'
 
-export const BASE_URL = 'https://netease-cloud-music-api.fe-mm.com'
+export const BASE_URL = 'https://neteasecloudmusicapi.vercel.app'
 export const MOO_API = BASE_URL
 
 const request = simpleAxios.create({
@@ -32,12 +32,12 @@ request.interceptors.response.use(
       case 200: return data
     }
 
-    return (toast.fail(), Promise.reject(new Error(data.message || '请求失败')))
+    return (Promise.reject(new Error(data.message || '请求失败')))
   }, (err) => {
     if (err.errMsg === 'request:fail abort') return Promise.reject(err)
 
     console.error(err)
-    toast.fail()
+    // toast.fail()
     return Promise.reject(err)
   })
 
