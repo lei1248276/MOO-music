@@ -29,7 +29,10 @@
 
       <view class="flex justify-between items-center text-white-1 pt-[30rpx]">
         <JIcon class="icon-send text-[60rpx]" />
-        <JIcon class="icon-download text-[60rpx]" />
+        <JIcon
+          class="icon-download text-[60rpx]"
+          @click="onDownload"
+        />
         <JIcon
           v-if="audioStore.playlist"
           class="icon-playlist text-[60rpx]"
@@ -54,8 +57,52 @@
 <script setup lang="ts">
 import type { Song } from '@/components/Song/Song.vue'
 
-defineProps<{ song: Song }>()
+const props = defineProps<{ song: Song }>()
 defineEmits<{ (e: 'change'): void }>()
 
 const audioStore = useAudioStore()
+
+async function onDownload() {
+  console.log('onDownload', audioStore.currentSongInfo)
+  // #ifdef H5
+  const url = audioStore.currentSongInfo?.urlInfo.url
+  if (!url) return
+
+  try {
+    // 显示加载提示
+    uni.showLoading({
+      title: '正在下载...'
+    })
+
+    // 获取音频文件
+    const response = await fetch(url)
+    const blob = await response.blob()
+
+    // 创建下载链接
+    const downloadUrl = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = downloadUrl
+    a.download = props.song.name
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+
+    // 释放 URL 对象
+    window.URL.revokeObjectURL(downloadUrl)
+
+    uni.hideLoading()
+    uni.showToast({
+      title: '下载成功',
+      icon: 'success'
+    })
+  } catch (error) {
+    console.error('下载失败:', error)
+    uni.hideLoading()
+    uni.showToast({
+      title: '下载失败',
+      icon: 'error'
+    })
+  }
+  // #endif
+}
 </script>
