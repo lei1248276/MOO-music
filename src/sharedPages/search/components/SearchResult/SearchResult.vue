@@ -134,7 +134,9 @@ async function fetchAlbum(_keyword: string) {
 async function fetchArtist(keyword: string) {
   const { result } = await getSearch<SearchArtistResponse>(keyword, 100, 0, 10)
   console.log('🚀 ~ file: SearchResult.vue:68 ~ fetchArtist ~ artists:', result.artists)
-  artist.value = result.artists.shift()
+  if (result.artists.length) {
+    artist.value = result.artists.shift()
+  }
 }
 
 defineExpose({
