@@ -65,7 +65,7 @@ const audioStore = useAudioStore()
 async function onDownload() {
   console.log('onDownload', audioStore.currentSongInfo)
   // #ifdef H5
-  const url = audioStore.currentSongInfo?.urlInfo.url
+  const url = audioStore.currentSongInfo?.urlInfo.url.replace('http://', 'https://')
   if (!url) return
 
   try {
@@ -99,9 +99,12 @@ async function onDownload() {
     console.error('下载失败:', error)
     uni.hideLoading()
     uni.showToast({
-      title: '下载失败',
+      title: '下载失败,请手动下载',
       icon: 'error'
     })
+    setTimeout(() => {
+      window.open(url, '_blank')
+    }, 1500)
   }
   // #endif
 }
