@@ -17,7 +17,7 @@ const audioStore = useAudioStore()
 
 function transTime(duration: number, currentTime: number) {
   const time = Math.floor(duration - currentTime)
-  if (time < 0) return
+  if (!time || time < 0) return '00:00'
 
   let m = Math.floor(time / 60) + ''
   let s = time % 60 + ''
